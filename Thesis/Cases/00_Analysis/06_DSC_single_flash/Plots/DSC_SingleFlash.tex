@@ -1,0 +1,126 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{chocolate2369815}{RGB}{236,98,15}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{firebrick175572}{RGB}{175,57,2}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{navajowhite253207161}{RGB}{253,207,161}
+\definecolor{saddlebrown127394}{RGB}{127,39,4}
+\definecolor{sandybrown25315378}{RGB}{253,153,78}
+\definecolor{sandybrown253173106}{RGB}{253,173,106}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electric power/\unit{\mega\watt}},
+ymin=-0.596633544396474, ymax=31.2021638091856,
+ytick style={color=black}
+]
+\addplot [semithick, saddlebrown127394]
+table {%
+0 4.68019046356514
+10 6.33786824208722
+20 8.19662468617633
+30 10.2665258268757
+40 12.5659729496647
+50 15.0996305321506
+60 17.8961824166246
+70 20.8488991260731
+80 23.8316642482924
+90 26.7962209044811
+100 29.7567639294773
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\addplot [semithick, firebrick175572]
+table {%
+0 3.65272804686847
+10 5.28756622552709
+20 7.17354497696852
+30 9.30569577039438
+40 11.6868609499473
+50 14.3397742532943
+60 17.1845519572385
+70 20.0420402295364
+80 22.8808897324396
+90 25.7327822006828
+100 28.612139819668
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, chocolate2369815]
+table {%
+0 2.77203624120037
+10 4.33961104553125
+20 6.20418692713397
+30 8.34349028695991
+40 10.7804704280669
+50 13.4322474411363
+60 16.1066765210045
+70 18.7955337328933
+80 21.4689540327441
+90 24.1492382123889
+100 26.7903244331684
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, sandybrown25315378]
+table {%
+0 2.00704976317278
+10 3.48622124228406
+20 5.29070301214816
+30 7.40602998595349
+40 9.81065940251747
+50 12.2687276928164
+60 14.6430124095696
+70 17.1478727162591
+80 19.6069623546236
+90 22.0296823002723
+100 24.5007022429487
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, sandybrown253173106]
+table {%
+0 1.37298923719255
+10 2.7159042785621
+20 4.43218820144198
+30 6.49193207610785
+40 8.651963212448
+50 10.8113503472737
+60 12.9710914641018
+70 15.1231233082903
+80 17.2939633303419
+90 19.4536693432826
+100 21.5760042101645
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\addplot [semithick, navajowhite253207161]
+table {%
+0 0.848766335311801
+10 2.02965916823412
+20 3.63678012234456
+30 5.44833428255714
+40 7.25930671017054
+50 9.0662679860003
+60 10.8803147696488
+70 12.6991628508844
+80 14.4995989214377
+90 16.3042529392927
+100 18.0943906521875
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{423}{\K}}
+\end{axis}
+
+\end{tikzpicture}

@@ -1,0 +1,318 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{chocolate2369815}{RGB}{236,98,15}
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray165}{RGB}{165,165,165}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkgreen06827}{RGB}{0,68,27}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{darkseagreen133204132}{RGB}{133,204,132}
+\definecolor{darkslategray45}{RGB}{45,45,45}
+\definecolor{dimgray108}{RGB}{108,108,108}
+\definecolor{firebrick175572}{RGB}{175,57,2}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{forestgreen611448}{RGB}{6,114,48}
+\definecolor{gainsboro216}{RGB}{216,216,216}
+\definecolor{lightgray198232191}{RGB}{198,232,191}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{lightgreen160216154}{RGB}{160,216,154}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{navajowhite253207161}{RGB}{253,207,161}
+\definecolor{saddlebrown127394}{RGB}{127,39,4}
+\definecolor{sandybrown25315378}{RGB}{253,153,78}
+\definecolor{sandybrown253173106}{RGB}{253,173,106}
+\definecolor{seagreen5816488}{RGB}{58,164,88}
+\definecolor{sienna1408675}{RGB}{140,86,75}
+\definecolor{silver188}{RGB}{188,188,188}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[group style={group size=1 by 2}]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.03)},
+  anchor=south west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific Cost/\unit{\USD\of{2023}\per\kilo\watt}},
+ymin=0, ymax=5133.20005020261,
+ytick style={color=black}
+]
+\addplot [semithick, gainsboro216]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{423}{\K}}
+\addplot [semithick, navajowhite253207161, forget plot]
+table {%
+0 4888.7143335263
+10 3404.0250225565
+20 2765.54563623294
+30 2409.1559187536
+40 2183.27858115757
+50 2009.69985620321
+60 1878.59416928319
+70 1781.0224664262
+80 1687.7740515826
+90 1617.80913453152
+100 1554.39592832416
+};
+\addplot [semithick, silver188]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\addplot [semithick, sandybrown253173106, forget plot]
+table {%
+0 4151.52655916405
+10 3093.66458210808
+20 2505.74674359629
+30 2179.5159627031
+40 1957.18513763749
+50 1799.12235928086
+60 1671.81829312684
+70 1573.71545917379
+80 1494.37146800752
+90 1427.06656072871
+100 1352.99672129195
+};
+\addplot [semithick, darkgray165]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, sandybrown25315378, forget plot]
+table {%
+0 3655.98032140456
+10 2848.07438984096
+20 2334.75521170762
+30 2013.49500986261
+40 1811.64639061245
+50 1658.35478306289
+60 1536.22860528175
+70 1435.11969747933
+80 1358.52998816526
+90 1292.05743230332
+100 1238.4966377997
+};
+\addplot [semithick, dimgray108]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, chocolate2369815, forget plot]
+table {%
+0 3287.81162533514
+10 2646.12175390539
+20 2229.84454889565
+30 1914.53283550025
+40 1708.56313786346
+50 1561.84904973759
+60 1460.04569452233
+70 1351.78587022443
+80 1276.63372935777
+90 1211.32101615723
+100 1158.48133985561
+};
+\addplot [semithick, darkslategray45]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, firebrick175572, forget plot]
+table {%
+0 2990.67224582709
+10 2482.06128606799
+20 2131.63812586402
+30 1851.79844429968
+40 1651.15991464286
+50 1500.51750608008
+60 1386.25897980577
+70 1297.77276358557
+80 1226.84937810228
+90 1159.36552719218
+100 1105.73508294575
+};
+\addplot [semithick, black]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\addplot [semithick, saddlebrown127394, forget plot]
+table {%
+0 2759.98967849107
+10 2339.78553853144
+20 2056.06477249343
+30 1810.13960903689
+40 1612.61074215184
+50 1466.83729484511
+60 1357.69912260723
+70 1266.77667555141
+80 1194.20844445113
+90 1131.04009908877
+100 1078.92746231424
+};
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Delta Specific Cost/\unit{\percent}},
+ymin=-528.607199508152, ymax=0,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 -509.164565540733
+100 -144.108604753362
+};
+\addplot [semithick, darkorange25512714]
+table {%
+0 -401.705459370786
+100 -134.867368609329
+};
+\addplot [semithick, forestgreen4416044]
+table {%
+0 -341.611015649443
+100 -133.240426918982
+};
+\addplot [semithick, crimson2143940]
+table {%
+0 -261.836472498775
+100 -121.262991543959
+};
+\addplot [semithick, mediumpurple148103189]
+table {%
+0 -236.153246849334
+100 -124.014133904551
+};
+\addplot [semithick, sienna1408675]
+table {%
+0 -198.680084978547
+100 -120.311886192345
+};
+\end{groupplot}
+
+\begin{groupplot}[group style={group size=1 by 2}]
+\nextgroupplot[
+axis y line=right,
+tick align=outside,
+x grid style={darkgray176},
+xmin=-5, xmax=105,
+xtick pos=left,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Delta Specific Cost/\unit{\USD\of{2023}\per\kilo\watt}},
+ymin=-10.4712697691791, ymax=0,
+ytick pos=right,
+ytick style={color=black},
+yticklabel style={anchor=west}
+]
+\addplot [semithick, lightgray198232191]
+table {%
+0 -9.43267855877124
+10 -9.66665041418657
+20 -6.97092178840367
+30 -7.183047837724
+40 -7.36642840997197
+50 -7.91739744907043
+60 -8.21299291031309
+70 -8.04170604213445
+80 -8.51910426511487
+90 -8.50469929161117
+100 -8.48444039723883
+};
+\addplot [semithick, lightgreen160216154]
+table {%
+0 -8.8224245488823
+10 -9.12014207516495
+20 -8.88265090172837
+30 -6.79495656146299
+40 -7.3537480350831
+50 -7.64174186316002
+60 -8.23583244563439
+70 -8.48179407829317
+80 -8.54123863079325
+90 -8.63463979340574
+100 -9.80282439224453
+};
+\addplot [semithick, darkseagreen133204132]
+table {%
+0 -8.54542115105721
+10 -8.94657430838011
+20 -9.24267442541881
+30 -7.98398157765914
+40 -7.25222120182117
+50 -7.75369991962051
+60 -8.13207448349782
+70 -9.09687700880866
+80 -9.34254041706648
+90 -9.65230154617713
+100 -9.71326286545352
+};
+\addplot [semithick, seagreen5816488]
+table {%
+0 -7.37640648543595
+10 -8.667256482833
+20 -8.23281150608275
+30 -8.97154626590142
+40 -8.58955984680807
+50 -8.1255067852301
+60 -7.66852118201009
+70 -9.05951726531824
+80 -9.47685326939709
+90 -9.91822439619652
+100 -9.8940706483996
+};
+\addplot [semithick, forestgreen611448]
+table {%
+0 -7.31843873755507
+10 -7.69254916621559
+20 -8.34629615583095
+30 -9.51575102651698
+40 -9.55742850843078
+50 -8.75725196762542
+60 -8.78563565644909
+70 -9.05386382882763
+80 -9.18036002914291
+90 -9.90706094771151
+100 -10.2924084880118
+};
+\addplot [semithick, darkgreen06827]
+table {%
+0 -6.71518286466536
+10 -7.64174173990568
+20 -7.35893816796081
+30 -8.86364739771983
+40 -9.87451116586232
+50 -9.929390210439
+60 -8.55463312593488
+70 -9.09898649929263
+80 -9.36384250365879
+90 -9.77433395827571
+100 -10.0323497842336
+};
+\end{groupplot}
+
+\end{tikzpicture}

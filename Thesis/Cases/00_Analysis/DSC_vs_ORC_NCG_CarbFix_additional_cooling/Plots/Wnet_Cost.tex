@@ -1,0 +1,141 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[group style={group size=1 by 2}]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.03)},
+  anchor=south west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=15.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power /\unit{\mega\watt}},
+ymin=-0.631967823677123, ymax=8.08069864191556,
+ytick style={color=black}
+]
+\addplot [semithick, black, dotted, forget plot]
+table {%
+0 0
+15 0
+};
+\addplot [semithick, steelblue31119180]
+table {%
+0 7.11824275760516
+1 7.00467904478748
+2 7.10623302992078
+3 7.12950822051279
+4 7.07229150509226
+5 7.03376493819734
+7 7.107513876526
+9 7.09335766079902
+11 7.16208640220028
+13 7.07213603304717
+15 7.1422569874497
+};
+\addlegendentry{ORC - Power Plant}
+\addplot [semithick, darkorange25512714]
+table {%
+0 6.31326095430661
+1 7.30048934664617
+2 7.30824633959365
+3 7.59867612258937
+4 7.40785684827916
+5 6.89719232366858
+7 7.35001804814124
+9 7.33897536519044
+11 7.68466834802498
+13 7.45310866326678
+15 7.00185571133071
+};
+\addlegendentry{DSC - Power Plant}
+\addplot [semithick, forestgreen4416044]
+table {%
+0 7.11824275760516
+1 6.55200334498105
+2 6.50812419725244
+3 6.39763831526581
+4 6.21299092215118
+5 6.05826468321621
+7 5.91255366974207
+9 5.70894434355113
+11 5.60671136475166
+13 5.40654697899401
+15 5.34428762053166
+};
+\addlegendentry{ORC - CarbFix}
+\addplot [semithick, crimson2143940]
+table {%
+0 6.31326095430661
+1 5.86750266469538
+2 5.07887036997752
+3 4.37255906269886
+4 3.62728854260825
+5 3.01830898429831
+7 2.24916203259472
+9 1.60466853247959
+11 0.92290509091976
+13 0.272540434310803
+15 -0.235937529786547
+};
+\addlegendentry{DSC - CarbFix}
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=15.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Plant Cost/\unit{\mega\USD\of{2023}}},
+ymin=0, ymax=88.2473461915207,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 17.7893198117598
+1 19.0447588706894
+2 21.9335566573449
+3 24.2426645649195
+4 26.3648729756112
+5 28.0418331245601
+7 31.5910296263793
+9 34.4436454532628
+11 36.5860826855573
+13 38.7065367995085
+15 40.6363790692026
+};
+\addplot [semithick, darkorange25512714]
+table {%
+0 15.0391758277982
+1 30.1849263438132
+2 38.4436055184808
+3 48.5141428843081
+4 53.2787533960609
+5 50.5920519984146
+7 62.5013093451175
+9 70.1076073992348
+11 80.2395921134838
+13 84.7612428408673
+15 83.287521898392
+};
+\end{groupplot}
+
+\end{tikzpicture}

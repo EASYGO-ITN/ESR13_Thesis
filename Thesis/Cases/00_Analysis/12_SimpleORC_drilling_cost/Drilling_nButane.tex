@@ -1,0 +1,80 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Drilling Cost/\unit{\mega\USD\of{2023}}},
+xmin=0, xmax=60,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific plant cost/\unit{\USD\of{2023}\kilo\watt}},
+ymin=0, ymax=100,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 100
+1 94.4331174504372
+2 89.4533542809712
+4 80.9191031524653
+8 67.9530514924405
+12 58.5683646602462
+16 51.4612812037458
+20 45.8923870312491
+25 40.4242392953735
+30 36.1204345632043
+35 32.6448679342366
+40 29.779441876473
+50 25.3323180894612
+60 22.0408410694347
+};
+\addlegendentry{Thermodynamic Opt.}
+\addplot [semithick, darkorange25512714]
+table {%
+0 100
+1 86.3944147646673
+2 76.0476825023191
+4 61.3523684248516
+8 44.2505708376259
+12 34.6046292127061
+16 28.4113855669373
+20 24.0984491121297
+25 20.2549868284061
+30 17.468875426455
+35 15.3565528054444
+40 13.6999639801308
+50 11.2687336750031
+60 9.57035435313743
+};
+\addlegendentry{Techno-economic Opt. (excluding drilling costs)}
+\addplot [semithick, forestgreen4416044]
+table {%
+0 100
+1 87.0210950563651
+2 77.5555231494792
+4 74.636711854398
+8 61.1985329886442
+12 54.4901793732125
+16 47.9875198088415
+20 43.3642552281589
+25 38.2269713893541
+30 34.563688867068
+35 31.8452576916097
+40 28.3408927724486
+50 24.8791639422721
+60 21.5210542116215
+};
+\addlegendentry{Techno-economic Opt. (including drilling costs)}
+\end{axis}
+
+\end{tikzpicture}

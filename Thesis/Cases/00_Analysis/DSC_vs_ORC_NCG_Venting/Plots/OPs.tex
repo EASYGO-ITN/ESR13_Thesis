@@ -1,0 +1,101 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=lightgray204
+},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0.3, xmax=15.7,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Pressure/\unit{\bar}},
+ymin=0.142832233002548, ymax=34.1714024287807,
+ymode=log,
+ytick style={color=black},
+ytick={0.01,0.1,1,10,100,1000},
+yticklabels={
+  \(\displaystyle {10^{-2}}\),
+  \(\displaystyle {10^{-1}}\),
+  \(\displaystyle {10^{0}}\),
+  \(\displaystyle {10^{1}}\),
+  \(\displaystyle {10^{2}}\),
+  \(\displaystyle {10^{3}}\)
+}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+1 15.6630536688748
+2 16.3198841873615
+3 16.9938113190951
+4 17.6848295204466
+5 18.3935694555122
+7 19.8673757145131
+9 21.4215479157084
+11 23.0630210435187
+13 24.799575491809
+15 26.6399783604382
+};
+\addlegendentry{Inlet}
+\addplot [semithick, darkorange25512714]
+table {%
+1 8.91280006879514
+2 11.619514683976
+3 12.742153323404
+4 15.2413970634192
+5 17.0756406138661
+7 18.4471428119401
+9 20.4355582975179
+11 22.6041335886886
+13 23.6051569686054
+15 26.2202186408983
+};
+\addlegendentry{Flash Sep.}
+\addplot [semithick, forestgreen4416044]
+table {%
+1 0.183212525464347
+2 0.298665812602474
+3 0.3069901933328
+4 0.385668843640606
+5 0.42807608145105
+7 0.465726351278403
+9 0.503653005999805
+11 0.769740739905919
+13 1.02082952300736
+15 0.777502984609375
+};
+\addlegendentry{Condenser}
+\addplot [semithick, crimson2143940]
+table {%
+1 1.1
+2 1.1
+3 1.1
+4 1.1
+5 1.1
+7 1.1
+9 1.1
+11 1.1
+13 1.1
+15 1.1
+};
+\addlegendentry{Outlet}
+\end{axis}
+
+\end{tikzpicture}

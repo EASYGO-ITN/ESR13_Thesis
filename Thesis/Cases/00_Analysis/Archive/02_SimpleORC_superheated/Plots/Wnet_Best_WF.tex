@@ -1,0 +1,105 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{lightsteelblue157201224}{RGB}{157,201,224}
+\definecolor{midnightblue848107}{RGB}{8,48,107}
+\definecolor{skyblue127184218}{RGB}{127,184,218}
+\definecolor{steelblue59139194}{RGB}{59,139,194}
+\definecolor{teal1287160}{RGB}{12,87,160}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electric power/\unit{\mega\watt}},
+ymin=1.29118121174937, ymax=26.8321258862207,
+ytick style={color=black}
+]
+\addplot [semithick, midnightblue848107]
+table {%
+0 8.20779790294988
+10 11.2081222375562
+20 13.0854325836886
+30 14.6626276703943
+40 16.3267119084718
+50 17.8059356533108
+60 19.3063180628649
+70 20.9748213632408
+80 22.339468317134
+100 25.6604501515816
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\addplot [semithick, teal1287160]
+table {%
+0 6.51071782979683
+10 9.66245172927201
+20 11.9383166245693
+30 13.9069520124142
+40 15.5388835006964
+50 17.1816242394788
+60 18.9092596218603
+70 20.5968232310609
+80 22.2534017828067
+100 25.6711738555629
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, steelblue59139194]
+table {%
+0 4.99145891520417
+10 7.07363697960753
+20 10.6298012895965
+30 12.6636056647697
+40 14.2351133570565
+50 16.0171081257553
+60 17.8988695926313
+70 19.4811415014822
+80 21.2493302846284
+100 24.7678356377811
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, skyblue127184218]
+table {%
+0 3.79528833873809
+10 6.20996646434119
+20 8.65687559346445
+30 11.1554141388874
+40 12.7747287449073
+50 14.5602091628645
+60 16.1824787085786
+70 17.8826843066143
+80 19.6166734616757
+100 23.0748659244432
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, lightsteelblue157201224]
+table {%
+0 2.45213324240716
+10 4.64872118663171
+20 6.80999174392427
+30 9.45102889933285
+40 11.1534729174211
+50 12.8312377631077
+60 14.4620477224563
+70 16.1367231164186
+80 17.7967964335918
+100 20.9639921706234
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\end{axis}
+
+\end{tikzpicture}

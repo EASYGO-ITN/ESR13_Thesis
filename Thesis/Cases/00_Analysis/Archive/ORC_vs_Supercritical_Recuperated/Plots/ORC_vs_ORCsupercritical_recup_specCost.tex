@@ -1,0 +1,214 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray165}{RGB}{165,165,165}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkslategray45}{RGB}{45,45,45}
+\definecolor{dimgray108}{RGB}{108,108,108}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{lightsteelblue157201224}{RGB}{157,201,224}
+\definecolor{midnightblue848107}{RGB}{8,48,107}
+\definecolor{sandybrown25315378}{RGB}{253,153,78}
+\definecolor{silver188}{RGB}{188,188,188}
+\definecolor{skyblue127184218}{RGB}{127,184,218}
+\definecolor{steelblue59139194}{RGB}{59,139,194}
+\definecolor{teal1287160}{RGB}{12,87,160}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific Cost/\unit{\USD\of{2023}\kilo\watt}},
+ymin=-185.634461538151, ymax=3920.32369230118,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue59139194]
+table {%
+0 1
+1 1
+};
+\addlegendentry{Supercritical ORC}
+\addplot [semithick, sandybrown25315378]
+table {%
+0 1
+1 1
+};
+\addlegendentry{Supercrit. Recup. ORC}
+\addplot [semithick, black]
+table {%
+0 1
+1 1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\addplot [semithick, darkslategray45]
+table {%
+0 1
+1 1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, dimgray108]
+table {%
+0 1
+1 1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, darkgray165]
+table {%
+0 1
+1 1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, silver188]
+table {%
+0 1
+1 1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\addplot [semithick, midnightblue848107, forget plot]
+table {%
+0 2495.15203183371
+10 2325.89371797625
+20 2117.87347212339
+30 1971.16739966392
+40 1720.22950854918
+50 1760.82352797713
+60 1721.76231802689
+70 1544.13399503389
+80 1572.76916730674
+100 1419.19816390582
+};
+\addplot [semithick, teal1287160, forget plot]
+table {%
+0 2683.33523854475
+10 2617.04824536429
+20 2009.71326918494
+30 1888.78620902123
+40 1897.14831780818
+50 1725.79012430618
+60 1686.9325632571
+70 1704.95906742678
+80 1547.15039251605
+100 1456.25806244861
+};
+\addplot [semithick, steelblue59139194, forget plot]
+table {%
+0 3059.54195647796
+10 2623.71457063541
+20 2282.58201631757
+30 2047.7386768935
+40 1909.85521021799
+50 1814.37298602803
+60 1748.81786433876
+70 1675.15023836417
+80 1623.50310643258
+100 1530.0174145895
+};
+\addplot [semithick, skyblue127184218, forget plot]
+table {%
+0 3496.89214457833
+10 2870.81987469864
+20 2370.17669740577
+30 2183.83401672741
+40 2028.5987489364
+50 1946.72376389888
+60 1866.66239245025
+70 1757.59926880299
+80 1744.55591453025
+100 1658.35812720224
+};
+\addplot [semithick, lightsteelblue157201224, forget plot]
+table {%
+0 3701.83003872805
+10 3304.33632036391
+20 2708.26699123108
+30 2447.89592367936
+40 2301.34685624471
+50 2170.69969733896
+60 2132.05549985905
+70 2062.81592958431
+80 2062.95813524034
+100 1891.82330005998
+};
+\addplot [semithick, midnightblue848107, forget plot]
+table {%
+0 2239.11756033622
+10 2040.51456010391
+20 1913.90949575419
+30 1807.57698844841
+40 1760.9844047084
+50 1634.63642969093
+60 1628.00871365142
+70 1570.60303989416
+80 1527.15697444626
+100 1457.3159337176
+};
+\addplot [semithick, teal1287160, forget plot]
+table {%
+0 2457.65933976922
+10 2216.24987479276
+20 2019.96074193736
+30 1887.83292396788
+40 1799.67577765968
+50 1702.55968436244
+60 1659.70423060767
+70 1614.53447928051
+80 1552.3470773504
+100 1487.54941155173
+};
+\addplot [semithick, steelblue59139194, forget plot]
+table {%
+0 2792.66927447657
+10 2309.96566460778
+20 2170.50754127399
+30 2000.37246117639
+40 1897.26685406077
+50 1846.35860425838
+60 1739.81168376862
+70 1708.5988290091
+80 1676.99272573201
+100 1601.10351548069
+};
+\addplot [semithick, skyblue127184218, forget plot]
+table {%
+0 3377.16616614202
+10 2630.84823218362
+20 2241.95823007901
+30 2087.87975332679
+40 1991.11155164802
+50 1893.78941816343
+60 1815.91914746017
+70 1761.48231833915
+80 1711.53968398513
+100 1644.20263623118
+};
+\addplot [semithick, lightsteelblue157201224, forget plot]
+table {%
+0 3733.68923076303
+10 3075.85244018528
+20 2629.54198094319
+30 2424.76769932376
+40 2288.35458885096
+50 2188.78163851872
+60 2108.7207122869
+70 2035.03423985699
+80 1985.13381811515
+100 1912.41042706317
+};
+\addplot [semithick, red, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+73.672112979361 1554.64915381082
+37.7503229345718 1819.50828867999
+57.8029311145942 1763.22077615301
+76.4579219165792 1729.2297550425
+44.1810453074015 2246.72268717789
+};
+\addlegendentry{Break-even}
+\end{axis}
+
+\end{tikzpicture}

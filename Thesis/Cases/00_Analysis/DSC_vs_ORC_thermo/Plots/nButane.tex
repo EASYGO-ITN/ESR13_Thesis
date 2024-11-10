@@ -1,0 +1,118 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[group style={group size=1 by 2}]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power/\unit{\mega\watt}},
+ymin=0, ymax=25,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 3.75045845803564
+10 5.3233703834005
+20 6.52143371948183
+30 7.72325173820182
+40 8.90734085878374
+50 10.0900882744848
+60 11.2859816404375
+70 12.4799494051215
+80 13.6582927603204
+90 14.8580333710726
+100 16.0578783341511
+};
+\addlegendentry{Binary ORC}
+\addplot [semithick, darkorange25512714]
+table {%
+0 2.00704976317278
+10 3.48622124228406
+20 5.29070301214816
+30 7.40602998595349
+40 9.81065940251747
+50 12.2687276928164
+60 14.6430124095696
+70 17.1478727162591
+80 19.6069623546236
+90 22.0296823002723
+100 24.5007022429487
+};
+\addlegendentry{Single Flash DSC}
+\addplot [semithick, black, dotted, forget plot]
+table {%
+25 0
+25 30
+};
+
+\nextgroupplot[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific Cost/\unit{\USD\of{2023}\per\kilo\watt}},
+ymin=0, ymax=4000,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 3585.04906524689
+10 3062.95078885213
+20 2601.17267795214
+30 2369.45547809689
+40 2183.42127474037
+50 2088.17516605231
+60 1989.79208588077
+70 1937.15559430886
+80 1880.15962224779
+90 1827.92110615512
+100 1784.4193788523
+};
+\addlegendentry{Binary ORC}
+\addplot [semithick, darkorange25512714]
+table {%
+0 3997.591337054
+10 3127.91569148296
+20 2572.52535475938
+30 2188.20053767263
+40 1953.30434225776
+50 1797.74666476365
+60 1672.2143192466
+70 1578.73530661691
+80 1498.53083730244
+90 1430.09446218898
+100 1371.73706471868
+};
+\addlegendentry{Single Flash DSC}
+\addplot [semithick, black, dotted, forget plot]
+table {%
+25 0
+25 4000
+};
+\end{groupplot}
+
+\end{tikzpicture}

@@ -1,0 +1,109 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid Inlet Steam Quality/\unit{\percent}},
+xmin=0, xmax=100,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Geofluid Inlet Temperature/\unit{\K}},
+ymin=423, ymax=548,
+ytick style={color=black}
+]
+\path [draw=black, fill=black, opacity=0.3]
+(axis cs:0,551)
+--(axis cs:0,550)
+--(axis cs:100,550)
+--(axis cs:100,551)
+--(axis cs:100,551)
+--(axis cs:0,551)
+--cycle;
+\addlegendimage{area legend, draw=black, fill=black, opacity=0.3}
+\addlegendentry{Binary ORC}
+
+\path [fill=steelblue31119180, fill opacity=0.3]
+(axis cs:0,548.15)
+--(axis cs:0,548.15)
+--(axis cs:2.87134648743694,523.15)
+--(axis cs:0,498.15)
+--(axis cs:100,473.15)
+--(axis cs:100,448.15)
+--(axis cs:0,448.15)
+--(axis cs:0,448.15)
+--(axis cs:0,473.15)
+--(axis cs:0,498.15)
+--(axis cs:0,523.15)
+--(axis cs:0,548.15)
+--cycle;
+
+\path [fill=darkorange25512714, fill opacity=0.3]
+(axis cs:0,448.15)
+--(axis cs:0,448.15)
+--(axis cs:2.74060669680509,473.15)
+--(axis cs:4.95179705040581,498.15)
+--(axis cs:18.8308924798823,523.15)
+--(axis cs:10.2523555773866,548.15)
+--(axis cs:0,548.15)
+--(axis cs:0,548.15)
+--(axis cs:0,523.15)
+--(axis cs:0,498.15)
+--(axis cs:0,473.15)
+--(axis cs:0,448.15)
+--cycle;
+
+\path [fill=forestgreen4416044, fill opacity=0.3]
+(axis cs:0,548.15)
+--(axis cs:0,548.15)
+--(axis cs:16.5662050666807,523.15)
+--(axis cs:5.2685447246236,498.15)
+--(axis cs:19.7483557982893,473.15)
+--(axis cs:32.4123236767932,448.15)
+--(axis cs:0,448.15)
+--(axis cs:0,448.15)
+--(axis cs:0,473.15)
+--(axis cs:0,498.15)
+--(axis cs:0,523.15)
+--(axis cs:0,548.15)
+--cycle;
+
+\addplot [semithick, steelblue31119180]
+table {%
+0 548.15
+2.87134648743694 523.15
+0 498.15
+100 473.15
+100 448.15
+};
+\addlegendentry{Net Power}
+\addplot [semithick, darkorange25512714]
+table {%
+0 448.15
+2.74060669680509 473.15
+4.95179705040581 498.15
+18.8308924798823 523.15
+10.2523555773866 548.15
+};
+\addlegendentry{Specific Cost}
+\addplot [semithick, forestgreen4416044]
+table {%
+0 548.15
+16.5662050666807 523.15
+5.2685447246236 498.15
+19.7483557982893 473.15
+32.4123236767932 448.15
+};
+\addlegendentry{LCOE}
+\end{axis}
+
+\end{tikzpicture}
