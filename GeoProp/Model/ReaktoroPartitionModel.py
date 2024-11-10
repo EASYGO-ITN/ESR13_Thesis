@@ -62,7 +62,7 @@ def initFromElements(fluid: Fluid, options) -> Tuple[rkt.GaseousPhase, rkt.Aqueo
         if options.aqueousCO2ActivityModel.value is not None:
             if "C" in fluid.total.elements and "O" in fluid.total.elements:
                 if options.aqueousActivityModel == options.AqueousActivityModels.IDEAL:
-                # cannot use the Ideal model with the CO2 activity model? - check with Alan
+                # cannot use the Ideal model with the CO2 activity models? - check with Alan
                     aqueous.setActivityModel(rkt.chain(options.AqueousActivityModels.HKF.value(),
                                                        options.aqueousCO2ActivityModel.value(("CO2"))))
                 else:
@@ -218,7 +218,7 @@ class ReaktoroPartitionOptions:
 
     class AqueousActivityModels(Enum):
         """
-            The AqueousActivityModels class contains links to all the activity model that can be used for the aqueous phase
+            The AqueousActivityModels class contains links to all the activity models that can be used for the aqueous phase
         """
         IDEAL = rkt.ActivityModelIdealAqueous
         DAVIES = rkt.ActivityModelDavies
@@ -233,7 +233,7 @@ class ReaktoroPartitionOptions:
 
     class AqueousCO2ActivityModels(Enum):
         """
-            The AqueousCO2ActivityModels class contains links to all the activity model that can be used for aqueous CO2
+            The AqueousCO2ActivityModels class contains links to all the activity models that can be used for aqueous CO2
         """
         NONE = None
         DRUMMOND = rkt.ActivityModelDrummond
@@ -242,7 +242,7 @@ class ReaktoroPartitionOptions:
 
     class GaseousActivityModels(Enum):
         """
-            The GaseousActivityModels class contains links to all the activity model that can be used for the gaseous phase
+            The GaseousActivityModels class contains links to all the activity models that can be used for the gaseous phase
         """
         IDEAL = rkt.ActivityModelIdealGas
         PENG_ROBINSON = rkt.ActivityModelPengRobinson
@@ -252,7 +252,7 @@ class ReaktoroPartitionOptions:
 
     class MineralActivityModels(Enum):
         """
-            The MineralActivityModels class contains links to all the activity model that can be used for the mineral phase
+            The MineralActivityModels class contains links to all the activity models that can be used for the mineral phase
         """
         IDEAL = rkt.ActivityModelIdealAqueous()
         REDLICH_KISTER = rkt.ActivityModelRedlichKister

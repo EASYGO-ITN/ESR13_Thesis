@@ -1,0 +1,29 @@
+{
+  "plugins": ["component_plugins.compressor", "component_plugins.heat_exchanger", "component_plugins.mixer", "component_plugins.multistage_compression", "component_plugins.pump", "component_plugins.separator", "component_plugins.splitter", "component_plugins.turbine"],
+  "components": [
+    {
+      "type": "compressor"
+    },
+    {
+      "type": "heat_exchanger"
+    },
+    {
+      "type": "mixer"
+    },
+    {
+      "type": "multistage_compression"
+    },
+    {
+      "type": "pump"
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "type": "splitter"
+    },
+    {
+      "type": "turbine"
+    }
+  ]
+}

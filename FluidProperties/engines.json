@@ -1,0 +1,17 @@
+{
+  "plugins": ["propertyengine_plugins.coolprop_engine","propertyengine_plugins.geoprop_engine", "propertyengine_plugins.lookup_engine"],
+  "engines": [
+    {
+      "type": "default"
+    },
+    {
+      "type": "coolprop"
+    },
+    {
+      "type": "geoprop"
+    },
+    {
+      "type": "tables"
+    }
+  ]
+}

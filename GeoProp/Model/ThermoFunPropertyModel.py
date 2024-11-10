@@ -73,8 +73,7 @@ class ThermoFunPropertyOptions:
         """
             initialises the ThermoFunPropertyModelOptions
         """
-        # self.database = self.Database.SLOP98INORGANIC_CUT
-        self.database = self.Database.SLOP98INORGANIC
+        self.database = self.Database.SLOP98INORGANIC_CUT
         self.databaseHomeDir = os.path.dirname(__file__).rstrip("\\Model")+"\\ThermoFun"
         self.databaseConfigFile = "hub-connection-config.json"
 
@@ -136,7 +135,6 @@ class ThermoFunProperties:
             if comp == Comp.WATER:
                 # calculate the properties of water using CoolProp
                 calc = cp.AbstractState("?", comp.value.alias["CP"])
-                calc.specify_phase(cp.iphase_liquid)
 
                 # calculate the enthalpy and entropy at the reference conditions
                 calc.update(cp.PT_INPUTS, Pref, Tref)
@@ -147,7 +145,7 @@ class ThermoFunProperties:
                 Tsat = calc.T()
                 if T < Tsat:
                     # calculate the properties at the temperature and pressure of interest
-                    calc.update(cp.PT_INPUTS, P, T)
+                    calc.update(cp.PT_INPUTS, P, T-0.01)
                     h = calc.hmass()
                     s = calc.smass()
                     rho = calc.rhomass()

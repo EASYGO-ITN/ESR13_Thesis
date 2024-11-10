@@ -126,7 +126,7 @@ class SpycherPruss2009:
 
         if self.Tmin_low <= T <= self.Tmax_low:
             # low temperature model
-            return 128475900.0  # This used to be zero but ended up causing huge interpolation errors...
+            return 0.0  # my addition
         elif T < self.Tmin_high:
             return self.interpolate(self.a_H2O, self.Tmax_low, self.Tmin_high, T)
         else:
@@ -872,8 +872,8 @@ class SpycherPrussPartition:
 
         """
 
-        MrH2O = 0.018015
-        MrCO2 = 0.044
+        MrH2O = 0.01801528
+        MrCO2 = 0.0440096
 
         targetComps = [Comp.WATER, Comp.STEAM, Comp.Na_plus, Comp.K_plus, Comp.Ca_plus2, Comp.Mg_plus2, Comp.Cl_minus, Comp.SO4_minus2, Comp.CARBONDIOXIDE, Comp.CO3_minus2, Comp.CO2_aq]
 

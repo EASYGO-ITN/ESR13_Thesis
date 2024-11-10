@@ -1,0 +1,14 @@
+coolprop
+reaktoro
+thermofun
+thermohubclient
+matplotlib
+numpy
+sphinx
+livereload
+myst-parser
+sphinx-autodoc-typehints
+pydata-sphinx-theme
+ghp-import
+
+

@@ -399,7 +399,7 @@ class Fluid:
             # make changes to the fluid itself
             self.reset()
 
-            self.addComponents(components, composition, False)
+            self.addComponents(components, composition)
             return self
         else:
             # create a new fluid object
@@ -426,7 +426,7 @@ class Fluid:
         if in_place:
             # updates the fluid itself
             self.reset()
-            self.addComponents(components, composition, False)
+            self.addComponents(components, composition)
 
             return self
         else:

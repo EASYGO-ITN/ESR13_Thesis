@@ -12,7 +12,7 @@ import time
 
 class PropertyModelOptions:
     """
-        The PropertyModelOptions class contains the options of all property model
+        The PropertyModelOptions class contains the options of all property models
 
         Attributes
         ----------
@@ -29,7 +29,7 @@ class PropertyModelOptions:
 
 class PropertyModels(Enum):
     """
-        The PropertyModel class contains links to all property model
+        The PropertyModel class contains links to all property models
 
         Attributes
         ----------
@@ -39,7 +39,7 @@ class PropertyModels(Enum):
             The link to the CoolPropPropertyModel
     """
 
-    # the different property model available
+    # the different property models available
     THERMOFUN = ThermoFunProperties
     COOLPROP = CoolPropProperties
 
