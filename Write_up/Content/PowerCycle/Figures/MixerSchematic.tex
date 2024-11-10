@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+    \pic (mixer) at (0,0) {valve quadruple = main};
+    \draw[main stream] ($(mixer-top)+(-2.5, 1.5)$) -| (mixer-top);
+    \node[above] at ($(mixer-top)+(-2.5, 1.5)$) {\(\Dot{m}_1,\, P_1,\,h_1\)};
+
+    \draw[main stream] ($(mixer-left)+(-2.5, 0)$) -- (mixer-left);
+    \node[above] at ($(mixer-left)+(-2.5, 0)$) {\(\Dot{m}_i,\, P_i,\,h_i\)};
+
+    \draw[main stream] ($(mixer-bottom)+(-2.5, -1.5)$) -| (mixer-bottom);
+    \node[above] at ($(mixer-bottom)+(-2.5, -1.5)$) {\(\Dot{m}_N,\, P_N,\,h_N\)};
+    
+    \draw[main stream] (mixer-right)-- ++(2.5,0);
+    \node[above] at ($(mixer-right)+(2.5, 0)$) {\(\Dot{m}_{out},\, P_{out},\,h_{out}\)};
+    
+\end{tikzpicture}
+
+% LEGACY
+% \begin{tikzpicture}
+%     \pic (mixer) at (0,0) {stirred reactor};
+%     \draw[main stream] ($(mixer-top left)+(-2.5, 0.5)$) -- ($(mixer-top left)+(-0.5, 0.5)$) -- (mixer-top left);
+%     \node[above] at ($(mixer-top left)+(-2.5, 0.6)$) {\(\Dot{m}_1,\, P_1,\,h_1\)};
+
+%     \draw[main stream] ($(mixer-left)+(-2.5, 0)$) -- (mixer-left);
+%     \node[above] at ($(mixer-left)+(-2.5, 0.1)$) {\(\Dot{m}_i,\, P_i,\,h_i\)};
+
+%     \draw[main stream] ($(mixer-bottom left)+(-2.5, -0.5)$) -- ($(mixer-bottom left)+(-0.5, -0.5)$) -- (mixer-bottom left);
+%     \node[above] at ($(mixer-bottom left)+(-2.5, -0.4)$) {\(\Dot{m}_N,\, P_N,\,h_N\)};
+    
+%     \draw[main stream] (mixer-right)-- ++(2,0);
+%     \node[above] at ($(mixer-right)+(2.5, 0.1)$) {\(\Dot{m}_{out},\, P_{out},\,h_{out}\)};
+% \end{tikzpicture}

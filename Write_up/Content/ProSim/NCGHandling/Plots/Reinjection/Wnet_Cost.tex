@@ -1,0 +1,119 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 1, 
+        vertical sep=2.5cm, 
+        horizontal sep=2cm},
+    height=6cm, 
+    width=7cm, 
+]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.15, -0.35)},
+  anchor=north,
+  draw=lightgray204
+},
+legend columns=-1,
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=16,
+xtick style={color=black},
+xtick distance=4,
+y grid style={darkgray176},
+ylabel={Net electrical power /\unit{\mega\watt}},
+ymin=-2, ymax=10,
+ytick style={color=black},
+ytick distance=2,
+]
+\addplot [semithick, black, dotted, forget plot]
+table {%
+0 0
+15 0
+};
+\addplot [semithick, steelblue31119180]
+table {%
+0 7.11824275760516
+1 6.55053136664628
+2 6.45897092818831
+3 6.39492422245896
+4 6.17205961707096
+5 5.99848102437757
+7 5.82878375693394
+9 5.62850587440294
+11 5.50896456987317
+13 5.32202151383855
+15 5.26612762767
+};
+\addlegendentry{Binary ORC}
+\addplot [semithick, darkorange25512714]
+table {%
+0 6.31326095430661
+1 4.93051246835845
+2 4.19029885324923
+3 3.66627047825475
+4 3.13203730200944
+5 2.64291217913743
+7 1.85880097825933
+9 1.32052238269359
+11 0.776437586549237
+13 0.299772606188324
+15 -0.139823843070852
+};
+\addlegendentry{Single Flash DSC}
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=16,
+xtick style={color=black}, xtick distance=4,
+y grid style={darkgray176},
+ylabel={Plant Cost/\unit{\mega\USD\of{2023}}},
+ymin=0, ymax=100,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 17.7893198117598
+1 19.1926875017161
+2 21.6943139984392
+3 24.1558293022766
+4 26.1475096140439
+5 27.9974960372848
+7 31.0536811733364
+9 33.3720702989873
+11 36.1093680763004
+13 38.0355481783677
+15 39.7521298098009
+};
+\addplot [semithick, darkorange25512714]
+table {%
+0 15.0391758277982
+1 29.6515541903645
+2 33.671382180979
+3 38.8981961750247
+4 44.5477762308278
+5 52.9838408653663
+7 54.8933994932988
+9 59.1315906110587
+11 67.6388936909268
+13 72.5615993918084
+15 76.8767388176412
+};
+\end{groupplot}
+
+\end{tikzpicture}

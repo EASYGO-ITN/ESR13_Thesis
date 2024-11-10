@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+    \pic (turb) at (0,0) {turbine};
+
+    \node (inlet) [above] at ($(turb-inlet top)+(-2,1)$) {\(\Dot{m},\, P_1,\,h_1\)};
+    \draw[main stream] ($(turb-inlet top)+(-2,0.9)$) -| (turb-inlet top);
+    
+
+    \draw[main stream] (turb-outlet bottom) |- ($(turb-outlet bottom)+(2,-1)$);
+    \node[below] at ($(turb-outlet bottom)+(2,-1.1)$) {\(\Dot{m},\, P_2,\,h_2\)};
+    
+    \draw[utility stream] (turb-right) -- ($(turb-right)+(1.5,0)$);
+    \node[right] at ($(turb-right)+(1.5,0)$) {\(\Dot{W}_i\)};
+\end{tikzpicture}

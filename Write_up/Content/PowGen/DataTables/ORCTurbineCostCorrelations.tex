@@ -1,0 +1,14 @@
+\begin{tabular}{|c | c c | c | c |}
+    \hline
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+    \textbf{Cost Correlation} & \textbf{Min}/\unit{\kilo\watt} & \textbf{Max}/\unit{\kilo\watt} & \textbf{Currency} & \textbf{Reference} \T\B \\
+    \hline \hline
+    \(C_{turb,\; gen} = 7400 \cdot\Dot{W}_e^{0.6} + 1800 \cdot \Dot{W}_e^{0.67}\) & - & 11000& \euro2002 &\cite{GETEM2016} \T\B \\
+    \(C_{turb,\; gen} = -1.4*10^4 + 1900*W^{0.75}\) & 100 & 20000 & \$2010 &\cite{TowlerGavin2013} \T\B \\
+    \(\log C_{turb,\; gen} = 2.7051 + 1.4398\log \Dot{W} -0.1776(\log \Dot{W})^2\) & 100 & 7500& \euro2001 &\cite{Turton2012} \T\B \\
+    \(C_{turb} = 1.23*10^6 * \frac{n}{2}^{0.5} * \frac{SP}{0.18}^{1.1}\) & - & - & \euro2014 &\cite{Astolfi2014B} \T\B \\
+    \(n = \Biggl \lceil \max \left( \frac{\Delta h_{isen}^{tot}}{\Delta h_{stage}^{max}} , \frac{V_{r, isen}^{tot}}{V_{r, stage}^{max}} \right) \Biggr \rceil \) &  &  & & \T\B \\
+    \(SP = \frac{\sqrt{\Dot{V}_{isen}}}{\sqrt[4]{\frac{\Delta h_{isen}^{tot}}{n_{stages}}}}\) &  &  & & \T\B \\
+    \(C_{gen} = 2*10^5 * (W_{e}/5000)^{0.67}*S_{gear}\) & - & - & \euro2014 &\cite{Astolfi2014B} \T\B \\
+    \hline
+\end{tabular}

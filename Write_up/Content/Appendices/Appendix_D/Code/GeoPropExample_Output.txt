@@ -1,0 +1,38 @@
+Phase: TOTAL
+
+Components:
+METHANE, CO_g, CARBONDIOXIDE, Ethylene_g, HYDROGEN, STEAM, OXYGEN, Phenol_g, m_Cresol_g, o_Cresol_g, 
+p_Cresol_g, CO_aq, CO2_aq, CO3_minus2, Cl_minus, ClO_minus, ClO2_minus, ClO3_minus, ClO4_minus,
+H_plus, H2_aq, WATER, H2O2_aq, HCO3_minus, HCl_aq, HClO_aq, HClO2_aq, HO2_minus, Na_plus, NaCl_aq,
+NaOH_aq, O2_aq, OH_minus, Diamond, Graphite, Halite
+
+Composition: 
+Component           |Mass, kg       |MassFrac, -    |Moles, mol     |MoleFrac, -    |In Phase       |
+--------------------+---------------+---------------+---------------+---------------+---------------+
+CARBONDIOXIDE       |      1.963e-02|      1.753e-02|      4.461e-01|      7.567e-03|        GASEOUS|
+STEAM               |      4.880e-03|      4.357e-03|      2.709e-01|      4.595e-03|        GASEOUS|
+CO2_aq              |      3.656e-04|      3.264e-04|      8.307e-03|      1.409e-04|        AQUEOUS|
+Cl_minus            |      4.532e-02|      4.047e-02|      1.278e+00|      2.169e-02|        AQUEOUS|
+H_plus              |      5.760e-08|      5.143e-08|      5.714e-05|      9.693e-07|        AQUEOUS|
+WATER               |      9.951e-01|      8.885e-01|      5.524e+01|      9.370e-01|        AQUEOUS|
+HCO3_minus          |      4.205e-06|      3.755e-06|      6.892e-05|      1.169e-06|        AQUEOUS|
+HCl_aq              |      4.283e-07|      3.824e-07|      1.175e-05|      1.993e-07|        AQUEOUS|
+Na_plus             |      2.939e-02|      2.624e-02|      1.278e+00|      2.168e-02|        AQUEOUS|
+NaCl_aq             |      2.529e-02|      2.258e-02|      4.327e-01|      7.340e-03|        AQUEOUS|
+NaOH_aq             |      1.258e-10|      1.124e-10|      3.146e-09|      5.337e-11|        AQUEOUS|
+OH_minus            |      6.015e-11|      5.371e-11|      3.537e-09|      6.000e-11|        AQUEOUS|
+--------------------+---------------+---------------+---------------+---------------+---------------+
+
+Properties: 
+Pressure: 101325.0 Pa
+Temperature: 350.0 K
+Phase               |Enthalpy, kJ/kg|Entropy, kJ/kg/K  |Rho, kg/m3     |Volume, m3/kg  |Mass, kg       |
+--------------------+-----------------+----------------+---------------+---------------+---------------+
+AQUEOUS             |      1.948e+02|         6.024e-01|      1.038e+03|      9.636e-04|      1.095e+00|
+GASEOUS             |      5.135e+02|         1.548e+00|      1.204e+00|      8.303e-01|      2.451e-02|
+MINERAL             |      0.000e+00|         0.000e+00|      0.000e+00|      0.000e+00|      8.246e-18|
+--------------------+-----------------+----------------+---------------+---------------+---------------+
+TOTAL               |      2.018e+02|         6.231e-01|      5.232e+01|      1.911e-02|      1.120e+00|
+--------------------+-----------------+----------------+---------------+---------------+---------------+
+The following had to be excluded: Diamond, Graphite, Halite
+This corresponds to a mass of 8.2464e-18 kg or 7.3629e-16 % of the total

@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+    \pic (sep) at (0,0) {gas-liquid separator};
+
+    \draw[main stream] ($(sep-inlet left)+(-2,0)$) -- (sep-inlet left);
+    \node[above] at ($(sep-inlet left)+(-2,0.1)$) {\(\Dot{m}_{in},\, P_{in},\,h_{in}\)};
+    
+    \draw[main stream] (sep-gas outlet) |- ($(sep-gas outlet)+(2,1)$);
+    \node[above] at ($(sep-gas outlet)+(2,1.1)$) {\(\Dot{m}_{vap},\, P_{vap},\,h_{vap}\)};
+
+    \draw[main stream] (sep-liquid outlet) |-($(sep-liquid outlet)+(2,-1)$);
+    \node[below] at ($(sep-liquid outlet)+(2,-1.1)$) {\(\Dot{m}_{liq},\, P_{liq},\,h_{liq}\)};
+\end{tikzpicture}

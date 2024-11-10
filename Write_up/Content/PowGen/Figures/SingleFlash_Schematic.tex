@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (valve) at ($(producer-anchor) + (1.5, 2.5)$) {lamination valve};
+    \pic[scale=0.4] (separator) at ($(valve-anchor) + (2, 0)$) {gas-liquid separator};
+    \pic (moist) [scale=0.3, rotate=90] at ($(separator-anchor) + (1, 2)$) {block};
+    \pic (turbine) at ($(separator-anchor) + (3, 2)$) {turbine_gen};
+    \pic (condenser) at ($(turbine-anchor) + (2, -2)$) {condenser};
+    \pic[scale=0.4] (NCGsep) at ($(condenser-anchor) + (3, 0.5)$) {gas-liquid separator};
+    \pic (treat) [scale=0.25] at ($(NCGsep-gas outlet) + (1.5, 1.5)$) {block};
+    \pic (condpump) at ($(condenser-anchor) + (0, -2.3)$) {centrifugal pump};
+    \pic (injector) at ($0.5*(producer-anchor) + 0.5*(condpump-anchor)$) {injector};
+    \pic[rotate=180] (joint) at ($(injector-anchor) + (0, 1)$) {valve triple=main};
+    
+    
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (valve-inlet);
+    \draw[main stream] (valve-outlet) -- (separator-inlet left);
+    \draw[main stream] (separator-gas outlet) |- (moist-top);
+    \draw[main stream] (moist-right) -| (turbine-inlet top);
+    \draw[main stream] (moist-left) -- ($(moist-left) + (0, -0.5)$);
+    \draw[main stream] (turbine-outlet bottom) |- (condenser-pipes inlet);
+    \draw[main stream] (condenser-pipes outlet) -- (NCGsep-inlet left);
+    \draw[main stream] (NCGsep-gas outlet) |- (treat-left);
+    \draw[main stream] (treat-right) -- ++ (1.5,0);
+    \draw[main stream] (NCGsep-liquid outlet) |- (condpump-anchor);
+    
+    \draw[main stream] (condpump-top) |- (joint-left);
+    \draw[main stream] (separator-liquid outlet) |- (joint-right);
+    \draw[main stream] (joint-top) -- (injector-top);
+
+    % % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[above, align=center] at (valve-top) {Expansion\\ Valve};
+    \node[right, align=left] at (separator-inlet right) {Steam \\ Separator};
+    \node[above, align=center] at (moist-right) {Moisture\\Removal};
+    \node[above] at (turbine-top) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[below] at (condenser-bottom) {Condenser};
+    \node[right, align=left] at (NCGsep-inlet right) {NCG \\ separator};
+    \node[below, align=center] at (treat-bottom) {NCG\\Treatment};
+    \node[above] at ($(treat-top) + ((1.5, 0)$) {To atmosphere};
+    \node[below] at (condpump-bottom) {Condensate Pump};
+    \node[below] at (injector-bottom) {Injector};
+
+\end{tikzpicture}

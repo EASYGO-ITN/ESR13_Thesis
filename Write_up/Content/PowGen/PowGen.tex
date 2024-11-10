@@ -1,0 +1,1476 @@
+\section{Direct Steam Cycles}
+    Direct steam cycles are typically used for the exploitation of medium to high enthalpy geothermal resources. Under these conditions, the geofluid arrives at the surface in its vapour state, or vapour can be readily liberated, by reducing the fluid pressure. Electrical power is generated directly from the geofluid, by expanding the high-pressure vapour in a turbine.
+
+    The following section aims to provide background on the different types of \ac{DSC} geothermal power plants in use around the globe, the assessment of their thermodynamic performance and optimisation thereof, as well as the costs of such power plants.
+
+    \subsection{Dry Steam}
+        Dry steam geothermal power plants are used when the geofluid arrives at the surface in its vapour state. This limits their use to but the highest enthalpy resources, such as The Geysers, USA, or near Larderello, Italy, where incidentally the world's first geothermal power generation was demonstrated.
+
+        % \todo{What are the geological pre-requsites for a dry steam setting and how does this make them rare}
+
+        The vapour arriving at the wellhead is treated, removing solids (i.e. carried up from the formation, product of corrosion or scales) and moisture, which could be damaging to the turbine internals, Figure~\ref{fig:litrev_dry_steam_schematic}. The dry high-pressure vapour is then expanded in a turbine, converting the thermal energy to rotational work, which in turn drives a generator to generate electricity. The low-pressure vapour is then condensed before being re-pressurised and re-injected into the formation. In case the geofluid is rich in \ac{NCG}, they are separated and may undergo treatment, to remove \(H_2S\) or mercury, with the remaining \ac{NCG} being vented to atmosphere.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Figures/DrySteam_Schematic}
+            \caption{Schematic of a dry steam geothermal power plant. Adapted from \cite{DiPippo2016}}
+            \label{fig:litrev_dry_steam_schematic}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/DrySteam_TS}
+            \caption{T-S diagram of a typical dry steam geothermal power plant.}
+            \label{fig:litrev_dry_steam_TS}
+        \end{figure}
+
+        However in light of the global drive for de-carbonisation, further treatment of the \ac{NCG} to remove high \ac{GWP} components, such as carbon diodixed or methane, or complete re-injection into the reservoir may be required in future. The \ac{NCG} handling options are further explored in Section~\ref{sec:litrev_NCG_handling}    
+
+    \subsection{Flash Steam}
+        Flash steam geothermal power plants are used for medium enthalpy sources, where the geofluid arrives at surface in its liquid state or a low vapour quality two-phase state.
+
+        % \todo{What are the geological pre-requisites}
+
+        The geofluid arriving at surface is flashed (i.e. reducing its temperature) to increase the vapour quality, also see Section~\ref{sec:litrev_DSC_opt}, separating the resulting liquid and vapour phases in a separator, Figure~\ref{fig:litrev_singleflash_schematic}. The liquid stream, also referred to as \emph{brine}, is reinjected into the reservoir. The high-pressure vapour is then dried, to prevent damage to the turbine internals, before being expanded in the turbine, driving the generator to generate electricity. The low-pressure vapour is condensed before being re-pressurised and re-injected into the reservoir. In case the geofluid is rich in \ac{NCG}, they are separated and may undergo treatment, to remove \(H_2S\) or mercury, with the remaining \ac{NCG} being vented to atmosphere.
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Figures/SingleFlash_Schematic}
+            \caption{Schematic of a flash steam geothermal power plant. Adapted from \cite{DiPippo2016}}
+            \label{fig:litrev_singleflash_schematic}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/SingleFlash_TS}
+            \caption{T-S diagram of a typical flash steam geothermal power plant.}
+            \label{fig:litrev_singleflash_TS}
+        \end{figure}
+        
+        In a variation of the above configuration, it is possible to \emph{flash} the liquid geofluid multiple times, Figure~\ref{fig:litrev_multiflash_schematic}. Here, following the initial flash (to pressure \(P_1\)), the liquid brine is flashed again (to pressure \(P_2\), liberating more vapour. The high pressure steam is expanding in the turbine to the pressure of the second flash (\(P_2\)), where the two vapour streams are mingled before being fully expanded. This procedure can be repeated an arbitrary number of times, though do to the increased cost and complexity of the process, in practise at most three flashes are performed in a commercial setting. The flash pressures represent a useful optimisation parameter for improving the thermodynamic performance of the power plant, Section~\ref{sec:litrev_DSC_opt}.
+
+        \begin{figure}[H]
+            \centering
+            \resizebox{\linewidth}{!}{\input{Content/PowGen/Figures/MultiFlash_Schematic}}
+            \caption{Schematic of a dual flash steam geothermal power plant. Adapted from \cite{DiPippo2016}}
+            \label{fig:litrev_multiflash_schematic}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/MultiFlash_TS}
+            \caption{T-S diagram of a typical dual flash steam geothermal power plant.}
+            \label{fig:litrev_multiflash_TS}
+        \end{figure}
+
+    \subsection{Optimisation}
+        \label{sec:litrev_DSC_opt}
+
+        The optimisation of \ac{DSC} geothermal power plants, primarily concerns choosing the optimum mass rate, and if the geofluid is flashed, the number of flashes and the corresponding flash temperature(s)/pressure(s). This is illustrated in three case studies below:
+
+        \subsubsection{Mass Rate Optimisation}
+            \label{sec:dsc_mrate_opt}
+            The following case study was first presented by \citeauthor{DiPippo2016} \cite{DiPippo2016}.
+            
+            The mass rate of geofluid produced from the geothermal reservoir is dependent on the \ac{WHP}, with a higher \ac{WHP} corresponding to a lower mass rate. However, the turbine power is also dependent on vapour inlet pressure, with a higher inlet pressure (and thereby pressure difference across the turbine) corresponding to a higher turbine power.
+
+            Assuming a dry steam plant with the turbine being located sufficiently close to the wellhead for frictional losses in the piping to be negligible, and a fixed condensation pressure of \qty{1}{\bar}.
+
+            The well performance curve (i.e. the relationship between the mass rate and the \ac{WHP}) can be obtained from well tests, or appropriate modelling software. In this case the well performance curve is approximated by Equation~\ref{eq:well_perf_curve} \cite{DiPippo2016}, the normalised form is shown in Figure~\ref{fig:litrev_whp_opt}. \(\Dot{m}\) is the mass flow rate, \(\Dot{m}_{max}\) is the maximum mass flow rate of the well (i.e. when the wellhead pressure is \qty{0}{\bar}), \(P\) is the wellhead pressure and \(P_{shut-in}\) is the wellhead pressure for which the well ceases to flow.
+
+            \begin{align}
+                \Dot{m} = \Dot{m}_{max}\sqrt{1-\left(\frac{P}{P_{shut-in}}\right)^2} \label{eq:well_perf_curve}
+            \end{align}
+    
+            Assuming the specific enthalpy of the geofluid is independent of the \ac{WHP} (i.e. heat losses along the wellbore are independent of mass rate), the performance of the turbine can be calculated using Equation~\ref{eq:turb_power}, assuming and isentropic efficiency \(\eta_{isen}\)of\qty{85}{\percent}. Where \(h_{out, isen}\) is calculated assuming an isentropic expansion from the \ac{WHP} \(P_{WH}\) to the condensation pressure \(P_{cond}\). The resultant turbine performance curve can be seen in Figure~\ref{fig:litrev_whp_opt}.
+    
+            \begin{align}
+                \Delta h = h_{in} - \eta_{isen}*(h_{in}-h_{out, isen}) \label{eq:turb_power}
+            \end{align}
+    
+            Combining the two performance curves, with each reaching zero at opposite extremes of the \ac{WHP}, the optimum can in this case be found to be around \qty{580}{\kilo\watt\per\kg} for a \ac{WHP} of \qty{6.8}{\bar}.
+    
+            \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/WellHeadPressure}
+                \caption[Optimisation of the \ac{WHP} to maximise the turbine power.]{Optimisation of the \ac{WHP} to maximise the turbine power. On the left, the normalised well performance curve (blue) and the corresponding enthalpy change across the turbine (assuming a condenser pressure of \qty{1}{\bar}) for an isentropic efficiency of \qty{85}{\percent} assuming a dry expansion. On the right, the turbine power as a function of the \ac{WHP}, the optimum is achieved at \ac{WHP} of \qty{6.8}{\bar} corresponding to a turbine power of \qty{580}{\kilo\watt\per\kg\s}}
+                \label{fig:litrev_whp_opt}
+            \end{figure}
+    
+        \subsubsection{Flash Temperature Optimisation}
+            \label{sec:dsc_flash_opt}
+            The following case study was first presented by \citeauthor{DiPippo2016} \cite{DiPippo2016}.
+            
+            In \ac{DSC} power plants using geofluid flashing, optimising the flash temperature(s)/pressure(s) is crucial of optimising the overall plant performance. Assuming a fixed inlet rate, there are two trade-offs that need to be balanced: a) flashing the geofluid to lower temperatures/pressures generally increases the vapour mass rate, but b) reduces the pressure difference across the turbine, see Figure~\ref{fig:litrev_tflash_opt}.
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/FlashTemperatureOptimisation}
+                \caption[Optimisation of the flash temperature to maximise the turbine power.]{Optimisation of the flash temperature to maximise the turbine power for an inlet mass rate of \qty{1}{\kg\per\s}, an inlet temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}), vapour quality of \qty{15}{\percent} and a condenser pressure of \qty{0.1}{\bar}. On the left, the vapour quality post flash (blue) and the corresponding enthalpy change across the turbine assuming an isentropic efficiency of \qty{85}{\percent}. On the right, the turbine power as a function of the flash temperature, the optimum is achieved at a flash temperature of \qty{415.5}{\K} (\qty{142.5}{\degreeCelsius}) corresponding to a turbine power of \qty{103.5}{\kilo\watt}}
+                \label{fig:litrev_tflash_opt}
+            \end{figure}
+
+            In reality, the mass rate and flash temperature optimisation are best combined to ensure the overall performance of the plant can be optimised in an integrated fashion, see Figure~\ref{fig:litrev_mrat_tflash_opt}.
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/MassRate_TflashOptimisation}
+                \caption[Maximisation of the turbine power by considering the inter-relation of the well performance curve and the enthalpy change across the turbine.]{Maximisation of the turbine power by considering the inter-relation of the well performance curve and the enthalpy change across the turbine. For a well performance curve following Equation~\ref{eq:well_perf_curve}, an shut-in temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}) and vapour quality of \qty{15}{\percent}, as well as a condenser pressure of \qty{0.1}{\bar}. On the left, the vapour mass rate  post flash (relative to the maximum geofluid mass rate) (blue) and the corresponding enthalpy change across the turbine assuming an isentropic efficiency of \qty{85}{\percent}. On the right, the turbine power as a function of the flash temperature, the optimum is achieved at a flash temperature of \qty{403.7}{\K} (\qty{130.7}{\degreeCelsius}) corresponding to a \ac{WHP} of \qty{2.74}{\bar}, a relative mass rate of \num{0.96} and a turbine power of \qty{96.5}{\kilo\watt\per\kg\s}}
+                \label{fig:litrev_mrat_tflash_opt}
+            \end{figure}
+            
+            
+        \subsubsection{Number Flashing Stages Optimisation}
+            Increasing the number of flashes increases the overall vapour mass rate, however, as the remaining pressure difference across the turbine reduces with each flash, the newly liberated vapour contributes less and less to the overall turbine power. This can be seen in Figure~\ref{fig:litrev_stagesflash_opt}, where increasing the number for flash stages from two to three increases the turbine power by about \qty{1}{\percent}, but from three to four adds \qty{0.33}{\percent} and from four to six only increases power by \qty{0.26}{\percent}. In this respect, the optimisation of the number of stages is primarily an economic consideration, due to the increased plant cost and complexity. For this reason, commercial power plants utilise at most a triple flash configuration (e.g. the Nga Awa Purua \cite{DiPippo2016})
+            
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/NoFlashStagesOptimisation}
+                \caption[The optimum turbine power as a function of the number of flash stages.]{The optimum turbine power as a function of the number of flash stages, for an inlet mass rate of \qty{1}{\kg\per\s}, an inlet temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}), an inlet vapour quality of \qty{15}{\percent} and a condensation pressure of \qty{0.1}{\bar}.}
+                \label{fig:litrev_stagesflash_opt}
+            \end{figure}
+
+\section{Binary Cycles}
+    Binary cycle geothermal power plants are primarily used to generate electrical power from low enthalpy resources, where the geofluid arrives at the surface in its liquid state and flashing does not liberate sufficient quantities of steam for cost-effective power generation. In a binary cycle geothermal power plant, the thermal energy contained within the geofluid is transferred to a secondary fluid, also referred to as the cycle working fluid, which subsequently undergoes a power cycle to generate electricity Figure~\ref{fig:litrev_binary_schematic}.
+
+    The following sections aim to provide background on binary geothermal power plants using \acf{ORC}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/PowGen/Figures/BinaryPlant}
+        \caption{Schematic of a binary geothermal power plant.}
+        \label{fig:litrev_binary_schematic}
+    \end{figure}
+
+    \subsection{Classical Rankine Cycle}
+        In the classical Rankine cycle, pressurised water is vaporised using a heat source, and then drives a turbine to generate electricity. The low-pressure vapour is then condensed and re-pressurised closing the loop.
+
+        However, due to the high critical temperature of water, it is unsuitable for use as a cycle working fluid in low-temperature application. This can be attributed to three factors, 1) poor alignment with the cooling curve of the heat source, leading to high exergetic losses and thus low efficiency; 2) sub-atmospheric evaporation and condensation pressures, leading to air-ingress into the system, increasing utility costs; and 3) wet expansion in the turbine leasing to low turbine efficiencies
+
+        Figure~\ref{fig:litrev_Rankine_TS} shows a thermodynamically optimised saturated Rankine cycle using water as the cycle working fluid. Here both the evaporation and condensation pressures are sub-atmospheric, \qty{0.85}{\bar} and \qty{0.08}{\bar} corresponding to saturation temperatures of \qty{368}{\K} (\qty{95}{\degreeCelsius}) and \qty{315}{\K} (\qty{42}{\degreeCelsius}). If the cycle is super-heated, Figure~\ref{fig:litrev_RankineSuperHeat_TS} to avoid complications related to the wet expansion of steam, then the evaporation pressure has to be reduced to \qty{0.41}{\bar} corresponding to boiling temperature of \qty{350}{\K} (\qty{76.7}{\degreeCelsius}). However this comes at the expense of an additional heat exchange unit to super-heat the vapour.
+
+         \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Rankine_TS}
+            \caption[TS and TQ diagrams of a saturated Rankine cycle.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a saturated Rankine cycle operating on a liquid water-dominated saturated geofluid at \qty{433}{\K} (\qty{160}{\degreeCelsius}). The cycle operating parameters were optimised to maximise the specific net power.}
+            \label{fig:litrev_Rankine_TS}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/RankineSuperHeat_TS}
+            \caption[TS and TQ diagrams of a super-heated Rankine cycle.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a super-heated Rankine cycle, operating on a water-dominated saturated geofluid at \qty{433}{\K} (\qty{160}{\degreeCelsius}). The cycle operating parameters were optimised to maximise the specific net power.}
+            \label{fig:litrev_RankineSuperHeat_TS}
+        \end{figure}
+        
+
+    \subsection{Organic Rankine Cycle}
+        \acf{ORC}s follow a classical Rankine cycle, Figure~\ref{fig:litrev_ORC_schematic}, with the exception of the choice of working fluid. Instead of water organic fluids, such as hydrocarbons or refrigerants, are used. 
+
+         \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Figures/ORC_Schematic}
+            \caption{Schematic of a binary ORC geothermal power plant. Adapted from \cite{DiPippo2016}}
+            \label{fig:litrev_ORC_schematic}
+        \end{figure}
+    
+        Organic substances have lower critical temperatures than water, allowing the evaporation and condensation to occur above atmospheric pressures, thus preventing the ingress of air into the system; on the other hand this can lead to loss of working fluid over time. In the \ac{ORC} shown in Figure~\ref{fig:litrev_ORC_TS}, using n-Butane as the working fluid, evaporation and condensation occur at pressures of \qty{16.8}{\bar} and \qty{4.00}{\bar} respectively.
+
+         \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/ORC_TS}
+            \caption[TS and TQ diagrams of a binary \ac{ORC} geothermal power plant using n-Butane as the working fluid.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a binary \ac{ORC} geothermal power plant using n-Butane as the working fluid for a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet. The cycle parameters to yield maximum specific net power}
+            \label{fig:litrev_ORC_TS}
+        \end{figure}
+
+        Another advantage over Rankine cycles, is that due to the higher cycle pressures the volumetric flow rates are much lower allowing the plant components to be more compact and hence cheaper.
+
+    \subsection{Working Fluids}
+        The cycle working fluid is selected from a vast pool of potential fluids, see Table~\ref{table:working_fluid_properties} and Figure~\ref{fig:litrev_ORC_working_fluids}, based on a number of metrics, such as its thermophysical properties, cost and availability, safety aspects like chemical stability, flammability and toxicity, as well as environmental considerations such as its \ac{ODP} and \ac{GWP}.
+
+        In terms of the thermophysical properties, as will be shown in Section~\ref{sec:prosim_litrev_orc_efficiency}, whether a well aligned critical temperature or a high latent-heat is preferable for achieving high overall plant efficiencies, is primarily dependent on the nature of the heat source. For single-phase heat sources, working fluids with well-aligned (i.e. low critical temperatures) are preferred, whereas for two-phase sources working fluids with high latent heat are favourable. High thermal conductivity of the candidate fluid improves the overall heat transfer coefficients in all heat transfer equipment, and low specific heat of the fluid in its vapour state can help reduce the duty, and thus cost, of the condenser unit, \cite{Hung2010}.
+
+        Another important aspect relates to the phase behaviour of the candidate fluid, and in particular the shape of the phase envelope in the temperature-entropy domain, which determines, whether expansion of the fluid vapour can be conducted with or without formation of liquid droplets. The formation of liquid droplets can be detrimental to both the turbine efficiency but also damage the turbine internals, see Section~\ref{sec:prosim_litrev_turbine} for further details. Candidate fluids fall into one of three categories, \emph{dry} corresponding to a negatively sloped dew line, dry, corresponding to a positively sloped dew line, and isentropic, corresponding to a vertical dew line, see Figure~\ref{fig:litrev_ORC_working_fluid_types}, with dry or isentropic fluids being  preferred working fluids \cite{DiPippo2016}. However, experiments have shown that expansion across the phase envelope does not necessarily result in liquid drop-out, if the outlet vapour is in a super-heated state, due to the fluid remaining in a meta-stable vapour state \cite{Mines1997,Bliem1992}. 
+
+        The possible working fluids can be categorised as hydrocarbons, refrigerants, siloxanes, other organics and inorganic substances, Figure~\ref{fig:litrev_ORC_working_fluids}. As a result of the Montreal Protocol \cite{Montreal2020} many of the \ac{CFC}, \ac{HCFC} and \ac{HFC} based refrigerants have been banned due to their high \ac{ODP} or face bans in coming years, under the Kigali amendment, due to their high \ac{GWP}.
+
+         \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/WorkingFluid_types}
+            \caption{Temperature-Entropy phase envelopes of dry, wet, isentropic fluids. \cite{Babatunde2018}}
+            \label{fig:litrev_ORC_working_fluid_types}
+        \end{figure}  
+
+         \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/WF_CriticalProperties}
+            \caption{Critical temperatures and pressures of various \ac{ORC} working fluids, \cite{Astolfi2014A, Bell2014}}
+            \label{fig:litrev_ORC_working_fluids}
+        \end{figure}
+
+        \begin{table}[H]
+            \caption{Environmental and Health properties of candidate working fluids \cite{DiPippo2016}}
+            \centering 
+            \label{table:working_fluid_properties}
+            \input{Content/PowGen/DataTables/WorkingFluids}        
+            \\[10pt]
+        \end{table}
+        
+    \subsection{Configurations}
+        The following section aims to provide background on the different strategies used to increase the efficiency of \ac{ORC}s
+
+        \subsubsection{Recuperative Cycle}
+            Where the turbine exhaust has a sufficiently high temperature, it can be used to pre-heat the pressurised working fluid before entering the pre-heater, Figure~\ref{fig:litrev_ORC_recu_schematic}. This has two main advantages: 1) reducing the duty and thus size and cost of the condenser; and 2) reducing the duty of the \ac{PHE}, which can be of operational importance when handling geofluids prone to scaling at lower temperatures, also see Section~\ref{sec:litrev_scale_handling}.
+
+             \begin{figure}[H]
+                \centering
+                % \resizebox{.75\linewidth}{!}{\input{Content/PowGen/Figures/ORC_Recup_Schematic}}
+                \input{Content/PowGen/Figures/ORC_Recup_Schematic}
+                \caption[Schematic of a binary ORC geothermal power plant with recuperation.]{Schematic of a binary ORC geothermal power plant with recuperation. Adapted from \cite{DiPippo2016}}
+                \label{fig:litrev_ORC_recu_schematic}
+            \end{figure}
+    
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_recu_TS}
+                \caption[TS and TQ diagrams of a recuperative binary \ac{ORC} using n-Butane as the working fluid.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a recuperative binary \ac{ORC} geothermal power plant using n-Butane as the working fluids for a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet. The cycle parameters were not optimised.}
+                \label{fig:litrev_ORC_recu_TS}
+            \end{figure}
+    
+        % \textbf{Turbine Bleeding}\\
+        % Similarly to a recuperative cycle, working fluid may also be prematurely bled from the turbine and mixed with the partially pressurised working fluid, Figure~\ref{fig:litrev_ORC_turb_bleeding_schematic}, reducing the duty of the primary heat exchange unit.
+
+        %  \begin{figure}[H]
+        %     \centering
+        %     \input{Content/PowGen/Figures/ORC_turbine_bleeding}
+        %     \caption{Schematic of a binary ORC geothermal power plant with recuperation.}
+        %     \label{fig:litrev_ORC_turb_bleeding_schematic}
+        % \end{figure}        
+        
+        \subsubsection{Double Pressure}
+            In double pressure cycles evaporation occurs at two distinct pressure levels, an intermediate pressure and a high pressure. In this configuration, the low-pressure working fluid is pressurised to the intermediate pressure and then pre-heated to its boiling point, Figure~\ref{fig:litrev_ORC_dualP_schematic}. The working fluid is then split into two streams, one is vaporised and sent to the turbine while the other is pressurised to a higher pressure, thus raising its boiling point, before being vaporised and then sent to the turbine. The streams can then either be expanded in two separate turbines or using a dual-inlet turbine.
+        
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Figures/ORC_DualP_Schematic}
+                \caption[Schematic of a double pressure binary ORC geothermal power plant.]{Schematic of a double pressure binary ORC geothermal power plant. Adapted from \cite{DiPippo2016}}
+                \label{fig:litrev_ORC_dualP_schematic}
+            \end{figure}
+            % \todo{I dont think the first version of the dualP diagram is correct... it is taken from DiPippo, but I struggle to see how this would be sensible}
+    
+            The use of double- or multi-pressure cycles has the advantage of obtaining a closer match between the heat profiles of the geofluid and the cycle working fluid in the \ac{PHE}, see Figure~\ref{fig:litrev_ORC_dualP_TS}, reducing exergetic losses and raising the cycle efficiency.         
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_dualP_TS}
+                \caption[TS and TQ diagram of a double pressure binary \ac{ORC} geothermal plant using n-Butane as the working fluid.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a double pressure binary \ac{ORC} geothermal power plant using n-Butane as the working fluids for a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet. The cycle parameters were not optimised.}
+                \label{fig:litrev_ORC_dualP_TS}
+            \end{figure}
+    
+        \subsubsection{Dual Fluid}
+            To obtain a closer match between the heat profiles of the cycle working fluid and the geofluid, and improve the cycle efficiency, two different cycle working fluids can be used. This effectively results in a high temperature \ac{ORC} and a low temperature \ac{ORC}, Figure~\ref{fig:litrev_ORC_dualFluid_schematic}.
+        
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Figures/ORC_DualFluid_Schematic}
+                \caption[Schematic of a dual fluid binary ORC geothermal power plant.]{Schematic of a dual fluid binary ORC geothermal power plant. Adapted from \cite{DiPippo2016}}
+                \label{fig:litrev_ORC_dualFluid_schematic}
+            \end{figure}
+
+            Comparing the Temperature-Heat diagrams of a single fluid cycle (using n-Butane), Figure~\ref{fig:litrev_ORC_TS}, and a dual fluid cycle (using n-Butane and n-Pentane), Figure~\ref{fig:litrev_ORC_dualFluid_TS}, a closer temperature approach can be seen to be obtained.
+                
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_dualFluid_TS}
+                \caption[TS and TQ diagrams of a dual fluid binary \ac{ORC} geothermal power plant using n-Butane and n-Pentane as the working fluids.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a dual fluid binary ORC geothermal power plant using n-Butane and n-Pentane as the working fluids for a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet. The cycle parameters were not optimised.}
+                \label{fig:litrev_ORC_dualFluid_TS}
+            \end{figure}
+    
+            While a dual fluid configuration can improve the plant performance, it comes at a higher capital cost, due to requiring two separate cycles and also increases the complexity of the system. Perhaps for this reason, dual fluid cycles have seen only limited commercial use.
+            
+            A prominent example of a dual fluid \ac{ORC} is the Magmamax plant at East Mesa in the United States \cite{DiPippo2016}. Here, a variation of the plant layout shown in Figure~\ref{fig:litrev_ORC_dualFluid_schematic} is used, where the two fluid cycles interlock (or cascade), meaning that \emph{left-over} heat from the hot cycle is transferred to the cold cycle, Figure~\ref{fig:litrev_ORC_dualFluid_interlocl_schematic}.
+
+            \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Figures/ORC_dualFluid_interlock}
+                \caption[Schematic of an interlocking dual fluid binary ORC geothermal power plant.]{Schematic of an interlocking dual fluid binary ORC geothermal power plant. Adapted from \cite{DiPippo2016}}
+                \label{fig:litrev_ORC_dualFluid_interlocl_schematic}
+            \end{figure}
+           
+        \subsubsection{Super-critical Cycle}
+            In super-critical cycles, the working fluid is pressurised to super-critical pressures, before being heated to the desired temperature. Naturally, only working fluids can be used whose critical temperatures are below the source temperatures. ENEL in collaboration with Turboden and Politecnico di Milano built and tested a pilot plant near Livorno, Italy \cite{Astolfi2013}.
+            
+            Due to its super-critical state, there is no discontinuous phase transition, allowing a closer match between the geofluid and working fluid heat profiles to be obtained, Figure~\ref{fig:litrev_ORC_supercrit_TS}. Moreover, supercritical cycles approximate the Lorenz or Triangular cycle, which as discussed in Section~\ref{sec:prosim_litrev_orc_efficiency} is the ideal cycle for sensible heat dominated heat sources. However, the higher cycle pressures compared to sub-critical cycles result in higher pumping requirements, to re-pressurise the working fluid, as well as thicker pipework and sturdier joints to contain the fluid. 
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_supercrit_TS}
+                \caption[TS and TQ diagrams of a super-critical binary \ac{ORC} geothermal power plant using n-Butane as the working fluid.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a super-critical binary \ac{ORC} geothermal power plant using n-Butane as the working fluid for a saturated water-dominated geofluid at a temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}) at the inlet. The cycle parameters were not optimised.}
+                \label{fig:litrev_ORC_supercrit_TS}
+            \end{figure}
+            
+        \subsubsection{Mixtures}
+            While the phase transition of pure fluids from liquid to vapour at constant pressure occurs at a constant temperature, mixtures experience a temperature glide. This temperature glide could be exploited in \ac{ORC}s to obtain a closer match in the geofluid and working fluid profile, Figure~\ref{fig:litrev_ORC_mixture_TS}. In principle, this would allow the design engineers to tune the working fluid, specifically to the heat source (i.e. the geofluid).
+        
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_mixture_TS}
+                \caption[TS and TQ diagrams of a binary \ac{ORC} geothermal power plant using a 50:50 mixture of n-Butane and n-Pentane as the working fluid.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a binary ORC geothermal power plant using a 50:50 mixture of n-Butane and n-Pentane as the working fluid for a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet. The cycle parameters and working fluid composition were not optimised.}
+                \label{fig:litrev_ORC_mixture_TS}
+            \end{figure}
+
+            However, mixtures also have a number of disadvantages, for instance, the temperature glide also occurs at when condensing the working fluid, and is generally more pronounced. As such, a compromise between a higher condensation pressure (and thus reduced turbine power) and closer approach temperatures in the condenser (and thus higher larger heat transfer area and cost) has to be found.
+
+            From an operational perspective, it is difficult to control the composition of the working fluid mixture - this can be attributed to lamination of the fluid in the evaporator/condenser, with heavier components collecting near the bottom and the lighter components collecting near the top of the pipes.
+
+    \subsection{Optimisation}
+        \label{sec:prosim_litrev_ORC_opt}
+
+        The optimisation of binary \ac{ORC} geothermal power plants, primarily concerns choosing the optimum cycle parameters, such as the turbine inlet pressure and temperature as well as the condenser outlet pressure and temperature. As will be shown below, optimisation of the wellhead pressure (and in turn geofluid mass rate) for liquid dominated sources is trivial, but may require further consideration for two-phase sources.
+
+        \subsubsection{Cycle Performance Optimisation}
+            From a thermodynamic perspective, the choice of condensation conditions is trivial, i.e. the lowest possible condensation temperature/pressure, however, from an economic perspective, this also needs to be balanced against the cost of the condensing unit.
+
+            The turbine conditions present a trade-off, the higher the inlet temperature and pressure , the higher the turbine power, however the lower the working fluid mass rate, resulting in reduced geofluid utilisation.
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_OPT/Tevap}
+                \caption[Optimisation of the maximum cycle temperature for saturated binary \ac{ORC} geothermal power plant.]{Left: The working fluid mass rate and the specific net power as a function of the evaporation temperature, assuming a saturated cycle. Right: The net power of the binary ORC using n-Butane as the working fluid for a unit mass rate (\qty{1}{\kg\per\s}) of a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet.}
+                \label{fig:litrev_ORC_Topt}
+            \end{figure}
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_OPT/Tevap_TS}
+                \caption[TS and TQ diagrams of a saturated binary \ac{ORC} with the maximum cycle temperature optimised for maximum net power.]{Temperature-Entropy and Temperature-Heat transfer diagrams of a binary ORC geothermal power plant using n-Butane as the working fluid for a saturated water-dominated geofluid at a temperature of \qty{433}{\K} (\qty{160}{\degreeCelsius}) at the inlet, assuming a saturated cycle. The evaporation temperature/pressure were optimised for maximum net cycle power.}
+                \label{fig:litrev_ORC_Topt_TS}
+            \end{figure}
+        
+
+        \subsubsection{Mass Rate Optimisation}
+            For liquid-dominated sources, the optimisation of the mass flow rate of geofluid is somewhat trivial since the fluid temperature is only weakly dependent on the fluid pressure, Figure~\ref{fig:litrev_ORC_Liq_Mrat_opts}. As such, the plant net power is maximised by the maximum geofluid mass rate (i.e. \ac{WHP} is as low as possible).
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_OPT/Liq_Mrate_Opt}
+                \caption[Optimisation of the geofluid working fluid mass rate ratio for a liquid dominated heat source.]{Left: The well performance curve, expressed as the mass rate ratio of geofluid (relative to the maximum mass rate) as a function of \ac{WHP}. Right: The temperature of geofluid at the wellhead, about \qty{433}{\K} (\qty{160}{\degreeCelsius}), assuming constant enthalpy of around \qty{570}{\kilo\joule\per\kg} along the wellbore, as a function of \ac{WHP}.}
+                \label{fig:litrev_ORC_Liq_Mrat_opts}
+            \end{figure}
+
+            However for artificially-lifted liquid-dominated sources, there maybe a trade-off between the net power of the cycle and the pumping requirements, if the frictional losses are significant. Ignoring frictional losses, the cycle and pumping power requirement are both directly proportional to the geofluid mass rate; as such the net plant power is maximised by the maximum geofluid mass rate (i.e. \ac{WHP} is as low as possible).
+
+            For two-phase sources, the mass flow rate of geofluid must be optimised similar to \ac{DSC}s, because the temperature is more strongly pressure dependent, Figure~\ref{fig:litrev_ORC_Vap_Mrat_opts}.
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_OPT/Vap_Mrate_Opt}
+                \caption[Optimisation of the geofluid working fluid mass rate ratio for a two-phase heat source.]{Left: The well performance curve, expressed as the mass rate ratio of geofluid (relative to the maximum mass rate) as a function of \ac{WHP}. The temperature of geofluid at the wellhead, assuming constant enthalpy of around \qty{570}{\kilo\joule\per\kg} along the wellbore, and the optimised working fluid (n-Butane) temperature, as a function of \ac{WHP}. Right: The specific cycle power (relative to the geofluid mass rate) and the specific net power (relative to the maximum geofluid mass rate)}
+                \label{fig:litrev_ORC_Vap_Mrat_opts}
+            \end{figure}
+
+             \begin{figure}[H]
+                \centering
+                \input{Content/PowGen/Plots/ORC_OPT/Vap_Mrate_Opt_TS}
+                \caption[TS and TQ diagrams of a binary \ac{ORC} geothermal power plant with optimised geofluid working fluid mass rate ratio]{Temperature-Entropy and Temperature-Heat transfer diagrams of a binary \ac{ORC} geothermal power plant using n-Butane as the working fluid for an optimised mass rate of a two-phase geofluid, assuming constant enthalpy of around \qty{570}{\kilo\joule\per\kg} along the wellbore.}
+                \label{fig:litrev_ORC_Vap_Mrat_opts_TS}
+            \end{figure}
+
+    \subsection{Intuitions for cycle and working fluid selection}
+        \label{sec:prosim_litrev_orc_efficiency}
+
+        While certain rules of thumb have been developed for choosing working fluids for single-phase heat sources, such as the critical temperature of the working fluid being well aligned with the source temperature \cite{Astolfi2014B}, this section aims to explorer whether these intuitions can also be applied to two-phase sources and what differences there may be. 
+        
+        A two-phase pure geofluid characterised by a vapour quality \(x\), a temperature \(T_H\), a latent heat \(\Delta h_{fg}\) and a constant specific heat capacity \(c_p\) of the condensed liquid is considered. The heat released by cooling the geofluid to a temperature \(T\) is thus given by Equation~\ref{eq:heat_content}. Where \(\Dot{Q}\) is the heat transferred, \(c_p\) is the specific heat capacity, \(T_H\) is the inlet temperature of the geofluid, \(T\) is the temperature to which the geofluid is cooled, \(x\) is the inlet vapour quality of the geofluid and \(\Delta h_{fg}\) is the latent heat of vaporisation of the geofluid.
+
+        \begin{align}
+            \Dot{Q} = c_p (T_H - T) + x\Delta h_{fg} \label{eq:heat_content}
+        \end{align}
+
+        Two thermodynamic cycles are to be considered for exploiting the resource, Figure~\ref{fig:litrev_Cycles}, a Rectangular cycle and a Triangular cycle, which can be seen as extreme instances of ordinary Rankine cycles. For instance, the Rectangular cycle resembles a Rankine cycle using a working fluid with extremely large latent heat, whereas the Triangular cycle represents a Rankine cycle using a working fluid requiring no latent heat (e.g. a super critical cycle). 
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/ORC_Efficiency/Rectangular_and_Triangular}
+            \caption{Temperature-Entropy diagram of the Rectangular cycle, left, and the Triangular cycle, right}
+            \label{fig:litrev_Cycles}
+        \end{figure}
+
+        The cycles are compared on the basis of the overall plant efficiency, Equation\ref{eq:eta_plant}, which takes into account both the efficiency of the cycles themselves, as well as how well either cycle allows the available heat to be utilised. Moreover, the overall plant efficiency can also be used to choose the optimum cycle temperature \(T_{cyc}\) for each cycle considered. Where \(\eta_{plant}\) is the overall plant efficiency, \(\eta_{cycle}\) is the efficiency of the cycle, \(\eta_{recov}\) is the thermal recovery efficiency, \(\Dot{W}_{net}\) is the net power generated by the heat engine, \(\Dot{Q}_{in}\) and \(\Dot{Q}_{out}\) are the heat transferred into and rejected from the heat engine.
+
+        \begin{align}
+            \eta_{plant} = \frac{\Dot{W}_{net}}{\Dot{Q}_{max}} = \eta_{recov}*\eta_{cycle} \label{eq:eta_plant}
+        \end{align}
+        \begin{align}
+            \eta_{recov} = \frac{\Dot{Q}_{in}}{\Dot{Q}_{max}} \label{eq:eta_recov}
+        \end{align}
+        \begin{align}
+            \eta_{cycle} = \frac{\Dot{W}_{net}}{\Dot{Q}_{in}} \label{eq:eta_cycle}
+        \end{align}
+
+        \subsubsection{Rectangular Cycle}
+
+        Figure~\ref{fig:TQ_Rect} shows the temperature duty diagram for the heat source and the rectangular cycle. For a given cycle temperature \(T_{cyc}\) (in the range of \(T_H\) to \(T_0\)) there will always be a pinch point, preventing all of the heat to be extracted (i.e. \(\Dot{Q}_{max}\)) - as a simplification, the minimum approach temperature is assumed to be zero. With this, two distinct regions emerge, Region 1 where the latent heat of condensation of the geofluid evaporated the working fluid, and Region 2 where the sensible heat of the geofluid evaporates the working fluid.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/ORC_Efficiency/TQ_Rectangular}
+            \caption{Temperature-Duty diagram of the geofluid and the rectangular cyce.}
+            \label{fig:TQ_Rect}
+        \end{figure}
+        
+        To obtain an expression for the cycle efficiency that accounts for all irreversibilities associated with the heat transfer, the enthalpy and entropy balances of the overall system, as well as each of the regions identified must be considered. Where \(\Dot{m}_{H}\) is the mass rate of geofluid, \(h_{in}^{H}\) and \(h_{out}^{H}\) are the specific enthalpy of the geofluid at the inlet and outlet of the plant, \(s_{in}^{H}\) and \(s_{out}^{H}\) are the specific entropy of the geofluid at the inlet and outlet of the geofluid, \(\Dot{S}_{gen}^{tot}\) is the entropy generated, and \(T_0\) is the ambient temperature
+
+        Overall:
+        \begin{align}
+             \Dot{m}_{H}(h_{in}^{H}-h_{out}^{H}) - \Dot{W}_{net} - \Dot{Q}_{out} = 0 \label{eq:rect_h_bal}
+        \end{align}
+        \begin{align}
+             \Dot{m}_{H}(s_{in}^{H}-s_{out}^{H}) + \Dot{S}_{gen}^{tot} - \frac{\Dot{Q}_{out}}{T_0} = 0 \label{eq:rect_s_bal}
+        \end{align}
+        \begin{align}
+             \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0 (s_{in}^{H}-s_{out}^{H}) + \frac{T_0\Dot{S}_{gen}^{tot}}{\Dot{m}_{H}}}{(h_{in}^{H}-h_{out}^{H})} \label{eq:rect_Qratio}
+        \end{align}
+
+        For Region 1:
+        \begin{align}
+             \Dot{m}_{H}(h_{in}^{H}-h_{sat}^{H}) = \Dot{m}_{F}(h_{out}^{F}-h_{*}^{F}) \label{eq:rect_h_bal_reg1}
+        \end{align}
+        \begin{align}
+            \Dot{m}_{H}(s_{in}^{H}-s_{sat}^{H}) - \Dot{m}_{F}(s_{out}^{F}-s_{*}^{F}) + \Dot{S}_{gen}^{Region 1} = 0 \label{eq:rect_s_bal_reg1}
+        \end{align}
+
+        Where \(h_{sat}^{H}\) is the specific enthalpy of the geofluid at  saturation, \(s_{sat}^{H}\) is the specific entropy of the geofluid at saturation, \(\Dot{m}_{F}\) is the mass rate of working fluid, \(h_{out}^{F}\) and \(h_{*}^{F}\) are the specific enthalpy of the working fluid at the outlet of the heat exchanger and at the point where the geofluid reaches saturation, \(s_{out}^{F}\) and \(s_{*}^{F}\) are the specific entropy of the working fluid at the outlet of the heat exchanger and the point corresponding to saturation of the geofluid, and \(\Dot{S}_{gen}^{Region 1}\) is the entropy generated in Region 1.
+
+        Combining Equations~\ref{eq:rect_s_bal_reg1} and \ref{eq:rect_h_bal_reg1}, recognising that evaporation/condensation of pure fluids occurs at constant temperature (at a given pressure), \(\Delta s_{fg}=\frac{\Delta h_{fg}}{T}\), we obtain an expression for the entropy generation associated with the heat transfer in Region 1, Equation~\ref{eq:rect_sgen_reg1}.
+
+        \begin{align}
+            \Dot{S}_{gen}^{Region 1} = \Dot{m}_{H}(h_{in}^{H}-h_{sat}^{H}) \left(\frac{1}{T_{cyc}} - \frac{1}{T_{H}}\right) \label{eq:rect_sgen_reg1}
+        \end{align}
+
+        A similar expression can be obtained for Region 2, Equation~\ref{eq:rect_sgen_reg2}.
+        \begin{align}
+             \Dot{m}_{H}(h_{sat}^{H}-h_{out}^{H}) = \Dot{m}_{F}(h_{*}^{F}-h_{in}^{F}) \label{eq:rect_h_bal_reg2}
+        \end{align}
+        \begin{align}
+            \Dot{m}_{H}(s_{sat}^{H}-s_{out}^{H}) - \Dot{m}_{F}(s_{*}^{F}-s_{in}^{F}) + \Dot{S}_{gen}^{Region 2} = 0 \label{eq:rect_s_bal_reg2}
+        \end{align}
+        \begin{align}
+            \Dot{S}_{gen}^{Region 2} = \Dot{m}_{H}(h_{sat}^{H}-h_{out}^{H})\frac{1}{T_{cyc}} - \Dot{m}_{H}(s_{sat}^{H}-s_{out}^{H}) \label{eq:rect_sgen_reg2}
+        \end{align}
+
+        Where \(h_{in}^{F}\) is the specific enthalpy of the working fluid at the inlet of the heat exchanger, \(s_{in}^{F}\) is the specific entropy of the working fluid at the inlet of the heat exchanger, and \(\Dot{S}_{gen}^{Region 2}\) is the entropy generated in Region 2.
+
+        Combining Equations~\ref{eq:rect_sgen_reg1} and \ref{eq:rect_sgen_reg2}, yields an expression for the total entropy generation across the system, Equation~\ref{eq:rect_sgen_tot}, assuming that heat engine is mechanically ideal and does not introduce any irreversibilities.
+
+        \begin{align}
+            \frac{T_0\Dot{S}_{gen}^{tot}}{\Dot{m}_{H}} =\frac{T_0\Dot{S}_{gen}^{Region 1} + T_0\Dot{S}_{gen}^{Region 2}}{\Dot{m}_{H}}
+        \end{align}
+        % \begin{align}
+        %     \frac{T_0\Dot{S}_{gen}^{tot}}{\Dot{m}_{H}} = (h_{in}^{H}-h_{sat}^{H}) \left(\frac{T_0}{T_{cyc}} - \frac{T_0}{T_{H}}\right) + (h_{sat}^{H}-h_{out}^{H})\frac{T_0}{T_{cyc}} - T_0(s_{sat}^{H}-s_{out}^{H})
+        % \end{align}
+        \begin{align}
+            \frac{T_0\Dot{S}_{gen}^{tot}}{\Dot{m}_{H}} = (h_{in}^{H}-h_{out}^{H})\frac{T_0}{T_{cyc}} - (h_{in}^{H}-h_{sat}^{H})\frac{T_0}{T_{H}}  - T_0(s_{sat}^{H}-s_{out}^{H}) \label{eq:rect_sgen_tot}
+        \end{align}
+
+        Equation~\ref{eq:rect_sgen_tot} can then be substituted into Equation~\ref{eq:rect_Qratio}, which then simplifies to Equation~\ref{eq_rect_Qratio2} since then condensation of a pure fluid occurs at constant temperature and so \((s_{in}^{H}-s_{sat}^{H})=\frac{(h_{in}^{H}-h_{sat}^{H})}{T_H}\). Finally, the cycle efficiency is given by Equation~\ref{eq:rect_eff_cyc}. Where \(T_{cyc}\) is the cycle temperature.
+
+        % \begin{align}
+        %     \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{(h_{in}^{H}-h_{out}^{H})\frac{T_0}{T_{cyc}} + T_0(s_{in}^{H}-s_{out}^{H}) - \frac{T_0}{T_{H}}(h_{in}^{H}-h_{sat}^{H}) - T_0(s_{sat}^{H}-s_{out}^{H})}{(h_{in}^{H}-h_{out}^{H})}
+        % \end{align}
+        \begin{align}
+            \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0}{T_{cyc}} + \frac{(T_0(s_{in}^{H}-s_{sat}^{H}) - \frac{T_0}{T_{H}}(h_{in}^{H}-h_{sat}^{H})}{(h_{in}^{H}-h_{out}^{H})} 
+        \end{align}
+
+        % \begin{align}
+        %     \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0}{T_{cyc}} + \frac{(\frac{T_0}{T_{H}}(h_{in}^{H}-h_{sat}^{H}) - \frac{T_0}{T_{H}}(h_{in}^{H}-h_{sat}^{H})}{(h_{in}^{H}-h_{out}^{H})} 
+        % \end{align}
+        \begin{align}
+            \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0}{T_{cyc}} \label{eq_rect_Qratio2}
+        \end{align}
+        \begin{align}
+            \eta_{cycle} = 1-\frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = 1-  \frac{T_0}{T_{cyc}} \label{eq:rect_eff_cyc}
+        \end{align}
+
+        The thermal recovery or thermal utilisation efficiency \(\eta_{recov}\) is then obtained via the ratio of the heat extracted from the heat source (by cooling it to a temperature \(T_{cyc}\)) to the maximum heat that could be extracted (by cooling the geofluid to a temperature of \(T_0\)), Equation~\ref{eq:rect_eff_recov}. Here \(\tau = T_H + \frac{x\Delta h_{fg}}{c_p}\), representing an \emph{effective} temperature of the geofluid at the inlet.
+
+        \begin{align}
+            \eta_{recov} =\frac{\Dot{Q}_{in}}{\Dot{Q}_{in}^{max}} = \frac{h_{in}^{H}-h_{out}^{H}}{h_{in}^{H}-h_{0}^{H}} = \frac{c_p (T_H - T_{cyc}) + x\Delta h_{fg}}{c_p (T_H - T_0) + x\Delta h_{fg}} 
+        \end{align}
+        % \begin{align}
+        %     \eta_{recov} = \frac{T_H - T_{cyc} + \frac{x\Delta h_{fg}}{c_p}}{T_H - T_0 + \frac{x\Delta h_{fg}}{c_p}}
+        % \end{align}
+        \begin{align}
+            \eta_{recov} = \frac{\tau - T_{cyc}}{\tau - T_0} \label{eq:rect_eff_recov}
+        \end{align}
+
+        The overall plant efficiency for the two-phase geofluid and the rectangular cycle, Equation~\ref{eq:rect_eff_plant}, is then obtained by combining Equations~\ref{eq:rect_eff_cyc} and \ref{eq:rect_eff_recov}. This expression is valid for any heat source that can be parameterised by Equation~\ref{eq:heat_content}.
+
+        \begin{align}
+            \eta_{plant} = \frac{\tau - T_{cyc}}{\tau - T_0} * \left(1-  \frac{T_0}{T_{cyc}}\right)\label{eq:rect_eff_plant}
+        \end{align}
+        
+        % \begin{figure}[H]
+        %     \centering
+        %     \input{Content/PowGen/Plots/ORC_Efficiency/Plant_Cycle_Recov_Effs_Rect}
+        %     \caption[The thermal recovery, cycle and plant efficiency for a Rectangular cycle and a sensible heat dominated heat-source.]{The thermal recovery, cycle and plant efficiency as a function of the maximum cycle temperature for a Rectangular cycle and a heat source characterised by a \(C_p\) of \qty{4}{\kilo\joule\per\kg\per\K}, a latent heat of \(x\Delta H_{fh}\) of \qty{0}{\kilo\joule\per\kg}, an inlet temperature of \qty{450}{\K} and an ambient temperature of \qty{300}{\K}. The black points indicate the best efficiency point}
+        %     \label{fig:litrev_SaturatedSource_Rectangular}
+        % \end{figure}
+
+        The optimum cycle temperature \(T_{cyc}^{opt}\) can then by determined by finding the cycle temperature \(T_{cyc}\), for which \(\frac{d\eta_{plant}}{dT_{cyc}}=0\), Equations~\ref{eq:rect_deff_plantdTcyc} and \ref{eq:rect_Tcyc_opt}. Equation~\ref{eq:rect_Tcyc_opt} is valid up to \(\frac{x\Delta h_{fg}}{c_p} = T_H\left(\frac{T_H}{T_0}-1\right)\), above which, the optimum cycle temperature is equal to the temperature of the heat source \(T_H\).
+
+        \begin{align}
+            \frac{d\eta_{plant}}{dT_{cyc}} = -\frac{1}{\tau - T_0} + \frac{1}{\tau T_0} \frac{1}{T_{cyc}^2}\label{eq:rect_deff_plantdTcyc}
+        \end{align}
+
+        \begin{align}
+            T_{cyc}^{opt} = \sqrt{\tau T_0}=\sqrt{T_0 * \left(T_H + \frac{x\Delta h_{fg}}{c_p}\right)} \label{eq:rect_Tcyc_opt}
+        \end{align}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/ORC_Efficiency/PlantEff_vs_DHfg_Rect}
+            \caption[The overall plant efficiency for different latent heats as a function of maximum cycle temperature.]{The overall plant efficiency as a function of the cycle temperature for a Rectangular cycle and a heat source characterised by a \(c_p\) of \qty{4}{\kilo\joule\per\kg\per\K}, a latent heat \(x\Delta H_{fh}\) of \qty{0}{\kilo\joule\per\kg}, an inlet temperature of \qty{450}{\K} and an ambient temperature of \qty{300}{\K}}
+            \label{fig:litrev_GenericSource_Carnot}
+        \end{figure}
+
+        \subsubsection{Triangular Cycle}
+
+        Assuming the specific heat capacity of the working fluid is constant over the range of temperatures of interest, Figure~\ref{fig:TQ_Tri} shows the temperature duty diagram for the geofluid and the triangular cycle. Similarly to the rectangular cycle two distinct regions emerge, Region 1 where the latent heat of condensation of the geofluid provides sensible heat to the working fluid, and Region 2 where the sensible heat of the geofluid provides sensible heat to the working fluid.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/ORC_Efficiency/TQ_Triangular}
+            \caption{Temperature-Duty diagram of the geofluid and the triangular cycle.}
+            \label{fig:TQ_Tri}
+        \end{figure}
+
+        To obtain an expression for the cycle efficiency that accounts for all irreversibilities associated with the heat transfer, the enthalpy and entropy balances of the overall system, as well as each of the regions identified must be considered. The nomenclature is used is consistent with that used in the previous chapter.
+
+        Overall:
+        \begin{align}
+             \Dot{m}_{H}(h_{in}^{H}-h_{out}^{H}) - \Dot{W}_{net} - \Dot{Q}_{out} = 0\label{eq:tri_h_bal}
+        \end{align}
+        \begin{align}
+             \Dot{m}_{H}(s_{in}^{H}-s_{out}^{H}) + \Dot{S}_{gen}^{tot} - \frac{\Dot{Q}_{out}}{T_0} = 0 \label{eq:tri_s_bal}
+        \end{align}
+
+        \begin{align}
+             \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0 (s_{in}^{H}-s_{out}^{H}) + \frac{T_0\Dot{S}_{gen}^{tot}}{\Dot{m}_{H}}}{(h_{in}^{H}-h_{out}^{H})} \label{eq:tri_Qratio}
+        \end{align}
+
+        For Region 1:
+        \begin{align}
+             \Dot{m}_{H}(h_{in}^{H}-h_{sat}^{H}) = \Dot{m}_{F}(h_{out}^{F}-h_{*}^{F}) \label{eq:tri_h_bal_reg1}
+        \end{align}
+        \begin{align}
+            \Dot{m}_{H}(s_{in}^{H}-s_{sat}^{H}) - \Dot{m}_{F}(s_{out}^{F}-s_{*}^{F}) + \Dot{S}_{gen}^{Region 1} = 0 \label{eq:tri_s_bal_reg1}
+        \end{align}
+
+       Since condensation of of pure fluids occurs at constant temperature (at a given pressure), \(\Delta s_{fg}=\frac{\Delta h_{fg}}{T}\), this yields Equation~\ref{eq:tri_sgen_reg1} as an expression for the entropy generation associated with the heat transfer in Region 1.
+
+        \begin{align}
+            \Dot{S}_{gen}^{Region 1} = \Dot{m}_{F}(s_{out}^{F}-s_{*}^{F}) - \Dot{m}_{H} \frac{(h_{in}^{H}-h_{sat}^{H})}{T_H}\label{eq:tri_sgen_reg1}
+        \end{align}
+
+        A similar expression can be obtained for Region 2, Equation~\ref{eq:tri_sgen_reg2}.
+        \begin{align}
+             \Dot{m}_{H}(h_{sat}^{H}-h_{out}^{H}) = \Dot{m}_{F}(h_{*}^{F}-h_{in}^{F}) \label{eq:tri_h_bal_reg2}
+        \end{align}
+        \begin{align}
+            \Dot{m}_{H}(s_{sat}^{H}-s_{out}^{H}) - \Dot{m}_{F}(s_{*}^{F}-s_{in}^{F}) + \Dot{S}_{gen}^{Region 2} = 0 \label{eq:tri_s_bal_reg2}
+        \end{align}
+        \begin{align}
+            \Dot{S}_{gen}^{Region 2} = \Dot{m}_{F}(s_{*}^{F}-s_{in}^{F}) - \Dot{m}_{H}(s_{sat}^{H}-s_{out}^{H})  \label{eq:tri_sgen_reg2}
+        \end{align}
+
+        Combining Equations~\ref{eq:tri_sgen_reg1} and \ref{eq:tri_sgen_reg2}, yields an expression for the total entropy generation across the system, Equation~\ref{eq:rect_sgen_tot}, assuming that heat engine is mechanically ideal and does not introduce any irreversibilities.
+
+        \begin{align}
+            \Dot{S}_{gen}^{tot} = \Dot{m}_{F}(s_{out}^{F}-s_{*}^{F} + s_{*}^{F}-s_{in}^{F}) - \Dot{m}_{H} \frac{(h_{in}^{H}-h_{sat}^{H})}{T_H} - \Dot{m}_{H}(s_{sat}^{H}-s_{out}^{H})
+        \end{align}
+        \begin{align}
+            \frac{T_0\Dot{S}_{gen}^{tot}}{\Dot{m}_{H}} = \frac{\Dot{m}_{F}}{\Dot{m}_{H}}T_0(s_{out}^{F}-s_{in}^{F}) - (h_{in}^{H}-h_{sat}^{H})\frac{T_0}{T_H} - T_0(s_{sat}^{H}-s_{out}^{H}) \label{eq:tri_sgen_tot}
+        \end{align}
+
+        Substituting Equation~\ref{eq:tri_sgen_tot} into Equation~\ref{eq:tri_Qratio}, yields an expression for the ration of the heat transferred out of and into the system. Since the condensation of the geofluid occurs at constant temperature \((s_{in}^{H}-s_{sat}^{H})=\frac{(h_{in}^{H}-h_{sat}^{H})}{T_H}\), this then simplifies to Equation~\ref{eq:tri_Qratio2}.
+        \begin{align}
+            \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0(s_{in}^{H}-s_{out}^{H} - s_{sat}^{H}+s_{out}^{H}) - \frac{T_0}{T_{H}}(h_{in}^{H}-h_{sat}^{H}) + \frac{\Dot{m}_{F}}{\Dot{m}_{H}}T_0(s_{out}^{F}-s_{in}^{F})}{(h_{in}^{H}-h_{out}^{H})}
+        \end{align}
+        % \begin{align}
+        %     \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{T_0(s_{in}^{H} - s_{sat}^{H}) - \frac{T_0}{T_{H}}(h_{in}^{H}-h_{sat}^{H}) + \frac{\Dot{m}_{F}}{\Dot{m}_{H}}T_0(s_{out}^{F}-s_{in}^{F})}{(h_{in}^{H}-h_{out}^{H})}
+        % \end{align}
+        \begin{align}
+            \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = \frac{\Dot{m}_{F}}{\Dot{m}_{H}}\frac{T_0(s_{out}^{F}-s_{in}^{F})}{(h_{in}^{H}-h_{out}^{H})} \label{eq:tri_Qratio2}
+        \end{align}
+        
+        As the heat released by the geofluid is absorbed by the working fluid, the mass rate ratio \(\frac{\Dot{m}_{F}}{\Dot{m}_{H}}\) is given by Equation~\ref{eq:tri_Mratio}. Moreover, assuming the working fluid has a constant specific heat capacity over the temperatures of interest, the difference in enthalpy and entropy are given by Equations~\ref{eq:tri_deltah} and \ref{eq:tri_deltas} respectively. Combined they yield Equation~\ref{eq:tri_Qratio3}, and in turn the cycle efficiency, Equation~\ref{eq:tri_eff_cyc}
+
+        \begin{align}
+            \frac{\Dot{m}_{F}}{\Dot{m}_{H}}=\frac{(h_{in}^{H}-h_{out}^{H})}{(h_{out}^{F}-h_{in}^{F})} \label{eq:tri_Mratio}
+        \end{align}
+        \begin{align}
+            h_{out}^{F}-h_{in}^{F}=c_p^F(T_{cyc}-T_0) \label{eq:tri_deltah}
+        \end{align}
+        \begin{align}
+            s_{out}^{F}-s_{in}^{F}=c_p^F \ln \frac{T_{cyc}}{T_0} \label{eq:tri_deltas}
+        \end{align}        
+        \begin{align}
+            \frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = T_0\frac{c_p^F \ln \frac{T_{cyc}}{T_0}}{c_p^F(T_{cyc}-T_0)}=\frac{T_0}{\frac{T_{cyc}-T_0}{\ln \frac{T_{cyc}}{T_0}}}=\frac{T_0}{T_{cyc}^{LM}} \label{eq:tri_Qratio3}
+        \end{align}
+        \begin{align}
+            \eta_{cycle} = 1-\frac{\Dot{Q}_{out}}{\Dot{Q}_{in}} = 1-  \frac{T_0}{T_{cyc}^{LM}} \label{eq:tri_eff_cyc}
+        \end{align}
+
+        With regards to the thermal recovery (or utilisation) efficiency, unlike the rectangular cycle, the heat extracted from the heat source is not limited by the existence of a pinch point - assuming a minimum approach temperature difference of zero as a simplification. As such, the heat extracted from the geofluid is not a function of the cycle temperature, and the thermal recovery efficiency \(\eta_{recov}\) is \num{1}, and the overall plant efficiency \(\eta_{plant}\) is only dependent on the cycle efficiency \(\eta_{cycle}\) of the triangular cycle. 
+
+        In terms of the optimum cycle temperature, this is equal to the source temperature, as this minimises the magnitude of \(\frac{\Dot{Q}_{out}}{\Dot{Q}_{in}}\).
+
+        \begin{align}
+            T_{cyc}^{opt} = T_H \label{eq:tri_T_cyc_opt}
+        \end{align}
+
+        \subsubsection{Direct Comparison}
+
+         Comparing the overall plant efficiency of the Triangular and Rectangular cycle plants for different values of \(\frac{x\Delta h_{fg}}{c_p}\), Triangular cycle can be seen to provide better overall plant efficiencies than the Carnot cycle plant for \(\frac{x\Delta h_{fg}}{c_p}\) as high as \qty{198}{K}, Figure~\ref{fig:litrev_GenericSource_Carnot_vs_Triangular}. The critical ratio of latent heat to the specific heat capacity is given by Equation~\ref{eq:carnot_triangular_crit_point}. For combinations of latent heat and specific heat capacity in excess of this critical point, the Rectangular cycle outperforms the Triangular cycle.
+
+         \begin{align}
+           \frac{x\Delta H_{fg}}{C_p}_{crit} = \frac{T_H(T_{LM}-T_0)}{T_{LM}-T_H\left(\frac{T_{LM}-T_0}{T_H-T0}\right)}  \label{eq:carnot_triangular_crit_point}
+        \end{align}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/ORC_Efficiency/PlantEff_Rect_vs_Tri}
+            \caption[The overall plant efficiency for different latent heats as a function of cycle temperature for a Rectangular and Triangular cycle.]{The overall plant efficiency as a function of the cycle temperature for a Rectangular cycle and a Triangular cycle for heat sources of different latent heat, a constant specific heat capacity \(C_p\) of \qty{4}{\kilo\joule\per\kg\per\K}, a geofluid inlet temperature of \(T_H\) of \qty{450}{\K} and an ambient temperature of \qty{300}{\K}.}
+            \label{fig:litrev_GenericSource_Carnot_vs_Triangular}
+        \end{figure}        
+
+        In summary, the overall plant efficiency of a binary plant depends not only on the efficiency of the thermodynamic cycle but also on the efficiency of thermal recovery from the heat source. Even though triangular cycle, has a low cycle efficiency, it is best suited for single phase source or two-phase sources with low amounts of latent heat (relative to the specific heat capacity of the heat source), because of its high, and constant thermal recovery efficiency. The Rectangular cycle achieves higher cycle efficiencies, however, generally operates at lower thermal recovery efficiencies, which reduce the overall plant efficiency. In this respect, the Rectangular cycle is better suited for two-phase sources with large latent heat, due to the increased thermal recovery efficiency. 
+        
+        In the real world, this corresponds to working fluids with critical temperatures close to the temperature of the heat source being favourable for the exploitation of single-phase (or low quality) resources, because near the critical point the latent heat of vaporisation is diminishing, or is eliminated entirely, in the case of super-critical cycles. However, for two-phase heat sources, working fluids with large latent heat of vaporisation are favourable. 
+
+    % \subsection{Efficiency of Ideal Binary Plants}
+    %     \label{sec:prosim_litrev_orc_efficiency}
+    %     The plant efficiency \(\eta_{plant}\) is a useful metric for comparing different different closed-cycle power plants, see Equation~\ref{eq:eta_plant}, where \(\Dot{W}_{net}\) is the net power done by the cycle, \(\Dot{Q}_{max}\) is the maximum heat that can be extracted from the heat source (i.e. if it is cooled to \(T_{ref}\), the temperature of the surroundings), and \(\eta_{recov}\) and \(\eta_{cycle}\) are the thermal recovery efficiency and cycle efficiency, defined in Equations~\ref{eq:eta_recov} and \ref{eq:eta_cycle} respectively. Here, \(\Dot{Q}_{in}\) is the heat transferred to the cycle.
+
+    %     \begin{align}
+    %         \eta_{plant} = \frac{\Dot{W}_{net}}{\Dot{Q}_{max}} = \eta_{recov}*\eta_{cycle} \label{eq:eta_plant}
+    %     \end{align}
+    %     \begin{align}
+    %         \eta_{recov} = \frac{\Dot{Q}_{in}}{\Dot{Q}_{max}} \label{eq:eta_recov}
+    %     \end{align}
+    %     \begin{align}
+    %         \eta_{cycle} = \frac{\Dot{W}_{net}}{\Dot{Q}_{in}} \label{eq:eta_cycle}
+    %     \end{align}
+
+    %     Equation~\ref{eq:eta_plant}, provides a useful framework for investigating the optimum cycle configuration and temperatures, and for simplified scenarios it is possible to derive analytical expressions for the optimum cycle conditions to maximise the overall plant efficiency \(\eta_{plant}\). 
+
+    %     Different idealised cycles, such as the Carnot, Triangular or Mixed cycles can be considered, the main pre-requisite being that an analytical expression for the cycle efficiency \(\eta_{cycle}\) exists. These expressions can be derived bearing in mind the definition of the cycle efficiency \(\eta_{cycle}\), Equation~\ref{eq:eta_cycle}, the work done, Equation~\ref{eq:cycle_work}, and the second law of thermodynamics, Equation~\ref{eq:secondLaw}.
+
+    %     \begin{align}
+    %         \Dot{W}_{net}=\Dot{Q}_{in} - \Dot{Q}_{out} \label{eq:cycle_work}
+    %     \end{align}
+    %     \begin{align}
+    %         dS = \frac{\Dot{Q}}{T} \label{eq:secondLaw}
+    %     \end{align}
+
+    %     For instance, considering a Carnot cycle, Figure~\ref{fig:litrev_Carnot_Cycle}, \(\Dot{Q}_{in}\), \(\Dot{Q}_{out}\) and in turn the net work and efficiency can be calculated using Equations~\ref{eq:Carnot_Qin} to \ref{eq:Carnot_eta}, where \(T_H\) and \(T_C\) are the maximum and minimum temperatures in the cycle respectively, in \unit{\K}.
+
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/PowGen/Plots/ORC_Efficiency/CarnotCycle}
+    %         \caption{Temperature-Entropy diagram of the Carnot cycle}
+    %         \label{fig:litrev_Carnot_Cycle}
+    %     \end{figure}
+
+    %     \begin{align}
+    %         \Dot{Q}_{in} = T_H * (S_2 - S_1) \label{eq:Carnot_Qin}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{Q}_{out} = T_C * (S_2 - S_1) \label{eq:Carnot_Qout}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{W}_{net} = (T_H - T_C) * (S_2 - S_1) \label{eq:Carnot_Wnet}
+    %     \end{align}
+    %     \begin{align}
+    %         \eta_{cycle}^{carnot} = \frac{(T_H - T_C) * (S_2 - S_1)}{T_H  * (S_2 - S_1)} = 1- \frac{T_C}{T_H}\label{eq:Carnot_eta}
+    %     \end{align}
+
+    %     A similar expression can also be written for the Triangular cycle, Figure~\ref{fig:litrev_Triangular_Cycle}, see Equations~\ref{eq:Triangular_Qin} to \ref{eq:Triangular_eta}. It should be noted, that for any given combination of cycle temperatures, the Triangular cycle has a lower efficiency than the Carnot cycle, nevertheless, as will be shown below, depending on the nature heat source, the Triangular cycle may yet prove favourable.
+
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/PowGen/Plots/ORC_Efficiency/TriangularCycle}
+    %         \caption{Temperature-Entropy diagram of the Triangular cycle}
+    %         \label{fig:litrev_Triangular_Cycle}
+    %     \end{figure}
+
+    %     \begin{align}
+    %         \Dot{Q}_{in} = \frac{T_H + T_C}{2} * (S_2 - S_1) \label{eq:Triangular_Qin}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{Q}_{out} = T_C * (S_2 - S_1) \label{eq:Triangular_Qout}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{W}_{net} = (\frac{T_H + T_C}{2}-T_C) * (S_2 - S_1) = \frac{T_H - T_C}{2} * (S_2 - S_1) \label{eq:Triangular_Wnet}
+    %     \end{align}
+    %     \begin{align}
+    %         \eta_{cycle}^{tri} = \frac{\frac{T_H - T_C}{2} * (S_2 - S_1)}{\frac{T_H + T_C}{2} * (S_2 - S_1)} = \frac{T_H - T_C}{T_H + T_C} \label{eq:Triangular_eta}
+    %     \end{align}
+
+    %     The mixed cycle is a combination of the Triangular and the Carnot cycle, Figure~\ref{fig:litrev_Mixed_Cycle}, and corresponds to a fluid first receiving sensible heat before being vapourised, akin to a Rankine cycle. Equations~\ref{eq:Mixed_Qin} to \ref{eq:Mixed_eta} provide the governing equations.
+        
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/PowGen/Plots/ORC_Efficiency/MixedCycle}
+    %         \caption{Temperature-Entropy diagram of a mixed cycle}
+    %         \label{fig:litrev_Mixed_Cycle}
+    %     \end{figure}
+
+    %     \begin{align}
+    %         \Dot{Q}_{in} = \Dot{Q}_{in}^{1\leftarrow*} + \Dot{Q}_{in}^{+\leftarrow2} \label{eq:Mixed_Qin}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{Q}_{in}^{1\leftarrow*} = \frac{T_H+T_C}{2}*(S^{*}-S_1) \label{eq:Mixed_Qin_a}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{Q}_{in}^{+\leftarrow2} = T_H*(S_2-S^{*})\label{eq:Mixed_Qin_b}
+    %     \end{align}
+
+    %     Letting \(\alpha=\frac{S^{*}-S_1}{S_2-S_1}\),
+        
+    %     \begin{align}
+    %         \Dot{Q}_{in} = \left[T_H -\frac{\alpha}{2}(T_H-T_C) \right](S_2-S_1) \label{eq:Mixed_Qin_combined}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{Q}_{out} = T_C * (S_2 - S_1) \label{eq:Mixed_Qout}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{W}_{net} = (1-\frac{\alpha}{2})(T_H-T_C)(S_2-S_1) \label{eq:Mixed_Wnet}
+    %     \end{align}
+        
+    %     \begin{align}
+    %         \eta_{cycle}^{mixed} = \frac{(1-\frac{\alpha}{2})(1-\frac{T_C}{T_H})}{1-\frac{\alpha}{2}(1-\frac{T_C}{T_H})} = \frac{(1-\frac{\alpha}{2})\eta_{cycle}^{carnot}}{1-\frac{\alpha}{2}\eta_{cycle}^{carnot}} \label{eq:Mixed_eta}
+    %     \end{align}
+
+    %     From Equation~\ref{eq:Mixed_eta}, it can be seen that the Carnot and Triangular cycle are in fact extreme cases of the mixed cycle. For instance if \(\alpha\) is close to zero, \(\eta_{cycle}^{mixed}\) approaches the Carnot efficiency, Equation~\ref{eq:Carnot_eta}, while if \(\alpha\) approaches one, \(\eta_{cycle}^{mixed}\) instead approaches the Triangular cycle efficiency., Equation~\ref{eq:Triangular_eta}. With this in mind, working fluids with a large latent heat can be approximated by a Carnot cycles, whereas fluids with small latent heat or large sensible heat, are better approximated with a Triangular cycle. 
+
+    %     \begin{notes}{Note}
+    %         \(\alpha\) can further be defined in terms of the specific heat capacity and latent heat of the working fluid, which can be useful a simplified parametric analysis for determining suitable fluid properties.
+
+    %         \begin{align}
+    %             \Dot{Q}_{in}^{1\leftarrow*} = \frac{T_H+T_C}{2}*(S^{*}-S_1) = C_p*(T_H-T_C) \label{eq:Mixed_Qin_c}
+    %         \end{align}
+    %         \begin{align}
+    %             (S^{*}-S_1) = 2C_p*\frac{T_H-T_C}{T_H+T_C}=2C_p*\eta_{cycle}^{triangular} \label{eq:Mixed_DS1}
+    %         \end{align}
+            
+    %         \begin{align}
+    %             \Dot{Q}_{in}^{+\leftarrow2} = T_H*(S_2-S^{*}) = x*\Delta H_{fg} \label{eq:Mixed_Qin_d}
+    %         \end{align}
+    %         \begin{align}
+    %             (S_2-S^{*}) = \frac{x*\Delta H_{fg}}{T_H} \label{eq:Mixed_DS2}
+    %         \end{align}
+            
+    %         \begin{align}
+    %             (S_2-S_1) = \frac{x*\Delta H_{fg}}{T_H} + 2C_p*\eta_{cycle}^{triangular} \label{eq:Mixed_Mixed_DS_tot}
+    %         \end{align}
+
+    %         Letting \(A=\frac{1}{2*\eta_{cycle}^{triangular}}\frac{x*\Delta H_{fg}}{C_p T_H}\)
+
+    %         \begin{align}
+    %             \alpha = \frac{S^{*}-S_1}{S_2-S_1}=\frac{2C_p*\eta_{cycle}^{triangular}}{\frac{x*\Delta H_{fg}}{T_H} + 2C_p*\eta_{cycle}^{triangular}} =\frac{1}{A+1} \label{eq:Mixed_alpha_redef}
+    %         \end{align}
+    %     \end{notes}
+
+    %     As for the thermal recovery efficiency, this is only dependent on the heat source. Equation~\ref{eq:Mixed_Qin_source} and \ref{eq:Mixed_Qin_max_source} provide expression for the heat transferred \(\Dot{Q}_{in}\), and the maximum heat that can be transferred \(\Dot{Q}_{in}^{max}\) by generic heat source capable of both fixed and variable temperature heat exchange (i.e. exchange of latent and sensible heat). Where, \(C_p\) is the specific heat capacity of the heat source, \(T_{cycle}^{max}\) is the maximum cycle temperature (formerly referred to as \(T_H\)), \(T_H\) the initial temperature of the heat source, \(T_C\) the reference temperature, \(x\) the vapour quality of the heat source, and \(\Delta H_{fg}\) the latent heat of the heat source (at \(T_H\)). The thermal recovery efficiency is then given by Equation~\ref{eq:eta_recov_source}.
+
+    %     \begin{align}
+    %         \Dot{Q}_{in} = C_p * (T_{cycle}^{max} - T_C) + x\Delta H_{fg} \label{eq:Mixed_Qin_source}
+    %     \end{align}
+    %     \begin{align}
+    %         \Dot{Q}_{in}^{max} = C_p * (T_H - T_C) + x\Delta H_{fg} \label{eq:Mixed_Qin_max_source}
+    %     \end{align}
+    %     \begin{align}
+    %         \eta_{recov} = \frac{\Dot{Q}_{in}}{\Dot{Q}_{max}} = \frac{C_p * (T_{cycle}^{max} - T_C) + x\Delta H_{fg}}{C_p * (T_H - T_C) + x\Delta H_{fg}} \label{eq:eta_recov_source}
+    %     \end{align}
+
+    %     The overall plant efficiency can then be found by combining Equation~\ref{eq:eta_recov_source} with one of the previously mentioned expressions for the cycle efficiency (i.e. Equations~\ref{eq:Carnot_eta}, \ref{eq:Triangular_eta} or \ref{eq:Mixed_eta}). The overall plant efficiency for a Carnot cycle is given by Equation~\ref{eq:eta_plant_carnot}.
+
+    %     \begin{notes}{Note}
+    %         While \(T_H\) previously denoted the maximum cycle temperature, henceforth \(T_{cycle}^{max}\) will be used, and \(T_H\) will instead denote the inlet temperature of the heat source.
+    %     \end{notes}
+
+    %     \begin{align}
+    %         \eta_{plant}^{carnot} = \left( 1- \frac{T_C}{T_{cycle}^{max}} \right) * \left( \frac{C_p * (T_{cycle}^{max} - T_C) + x\Delta H_{fg}}{C_p * (T_H - T_C) + x\Delta H_{fg}} \right) \label{eq:eta_plant_carnot}
+    %     \end{align}
+
+    %     The optimum maximum cycle temperature \(T_{cycle}^{max}\), can then be found by taking the first derivative w.r.t \(T_{cycle}^{max}\) and then determining the maximum cycle temperature for which the derivative is zero, Equation~\ref{eq:carnot_Topt}, or alternatively graphically, Figure~\ref{fig:litrev_SaturatedSource_Carnot}. 
+
+    %     \begin{align}
+    %         T_{cycle}^{max,\;carnot} = \sqrt{T_C*\left(T_H + \frac{x\Delta H_{fg}}{C_p}\right)} \label{eq:carnot_Topt}
+    %     \end{align}
+
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/PowGen/Plots/ORC_Efficiency/Plant_Cycle_Recov_Effs_carnot}
+    %         \caption[The thermal recovery, cycle and plant efficiency for a Carnot cycle and a sensible heat dominated heat-source.]{The thermal recovery, cycle and plant efficiency as a function of the maximum cycle temperature for a Carnot cycle and a heat source characterised by a \(C_p\) of \qty{4}{\kilo\joule\per\kg\per\K} and a latent heat of \(x\Delta H_{fh}\) of \qty{0}{\kilo\joule\per\kg}}
+    %         \label{fig:litrev_SaturatedSource_Carnot}
+    %     \end{figure}
+
+    %     Of course, Equation~\ref{eq:carnot_Topt} is only valid for cases where the resultant \(T_{cycle}^{max}\) is less than or equal to \(T_H\), this critical point (i.e. where \(T_{cycle}^{max}=T_H\)), is given by Equation~\ref{eq:carnot_crit_point}. 
+
+    %     \begin{align}
+    %        \frac{x\Delta H_{fg}}{C_p}_{crit} = T_H\left( \frac{T_H}{T_C} - 1 \right)\label{eq:carnot_crit_point}
+    %     \end{align}
+
+
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/PowGen/Plots/ORC_Efficiency/PlantEff_vs_DHfg}
+    %         \caption[The overall plant efficiency for different latent heats as a function of maximum cycle temperature.]{The overall plant efficiency as a function of the maximum cycle temperature for a Carnot cycle and a heat source characterised by a \(C_p\) of \qty{4}{\kilo\joule\per\kg\per\K} and different latent heats}
+    %         \label{fig:litrev_GenericSource_Carnot}
+    %     \end{figure}
+
+    %     For the Triangular cycle, circumstances are somewhat different; due to the unique structure of the Triangular cycle, \(\eta_{recov}\) is equal to one for all maximum cycle temperatures. As such, the plant efficiency is equal to that of the triangular cycle, unaffected by latent heat of the heat source, and the optimum maximum cycle temperature is equal to the temperature of the heat source \(T_H\). 
+        
+    %     For this reason Triangular cycles are the ideal candidates for exploiting single phase or low latent heat heat sources. Comparing the overall plant efficiency of the Triangular and Carnot cycle plants for different amounts of latent heat, Triangular cycle can be seen to provide better overall plant efficiencies than the Carnot cycle plant for latent heats as high as \qty{900}{\kilo\joule\per\kg}. The critical ratio of latent heat to the specific heat capacity is given by Equation~\ref{eq:carnot_triangular_crit_point}. For combinations of latent heat and specific heat capacity in excess of this critical point, the Carnot cycle outperforms the Triangular cycle.
+
+    %     \begin{align}
+    %        \frac{x\Delta H_{fg}}{C_p}_{crit} = (T_H -T_C) * \frac{\eta_{cycle}^{triangular}}{\eta_{cycle}^{carnot}-\eta_{cycle}^{triangular}}\label{eq:carnot_triangular_crit_point}
+    %     \end{align}
+
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/PowGen/Plots/ORC_Efficiency/PlantEff_Carnot_vs_Triangular}
+    %         \caption[The overall plant efficiency for different latent heats as a function of maximum cycle temperature for a Carnot and Triangular cycle.]{The overall plant efficiency as a function of the maximum cycle temperature for a Carnot cycle and a Triangular cycle for heat sources of different latent heat and a constant specific heat capacity \(C_p\) of \qty{4}{\kilo\joule\per\kg\per\K}.}
+    %         \label{fig:litrev_GenericSource_Carnot_vs_Triangular}
+    %     \end{figure}
+
+    %     In summary, the overall plant efficiency of a binary plant depends not only on the efficiency of the thermodynamic cycle but also on the efficiency of thermal recovery from the heat source. Even though triangular cycle, has a low cycle efficiency, it is best suited for single phase source or two-phase sources with low amounts of latent heat, because of its high, and constant thermal recovery efficiency. The Carnot cycle achieves higher cycle efficiencies, however, generally operates at lower thermal recovery efficiencies, which reduce the overall plant efficiency. In this respect, the Carnot cycle is better suited for two-phase sources with large latent heat, due to the increased thermal recovery efficiency. The cut-off between the two is given by Equation~\ref{eq:carnot_triangular_crit_point}.
+
+
+\section{NCG Handling}
+    \label{sec:litrev_NCG_handling}
+
+    The presence of \ac{NCG} in geofluids can pose a number of issues for the operation of geothermal power plants. For instance, expelling the \ac{NCG} liberated and expanded as part of \ac{DSC} geothermal power plants can be energy intensive and technically challenging. As most geothermal \ac{DSC} power plants expand the geofluid to sub-atmospheric conditions, at a minimum the \ac{NCG} must be re-pressurised to atmospheric conditions to allow the \ac{NCG} to be vented to atmosphere.
+
+    Where the \ac{NCG} contains harmful constituents such as mercury or hydrogen sulfide, further treatment of the \ac{NCG} maybe required before it can be safely released into the environment. An example of this is the AMIS process designed by \emph{ENEL} to remove mercury and hydrogen sulfide from the \ac{NCG} effluent streams. During the AMIS process, mercury is removed using selenium or activated carbon adsorbents, and hydrogen sulfide is first catalytically oxidised to sulfur dioxide and then stripped using an alkaline solution (e.g. dilute ammonia or sodium hydroxide solution) \cite{Baldacci2005, Manzella2018}.
+
+    With regards to \ac{NCG} with significant \ac{GWP}, there are two schools of thought on whether venting to atmosphere is an option. On the one hand, venting \ac{NCG} to atmosphere represents an obvious source of greenhouse gas emissions that should be prevented. In fact some geothermal power plants in Türkiye have carbon footprints as \qty{900}{\kg\per\mega\watt} to \qty{1400}{\kg\per\mega\watt}, which is comparable to coal-fired power stations.
+    
+    On other hand, such emissions do also occur naturally in the absence of geothermal power plants, for example from surface features like fumaroles. In this respect, if the emissions of a geothermal power or heat plant reduce the natural emissions by the same amount, the overall emissions from the geothermal site are unchanged. That being said, tracking and quantifying emissions across a wide area is no trivial task, as illustrated from attempts tracking methane leakage from active as well as abandoned oil and gas wells \cite{Collins2022}. While some countries, like Italy \cite{Armannsson2003} and Türkiye \cite{Baba2022}, have taken the stance that geothermal power plants do not increase the overall emissions, this view is not shared universally and in, for instance, Iceland efforts are taken to actively reduce \ac{NCG} emissions to reduce the carbon foot print \cite{Sigfusson2018}.
+    
+    At the Hellisheiði geothermal power plant in Iceland, \emph{CarbFix} have trialled the dissolution, re-injection and sequestration of \ac{NCG} using their \emph{Carbfix} process\cite{CarbFix2024}. At Hellisheiði, geothermal power is generated by means of a dual flash \ac{DSC} from a geofluid with carbon dioxide and hydrogen sulfide impurities (the \ac{NCG} comprises about \qty{5}{\percent} of the steam mass flow rate \cite{Sigfusson2018}). Following the expansion and cooling the \ac{NCG} is extracted using vacuum pumps. The \ac{NCG} stream is then pressurised and fed to an absorption column (at a temperature of \qty{293}{\K} or \qty{20}{\degreeCelsius}, and a pressure of \qty{6}{\bar}) \cite{Gunnarsson2018} to dissolve in geofluid condensate. The left over \ac{NCG} is vented the the atmosphere. The saturated gas-charged condensate is then injected at depth into the brine injection wellbore. 
+
+    The basalt formations of the Hellisheiði field provide a natural mechanism for the long-term sequestration of carbon dioxide within the reservoir \cite{CarbFix2024, Gunnarsson2018}. That being said, it is important to ensure that mineralisation does not occur in close vicinity of the injections wells as this could result in clogging and reduce the injectivity in the long-term. Nevertheless, since 2014 the \emph{CarbFix} project at Hellisheiði have injected over \qty{100,000}{\tonne} of carbon dioxide \cite{CarbFix2024}.
+
+    The main drawback from this approach is that the solubility of carbon dioxide in water at surface temperatures and pressures is low (at \emph{CarbFix} the maximum mole fraction of carbon dioxide in the re-injected water phase is just \qty{0.38}{\percent}). As the solubility of carbon dioxide increases with temperature and pressure, it is consequently not possible to dissolve and re-inject all of the produced carbon dioxide. In fact, this is already seen at \emph{CarbFix}, where only around \qty{35}{\percent} of the produced carbon dioxide is re-injected \cite{Sigfusson2018}.
+
+    The main challenge to direct-injection of excess \ac{NCG} is its low density compared to brines, which leads to extremely high \ac{WHP}s being required to inject the \ac{NCG} into the reservoir formation. For example, as a rough approximation, neglecting frictional losses and temperature changes, injecting \qty{493}{\K} (\qty{20}{\degreeCelsius}) into a static water column at a depth of just \qty{500}{m} requires \ac{WHP} in excess off \qty{45}{\bar} (assuming ideal gas behaviour of the carbon dioxide phase). This is investigated in further detail in Section~\ref{sec:prosim_NCGhandling_Pinj}.
+
+    \begin{align}
+        P_{brine} = P_{wh,\;brine} + \rho_{brine}*g*h
+    \end{align}
+    \begin{align}
+        P_{ncg} = P_{wh,\;ncg} * \exp{\frac{M_r*g*h}{RT}}
+    \end{align}
+    \begin{align}
+        P_{wh,\;ncg} = (P_{wh,\;brine} + \rho_{brine}*g*h) * \exp{-\frac{M_r*g*h}{RT}}
+    \end{align}
+    \begin{align}
+        P_{wh,\;ncg} = (1*10^5 + 1000*9.81*500) * \exp{\left(-\frac{0.044*9.81*500}{8.314 * 293}\right)} = 4.58*10^6 Pa
+    \end{align}
+
+    For reference, at these conditions the solubility has increased to \qty{2.37}{\percent} on a mole fraction basis. In principle, this could be used to dissolve the remaining carbon dioxide at Hellisheiði. In fact \citeauthor{Leontidis2023} \cite{Leontidis2023} conducted steady-state and transient simulations on the re-injection of \ac{NCG} into the reservoir considering various injection strategies, such as mixing of the \ac{NCG} and brine at the surface (i.e. two-phase injection), co-axial injection through a central pipe and surrounding annular space, as well as co-axial injection with mixing at depth. While their results suggest that mixing at depth may be possible and an attractive strategy for reducing surface compression power, particularly for low \ac{NCG} content, the authors highlight the importance of the underlying thermophysical property models. However, given that the simulation tools used in this study (i.e. \emph{PipeSim}, \emph{OLGA}, etc.) were originally developed for the oil and gas industry and are therefore used out of context, further investigations into the role of the following items are required:
+
+    \begin{description}
+        \item[Flow Correlations] The flow correlations used to determine the liquid-hold (e.g. Hagedorn \& Brown \cite{Hagedorn1965}) have generally been developed for upward vertical flow. However, in this case the flow is vertically downwards, and as such the buoyancy forces are now opposed to the direction of motion, which could affect the phase distribution and thus the liquid hold-up. This is particularly important because of the tendency of gas bubbles tend to coalesce into large bubbles, reducing surface tension and increasing buoyancy effects.  
+        \item[Equilibration] When mixing \ac{NCG} and brine at depth, there may be significant barriers to mass transfer (e.g. due to limited interfacial area). As such, the common assumption of instantaneous equilibration (and hence dissolution of \ac{NCG}) may no longer be valid, leading to an overestimation of the liquid hold-up within the wellbore. Further simulations assuming no dissolution of \ac{NCG} in the brine even when in thermodynamic non-equilibrium could help assess the importance of these mass transfer effects.
+    \end{description}
+    
+    Alternatively, owing to the low critical temperature, where the required wellhead pressure exceeds about \qty{60}{\bar} carbon dioxide could be liquefied at ambient temperatures. This has two advantages: 1) further compression requires significantly less power because liquid carbon dioxide is less compressible, 2) the higher density of liquid carbon dioxide adds significant static pressure in the wellbore, and 3) as the temperature and pressure increase, the liquid transitions to the supercritical state.
+        
+    As an alternative to re-injecting the \ac{NCG} into the reservoir, depending on the composition, it may be possible to upgrade the \ac{NCG} to commercial products. For example, where carbon dioxide is the main constituent, \ac{NCG} could be purified and converted to dry ice or used in beverages \cite{Baba2022}, provided there is a market and the capital investment is not prohibitive. There may also be niche applications, such as reusing carbon dioxide locally as an inhibitor to acidify the returns brine to prevent scale formation, as reported by \citeauthor{Topcu2019} \cite{Topcu2019}.
+
+\section{Scale Handling}
+    \label{sec:litrev_scale_handling}
+
+        The geofluids are created over geological timescales, during which surface water resides in the geothermal reservoir and chemically equilibrates with the surrounding formation, causing minerals to leach from the formation \cite{DiPippo2016}. However, once the geofluid is produced from the reservoir and its temperature, pressure and composition are changed, this may cause the equilibrium to shift, causing minerals to precipitate. These mineral precipitates, commonly referred to as scales, can then deposit in the production system (i.e. wellbores, separators, heat exchange equipment) and impede the performance of the geothermal power plants. Calcite, Silica and sulphate scales are commonly encountered across the geothermal industry \cite{LuoKottsova2023}.
+
+    \subsection{Calcite Scale}
+        Calcite \ce{CaCO3} is a common mineral in geofluids from carbonate reservoirs. Due to its negatively sloped solubility curve (with respect to temperature), temperature reduction induced scaling is not typically an issue in a geothermal setting, as the solubility increases as the temperature is reduced.
+    
+        However, the solubility of calcite is also strongly dependent on the amount of carbon dioxide dissolved in the geofluid and the pH of the aqueous phase. Once the geofluid reaches its boiling point, or is flashed in the power plant, the resulting gas phase is enriched in carbon dioxide, which raises the pH and almost instantaneously causes calcite to precipitate. Such scaling is common carbonate fields, where the geofluids boils within the well-bores or surface, resulting in the thick calcite deposits that can incur significant pressure losses or even cause blockages\cite{DiPippo2016}. Acidisation or mechanical cleaning maybe used to manage calcite scaling once deposits become significant.
+
+    \subsection{Silica Scale}
+        Silica \ce{SiO2} is a common mineral found in geofluids, and exists in different crystalline structures, such as an amorphous state or as quartz in a highly crystalline state. While all forms of silica have a positively sloped solubility curve (with respect to temperature), the absolute solubility varies between the different forms, for example amorphous silica has a higher solubility in water than quartz\cite{DiPippo2016}. This puts both binary \ac{ORC} and \ac{DSC} with flash geothermal power plants at risk from silica scaling. Reductions in temperature (e.g. in the \ac{PHE}) or concentration of geofluid (e.g. steam removed by flashing) can result in the geofluid becoming supersaturated in silica. Silica scaling prevention is simpler in binary plants, as the geofluid is not concentrated by flashing stages, meaning that by simply managing the re-injection temperature supersaturated conditions can be prevented.   
+    
+        In terms of mitigation, strategies are to either prevent supersaturation by raising the pH to above \num{7}, or manage the kinetics of silica precipitation. For instance, reducing the speed of precipitation, may allow sufficient time for the geofluid to be re-injected into the reservoir, where any precipitate will eventually be dissolved. Kinetic inhibition could be achieved by pH control, by maintaining either low pH (<5.5) or high pH (>9.0) \cite{DiPippo2016}. An alternative approach is to achieve a controlled precipitation by increasing the rate of precipitation, and to remove the excess silica, re-injecting under-saturated geofluid into the reservoir \cite{DiPippo2016}.
+        
+\section{Turbines}
+\label{sec:prosim_litrev_turbine}
+    Turbines are used to convert the thermal energy contained within the working fluid into mechanical energy. The following subsections aim to provide background on the working principle, internal configuration, and types of turbines. 
+
+    \subsection{Working Principle}
+        Within the turbine, nozzles direct high velocity streams onto a solid element, called a blade, which deflects the fluid, Figure~\ref{fig:prosim_litrev_blade_velocity}. The change in momentum (i.e. \(v_{in}\) to \(v_{out}\)) imparts a resultant force on the blade opposite in the direction of the change in momentum. The blades are attached to a central shaft, such that resultant force manifests as a torque, causing the shaft to rotate. This rotation can then be used to drive a generator \cite{Dick2015, Smith2005}.
+    
+        \begin{figure}[H]
+            \centering
+            % \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/VelocityTrianglesSchematic.svg}
+            \includegraphics{Content/PowGen/Figures/Turbine/VelocityTrianglesSchematic.png}
+            \caption{Fluid, blade and relative velocity vectors at the inlet and outlet of the blade.}
+            \label{fig:prosim_litrev_blade_velocity}
+        \end{figure}
+    
+        The maximum work, \(\Dot{w}\) generated by a turbine can be obtained from the Euler equation, Equation~\ref{eq:EulerEq}, or its alternate form, Equation~\ref{eq:AlternateEulerEq}, where \(v\) is the absolute fluid velocity, \(u\) is the tangential velocity of the blade, and \(w\) is the relative velocity from the perspective of the blade.
+        
+        \begin{align}
+            \Dot{w} = \vec{u}_{in} \cdot \vec{c}_{in} - \vec{u}_{in}\cdot \vec{c}_{in} \label{eq:EulerEq}
+        \end{align}
+        \begin{align}
+            \Dot{w} = \frac{v_{in}^2 - v_{out}^2}{2} + \frac{u_{in}^2-u_{out}^2}{2} - \frac{w_{in}^2-w_{out}^2}{2} \label{eq:AlternateEulerEq}
+        \end{align}
+    
+        Velocity triangles, Figure~\ref{fig:prosim_litrev_velocity_triangles}, summarise the inlet and outlet velocity vectors and are an important tool for and optimising the  energy conversion.  
+    
+        \begin{figure}[H]
+            \centering
+            % \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/VelocityTriangles.svg}
+            \includegraphics{Content/PowGen/Figures/Turbine/VelocityTriangles.png}
+            \caption{Velocity Triangles.}
+            \label{fig:prosim_litrev_velocity_triangles}
+        \end{figure}
+    
+    \subsection{Impulse vs. Reaction Stages}
+        To maximise the efficiency, the expansion is broken down into a number of stages, allowing the nozzles and blades to be specifically designed for the fluid and velocities at various stages of expansion. Each stage is comprised of a static stator, containing the nozzles, and the rotating rotor, containing the blades. There are two different types of turbine stages, impulse and reaction stages, the main difference being the mechanisms by which the fluid imparts the resultant force on the blades.
+        
+        In an impulse stage, Figure~\ref{fig:prosim_litrev_impulse}, the fluid is expanded in the stator nozzles, reducing the fluid pressure but increasing the volumetric flow rate and in turn the velocity of the fluid, Figure~\ref{fig:prosim_litrev_impulse_profile}. The fluid is then directed onto the blades, which deflect the fluid, and the change in momentum imparts the resultant force on the blade. In an ideal impulse stage, the fluid pressure in rotor section remains constant, such that only the kinetic energy is transferred to the blade/central shaft. 
+        
+        \begin{figure}[H]
+            \centering
+            \subfloat[Impulse stage.\label{fig:prosim_litrev_impulse}]{
+                \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/ImpulseStage.svg}
+            }
+            \quad
+            \subfloat[Fluid pressure and velocity profile.\label{fig:prosim_litrev_impulse_profile}]{
+                \includesvg[width=0.35\columnwidth]{Content/PowGen/Figures/Turbine/ImpulseStageProfiles.svg}
+            }
+            \caption[Configuration of an impulse turbine stage and the corresponding fluid pressure and velocity profiles.]{Configuration of an impulse turbine stage and the corresponding fluid pressure and velocity profiles. Adapted from \cite{Dick2015, Smith2005}}
+            \label{fig:prosim_litrev_impulse_turbine_stage}
+        \end{figure}
+        
+        In a reaction stage, Figure~\ref{fig:prosim_litrev_impulse}, the fluid is partially expanded in the stator nozzles and then directed onto the blades. Similarly to the impulse stage the fluid imparts some momentum on the blades, but is also expanded further, increasing its velocity, thus creating an area of low pressure on the back of the blades. This configuration allows both kinetic and pressure energy to be transferred to the shaft.
+        
+        \begin{figure}[H]
+            \centering
+            \subfloat[Reaction stage.\label{fig:prosim_litrev_reaction}]{
+                \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/ReactionStage.svg}
+            }
+            \quad
+            \subfloat[Fluid pressure and velocity profile.\label{fig:prosim_litrev_reaction_profile}]{
+                \includesvg[width=0.35\columnwidth]{Content/PowGen/Figures/Turbine/ReactionStageProfiles.svg}
+            }
+            \caption[Configuration of a reaction turbine stage and the corresponding fluid pressure and velocity profiles.]{Configuration of a reaction turbine stage and the corresponding fluid pressure and velocity profiles. Adapted from \cite{Dick2015, Smith2005}}
+            \label{fig:prosim_litrev_reaction_turbine_stage}
+        \end{figure}
+
+        Impulse stages are typically used for small turbines or the high pressure stages of larger turbines. Reaction stages are used for low pressure and high through-put applications \cite{Smith2005}.    
+
+    \subsection{Types of Turbines}
+
+         \subsubsection{Axial Inflow, Axial Outflow}
+            In axial turbines the fluid enters and exits the turbine parallel to the central axis, Figute~\ref{fig:prosim_litrev_axial_turbine}. Many commercial steam turbines utilise this design, as it can be readily extended to accommodate a large number of stages. The lessons from many decades of steam turbine operation can also be translated to the significantly smaller \ac{ORC} turbines, with this configuration being used extensively by \ac{ORC} system manufactures like Turboden \cite{Turboden2024} and Ormat \cite{Ormat2024, Buchanan2010}.
+
+            \begin{figure}[H]
+                \centering
+                \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/AxialTurbine.svg}
+                \caption{Inlet and outlet streams of an axial turbine.}
+                \label{fig:prosim_litrev_axial_turbine}
+            \end{figure}
+    
+        \subsubsection{Radial Inflow}
+            In a radial inflow, the fluid enters the turbine perpendicular to the central shaft along the outer perimeter, similar to a centrifugal compressor in reverse flow \cite{Boyce2012}. Unlike axial turbines, where the tangential velocity of the blades is constant (i.e. \(u_{in}=u_{out}\)), in this configuration due to the decreasing radius the tangential blade velocity at the outlet is lower than at the inlet (i.e. \(u_{in}>u_{out}\)), allowing the second term of Equation~\ref{eq:AlternateEulerEq} to be larger, leading to higher turbine efficiencies.
+
+            % This configuration is similar to gas compressors, which are fed axially and discharge radially, albeit in reverse, 
+
+            % \begin{itemize}
+            %     \item (see Walraven for citation)
+            %         used by Atlas Copco and Triogen 
+            %         "centripetal turbine" - often a reverse action centrifugal compressor
+            %         favourable velocity triangles, can yield high efficiencies (82 to 90\%) 
+            % \end{itemize}
+
+            \begin{figure}[H]
+                \centering
+                \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/RadialInflowAxialOutflow.svg}
+                \caption{Inlet and outlet streams of a radial inflow turbine.}
+                \label{fig:prosim_litrev_RadialAxial_turbine}
+            \end{figure}
+
+        \subsubsection{Radial Outflow}
+            The Ljungström brothers \cite{Dick2015} first proposed an axial inflow-radial outflow configuration, with the working fluid entering parallel to the central shaft, expanding radially through the turbine and then exiting perpendicular to the central shaft along the perimeter.
+
+            \begin{figure}[H]
+                \centering
+                \includesvg[width=0.45\columnwidth]{Content/PowGen/Figures/Turbine/AxialInflowRadialOutflow.svg}
+                \caption{Inlet and outlet streams of a radial-outflow turbine.}
+                \label{fig:prosim_litrev_AxialRadial_turbine}
+            \end{figure}
+
+            An advantage of this design is that the flow area naturally increases as the fluid progresses radially through the turbine, thus, in principle allowing the turbine to be more compact. In axial turbines on the hand, the diameter must be increased along the length of the turbine to accommodate the increasing volume rate and prevent supersonic velocities. However, the increasing flowing radius also results in increasing blade velocities, which reduce the maximum work a given stage can extract, see Equation~\ref{eq:AlternateEulerEq} where \(u_{in}<u_{out}\).
+            
+            This turbine configuration has not seen extensive use in steam expansion applications, as the increase in volumetric flow rate far exceeds the aforementioned increase in flow area, however Exergy International SRL \cite{Exergy2024} have used employed a related design in \ac{ORC} applications where changes in fluid density and enthalpy are less significant    
+
+    \subsection{Wet Expansion}
+        \label{sec:prosim_litrev_wet_expansion}
+        Unlike Rankine cycle power stations, where superheated or supercritical steam is expanded in turbines, guaranteeing a dry expansion, geothermal steam is typically saturated vapour or minimally super-heated. Consequently, due to the bell-shaped phase envelope of water in the temperature-entropy domain, two-phase condition during the expansion process are unavoidable. The formation of liquid droplets not only degrades the thermodynamic performance of the turbines but the droplets can also damage the turbine internals.
+
+        The mechanism for the formation of droplets is complex, involving meta-stable non-equilibrium fluid states and continues to be subject of research \cite{Senoo2017}, but can broadly be divided into four phases: 1) Nucleation, 2) Droplet Growth, 3) Deposition and 4) Dispersion, see Figure~\ref{fig:prosim_litrev_WetExpansion_mech}.
+        
+        \begin{figure}[H]
+            \centering
+            % \includesvg[width=1.15\columnwidth]{Content/PowGen/Figures/Turbine/WetExpansionMechanism.svg}
+            \includegraphics[width=.95\columnwidth]{Content/PowGen/Figures/Turbine/WetExpansionMechanism.png}
+            \caption{Mechanism for liquid formation in a steam turbine.}
+            \label{fig:prosim_litrev_WetExpansion_mech}
+        \end{figure}
+
+        The condensation of liquid is not immediate, when the fluid is initially expanded to conditions below the saturation line. The reason for this is that for a pure fluid, the only pathway from a an equilibrium vapour state to an equilibrium two-phase state is via drop-wise condensation\footnote{Droplets of condensate do not wet surfaces/sites where they form and after growing expose the condensing surface/site without forming a film \cite{Smith2005}}, due to a lack of nucleation points and wettability. However, the formation of droplets poses a thermodynamic barrier (akin to an activation energy), as it increases the surface free energy due to interactions between the droplets and the vapour. For small droplet radii, the reduction in Gibbs free energy, which is proportional to the cube of the radius, is outweighed by the change in surface free energy, which is proportional to the square of the radius \cite{McDONALD1974}. The Wilson point denotes the super-cooled conditions for which droplets are able to form spontaneously without explicit nucleation sites \cite{gyarmathy1962, McDONALD1974, Azzini2018}.
+
+        These initial droplets, typically between \qty{0.01}{\micro\m} to \qty{1}{\micro\m}, continue to grow as the expansion progresses both due to continued condensation and coalescence with other droplets.
+        
+        While the difference in vapour and droplet velocity, also called slip velocity, is minimal, as the droplets grow, sharp changes in fluid velocity can result in the deposition of a small fraction of droplets on rotor or stator surfaces. Shearing with the vapour phase, gravity and centrifuging, causes the liquid to accumulate and migrate towards the trailing edge of rotor blades or nozzles, from where it is stripped of by the high velocity vapour phase. The resultant coarse droplets, \qty{10}{\micro\m} to \qty{500}{\micro\m}, are much larger than the primary fog, exhibiting higher slip velocities and therefore pressure drops, but can also have a devastating effect on the downstream turbine internals \cite{Senoo2017}.
+
+        However, condensation also impacts the energy conversion, reducing the apparent isentropic efficiency. The main phenomena responsible for these losses are \cite{Senoo2017}:
+
+        \begin{description}
+            \item[Thermal Relaxation] Irreversible exchange of mass and heat between the vapour and the condensing droplets accounts for about \qty{60}{\percent} to \qty{90}{\percent} of losses, and is strongly droplet size dependent.
+            \item[Coarse droplet \& collected Water] Coarse droplets impacting rotors and centrifuging of liquid films accounts for about \qty{10}{\percent} to \qty{40}{\percent} of losses.
+            \item[Droplet Drag] Increased frictional losses due to the presence of liquid droplets, typically, account for less than \qty{5}{\percent} of losses. However, as the frictional losses depend on the slip velocity, which is small for the primary fog, higher losses can be anticipated where large or coarse droplets are more prevalent.
+        \end{description}
+
+        % \begin{itemize}
+        %     \item \textbf{Thermal Relaxation}: Irreversible exchange of mass and heat between the vapour and the condensing droplets accounts for about \qty{60}{\percent} to \qty{90}{\percent} of losses, and is strongly droplet size dependent.
+        %     \item \textbf{Coarse droplet \& collected Water}: Coarse droplets impacting rotors and centrifuging of liquid films accounts for about \qty{10}{\percent} to \qty{40}{\percent} of losses. 
+        %     \item \textbf{Droplet Drag}: Increased frictional losses due to the presence of liquid droplets, typically, account for less than \qty{5}{\percent} of losses. However, as the frictional losses depend on the slip velocity, which is small for the primary fog, higher losses can be anticipated where large or coarse droplets are more prevalent. 
+        % \end{itemize}
+
+        Baumann \cite{Baumann1921} first proposed a rule-of-thumb for capturing the efficiency degradation due to condensation in \citeyear{Baumann1921}, see Equation~\ref{eq:litrev_Baumann}, where \(\eta_{dry, turb}\) is the isentropic efficiency corresponding to a dry expansion and \(x_{in}\) and \(x_{out}\) are the steam quality at the inlet and outlet of the turbine. Equation~\ref{eq:litrev_alternateBaumann}, is a more modern and tunable formulation of the original Baumann rule, where \(\alpha\) is the Baumann factor, typically between \num{0.4} and \num{2.5} or \num{1.0} for the original Baumann rule, and \(y_m\) is the average wetness across the turbine (sometimes weighted for dry stages) \cite{Senoo2017}.
+
+        \begin{align}
+            \eta_{isen, turb} = \eta_{dry, turb} * \frac{x_{in} + x_{out}}{2} \label{eq:litrev_Baumann}
+        \end{align}
+        \begin{align}
+            \eta_{isen, turb} = \eta_{dry, turb} * (1-\alpha y_m) \label{eq:litrev_alternateBaumann}
+        \end{align}
+
+        However, it should be noted that the Baumann rule is entirely empirical, with the underlying source of thermodynamic losses being fluid, expansion, turbine geometry, and importantly \emph{droplet size distribution} dependent. Despite a number of analytical approaches (e.g. for predicting the droplet nucleation and growth), to accurately predict the impact of condensation on turbine performance requires sophisticated CFD simulations or experimentation\cite{Senoo2017}.
+
+
+\section{Heat Exchangers}
+    Heat exchangers are used to facilitate the transfer of thermal energy from one fluid stream to another. 
+    
+    \subsection{Working Principle}
+    The rate of heat transfer \(Q\) is driven by the overall heat transfer coefficient \(U\) (the inverse of the cumulative heat transfer resistances), the area \(A\) over which the heat transfer occurs, and the difference in temperature between the two streams \(\Delta T\), Equation~\ref{eq:litrev_heatTransfer}.
+
+    \begin{align}
+        \Dot{Q} = U * A * \Delta T \label{eq:litrev_heatTransfer}
+    \end{align}
+
+    \subsubsection{Temperature Difference}
+    The definition of the temperature difference depends on the heat exchange scenario. For instance, where transfer of heat does not change the temperature of either stream (e.g. exchange of latent heat), \(\Delta T\) is simply the difference in temperature between the hot and cold stream. For idealised cases of counter-current or co-current heat exchange, the log-mean temperature difference \(\Delta T_{lm}\) is used, see Equation~\ref{eq:litrev_DTlogmean}, where \(\Delta T_1\) is the difference in temperature between the two streams at the inlet of the hot stream, and \(\Delta T_2\) is the difference in temperature between the two streams at the outlet of the hot stream \cite{Smith2005}.
+    
+    \begin{align}
+        \Delta T_{lm} = \frac{\Delta T_1 - \Delta T_2}{\ln \frac{\Delta T_1}{\Delta T_2}}\label{eq:litrev_DTlogmean}
+    \end{align}   
+
+    For real heat exchangers, where the heat transfer does not occur in a purely counter-current or co-current configuration (i.e. multiple tubing passes or shell passes in a shell and tube heat exchanger), \(\Delta T\) is obtained by applying a correction factor \(f_{T}\) to the log-mean temperature difference \(\Delta T_{lm}\), Equation~\ref{eq:litrev_DTlogmean_correction}.  
+
+    \begin{align}
+        \Delta T = f_{T}*\Delta T_{lm}\label{eq:litrev_DTlogmean_correction}
+    \end{align}  
+
+    The temperature correction factor is typically correlated based on two dimensionless numbers: the ratio of heat capacity flow rates \(R\) and thermal effectiveness of the heat exchanger \(P\), which are calculated based on the inlet and outlet temperatures of the two streams, Equations~\ref{eq:litrev_R} and \ref{eq:litrev_P} respectively. For simple geometries analytical solutions exist, for example Equation~\ref{eq:litrev_f_T_1_2} can be used to calculate the temperature correction factor for heat exchanger with one shell and two tubing passes (also referred to as a 1-2 heat exchanger). Correction factors for more complex geometries can be obtained from tables, graphical methods or simulations \cite{Smith2005}.
+
+    \begin{align}
+        R = \frac{CP^{cold}}{CP^{hot}} = \frac{\Dot{m}C_p^{cold}}{C_p^{hot}} = \frac{T_{in}^{hot} - T_{out}^{hot}}{T_{out}^{cold} - T_{in}^{cold}} \label{eq:litrev_R}
+    \end{align}
+    \begin{align}
+        P = \frac{T_{out}^{cold} - T_{in}^{cold}}{T_{in}^{hot} - T_{in}^{cold}} \label{eq:litrev_P}
+    \end{align}
+
+    \begin{equation}
+        \label{eq:litrev_f_T_1_2}
+        f_T^{1-2} = \left\{
+        \begin{aligned}
+        \frac{\frac{\sqrt{2}P}{1-P}}{\ln\frac{2-P(2-\sqrt{2})}{2-P(2+\sqrt{2})}} \quad\quad\quad\quad\;& if\; R = 1\\
+        & \\
+        \frac{\sqrt{R^2+1}\ln\frac{1-P}{1-RP}}{(R-1)\ln\frac{2-P(R+1-\sqrt{R^2+1})}{2-P(R+1+\sqrt{R^2+1})}}\quad\; & if\; R \neq 1
+        \end{aligned}
+        \right.
+    \end{equation}
+
+    \subsubsection{Overall Heat Transfer Coefficient}
+    The overall heat transfer coefficient is a measure of the ease of heat transfer between the bulk hot stream and the bulk cold stream. For a shell \& tube configuration, with the hot fluid on the shell side and the cold fluid on the tube side, the heat transfer can be broken down five stages, across the:
+    
+    \begin{enumerate}
+        \item  \emph{Shell-side film}, Equation~\ref{eq:litrev_U_shellside}, where \(Q\) is the heat transferred, \(h_{ss}\) is the shell-side heat transfer coefficient, \(A_{ss}\) is the heat transfer area on the shell-side, and \(\Delta T_{ss}\) is the temperature difference across the shell-side fluid film.
+            \begin{align}
+                Q = h_{ss}A_{ss}\Delta T_{ss} \label{eq:litrev_U_shellside}
+            \end{align}
+        \item \emph{Shell-side fouling layer}, Equation~\ref{eq:litrev_U_shellside_fouling}, where \(Q\) is the heat transferred, \(h_{ssf}\) is the shell-side fouling layer heat transfer coefficient, \(A_{ss}\) is the heat transfer area on the shell-side, and \(\Delta T_{ssf}\) is the temperature difference across the shell-side fouling film. Fouling (i.e. the deposition of materials on surfaces, such as scales, biofilms, etc.) is a time dependent phenomenon, with complex mechanisms and multi variable dependencies, as such for design is usually performed with experienced based values of fouling resistance after a reasonable period of operation \cite{Smith2005}.     
+            \begin{align}
+                Q = h_{ssf}A_{ss}\Delta T_{ssf} \label{eq:litrev_U_shellside_fouling}
+            \end{align}
+        \item \emph{Tubing}, Equation~\ref{eq:litrev_U_tubing}, where \(Q\) is the heat transferred, \(k\) is the thermal conductivity of the tubing material, \(L\) is the length of the tubing, \(\Delta T_{tw}\) is the temperature difference across the tubing wall, and \(d_{ss}\) and \(d_{ts}\) are the tubing diameter on the shell and tubing side respectively.
+            \begin{align}
+                Q = \frac{2\pi kL}{\ln \frac{d_{ss}}{d_{ts}}}\Delta T_{tw} \label{eq:litrev_U_tubing}
+            \end{align}
+        \item \emph{Tube-side fouling layer}, Equation~\ref{eq:litrev_U_tubeside_fouling}, where \(Q\) is the heat transferred, \(h_{tsf}\) is the tube-side heat transfer coefficient, \(A_{ts}\) is the heat transfer area on the tube-side, and \(\Delta T_{tsf}\) is the temperature difference across the tube-side fluid film.
+            \begin{align}
+                Q = h_{tsf}A_{ts}\Delta T_{tsf} \label{eq:litrev_U_tubeside_fouling}
+            \end{align}
+        \item \emph{Tube-side film}, Equation~\ref{eq:litrev_U_tubeside}, where \(Q\) is the heat transferred, \(h_{ts}\) is the tube-side heat transfer coefficient, \(A_{ts}\) is the heat transfer area on the tube-side, and \(\Delta T_{ts}\) is the temperature difference across the tube-side fluid film.
+            \begin{align}
+                Q = h_{ts}A_{ts}\Delta T_{ts} \label{eq:litrev_U_tubeside}
+            \end{align}
+    \end{enumerate}
+
+    Combining Equations~\ref{eq:litrev_U_shellside} to ~\ref{eq:litrev_U_tubeside}, an expression for the overall heat transfer coefficient \(U\) can be obtained, Equation~\ref{eq:litrev_U_overall} ( \emph{Note}, this formulation is relative to the shell-side heat transfer area).
+
+    \begin{align}
+        U = \left[\frac{1}{h_{ss}} + \frac{1}{h_{ssf}}+ \frac{d_{ss}\ln \frac{d_{ss}}{d_{ts}}}{2\pi kL} + \frac{d_{ss}}{h_{tsf}d_{ts}} + \frac{d_{ss}}{h_{ts}d_{ts}}\right]^{-1} \label{eq:litrev_U_overall}
+    \end{align}
+
+    An alternative, more generic formulation of the overall heat transfer coefficient \(U\) is given by Equation~\ref{eq:litrev_U_overall_general}.
+
+    \begin{align}
+        U = \left[\frac{1}{h_{int}\chi_{int}\frac{A_{int,\;pt}}{A_{ext,\;pt}}} +  \frac{R_{int,\;f}}{\frac{A_{int,\;pt}}{A_{ext,\;pt}}} + R_{m} + \frac{R_{ext,\;f}}{\frac{A_{ext,\;t}}{A_{ext,\;pt}}} + \frac{1}{h_{ext}\chi_{ext}\frac{A_{ext,\;t}}{A_{ext,\;pt}}}\right]^{-1} \label{eq:litrev_U_overall_general}
+    \end{align}
+
+    Here,
+    \begin{itemize}
+        \item \(h_{int}\) and \(h_{ext}\) are the internal and external film heat transfer coefficients. Exact values are not usually known until detailed design calculations have been performed. \citeauthor{Astolfi2014C} \cite{Astolfi2014C} obtained typical values by performing regression analysis against overall heat transfer coefficient data, see Table~\ref{table:FilmHeatTransferCoefficient}.
+        \item \(\chi_{int}\) and \(\chi_{ext}\) are the internal and external enhancement factor, with typical values ranging from 1 to 5. The enhancement factor accounts for improvement of the film heat transfer from turbulence/mixing promoting texturing of the heat transfer surface.  
+        \item \(\frac{A_{int,\;pt}}{A_{ext,\;pt}}\) is the ratio of the internal to the external \emph{plain} tubing area. It is usually around \num{0.87}.
+        \item \(\frac{A_{ext,\;t}}{A_{ext,\;pt}}\) is the ratio of the external heat transfer area to the external plain tubing area. For plain tubes its value is \num{1}, however for finned tubes its value can be as large as \num{14}.
+        \item \(R_{int,\;f}\) and \(R_{ext,\;f}\) are the heat transfer resistances the internal and external fouling layer. Typical values are shown in Table~\ref{table:FoulingResistances}
+        \item \(R_{m}\) is the resistance of the material. Due to the high thermal conductivity of the materials used, the material resistance is small and can be neglected. 
+    \end{itemize}
+
+    \begin{table}[H]
+        \caption{Film heat transfer coefficients for different fluids \cite{Astolfi2014C}.}
+        \centering 
+        \label{table:FilmHeatTransferCoefficient}
+        \input{Content/PowGen/DataTables/FilmHeatTransferCoefficients}
+        \\[10pt]
+    \end{table}
+
+    \begin{table}[H]
+        \caption[Fouling resistances for different fluids.]{Fouling resistances for different fluids \cite{TEMA2019}. \textsuperscript{a}Sodium Chloride or Calcium Chloride solutions in TEMA standard \textsuperscript{b} Refrigerant in TEMA standard}
+        \centering 
+        \label{table:FoulingResistances}
+        \input{Content/PowGen/DataTables/Fouling Resistances}
+        \\[10pt]
+    \end{table}
+
+    \subsection{Shell \& Tube Heat Exchangers}
+        In shell and tube heat exchangers, one fluid flow through a collection of tubes, which are contained within an outer shell. The other fluid flows through the interspace between the tubes and the shell, Figure~\ref{fig:prosim_litrev_ShellandTubeHX}. On the shell side, baffles are used not only to hold tubes in place and reduce vibrations, but also to ensure even flow across all tubes and prevent short-circuiting \cite{Incropera2007}.
+
+        \begin{figure}[H]
+            \centering
+            \includesvg[width=0.8\columnwidth]{Content/PowGen/Figures/Shell_and_Tube_HX.svg}
+            \caption[Shell \& Tube heat exchanger.]{Shell \& Tube heat exchanger. Adapted from \cite{Incropera2007}}
+            \label{fig:prosim_litrev_ShellandTubeHX}
+        \end{figure}
+
+        Shell and tube heat exchangers can be divided into three core components, 1) the front end, 2) the shell and 3) the rear end, with many possible configurations being available for each component \cite{TEMA2019}. This versatility has made shell and tube heat exchangers popular across many industries, with \ac{TEMA} providing standards for their design and operation since as early as 1939 \cite{TEMA2024}. 
+
+        For \emph{dirty} fluids, such as scaling-prone geofluids, \ac{TEMA} recommend confining the fluid to the tube-side reduce maintenance costs (compared to the shell-side), and to avoid U-bends, as these may make it impossible to clean the U-bend section of the tubing, which may lead to high pressure losses and in the worst case clogging.
+
+        % \textbf{Parallel Plate}\\
+        %     In parallel plate heat exchangers, the fluids both flow between parallel plates stacked together. Their modular design makes them well suited for low-cost maintenance, and also them to be extended to increase capacity, if so required. Parallel plate heat exchangers offer some of the highest heat transfer surface area to volume ratios, allowing very low approach temperatures to be achieved \cite{Incropera2007}.
+
+        %     % \begin{figure}[H]
+        %     %     \centering
+        %     %     \includesvg[width=0.8\columnwidth]{Content/PowGen/Figures/Shell_and_Tube_HX.svg}
+        %     %     \caption[Parallel plate heat exchanger.]{Parallel plate heat exchanger. Adapted from \cite{Incropera2007}}
+        %     %     \label{fig:prosim_litrev_ParallelPlateHX}
+        %     % \end{figure}
+        %     % \todo{draw parallel plate HX}
+
+        %     However, parallel plate heat exchangers are not well suited to high pressure applications, as unlike tubes, large flat surfaces are not ideal for containing pressures. Moreover, the typical rubber gaskets are not designed to withstand the high temperatures encountered in a geothermal setting. To prevent leakage for fluids (e.g. ORC working fluid into the geofluid or the atmosphere; or geofluid into the ORC working fluid), it is possible for the parallel plates to be welded together, avoiding the need for gaskets, but this results them no longer being disassemble for maintenance \cite{Incropera2007}.
+
+        %     \todo{probably not useful in ORC or DSC applications, but perhaps the welded ones could be used in low fouling applications... perhaps for the recuperator??}
+
+        % \textbf{Air Coolers}\\
+        %     - low heat capacity -> high mass rate -> high fan power
+        %     - low air heat transfer coefficient -> use of fins and corrugated surface
+        %     - humid air?
+
+        % \textbf{Cooling Tower}\\
+        %     - direct contact heat exchanger
+        %         * air flows past water, evaporating some in the process -> evaporation carries away heat, cooling the remaining liquid.
+        %         * for large capacity use natural draft, low capacity use mechanical draft (Walraven)
+        %         * 
+
+
+        % \todo{What configuration is best suited for what application}
+
+\section{Equipment Costs}
+
+    \subsection{Steam Turbines}
+        Steam turbines have not only been installed in many power plants across the globe but also for many decades, yielding significant experience in their design, manufacture and operation. Some cost correlations, in terms of the fluid power \(\Dot{W}\), i.e. work done by the fluid, (or similar) are shown in Table~\ref{table:SteamTurbineCosts}.
+
+        The \emph{genGEO} steam turbine cost model suggested by \citeauthor{Adams2021} \cite{Adams2021} is a development of a cost model from \emph{GETEM} \cite{GETEM2016}, where the specific cost has been matched against cost data of coal-fired power stations reported by \ac{NETL} between 2007 and 2019. This also explains the similarity in specific cost predicted by either model, see Figure~ \ref{fig:prosim_litrev_steamturb_speccost}.
+        
+        \begin{table}[H]
+            \caption[Steam turbine cost correlations.]{Steam turbine cost correlations.\(\Dot{W}\) is the fluid power in \unit{\kilo\watt}, \(\Dot{W}_s\) is the shaft power in \unit{\kilo\watt}, and \(\Dot{W}_e\) is the electrical power in \unit{\kilo\watt}. \textsuperscript{a}Fitted against data from Thermoflex, \(R^2=0.9994\)}
+            \centering 
+            \label{table:SteamTurbineCosts}
+            \scalebox{0.75}{
+                \input{Content/PowGen/DataTables/SteamTurbineCostCorrelations}
+            }
+            % \\[6pt]
+        \end{table}
+
+        However, although steam turbines share the same working fluid, there are some stark differences in the expansion processes used in coal-fired and geothermal power stations. As discussed in Section~\ref{sec:prosim_litrev_wet_expansion}, wet expansion is unavoidable in geothermal \ac{DSC} power plants and reduces the isentropic efficiency of the turbine. In turn, this should lead to higher specific costs for geothermal steam turbines.
+
+        With this in mind, a wet expansion turbine was simulated in \emph{Thermoflex} \cite{Thermoflex2021} for a range of operating conditions, analogous to a geothermal \ac{DSC} and different mass rates. The combined turbine and generator costs predicted by \emph{Thermoflex} were then correlated against the turbine power. 
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/SteamTurbineCost}
+        %     \caption[Steam turbine cost correlations.]{Steam turbine cost correlations. \textsuperscript{a}Fitted against data from Thermoflex, \(R^2=0.9994\)}
+        %     \label{fig:prosim_litrev_steamturb_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/SteamTurbineSpecCost}
+            \caption[Steam turbine specific cost correlations.]{Steam turbine specific cost correlations. \textsuperscript{a}Fitted against data from Thermoflex, \(R^2=0.9994\)}
+            \label{fig:prosim_litrev_steamturb_speccost}
+        \end{figure}
+
+        While the cost model developed in \emph{Thermoflex} incorporates the turbine efficiency reduction into the cost estimate, more practical consideration such as material allowances to handle the effects of liquid formation within the turbine are not captured. Moreover, given that geothermal fluids are not pure water, additional allowances could be made to incorporate the increased vapour volumetric flow rate when \ac{NCG} is present, corrosion- and erosion-resistant materials to handle the presence of minerals and \ac{NCG} in the geofluid. 
+
+    \subsection{ORC Turbines}  
+        For \ac{ORC} turbines there are two types of cost models, ones that correlate the cost to the turbine power (similar to steam turbines), and the ones correlating costs with the number of stages and the size parameter \(SP\). For \ac{ORC} turbines, the latter approach is preferred as it allows the effect of different working fluids and expansion processes on the turbine cost to be captured. A number of \ac{ORC} turbine cost models are shown in Table~\ref{table:ORCTurbineCosts}.
+        
+        \begin{table}[H]
+            \caption[ORC turbine cost correlations.]{ORC turbine cost correlations.\(\Dot{W}\) is the fluid power in \unit{\kilo\watt}, \(\Dot{W}_s\) is the shaft power in \unit{\kilo\watt}, and \(\Dot{W}_e\) is the electrical power in \unit{\kilo\watt}.}
+            \centering 
+            \label{table:ORCTurbineCosts}
+            \scalebox{0.8}{
+                \input{Content/PowGen/DataTables/ORCTurbineCostCorrelations}
+            }
+            % \\[6pt]
+        \end{table}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/ORCTurbineCost}
+        %     \caption[ORC turbine cost correlations.]{ORC turbine cost correlations. \textsuperscript{a}Assuming n-Butane as the working fluid, \num{3} turbine stages, \(\Delta h=\)\qty{78.74}{\kilo\watt\per\kg}, and an outlet vapour density of \qty{10.45}{\kg\per\m\cubed}}
+        %     \label{fig:prosim_litrev_ORCturb_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/ORCTurbineSpecCost}
+            \caption[ORC turbine specific cost correlations.]{ORC turbine specific cost correlations. \textsuperscript{a}Assuming n-Butane as the working fluid, \num{3} turbine stages, \(\Delta h=\)\qty{78.74}{\kilo\watt}, and an outlet vapour density of \qty{10.45}{\kg\per\m\cubed}}
+            \label{fig:prosim_litrev_ORCturb_speccost}
+        \end{figure}
+
+        From Figure~\ref{fig:prosim_litrev_ORCturb_speccost} it can be seen that the generic model from \emph{GETEM} and the \emph{Similitude} approach yield comparable costs estimates over a wide range of turbine capacities. However, for other fluids or expansion processes agreement between the two approaches may differ.
+    
+    \subsection{Shell \& Tube Heat Exchangers}
+
+        Shell and Tube heat exchangers are common process equipment that have been in use for many decades, resulting in extensive design, manufacturing and operational experience. As a result, cost correlations have been published in a number of reference text books, see Table~\ref{table:ShellAndTubeCosts}, the main challenge being to accurately update the purchasing costs to today's cost levels.
+        
+        \begin{table}[H]
+            \caption[Cost correlations for shell and tube heat exchangers.]{Cost correlations for shell and tube heat exchangers.\(A\) is the heat transfer area in \unit{\square\m}. \textsuperscript{a}Floating head \textsuperscript{b}Fixed head \textsuperscript{c}Fixed or floating head \textsuperscript{d}Kettle boiler \textsuperscript{e}Primary heat exchanger \textsuperscript{f}Recuperator}
+            \centering 
+            \label{table:ShellAndTubeCosts}
+            \scalebox{0.8}{
+                \input{Content/PowGen/DataTables/ShellAndTube_CostCorrelations}
+            }
+            \\[10pt]
+        \end{table}
+
+        As can be seen from Figure~\ref{fig:prosim_litrev_SandTHX_speccost} the different correlations yield remarkably similar results over a wide range of heat transfer areas. Owing to most the majority of the cost models scaling linearly to the heat transfer area, the specific cost for heat exchangers larger than \qty{10}{\square\m} remains fairly constant at around \qty{225}{\USD\per\square\m}.
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/ShellAndTubeHXCost}
+        %     \caption[Shell and tube cost correlations.]{Shell and tube cost correlations. \textsuperscript{a}Floating head \textsuperscript{b}Fixed head \textsuperscript{c}Fixed/floating head \textsuperscript{d}Kettle boiler \textsuperscript{e}Assuming an overall heat transfer coefficient of \qty{1000}{\watt\per\square\m\per\K} \textsuperscript{f}\ac{PHE} \textsuperscript{g}Recuperator.}
+        %     \label{fig:prosim_litrev_SandTHX_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/ShellAndTubeHXSpecCost}
+            \caption[Shell and tube specific cost correlations.]{Shell and tube specific cost correlations.\textsuperscript{a}Floating head \textsuperscript{b}Fixed head \textsuperscript{c}Fixed/floating head \textsuperscript{d}Kettle boiler \textsuperscript{e}Assuming an overall heat transfer coefficient of \qty{1000}{\watt\per\square\m\per\K} \textsuperscript{f}\ac{PHE} \textsuperscript{g}Recuperator.}
+            \label{fig:prosim_litrev_SandTHX_speccost}
+        \end{figure}
+
+        % \textbf{Parallel Plate}\\
+        % \todo{check in DiPippo if they are actually used.. if not I can just comment out this section}
+        % \begin{table}[H]
+        %     \caption{Cost correlations for parallel plate heat exchangers.\(A\) is the heat transfer area in \unit{\square\m}. \textsuperscript{a}Spiral \textsuperscript{b}Gasketted \textsuperscript{c}Welded}
+        %     \centering 
+        %     \label{table:PlateHXCosts}
+        %     \scalebox{0.8}{
+        %         \input{Content/PowGen/DataTables/Plate_CostCorrelations}
+        %     }
+        %     \\[10pt]
+        % \end{table}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/PlateCost}
+        %     \caption{Parallel plate cost correlations. Citations in order of appearance \cite{Loh2002, Adams2021}, \cite{Peters2003, Adams2021}, \cite{Peters2003, Adams2021}, \cite{Peters2003, Adams2021}. \textsuperscript{a}Via \cite{Adams2021} \textsuperscript{b}Spiral \textsuperscript{c}Gaskets \textsuperscript{d}Welded.}
+        %     \label{fig:prosim_litrev_PlateHX_cost}
+        % \end{figure}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/PlateSpecCost}
+        %     \caption{Parallel plate specific cost correlations. Citations in order of appearance \cite{Loh2002, Adams2021}, \cite{Peters2003, Adams2021}, \cite{Peters2003, Adams2021}, \cite{Peters2003, Adams2021}. \textsuperscript{a}Via \cite{Adams2021} \textsuperscript{b}Spiral \textsuperscript{c}Gaskets \textsuperscript{d}Welded.}
+        %     \label{fig:prosim_litrev_PlateHX_speccost}
+        % \end{figure}
+
+    \subsection{Condensers}
+
+        A number of condenser cost models were considered, see Table~\ref{table:CondenserCosts}, however it was noticed that there appears to be some disagreement in the cost scaling between the different correlations, see Figure~\ref{fig:prosim_litrev_CondTHX_speccost}. For instance, the correlations from \citeauthor{Smith2005} \cite{Smith2005} and \citeauthor{Turton2012} \cite{Turton2012}, are at opposite ends of the spectrum, possibly indicating that they represent different cooling systems architectures or mechanisms. The remaining correlations, taken from \emph{GETEM} \cite{GETEM2016} and \citeauthor{Astolfi2014B} \cite{Astolfi2014B}, agree more closely and form a middle ground.
+        
+        \begin{table}[H]
+            \caption[Cost correlations for condensers.]{Cost correlations for condensers.\(A\) is the heat transfer area in \unit{\square\m}. \textsuperscript{a}via \cite{Adams2021} \textsuperscript{b}\ac{NCG} condenser }
+            \centering 
+            \label{table:CondenserCosts}
+            \scalebox{0.8}{
+                \input{Content/PowGen/DataTables/Condenser_CostCorrelations}
+            }
+            \\[10pt]
+        \end{table}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/CondenserCost}
+        %     \caption[Condenser cost correlations.]{Condenser cost correlations. \textsuperscript{a}\ac{NCG} condenser.}
+        %     \label{fig:prosim_litrev_CondHX_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/CondenserSpecCost}
+            \caption[Condenser specific cost correlations.]{Condenser specific cost correlations. \textsuperscript{a}\ac{NCG} condenser.}
+            \label{fig:prosim_litrev_CondTHX_speccost}
+        \end{figure}
+        
+    \subsection{Pumps}
+        From the pump cost models considered, Table~\ref{table:PumpCosts}, no clear conclusions on suitability. The models from \citeauthor{Turton2012} \cite{Turton2012} and \citeauthor{Astolfi2014B} \cite{Astolfi2014B} are in good agreement for pump sizes greater than \qty{10}{\kilo\watt}, Figure~\ref{fig:prosim_litrev_Pump_speccost}, whereas the models from \citeauthor{Smith2005} \cite{Smith2005} and \emph{GETEM} \cite{GETEM2016} provide significantly higher costs but agree well with each other.
+        
+        \begin{table}[H]
+            \caption[Cost correlations for pumps.]{Cost correlations for pumps. \(\Dot{W}\) is the pump power in \unit{\kilo\watt}.}
+            \centering 
+            \label{table:PumpCosts}
+            \scalebox{0.8}{
+                \input{Content/PowGen/DataTables/PumpCostCorrelations}
+            }
+        \end{table}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/PumpCost}
+        %     \caption[Pump cost correlations.]{Pump cost correlations. \textsuperscript{a}\(S_{mat}\) is \num{1} corresponding to carbon steel.}
+        %     \label{fig:prosim_litrev_Pump_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/PumpSpecCost}
+            \caption[Pump specific cost correlations.]{Pump specific cost correlations. \textsuperscript{a}\(S_{mat}\) is \num{1} corresponding to carbon steel.}
+            \label{fig:prosim_litrev_Pump_speccost}
+        \end{figure}
+
+    \subsection{Compressors}
+        There are significant differences in the specific cost predicted by the correlations investigated. While the correlations by \citeauthor{Turton2012} \cite{Turton2012} and \citeauthor{Smith2005} \cite{Smith2005}, appear to be in good agreement at high capacities, the model by \citeauthor{Duc2007} \cite{Duc2007} has been used in a similar context (i.e. \ce{CO2} compression) in the original paper as well as \emph{genGeo} \cite{Adams2021}.
+    
+        \begin{table}[H]
+            \caption[Cost correlations for compressors.]{Cost correlations for compressors.\(\Dot{W}\) is the fan power in \unit{\kilo\watt}.}
+            \centering 
+            \label{table:CompressorsCosts}
+            \scalebox{0.8}{
+                \input{Content/PowGen/DataTables/CompressorCostCorrelations}
+            }
+            \\[10pt]
+        \end{table}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/CompressorCost}
+        %     \caption[Compressors cost correlations.]{Compressors cost correlations. Citations in order of appearance \cite{Turton2012}, \cite{Smith2005}, and \cite{Duc2007}.}
+        %     \label{fig:prosim_litrev_Compressor_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/CompressorSpecCost}
+            \caption[Compressor specific cost correlations.]{Compressor specific cost correlations. Citations in order of appearance \cite{Turton2012}, \cite{Smith2005}, and \cite{Duc2007}.}
+            \label{fig:prosim_litrev_Compressor_speccost}
+        \end{figure}
+
+    \subsection{Fans}
+        The fan models considered are not in close agreement, and the model by \citeauthor{Turton2012} \cite{Turton2012} provides unrealistic cost estimates for capacities exceeding \qty{8}{\kW}, as the specific cost begins to increase with capacity.
+        \begin{table}[H]
+            \caption{Cost correlations for fans.\(\Dot{V}\) is the volumetric flow rate in \unit{\m\cubed\per\s} and \(\Dot{W}\) is the fan power in \unit{\kilo\watt}.}
+            \centering 
+            \label{table:FanCosts}
+            \scalebox{0.8}{
+                \input{Content/PowGen/DataTables/FanCostCorrelations}
+            }
+            \\[10pt]
+        \end{table}
+
+        % \begin{figure}[H]
+        %     \centering
+        %     \include{Content/PowGen/Plots/Costs/FanCost}
+        %     \caption{Fan cost correlations. Citations in order of appearance \cite{Turton2012}, \cite{Smith2005}. \textsuperscript{a}Assuming a pressure drop of \qty{120}{\Pa}, an fan efficiency of \qty{60}{\percent}, resulting in a air enthalpy of \qty{0.16}{\kilo\joule\per\kg} and a density of \qty{1.18}{\kg\per\m\cubed}.}
+        %     \label{fig:prosim_litrev_Fan_cost}
+        % \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/FanSpecCost}
+            \caption{Fan specific cost correlations. Citations in order of appearance \cite{Turton2012}, \cite{Smith2005}. \textsuperscript{a}Assuming a pressure drop of \qty{120}{\Pa}, an fan efficiency of \qty{60}{\percent}, resulting in a air enthalpy of \qty{0.16}{\kilo\joule\per\kg} and a density of \qty{1.18}{\kg\per\m\cubed}.}
+            \label{fig:prosim_litrev_Fan_speccost}
+        \end{figure}
+
+    \subsection{Power Plants}
+        \label{sec:prosim_litrev_plant_cost}
+        \emph{GEOPHIRES-X}\cite{Beckers2023} is a useful reference for comparing the cost of binary \ac{ORC} and \ac{DSC} geothermal power plants. As can be seen from  Figure~\ref{fig:prosim_litrev_Plant_cost} the absolute cost of both types of power plant decrease with temperature, resulting in lower specific costs, Figure~\ref{fig:prosim_litrev_Plant_speccost}. Binary \ac{ORC}s scale almost linearly with plant, indicating fewer economies of scale compared to \ac{DSC}s, whose specific costs decrease more significantly with plant capacity.
+
+        However this approach has a number of drawbacks. For instance the geofluid temperature is not the sole discriminator between binary and \ac{DSC} geothermal power plants, but the steam quality also plays an important role, particularly for \ac{DSC}s. Moreover, the binary \ac{ORC} is generic and does not differentiate between different working fluids.
+
+        Comparing the cost estimates from \emph{GEOPHIRES-X} against costs derived in a study by \citeauthor{Astolfi2014B} \cite{Astolfi2014B} it can be seen that there is a significant discrepancy of almost \qty{50}{\percent}.
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/PlantCost}
+            \caption[Plant cost correlations of a sub-critical binary \ac{ORC} and a single flash \ac{DSC}.]{Cost correlations of a sub-critical binary \ac{ORC} and a single flash \ac{DSC} for different geofluid inlet temperatures \cite{Beckers2019, Ross2023, Beckers2023}. \textsuperscript{a} Super-critical \ac{ORC} with R134a as the cycle working fluid. Geofluid inlet temperature of \qty{150}{\degreeCelsius} and mass rate of \qty{200}{\kg\per\s} \cite{Astolfi2014B}}
+            \label{fig:prosim_litrev_Plant_cost}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowGen/Plots/Costs/PlantSpecCosts}
+            \caption[Specific cost cost correlations of a sub-critical binary \ac{ORC} and a single flash \ac{DSC}.]{Specific cost cost correlations of a sub-critical binary \ac{ORC} and a single flash \ac{DSC} for different geofluid inlet temperatures \cite{Beckers2019, Ross2023, Beckers2023}.}
+            \label{fig:prosim_litrev_Plant_speccost}
+        \end{figure}
+
+% \subsection{Conclusions}
+% \label{sec:prosim_lit_review_conclusions}
+%     \todo{Write some conclusions for the ProSim lit review}
+
+\cleardoublepage

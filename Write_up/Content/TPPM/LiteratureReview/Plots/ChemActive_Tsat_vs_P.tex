@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+    \begin{axis}[xlabel = {Pressure/\unit{\bar}},
+                 ylabel = {Deviation from \ac{WP} Tsat/\unit{\K}},
+                 legend style={at={(0.03,0.97)}, anchor=north west},
+                 axis y line*=left,
+                 ymin = 0,
+                 ymax=20,
+                 xmin = 1,
+                 xmax = 64,
+                 xmode = log,
+                 log basis x={4},
+                 log ticks with fixed point,
+                 height=6.5cm, width=10cm]
+        
+        \addplot[color=black, smooth]
+                coordinates {(1.000e+00,30e+00) (2.000e+00,30e+00)};
+        \addlegendentry{Abs Diff.};
+        \addplot[color=black, smooth, dashed]
+                coordinates {(1.000e+00,2.600e+00) (2.000e+00,1.900e+00)};
+        \addlegendentry{\% Diff.};
+        
+        \addplot[color=blue, smooth]
+                coordinates {(1.000e+00,2.600e+00) (2.000e+00,1.900e+00) (4.000e+00,1.300e+00) (8.000e+00,1.600e+00) (1.600e+01,2.100e+00) (3.200e+01,2.700e+00) (6.400e+01,3.700e+00)};
+        \addlegendentry{\ac{SRK}};
+        \addplot[color=red, smooth]
+                coordinates {(1.000e+00,1.100e+00) (2.000e+00,1.500e+00) (4.000e+00,2.200e+00) (8.000e+00,3.400e+00) (1.600e+01,5.600e+00) (3.200e+01,9.900e+00) (6.400e+01,1.840e+01)};
+        \addlegendentry{Ideal Gas};
+    \end{axis}
+    
+    \begin{axis}[legend style={at={(0.97,0.03)}, anchor=south east},
+                 axis y line*=right,
+                 axis x line=none,
+                 ylabel = {Deviation from \ac{WP} Tsat/\unit{\percent}},
+                 ylabel near ticks,
+                 ymin = 0,
+                 ymax = 5,
+                 xmin = 1,
+                 xmax = 64,
+                 xmode = log,
+                 log basis x={4},
+                 log ticks with fixed point,
+                 height=6.5cm, width=10cm]
+       
+        \addplot[color=blue, dashed]
+                coordinates {(1.000e+00,6.975e-01) (2.000e+00,4.830e-01) (4.000e+00,3.119e-01) (8.000e+00,3.607e-01) (1.600e+01,4.426e-01) (3.200e+01,5.288e-01) (6.400e+01,6.691e-01)};
+        \addplot[color=red, dashed]
+                coordinates {(1.000e+00,2.951e-01) (2.000e+00,3.813e-01) (4.000e+00,5.279e-01) (8.000e+00,7.665e-01) (1.600e+01,1.180e+00) (3.200e+01,1.939e+00) (6.400e+01,3.327e+00)};
+    \end{axis}
+    \label{axis_right}
+
+\end{tikzpicture}

@@ -1,0 +1,348 @@
+The presence of impurities like \ac{NCG} in the geofluid represents a challenge for the operation of geothermal power plants, as they can not only be harmful and toxic, but may also pose a global warming potential. Harmful and toxic substances maybe removed by means of scrubbing the \ac{NCG} stream (e.g. AMIS or CarbFix process), however species like carbon dioxide and methane are mostly released into the environment.
+
+The following chapter focuses on the latter constituents of \ac{NCG} (i.e. \ce{CO2} and \ce{CH4}), and aims to investigate the impact of the presence of \ac{NCG} in the geofluid on the performance of the power plant, as well as various options for their disposal.
+
+\subsection{NCG Venting}
+    To prevent the build of \ac{NCG} with the power plant, \ac{NCG} must be released from the power plant. Venting to the atmosphere (following the removal of harmful constituents) represents a low-effort solution, but raises the carbon-foot print of the power plant.
+
+    Nevertheless, venting still represents a challenge to \ac{DSC} geothermal power plants, as the vapour is typically expanded to sub-atmospheric conditions, see Section~\ref{sec:thermo_opt_DSCresults}, and as such the \ac{NCG} must be re-pressurised to atmospheric pressure to be vented. Binary \ac{ORC}s do not face this challenge as the pressure losses within the \ac{PHE} are comparatively low, and so the \ac{NCG} remains about atmospheric pressure and can be vented without issue.
+
+    \subsubsection{Plant Configurations}
+        The \ac{DSC} plant used for the thermodynamic, see Section~\ref{sec:thermo_opt_DSC_config} is modified to include an \ac{NCG} separator following the condenser, as well as compressor and a pump to repressurise the \ac{NCG} and condensate streams to atmospheric pressure (if required, Figure~\ref{fig:prosim_NCG_ventingDSC}.
+
+        \begin{figure}[H]
+            \centering
+            \resizebox{\linewidth}{!}{\input{Content/ProSim/NCGHandling/Figures/DSC_VentingSchematic}}
+            \caption{Single flash \ac{DSC} geothermal power plant with \ac{NCG} re-pressurisation to atmospheric pressure to allow venting.}
+            \label{fig:prosim_NCG_ventingDSC}
+        \end{figure}
+
+        Besides a \ac{NCG} separator, the binary \ac{ORC} does not required any modifications to facilitate the venting of \ac{NCG} to the atmosphere, Figure~\ref{fig:prosim_NCG_ventingORC}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Figures/ORC_VentingSchematic}
+            \caption{Binary \ac{ORC} geothermal power plant with \ac{NCG} venting to atmosphere.}
+            \label{fig:prosim_NCG_ventingORC}
+        \end{figure}
+
+    \subsubsection{Boundary Conditions and Assumptions}
+        Unlike the previous investigations, the geofluid is assumed to be a mixture of water and carbon dioxide, ranging between pure water and up to \qty{12}{\mol\percent\of{\ce{CO2}}} (corresponding to \qty{30}{mass\percent\of{\ce{CO2}}}). The working fluid used in the binary \ac{ORC} is n-Butane.
+
+        The geofluid inlet temperature and vapour quality were chosen to be \qty{473}{\K} (\qty{200}{\degreeCelsius}) and \qty{20}{\percent} respectively, such that for the pure water case the binary \ac{ORC} and single flash \ac{DSC} have a similar net electrical power and specific cost, Figure~\ref{fig:prosim_NCG_nButane_Wnet_specCost}. 
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/nButane_Wnet_specCost}
+            \caption[The net electrical power and specific plant cost of a thermodynamically optimised binary \ac{ORC} using n-Butane as the working fluid and a single flash \ac{DSC} geothermal power plant.]{The net electrical power (left) and specific plant cost (right) of a thermodynamically optimised binary \ac{ORC} using n-Butane as the working fluid and a thermodynamically optimised single flash \ac{DSC} geothermal power plant, Section~\ref{sec:thermo_comp}.}
+            \label{fig:prosim_NCG_nButane_Wnet_specCost}
+        \end{figure}
+
+        The geofluid mass flow rate is scaled to ensure a constant heat flow rate into the power plant (equal to that of pure water at the aforementioned conditions), Equation~\ref{eq:NCG_mrate_scaling}.
+
+        \begin{align}
+            \Dot{m}_{geo} = \Dot{m}_{\ce{H2O}} * \frac{h_{\ce{H2O}}^{in}-h_{\ce{H2O}}^{ref}}{h_{geo}^{in}-h_{geo}^{ref}} \label{eq:NCG_mrate_scaling}
+        \end{align}
+
+        With this in mind, to minimise the scaling of the geofluid mass rate and to ensure that the geofluid compositions remain \emph{similar}, for this study, the vapour quality of the geofluid is defined solely based on the fraction of the total amount of water that is in the vapour phase, Equation~\ref{eq:NCG_vapqual_def}.
+
+        \begin{align}
+            x_{geo} = \frac{\Dot{n}_{\ce{H2O}}^{vap}}{\Dot{n}_{\ce{H2O}}^{vap}+\Dot{n}_{\ce{H2O}}^{liq}} \label{eq:NCG_vapqual_def}
+        \end{align}
+
+        \begin{table}[H]
+            \centering
+            \caption{The boundary conditions used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+            \label{table:NCG_Venting_BCs}
+            \input{Content/ProSim/NCGHandling/DataTables/BCs_Venting}        
+        \end{table}
+    
+    \subsubsection{Optimisation Configuration}
+        \label{sec:NCG_Venting_opt_config}
+        The two power plants are thermodynamically optimised (i.e. to maximise their net electrical power) using the same optimisation configuration as previously used in Section~\ref{sec:thermo_comp}, see Table~\ref{table:NCG_Venting_opt_config}.
+
+        \begin{table}[H]
+            \centering
+            \caption{The optimisation parameters used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+            \label{table:NCG_Venting_opt_config}
+            \input{Content/ProSim/NCGHandling/DataTables/OptConfig_Venting}        
+        \end{table}
+
+    \subsubsection{Results}
+        The performance of the binary \ac{ORC} is unaffected by the presence of \ac{NCG} within the geofluid, Figure~\ref{fig:prosim_NCG_Ventilation_Wnet}. This is a result of the heat flow being the same as in the pure water case, and with the pinch-point being located at the pre-heater inlet (on the working fluid side) the operating conditions of the \ac{ORC} are unchanged. Moreover, as there are no pressure losses in the \ac{PHE}, the geofluid exits the \ac{PHE} at a pressure equal to the inlet pressure, which is well above atmospheric pressure, Figure~\ref{fig:prosim_NCG_Ventilation_Power_Breakdown}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Ventilation/Wnet}
+            \caption[The net electrical power of a thermodynamically optimised binary \ac{ORC} and single flash \ac{DSC} geothermal power plants venting \ac{NCG} to atmosphere.]{The net electrical power of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with \ac{NCG} venting to atmosphere.}
+            \label{fig:prosim_NCG_Ventilation_Wnet}
+        \end{figure}
+
+        On the other hand, the net electrical power of the single flash \ac{DSC} initiall decreases for geofluid \ce{CO2} contents up to about \qty{6}{\percent}, but then exceeds the net power observed with pure water as the geofluid, Figure~\ref{fig:prosim_NCG_Ventilation_Wnet}. The increase in net power can be attributed to the increase in geofluid inlet pressure, which allows for larger expansion ratios and higher turbine power, Figures~\ref{fig:prosim_NCG_Ventilation_Power_Breakdown} and ~\ref{fig:prosim_NCG_Ventilation_OPs}. Although \ac{NCG} handling power could be expected to increase inline with \ce{CO2} content, reducing the degree of flashing, thus lowering the vapour mass rate, and raising the condensation pressure, thus lowering re-pressurisation power requirements, help to minimise this effect.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Ventilation/Power_Breakdown}
+            \caption{Breakdown of the net electrical power for thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) (left) and single flash \ac{DSC} (right) geothermal power plants with \ac{NCG} venting to atmosphere.}
+            \label{fig:prosim_NCG_Ventilation_Power_Breakdown}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Ventilation/OPs}
+            \caption{The pressures of the geofluid at different points in the power plant.}
+            \label{fig:prosim_NCG_Ventilation_OPs}
+        \end{figure}
+
+        At higher geofluid \ce{CO2} contents (above \qty{9}{\percent}, the optimisation problem becomes degenerate as many combinations of process variables yield similar values for the objective function. For instance, increasing the degree of flashing and raising the condensation pressure has the same effect as reducing the degree of flashing and lowering the condensation pressure. While this does not significantly alter the maximum net electrical power found by the optimisation, it has a considerable impact on the cost of the power plant, Figure~\ref{fig:prosim_NCG_Ventilation_Cost}. This is because, in one case virtually no \ac{NCG} re-pressurisation is required, while in the other it is required and represents a considerable cost item, Figure~\ref{fig:prosim_NCG_Ventilation_CostBreakdown}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Ventilation/Cost}
+            \caption{The total plant cost of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with \ac{NCG} venting to atmosphere.}
+            \label{fig:prosim_NCG_Ventilation_Cost}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Ventilation/Cost_Breakdown}
+            \caption{The cost breakdown of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with \ac{NCG} venting to atmosphere.}
+            \label{fig:prosim_NCG_Ventilation_CostBreakdown}
+        \end{figure}
+
+\subsection{NCG Re-injection}
+    In previous studies the geofluid was discharged at a pressure equal to the pressure at the power plant inlet, under the assumption that this would be sufficient to re-inject the geofluid into the reservoir. Even if higher pressures were required, as the geofluid was assumed to be as pure water and in its liquid state at the outlet, the re-pressurisation to higher pressure would have been possible with only small reductions in net electrical power and small capital cost increases.
+
+    For geofluids comprised of water and \ac{NCG}, the existence of an \ac{NCG}-rich vapour phase is all but guaranteed, which poses a significant challenge for re-injection. Due to the low density of \ac{NCG}, the pressures required for re-injection are about one to two orders of magnitude higher, and owing to the high compressibility of gases, the power required for compression is significant.
+
+    \begin{notes}{Note}
+        Owing to the large differences in density between the liquid and vapour phases, injection of a two-phase fluid is likely to be technically challenging, if not impossible.
+
+        As the vapour has a lower density than the liquid, it has a natural tendency to rise in the wellbore (i.e. buoyancy). Hence, the liquid must exert a significant drag on the gas phase to prevent the vapour phase from moving upwards, towards the surface. This may be possible when the fluid is predominantly liquid (e.g. bubble flow) or predominantly vapour (i.e. mist flow), where the effect of buoyancy is reduced due to the significant drag between the bulk fluid and the bubbles/droplets. 
+        
+        For this reason, injection of single phase fluids is preferred. Where two-phase fluids are to be injected (e.g. brine and \ac{NCG}), this can be achieved by means of a secondary tubing within the wellbore, with the one fluid flowing through the secondary tubing, and the other in the annular space between the primary and secondary tubing.  
+    \end{notes}
+
+    \begin{notes}{Note}
+        The injection of liquids containing dissolved gases (e.g. brine containing dissolved \ac{NCG} is also not without risks. For instance, loss in wellhead pressure or increase in fluid temperature (i.e. during shut-in conditions), may result in previously dissolved gases coming out of solution. The presence of gas as well as its upward movement due to buoyancy, lightens the fluid in the wellbore resulting in a reducing in pressure all along the wellbore, causing more gas to come out of solution.
+
+        This run cascading effect could simply result in the accumulation of gas near the wellhead (if in shut-in conditions) or in the worst-case lead to a blow-out event.
+    \end{notes}
+
+    \subsubsection{Injection Pressure and Depth of Injection}
+        \label{sec:prosim_NCGhandling_Pinj}
+        To determine the maximum depth of injection, given the wellhead conditions of the geothermal brine and the \ac{NCG} (i.e. temperature and pressure) it is useful to consider the static pressure profiles within the wellbore.
+
+        The static pressure of the geothermal brine at a depth \(z\) can be estimated using Equation~\ref{eq:brine_static_grad}, assuming that the brine is pure water and in-compressible. Where, \(\rho_{brine}\) is the density of the brine, taken to be \qty{1000}{\kg\per\cubic\m} (i.e. independent of temperature and pressure), \(g\) the acceleration due to gravity and \(z\) the \ac{TVD} along the wellbore. 
+
+        \begin{align}
+            P_{brine}^{static}(z) = \rho_{brine} \cdot g \cdot z  \label{eq:brine_static_grad}
+        \end{align}
+
+        For the \ac{NCG}, the static pressure was determined by assuming negligible heat transfer between the \ac{NCG}, the brine and the surrounding formation along the wellbore, i.e. constant enthalpy. The enthalpy of the \ac{NCG} at the wellhead is defined by the wellhead temperature and pressure. The static pressure along the wellbore is then determined by discretising the wellbore into \(N\) nodes and iteratively solving Equations~\ref{eq:ncg_static_grad} and \ref{eq:ncg_average_density}. Here, \(P_i\) and \(P_{i+1}\) are the static pressure at node \(i\) and \(i+1\) respectively, \(g\) is the acceleration due to gravity, \(\Delta z\) is the difference in vertical depth between nodes \(i+1\) and \(i\), and \(\rho_{av}\) is the average density between nodes \(i\) and \(i+1\). The inlet enthalpy and density are calculated using \emph{CoolProp} treating the \ac{NCG} as pure \ce{CO2}.
+
+        \begin{align}
+            P_{i+1} = P_i + \rho_{av} \cdot g \cdot \Delta z \label{eq:ncg_static_grad}
+        \end{align}
+
+        \begin{align}
+            \rho_{av} = \frac{\rho (h, P_i) + \rho (h, P_{i+1})}{2} \label{eq:ncg_average_density}
+        \end{align}
+
+        The depth at which the pressure of the brine and the pressure of the \ac{NCG} are equal, is the maximum depth of injection. In reality, frictional losses, as well as heat transfer effects between the surrounding rock, the geothermal brine and the \ac{NCG} result in injection at shallower depths.
+
+        The static pressure profiles for brine and \ac{NCG} along a wellbore were calculated for a range of \ac{NCG} injection pressures, Figure~\ref{fig:prosim_NCG_Reinjection_PvD_by_Pinj}, assuming the brine to be pure water, a brine injection temperature and pressure (at the wellhead) of \qty{298}{\K} and \qty{1}{\bar} respectively, the \ac{NCG} is pure \ce{CO2}, and a \ac{NCG} injection temperature (at the wellhead) of \qty{298}{\K}. 
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/PvD_for_Pinjs}
+            \caption{The static pressure with depth of \ac{NCG} for a range of injection wellhead pressures.}
+            \label{fig:prosim_NCG_Reinjection_PvD_by_Pinj}
+        \end{figure}
+
+        From these static pressure profiles, Figure\ref{fig:prosim_NCG_Reinjection_PvD_by_Pinj}, the depth of injection be seen to be a few hundreds of meters for \ac{NCG} injection pressures up to \qty{60}{\bar}, which is insufficient for geothermal reservoirs. Injection depths of a few thousands of meters can be achieved with injection pressures in excess of \qty{65}{\bar}, which can be attributed to the \ce{CO2} being a liquid at the wellhead. Liquefaction is possible in this case, as the \ac{NCG} injection temperature at the wellhead (\qty{298}{\K}) is below the critical temperature of \ce{CO2} (\qty{304.12}{\K}) and the injection pressure (\qty{65}{\bar}) is above the saturation pressure of \ce{CO2} (\qty{64.12}{\bar} at \qty{298}{\K}).   
+
+        \begin{notes}{Note}
+
+            For low \ac{NCG} content geofluids, it can be thermodynamically possible to fully dissolve the \ac{NCG} the geofluids at these shallow depths of injection, allowing for the \ac{NCG} to be carried to the reservoir. However, it is also important to consider the rate of mass transfer, as the dissolution must take place before the \ac{NCG} can large enough bubbles for buoyancy effects to manifest, which could lead to well unloading and a potentially catastrophic blow-out event.
+
+            To prevent this, large mass transfer coefficients and mass transfer area are required. 
+        \end{notes}
+
+        Besides the injection pressure, the depth of injection also depends on the temperature of the \ac{NCG} at the wellhead, as this affects the density in the wellbore, Figure~\ref{fig:prosim_NCG_Reinjection_Pinj_v_Depth_v_Tinj}. For injection temperatures below \qty{313}{\K}, \ac{NCG} can be injected to depths of \qty{4000}{m} with injection pressures below \qty{100}{\bar}. For injection temperatures below \qty{303}{\K} similar depths can be obtained with just \qty{80}{\bar} of pressure at the wellhead.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/Pinj_vs_Depth_vs_Tinj}
+            \caption[The minimum \ac{NCG} injection pressure required to inject at a given depth for different \ac{NCG} injection temperatures.]{The minimum \ac{NCG} injection pressure required to inject at a given depth for different \ac{NCG} injection temperatures. The brine injection pressure is assumed to be \qty{15.5}{\bar} corresponding to the saturation pressure of pure water at \qty{473}{\K}.}
+            \label{fig:prosim_NCG_Reinjection_Pinj_v_Depth_v_Tinj}
+        \end{figure}
+
+    % \subsubsection{Determination of Re-injection Pressure}
+        
+    %     The maximum depth of \ac{NCG} re-injection was estimated for a range of wellhead pressures. Here, the \ac{NCG} was assumed to be pure \ce{CO2}, at a temperature of \qty{298}{\K} (\qty{25}{\degreeCelsius}) at the wellhead. The static pressure gradient was then evaluated assuming negligible heat transfer with the surrounding formation along the wellbore (i.e. constant enthalpy). For reference, the static pressure gradient of pure water (also at \qty{298}{\K} (\qty{25}{\degreeCelsius}) and \qty{1}{\bar} of pressure at the wellhead) was calculated in a similar fashion. The depth of injection, is thus given by the intersection of the static pressure profiles, Figure~\ref{fig:prosim_NCG_Reinjection_PvD_by_Pinj}. The corresponding injection pressures required to reach a given depth are shown in Figure~\ref{fig:prosim_NCG_Reinjection_Pinj_v_D}.
+
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/ProSim/NCGHandling/Plots/Reinjection/PvD_for_Pinjs}
+    %         \caption{The static pressure with depth of \ac{NCG} for a range of injection wellhead pressures.}
+    %         \label{fig:prosim_NCG_Reinjection_PvD_by_Pinj}
+    %     \end{figure}
+
+    %     Under the previously used boundary conditions (i.e. \(P_{geo}^{out} = P_{geo}^{in}\)) power plant discharge pressures of around \qtyrange{10}{20}{\bar} could be expected - however this would only permit injection of \ac{NCG} to depths of a few hundred meters. While the \ac{NCG} remains in its vapour state, even at elevated pressures (e.g. \qty{60}{\bar} only relatively shallow depths of around \qty{650}{\m} can be reached.
+
+    %     \begin{notes}{Note:}
+    %         For low geofluid \ac{NCG} contents, it can be thermodynamically possible to inject the \ac{NCG} at these shallow depths, and for the \ac{NCG} to fully dissolve in the geofluid. However, here it is also important to consider the rate of mass transfer, as the dissolution of the \ac{NCG} with in the geofluid, must take place before the \ac{NCG} coalesce into bubbles large enough for buoyancy effects to manifest, which could lead to well unloading and a potential catastrophic blow-out event.
+
+    %         To prevent this, large mass transfer coefficients and mass transfer area are required. 
+    %     \end{notes}
+
+    %     However, as the injection temperature (\qty{298}{\K} or \qty{25}{\degreeCelsius}) is below the critical temperature of \ce{CO2} (\qty{304.1}{\K} or \qty{31}{\degreeCelsius}), and as such it is possible to liquefy to \ce{CO2} at sufficiently high pressures, in this case, at pressures in excess of \qty{64.1}{\bar}. Liquefaction has several advantages over gaseous \ce{CO2}, since liquid \ce{CO2} has a similar density to water thus allowing deeper injection depths to be obtained, and owing to its low compressibility pressurisation to even higher pressures is energetically cheap. With pressures of \qty{70}{\bar} injection depths in excess of \qty{4000}{\m} can be obtained.
+        
+    %     \begin{figure}[H]
+    %         \centering
+    %         \input{Content/ProSim/NCGHandling/Plots/Reinjection/Pinj_vs_D}
+    %         \caption{The minimum wellhead pressure required to inject \ac{NCG} at a given depth against a static column of water with a header pressure of \qty{10}{\bar}.}
+    %         \label{fig:prosim_NCG_Reinjection_Pinj_v_D}
+    %     \end{figure}
+
+    \subsubsection{Boundary Conditions}
+        \label{sec:prosim_NCG_reinj}
+        The boundary conditions used for this study resemble those used in the previous study, the only difference being the geofluid outlet pressure, which is assumed to be \qty{75}{\bar} for all outlet geofluid streams (i.e. brine, condensate and \ac{NCG}).
+
+        \begin{table}[H]
+            \centering
+            \caption{The boundary conditions used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+            \label{table:NCG_Reinj_BCs}
+            \input{Content/ProSim/NCGHandling/DataTables/BCs_Reinjection}        
+        \end{table}
+
+    \subsubsection{Plant Configurations}
+    \label{sec:NCG_reinjection_plant_config}
+        The power plants are extended with \ac{NCG} handling facilities: the vapour and liquid streams are separated and then separately pressurised to the target outlet pressure of \qty{75}{\bar}, Figure~\ref{fig:prosim_NCG_reinjection}. The brine and condensate streams (\ac{DSC} only) are pressurised with pumps, and the \ac{NCG} stream is pressurised to its saturation pressure at \qty{298}{\K}, around \qty{64.1}{\bar}, before liquefied and then pressurised to the target pressure.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Figures/Generic_Reinjection}
+            \caption[Binary \ac{ORC} or single flash \ac{DSC} geothermal power plants with \ac{NCG} reinjection into the reservoir.]{Binary \ac{ORC} or single flash \ac{DSC} geothermal power plants with \ac{NCG} reinjection into the reservoir. \textsuperscript{1}Geofluid from \ac{PHE}. \textsuperscript{2}Condensate and \ac{NCG} from Condenser. \textsuperscript{3}Brine from flash separator.}
+            \label{fig:prosim_NCG_reinjection}
+        \end{figure}
+
+    \subsubsection{Optimisation Configuration}
+        The power plants were optimised for the net electrical power based on the optimisation configuration used in the previous study, Section~\ref{sec:NCG_Venting_opt_config}.
+
+    \subsubsection{Results}
+        Re-pressurisation of \ac{NCG} for re-injection into the reservoir, significantly reduces the net electrical power of the \ac{DSC} plant, with it just about breaking even at a geofluid \ce{CO2} content of \qty{15}{\percent} (i.e. a \qty{100}{\percent} reduction compared to the pure water case), Figure~\ref{fig:prosim_NCG_Reinjection_Wnet}. The net electrical power of the \ac{ORC}, decreases by about \qty{20}{\percent} over the full range of \ce{CO2} contents studied. In both cases, the reduction can be seen to be driven entirely by the power requirements of the \ac{NCG} re-pressurisation, Figure~\ref{fig:prosim_NCG_Reinjection_Power_Breakdown}
+    
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/Wnet}
+            \caption[The net electrical power of thermodynamically optimised binary \ac{ORC} and single flash \ac{DSC} geothermal power plants re-injecting \ac{NCG} into the reservoir.]{The net electrical power of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with \ac{NCG} re-pressurisation to \qty{75}{\bar} for re-injection into the reservoir.}
+            \label{fig:prosim_NCG_Reinjection_Wnet}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/PowerBreakdown}
+            \caption[Breakdown of the net electrical power for thermodynamically optimised binary \ac{ORC} and single flash \ac{DSC} geothermal power plants re-injecting \ac{NCG} into the reservoir.]{Breakdown of the net electrical power for thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) (left) and single flash \ac{DSC} (right) geothermal power plants with \ac{NCG} re-pressurisation to \qty{75}{\bar} for re-injection into the reservoir.}
+            \label{fig:prosim_NCG_Reinjection_Power_Breakdown}
+        \end{figure}
+
+        However, unlike in the venting case, where the cycle (or turbine power) could be seen to marginally increase with geofluid \ce{CO2} content for the single flash \ac{DSC}, the cycle power is not strongly affected by geofluid \ce{CO2} content. Given the re-pressurisation power is on a comparable magnitude to the turbine power, it is favourable to raise the condensation pressure to reduce the required compression ratio and hence power requirement, Figure~\ref{fig:prosim_NCG_Reinjection_OPs}.  
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/OPs}
+            \caption{The pressures of the geofluid at different points in the single flash geothermal power plant.}
+            \label{fig:prosim_NCG_Reinjection_OPs}
+        \end{figure}
+
+        The cost of the binary \ac{ORC} roughly doubles compared to the pure water, while the single flash \ac{DSC} increases by a factor of \num{2.6}, Figure~\ref{fig:prosim_NCG_Reinjection_Cost}. Compared to the venting case, where \ac{NCG} handling already presented a significant cost item for the \ac{DSC}, the \ac{NCG} handling is now the primary cost item for both the binary \ac{ORC} and the \ac{DSC} plant, Figure~\ref{fig:prosim_NCG_Reinjection_CostBreakdown}.
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/Cost}
+            \caption[The total plant cost of thermodynamically optimised binary \ac{ORC} and single flash \ac{DSC} geothermal power plants re-injecting \ac{NCG} into the reservoir.]{The total plant cost of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with \ac{NCG} re-pressurisation to \qty{75}{\bar} for re-injection into the reservoir.}
+            \label{fig:prosim_NCG_Reinjection_Cost}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/Reinjection/Cost_breakdown}
+            \caption[The cost breakdown of thermodynamically optimised binary \ac{ORC} and single flash \ac{DSC} geothermal power plants re-injecting \ac{NCG} into the reservoir.]{The cost breakdown of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with \ac{NCG} re-pressurisation to \qty{75}{\bar} for re-injection into the reservoir.}
+            \label{fig:prosim_NCG_Reinjection_CostBreakdown}
+        \end{figure}
+
+\subsection{Re-injection with partial dissolution}
+    To reduce the power requirements of pressurising the \ac{NCG} to the re-injection pressure of \qty{75}{\bar}, it may be possible to re-dissolve some \ac{NCG} in the brine. This could reduce the re-pressurisation power requirements by reducing the mass rate of \ac{NCG} requiring further pressurisation to the target pressure. 
+
+    \subsubsection{Plant Configurations}
+        The plant configuration shown for the previous study, Section~\ref{sec:NCG_reinjection_plant_config}, were adapted to include an absorption unit to redissolve the \ac{NCG} in the brine. 
+        
+        The streams exiting the power plant, split into their constituent phases, which are then re-pressurised to a common absorption pressure \(P_{absorb}\) and then fed to an absorption column. The absorption column is modelled using a Mixer and a Separator element, to combine and equilibrate the streams and to then separate them into a vapour and liquid stream. 
+
+        \begin{figure}[H]
+            \centering
+            \resizebox{\linewidth}{!}{\input{Content/ProSim/NCGHandling/Figures/Generic_Reinjection_CarbFix}}
+            \caption[Binary \ac{ORC} or single flash \ac{DSC} geothermal power plants with partial dissolution of \ac{NCG} subsequent re-injection into the reservoir.]{Binary \ac{ORC} or single flash \ac{DSC} geothermal power plants with partial dissolution of \ac{NCG} subsequent re-injection into the reservoir. \textsuperscript{1}Geofluid from \ac{PHE}. \textsuperscript{2}Condensate and \ac{NCG} from Condenser. \textsuperscript{3}Brine from flash separator.}
+            \label{fig:prosim_NCG_reinjection_CarbFix}
+        \end{figure}
+
+    \subsubsection{Boundary Conditions}
+        The same boundary conditions as in the previous study are used, see Section~\ref{sec:prosim_NCG_reinj}.
+
+    \subsubsection{Optimisation Configuration}
+        The binary \ac{ORC} and single flash \ac{DSC} power plants were thermodynamically optimised using the same optimisation configuration as used for previous studies, but with an additional optimisation variable, the absorption pressure \(P_{absorb}\), which is allowed to range between the power plant outlet pressure and saturation pressure of \ac{NCG}, Table~\ref{table:NCG_CarbFix_opt_config}.
+
+        \begin{table}[H]
+            \centering
+            \caption{The optimisation parameters used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+            \label{table:NCG_CarbFix_opt_config}
+            \input{Content/ProSim/NCGHandling/DataTables/OptConfig_CarbFix_Reinjection}        
+        \end{table}
+
+    \subsubsection{Results}
+        Partial dissolution can reduce the power requirements of \ac{NCG} re-pressurisation in single flash \ac{DSC} power plants for geofluid \ce{CO2} contents of up to \qty{8}{\mol\percent}, beyond which an increase in pressurisation power compared to the direct pressurisation case, Figure~\ref{fig:prosim_NCG_CarbFix_Wnet}. 
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/CarbFix/Wnet}
+            \caption[The net electrical power of thermodynamically optimised binary \ac{ORC} and single flash \ac{DSC} geothermal power plants partially dissolving and re-injecting \ac{NCG} into the reservoir.]{The net electrical power of thermodynamically optimised binary \ac{ORC} (using n-Butane as the working fluid) and single flash \ac{DSC} geothermal power plants with partial \ac{NCG} re-dissolution and re-pressurisation to \qty{75}{\bar} for re-injection into the reservoir.}
+            \label{fig:prosim_NCG_CarbFix_Wnet}
+        \end{figure}
+
+        Partial dissolution is only effective at reducing the pressurisation power where 1) a significant portion of the \ac{NCG} stream can be absorbed by the brine and 2) the compression ratio for the secondary compression (i.e. from the absorption pressure \(P_{absorb}\) to the saturation pressure \(P_{sat}\) is large. This is illustrated in Equation~\ref{eq:power_partial_dis}, which can be derived assuming that the pressurisation power is approximately proportional to the product of the mass flow rate and the logarithm of the compression ratio.
+
+        \begin{align}
+            \Dot{W}_{compr}^{tot} \propto \Dot{m}_{NCG} * \log \frac{P_{out}}{P_{in}} - \Dot{m}_{absorbed} * \log \frac{P_{out}}{P_{absorb}} \label{eq:power_partial_dis}
+        \end{align}
+
+        However, in reality the fraction of the total \ac{NCG} mass flow rate that can be dissolved in the geothermal brine diminishes as the geofluid \ce{CO2} content increases. This is because the brine can only accommodate a few \unit{\mol\percent} of \ce{CO2}, Figure~\ref{fig:prosim_NCG_CarbFix_Solubility}, which represents a fraction of the total \ac{NCG} contained within the geofluid. For example, at a temperature of \qty{375}{\K} and a pressure of around \qty{30}{\bar} the brine is saturated at just \qty{0.5}{\mol\percent} of \ce{CO2}. For a geofluid \ce{CO2} content of \qty{1}{\mol\percent} this represents a \ac{NCG} mass rate reduction of \qty{50}{\percent}, however this reduces to a reduction of just \qty{3.3}{\percent} for geofluid \ce{CO2} contents of \qty{15}{\mol\percent}. To achieve higher \ce{CO2} concentrations in the brine, higher pressures are required, however this reduces the compression ratio of the secondary pressurisation and hence the overall reduction in pressurisation power.
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/CarbFix/Solubility_P_vs_T}
+            \caption{The bubble point pressure for different water-carbon dioxide mixtures as a function of temperature.}
+            \label{fig:prosim_NCG_CarbFix_Solubility}
+        \end{figure}
+
+        Another factor to consider is that, the average temperature of the \ac{NCG} is higher in this process, due to its exposure to the hot brine in the absorption unit. In turn, this results in higher power consumption in the compressor, undoing any savings from reducing the \ac{NCG} mass rate. This is particularly evident at higher geofluid \ce{CO2} contents, where the savings from partial dissolution are insignificant.
+
+        As for the binary \ac{ORC}, partial dissolution somewhat reduces the pressurisation power requirement, however, as the overall compression ratio is smaller than for the \ac{DSC}, the potential gains from partial dissolution are small.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/NCGHandling/Plots/CarbFix/OPs}
+            \caption{The pressures of the geofluid at different points in the power plant.}
+            \label{fig:prosim_NCG_CarbFix_OPs}
+        \end{figure}
+
+\subsection{Conclusion}  
+    Single flash DSC geothermal power plants are particularly vulnerable to the presence of \ac{NCG} because power is directly generated from the geofluid. On the other hand, binary \ac{ORC} geothermal power plants are virtually unaffected by the presence of \ac{NCG} in the geofluid.
+
+    With regards to \ac{NCG} disposal, venting \ac{NCG} to atmosphere is by far the least energy intensive option. While binary \ac{ORC} do not require an re-pressurisation to vent \ac{NCG} to the atmosphere, in single flash \ac{DSC} power plants the re-pressurisation power requirements can be mitigated by raising the condensation pressure, however a net plant power reduced for NCG contents less than \qty{7}{\mol\percent}
+
+    \ac{NCG} disposal by re-injection into the geothermal reservoir requires wellhead pressures in excess of \qty{60}{\bar} depending on the injection temperature and whether the NCG can be liquefied. For single flash \acp{DSC}, the re-pressurisation power requirements are significant, and increase with \ac{NCG} content, ultimately resulting in zero net plant power for \ac{NCG} contents higher than \qty{14}{\mol\percent}. Binary \ac{ORC} plants are not as strongly affected due to the smaller pressure differential across the power plant.
+    
+    Partial dissolution of NCG, akin to the CarbFix process, could help reduce the re-pressurisation power requirements in single flash \ac{DSC} geothermal power plants for geofluid \ac{NCG} contents less than about \qty{8}{\mol\percent}. For binary \ac{ORC} plants no significant power savings can be realised.
+
+\clearpage

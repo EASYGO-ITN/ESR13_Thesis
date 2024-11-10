@@ -1,0 +1,44 @@
+The following section aims to investigate the impact of drilling costs on the design of single flash \ac{DSC} and binary \ac{ORC} geothermal power plants.
+
+\subsection{Boundary Conditions}
+    The geofluid is assumed to be pure water, arriving at the wellhead at a temperature of \qty{473}{\K} (\qty{200}{\degreeCelsius}) and a steam quality \qty{20}{\percent}. The geofluid inlet pressure is back-calculated from the inlet conditions. The mass rate of geofluid is fixed at \qty{50}{\kg\per\s}. The working fluid is assumed to be n-Butane.
+
+    \begin{table}[H]
+        \centering
+        \caption{The boundary conditions used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+        \label{table:prosim_pure_water_drilling_boundary}
+        \input{Content/ProSim/DrillingCost/DataTables/BCs_Drilling}        
+    \end{table}
+
+\subsection{Optimisation Configuration}
+    Three optimisations were considered: a thermodynamic optimisation (i.e. maximising the net electrical power) and two techno-economic optimisations (i.e. maximising the specific plant cost), and excluding and the other including the drilling cost.
+    
+    For all optimisations the evaporation pressure, the degree of super-heating and condensation temperature could be adjusted by the optimiser. For the thermodynamic optimisation, the minimum approach temperature differences in the pre-heater, evaporator, super-heater and condenser are treated as constraints, whereas for the techno-economic optimisations they are adjusted by the optimiser, Table~\ref{table:prosim_pure_water_drilling_opt_params}
+
+    \begin{table}[H]
+        \centering
+        \caption{The optimisation parameters used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+        \label{table:prosim_pure_water_drilling_opt_params}
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/DrillingCost/DataTables/Optimisation_Drilling}}        
+    \end{table}
+
+\subsection{Results}
+    The power plant was optimised for drilling costs ranging between zero to \qty{60}{\mega\USD\of{2023}}, Figure~\ref{fig:prosim_purewater_drilling}. The specific plant cost obtained from the thermodynamic and simple techno-economic optimisation, are by definition, independent of the drilling cost and form an upper and lower bound for the specific plant cost.
+
+    When the drilling cost is included in the objective function, the specific plant cost tends towards the upper bound determined from the thermodynamic optimisation. This is a result of the contribution of the plant costs towards the total cost diminishing with increasing drilling costs. As such, greater reductions in specific total plant cost can be achieved by maximising the net electrical power, instead of reducing the cost the power plant, which also tends to reduce net electrical power. The significance of this effect also depends on the working fluid, see Figure~\ref{fig:prosim_purewater_drilling_cyclopentane} for CycloPentane for comparison. 
+    
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/DrillingCost/Plots/12_SimpleORC_Drilling/nButane}}
+        \caption[The specific plant cost (excl. drilling costs) and net electrical power (right) obtained from thermodynamic and techno-economic optimisations using n-Butane as the working fluid.]{The specific plant cost (excl. drilling costs) (left) and the net electrical power (right) as obtained from the thermodynamic and techno-economic optimisations as a function of the drilling cost. The working fluid is n-Butane}
+        \label{fig:prosim_purewater_drilling}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/DrillingCost/Plots/12_SimpleORC_Drilling/CycloButane}}
+        \caption[The specific plant cost (excl. drilling costs) and net electrical power (right) obtained from thermodynamic and techno-economic optimisations using CycloPentane as the working fluid.]{The specific plant cost (excl. drilling costs) (left) and the net electrical power (right) as obtained from the thermodynamic and techno-economic optimisations as a function of the drilling cost. The working fluid is CycloPentane}
+        \label{fig:prosim_purewater_drilling_cyclopentane}
+    \end{figure}
+
+\clearpage

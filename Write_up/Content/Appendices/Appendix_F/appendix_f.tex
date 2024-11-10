@@ -1,0 +1,148 @@
+\section{Fluid Properties}
+        
+    \begin{figure}[H]
+        \centering
+        \input{Content/Appendices/Appendix_F/Plots/BUTANE}
+        \caption{Comparing properties of n-Butane as calculated by Aspen Plus v11 and PowerCycle (using CoolProp)}
+        \label{fig:powercycle_val_butane}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \input{Content/Appendices/Appendix_F/Plots/PENTANE}
+        \caption{Comparing properties of n-Pentane as calculated by Aspen Plus v11 and PowerCycle (using CoolProp)}
+        \label{fig:powercycle_val_pentane}
+    \end{figure}
+
+\section{Turbine - Wet expansion}
+    Unlike \emph{PowerCycle}, \emph{Aspen Plus v11} does not provide native methodologies for handling handling wet fluid expansion across turbines, such as the Baumann Rule. Nevertheless, the Baumann Rule, or similar, can be implemented through the use of a \emph{Design Spec}, see Figure~\ref{fig:Aspen_turb_wet_validation}, by, in the case of the Baumann Rule, iterating on the isentropic efficiency until the value agrees with the prediction from the Baumann Rule. The implementation of a wet expansion turbine in \emph{PowerCycle} is shown in Listing~\ref{lst:PC_turbine_wet_validation}.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics{Content/Appendices/Appendix_F/Figures/AspenPlus_TurbineWetValidation.png}
+        \caption{Process flow diagram of the \emph{Aspen Plus v11} simulation used to calculate the performance of a turbine for a wet expansion}
+        \label{fig:Aspen_turb_wet_validation}
+    \end{figure}
+
+    \begin{listing}[H]
+        \caption{Configuration of a turbine performance calculation in \emph{PowerCycle} for saturated steam at temperature \(T\) assuming wet expansion}
+        \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/Appendices/Appendix_F/Code/TurbineWetPerf_snippet.py}
+        \label{lst:PC_turbine_wet_validation}
+        \vspace{-20pt}
+    \end{listing}
+
+    Assuming the same boundary conditions as the dry expansion case, Section~\ref{sec:PC_dry_turbine_validation}, the calculation results for a wet expansion using \emph{PowerCycle} and \emph{Aspen Plus} can be seen to be in close agreement, with negligible differences, see Table~\ref{table:turbine_wet_validation}.
+
+    \begin{table}[H]
+        \caption{The turbine performance calculation results for Aspen Plus v11 and PowerCycle for a wet expansion process}
+        \centering 
+        \label{table:turbine_wet_validation}
+        \input{Content/Appendices/Appendix_F/DataTables/TurbineValidation/Wet_outputs}
+        \\[10pt]
+    \end{table}
+
+\section{Pump}
+    The inlet stream was initialised to a temperature of \qty{298}{\K} (\qty{25}{\degreeCelsius}) and a pressure of \qty{1}{\bar}. The pump isentropic and motor efficiencies were assumed to be \qty{85}{\percent} and \qty{95}{\percent} respectively. The outlet pressure was set to \qty{10}{\bar}. For a summary of the inlet conditions, see Table~\ref{table:pump_validation_inputs}.
+
+    \begin{table}[H]
+        \caption{Comparing the pump performance calculations between PowerCycle and Aspen Plus v11}
+        \centering 
+        \label{table:pump_validation_inputs}
+        \input{Content/Appendices/Appendix_F/DataTables/PumpValidation/inputs}        
+        \\[10pt]
+    \end{table}
+
+    A standalone pump was modelled in \emph{Aspen Plus}, see Figure~\ref{fig:Aspen_pump_validation}, and \emph{PowerCycle}, see Listing~\ref{lst:PC_pump_validation}. The performance calculation results were found to be in good agreement, Table~\ref{table:pump_validation_outputs}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics{Content/Appendices/Appendix_F/Figures/AspenPlus_PumpValidation.png}
+        \caption{Process flow diagram of the \emph{Aspen Plus v11} simulation used to calculate the performance of a pump}
+        \label{fig:Aspen_pump_validation}
+    \end{figure}
+
+    \begin{listing}[H]
+        \caption{Configuration of a pump performance calculation in \emph{PowerCycle}}
+        \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/Appendices/Appendix_F/Code/PumpPerf_snippet.py}
+        \label{lst:PC_pump_validation}
+        \vspace{-20pt}
+    \end{listing}
+
+    \begin{table}[H]
+        \caption{The pump performance calculation results for \emph{Aspen Plus v11} and \emph{PowerCycle}}
+        \centering 
+        \label{table:pump_validation_outputs}
+        \input{Content/Appendices/Appendix_F/DataTables/PumpValidation/outputs}        
+        \\[10pt]
+    \end{table}
+
+\section{Compressor}
+    The inlet stream was initialised to a temperature of \qty{298}{\K} (\qty{25}{\degreeCelsius}) and a pressure of \qty{1}{\bar}. The compressor isentropic and mechnical efficiencies were assumed to be \qty{85}{\percent} and \qty{95}{\percent} respectively. The outlet pressure was set to \qty{10}{\bar}. For a summary of the inlet conditions, see Table~\ref{table:compressor_validation_inputs}.
+
+    \begin{table}[H]
+        \caption{Comparison of the compressor performance calculations between \emph{PowerCycle} and \emph{Aspen Plus}}
+        \centering 
+        \label{table:compressor_validation_inputs}
+        \input{Content/Appendices/Appendix_F/DataTables/CompressorValidation/inputs}
+        \\[10pt]
+    \end{table}
+
+    A standalone compressor was modelled in \emph{Aspen Plus v11} and \emph{PowerCycle}, see Figure~\ref{fig:Aspen_comp_validation}, and Listing~\ref{lst:PC_compressor_validation}. The performance calculation results were found to be in good agreement, Table~\ref{table:compressor_validation_outputs}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics{Content/Appendices/Appendix_F/Figures/AspenPLus_CompValidation.png}
+        \caption{Process flow diagram of the \emph{Aspen Plus v11} simulation used to calculate the performance of a pump}
+        \label{fig:Aspen_comp_validation}
+    \end{figure}
+
+    \begin{listing}[H]
+        \caption{Configuration of a compressor performance calculation in \emph{PowerCycle}}
+        \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/Appendices/Appendix_F/Code/CompressorPerf_snippet.py}
+        \label{lst:PC_compressor_validation}
+        \vspace{-20pt}
+    \end{listing}
+
+    \begin{table}[H]
+        \caption{The compressor performance calculation results for \emph{Aspen Plus} and \emph{PowerCycle}}
+        \centering 
+        \label{table:compressor_validation_outputs}
+        \input{Content/Appendices/Appendix_F/DataTables/CompressorValidation/outputs}
+        \\[10pt]
+    \end{table}
+
+
+\section{Multi-Stage Compressor}
+    The inlet stream was initialised to a temperature of \qty{298}{\K} (\qty{25}{\degreeCelsius}) and a pressure of \qty{1}{\bar}. The compressor isentropic and mechnical efficiencies were assumed to be \qty{85}{\percent} and \qty{95}{\percent} respectively. The outlet pressure was set to \qty{10}{\bar}. For a summary of the inlet conditions, see Table~\ref{table:multicompressor_validation_inputs}.
+
+    \begin{table}[H]
+        \caption{Comparison of the multi-stage compressor performance calculations between \emph{PowerCycle} and \emph{Aspen Plus}}
+        \centering 
+        \label{table:multicompressor_validation_inputs}
+        \input{Content/Appendices/Appendix_F/DataTables/MultiStageCompressorValidation/inputs}
+        \\[10pt]
+    \end{table}
+    
+    The multi-stage compressor performance calculations in \emph{Aspen Plus} and \emph{PowerCycle} were compared using corresponding standalone multi-stage compressor models, see Figure~\ref{fig:Aspen_multicomp_validation}, and Listing~\ref{lst:PC_multistage_compressor_validation}. The performance calculation results were found to be in good agreement, Table~\ref{table:multicompressor_validation_outputs}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics{Content/Appendices/Appendix_F/Figures/AspenPLus_MultiStageCompValidation.png}
+        \caption{Process diagram of the \emph{Aspen Plus} simulation used to calculate the performance of a multi-stage compressor}
+        \label{fig:Aspen_multicomp_validation}
+    \end{figure}
+
+    \begin{listing}[H]
+        \caption{Configuration of a multi-stage compressor performance calculation in \emph{PowerCycle}}
+        \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/Appendices/Appendix_F/Code/MultiStageCompressorPerf_snippet.py}
+        \label{lst:PC_multistage_compressor_validation}
+        \vspace{-20pt}
+    \end{listing}
+
+    \begin{table}[H]
+        \caption{The multi-stage compressor performance calculation results for \emph{Aspen Plus v11} and \emph{PowerCycle}}
+        \centering 
+        \label{table:multicompressor_validation_outputs}
+        \input{Content/Appendices/Appendix_F/DataTables/MultiStageCompressorValidation/outputs}
+        \\[10pt]
+    \end{table}

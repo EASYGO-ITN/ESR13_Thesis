@@ -1,0 +1,11 @@
+\begin{tabular}{|c | c c | c | c |}
+    \hline
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+    \textbf{Cost Correlation} & \textbf{Min}/\unit{\kilo\watt} & \textbf{Max}/\unit{\kilo\watt} & \textbf{Currency} & \textbf{Reference} \T\B \\
+    \hline \hline
+        \(C_{turb,\; gen} = 2830\cdot \Dot{W}_e^{0.745} + 3685\cdot \Dot{W}_e^{0.617}\) & - & - & \euro2002 &\cite{GETEM2016} \T\B \\
+    \(C_{turb,\; gen} = 0.67 \cdot(2830 \cdot \Dot{W}^{0.745} + 3680\cdot \Dot{W}^{0.617}\) & - & - & \euro2002 &\cite{Adams2021} \T\B \\
+    \(\log C_{turb,\; gen} = 2.6259 + 1.4398\log \Dot{W}_s -0.1776(\log \Dot{W}_s)^2\) & 70 & 7500& \euro2001 &\cite{Turton2012} \T\B \\
+    \(C_{turb,\; gen} = 10^3\cdot\exp \left(-0.0408\ln^2\Dot{W}_e + 1.3039\ln^2\Dot{W}_e -0.1583\right)\) & 500 & 70000 & \euro2021 &\cite{Thermoflex2021}\textsuperscript{a} \T\B \\
+    \hline
+\end{tabular}

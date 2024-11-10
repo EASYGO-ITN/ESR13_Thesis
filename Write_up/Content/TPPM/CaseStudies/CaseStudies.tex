@@ -1,0 +1,91 @@
+\subsection{Cooling Curves of Geothermal Geofluids}
+\label{sec:tppm_geoprop_casestudies}
+
+    A common approach for investigating the comparative performance of different geothermal power plant technologies is to consider the geofluid to be pure water. However, this approach neglects the impact that impurities, such as dissolved salts and non-condensable gases, can have on the phase behaviour and thermophysical properties.
+
+    \begin{table}[H]
+        \caption{Used compositions and models of the considered geofluids.}
+        \centering 
+        \label{table:CasestudyComposition}
+        \input{Content/TPPM/CaseStudies/DataTables/CaseStudyComposition}   
+        \\[10pt]
+    \end{table}
+
+    These differences can be illustrated by considering the \ac{PHE} in a simple binary ORC geothermal power plant and calculating the heat released by different geofluids as a function of reinjection temperature. Four geofluids, Table~\ref{table:CasestudyComposition} are considered and their temperature-heat content (TQ) curves are generated in GeoProp, Figure~\ref{fig:geoprop_casestudy}.
+    
+    The inlet conditions are defined in terms of a common temperature of \qty{473}{\K} (\qty{200}{\degreeCelsius}) and a heat content of \qty{1135}{\kilo\joule \per \kg} (relative to \qty{298}{\K} and \qty{1.01325}{\bar}). The heat content corresponds to that of pure water at \qty{473}{\K} and a vapour quality of \qty{0.2}{\kg\per\kg}. The same inlet temperature has been considered in order to investigate similar geothermal heat sources, while the heat content has been fixed to have Primary Heat Exchangers units of similar capacity. For the other three fluids, the vapour quality and inlet pressure are calculated in GeoProp assuming an inlet temperature of \qty{473}{\K} and a heat content of \qty{1135}{\kilo\joule \per \kg}. The resulting inlet conditions are summarised in Table~\ref{table:CasestudyBoundaryConditions}.
+
+    \begin{table}[H]
+        \caption{Used compositions and models of the considered geofluids.}
+        \centering 
+        \label{table:CasestudyBoundaryConditions}
+        \input{Content/TPPM/CaseStudies/DataTables/CasestudyBoundaryConditions}         
+        \\[10pt]
+    \end{table}
+
+    Unlike \emph{Water}, \emph{Brine} experiences a small temperature glide in the two-phase region as condensing water reduces the effective salinity of the aqueous phase, thereby reducing the saturation temperature. Moreover, liquid “Brine” has a lower specific heat capacity than liquid \emph{Water}, as indicated by the steeper slope. 
+    
+    Thus, a binary ORC operating on a liquid-dominated \emph{Brine}-like geofluid has a higher cycle working fluid mass rate to geofluid mass rate ratio compared to a \emph{Water}-like geofluid. Consequently, for the same net power, a higher mass rate of the \emph{Brine}-like geofluid is required. In turn, the higher geofluid mass rate also affects the heat exchanger design, in particular the required heat transfer and, hence, the cost.
+    
+    Above \qty{440}{\K}, the specific heat capacity of \emph{Water} \& \emph{\ac{NCG}} deviates from \emph{Water} significantly, which can be attributed to the presence of \ac{NCG}, reducing the boiling point of the geofluid, allowing the water species to remain in the vapour phase at lower temperatures. For example, at the inlet, the vapour quality of \emph{Water} \& \emph{\ac{NCG}} is \qty{0.265}{\kg\per\kg}, compared to just \qty{0.200}{\kg\per\kg} for \emph{Water}. Discounting the initial \ac{NCG} content of \qty{0.050}{\kg\per\kg}, this means that an additional \qty{0.015}{\kg\per\kg} of water is in the vapour phase. Similarly, when the vapour quality of \emph{Water} reaches zero, \emph{Water} \& \emph{\ac{NCG}} still has a vapour quality of \qty{0.09}{\kg\per\kg}, implying that about \qty{0.04}{\kg\per\kg} of water still remains in the vapour phase.
+    
+    The curvature of the TQ curve for \emph{Water} \& \emph{\ac{NCG}} (Figure 9) also has practical implications, as it reduces the average temperature difference between the hot geofluid and the cold working fluid, compared to the \emph{Water} case. This increases the heat transfer area required and, in turn, the cost of the heat exchanger.
+    
+    The \emph{Brine} \& \emph{\ac{NCG}} case has a slightly higher vapour quality, compared to the \emph{Water} \& \emph{\ac{NCG}} case. This can be attributed to the presence of \(Na^+\) and \(Cl^-\) ions.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/CaseStudies/Plots/GeoProp_Cooling_Curve}        
+        \caption[The temperature and heat released by different geofluids as well as the corresponding vapour quality.]{The temperature and heat released by different geofluids as well as the corresponding vapour quality. The heat content is relative to \qty{298}{\K} (\qty{25}{\degreeCelsius}) and \qty{1.01325}{\bar}.}
+        \label{fig:geoprop_casestudy}
+    \end{figure}
+
+\subsection{Model Comparison}
+\label{sec:tppm_model_comparison}
+    A particular focus of this work is geothermal power generation from two-phase and \ac{NCG}-rich geofluids. In this respect, it is important to have the appropriate tools for describing these fluids over the typical range of temperatures and pressures encountered in the geothermal energy system. This case study aims to compare the \ac{SP2009} model against the \ac{HEOS} mixture model implemented in \emph{CoolProp}. The primary objective of this study is to compare the equilibrium compositions of the water-rich and carbon dioxide-rich phases.
+
+    A mixture of water and carbon dioxide was modelled using an \ac{HEOS} mixture in \emph{CoolProp} using the default binary interaction data from \citeauthor{Gernert2013}. Similarly to the comparison above, this approach relies on the fluid to be two-phase at the temperature and pressure of interest in order for the mole fraction to be representative. In this respect, the same 1:10 ratio of carbon dioxide to water was used to ensure two-phase behaviour over a wide range of conditions.
+
+    \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/TPPM/CaseStudies/Code/SP2009vsCoolProp.py}
+
+    Regarding the definition of phases, the same caveats as with the ELECNRTL model apply, the \ac{HEOS} mixture considers vapour and liquid phases, whereas the \ac{SP2009} model considers a carbon-dioxiderich and a water-rich phase. These definitions are congruent for most conditions, however below the critical temperautre of carbon dioxide, it is possible for both water and carbon dioxide to be in their liquid state.
+
+    Comparing the equilibrium mole fraction of water in the vapour/carbon dioxide-rich phase, see Figure~\ref{fig:SP2009vsCoolProp_yH2O}, it can be seen that the \ac{HEOS} mixture and \ac{SP2009} models are in close agreement at the lower temperatures and pressures. Unlike the ELECNRTL model, the \ac{HEOS} mixture model appears to capture the phase transition at temperatures below \qty{31}{\degreeCelsius}. At higher pressures and temperatures more significant deviations are observed, for example at \qty{250}{\degreeCelsius} and \qty{600}{\bar}, the ratio of the equilibrium mole fractions of water is around \num{0.75}, representing a difference of \qty{25}{\percent}. Perhaps due to the complexity of the formulation, it is worth noting that the calculations did not converge for all conditions considered, see the gaps in the lines in Figure~\ref{fig:SP2009vsCoolProp_yH2O}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/CaseStudies/Plots/SP2009vsCoolProp_yH2O}         
+        \caption[Comparison of the equilibrium mole fractions of water in a carbon dioxide-rich phase]{The equilibrium mole fractions of water in a carbon dioxide-rich phase, as a function of temperature and pressure, as calculated using the \ac{HEOS} mixture model in \emph{CoolProp} and the \ac{SP2009} model}
+        \label{fig:SP2009vsCoolProp_yH2O}
+    \end{figure}
+    
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/TPPM/CaseStudies/Plots/SP2009vsCoolProp_yH2O_ratio}         
+    %     \caption{The ratio of equilibrium mole fractions of water in a carbon dioxide-rich phase, as a function of temperature and pressure, as calculated using the \ac{HEOS} mixture model in \emph{CoolProp} and the \ac{SP2009} model}
+    %     \label{fig:SP2009vsCoolProp_yH2O_ratio}
+    % \end{figure}
+
+    Comparing the equilibrium mole fraction of carbon dioxide in the liquid/water-rich phase, see Figures~\ref{fig:SP2009vsCoolProp_xCO2_part2}, \ref{fig:SP2009vsCoolProp_xCO2_part1}, the \ac{HEOS} mixture model and the \ac{SP2009} appear in close agreement for temperatures up to \qty{150}{\degreeCelsius}.
+    
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/CaseStudies/Plots/SP2009vsCoolProp_xCO2_part2}
+        \caption[Comparison of the equilibrium mole fractions of carbon dioxide in a water-rich phase. Part 1.]{The equilibrium mole fractions of carbon dioxide in a water-rich phase, as a function of temperature and pressure, as calculated using the \ac{HEOS} mixture model in \emph{CoolProp} and the \ac{SP2009} model}
+        \label{fig:SP2009vsCoolProp_xCO2_part2}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/CaseStudies/Plots/SP2009vsCoolProp_xCO2_part1}
+        \caption[Comparison of the equilibrium mole fractions of carbon dioxide in a water-rich phase. Part 2.]{The equilibrium mole fractions of carbon dioxide in a water-rich phase, as a function of temperature and pressure, as calculated using the \ac{HEOS} mixture model in \emph{CoolProp} and the \ac{SP2009} model}
+        \label{fig:SP2009vsCoolProp_xCO2_part1}
+    \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/TPPM/CaseStudies/Plots/SP2009vsCoolProp_xCO2_ratio}
+    %     \caption{The ratio of equilibrium mole fractions of carbon dioxide in a water-rich phase, as a function of temperature and pressure, as calculated using the \ac{HEOS} mixture model in \emph{CoolProp} and the \ac{SP2009} model}
+    %     \label{fig:SP2009vsCoolProp_xCO2_ratio}
+    % \end{figure}
+    

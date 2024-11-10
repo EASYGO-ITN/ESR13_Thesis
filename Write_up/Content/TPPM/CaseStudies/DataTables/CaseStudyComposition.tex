@@ -1,0 +1,18 @@
+\begin{tabular}{|p{4.5em} c | c | c | c | c| c |}
+    \hline
+    \rowcolor{bluepoli!40}
+    \multicolumn{2}{|c|}{} &  & \multicolumn{4}{c|}{\textbf{Geofluid}} \T\B \\
+    \rowcolor{bluepoli!40}
+    \multicolumn{2}{|c|}{} & \textbf{Units} & \textbf{Water} & \textbf{Brine} & \textbf{Water \& NCG} & \textbf{Brine \& NCG} \T\B \\
+    \hline \hline
+    \emph{Component} &   &   &  &  &  &  \T\B\\
+     & \(H_2O\) & \unit{\kg \per \kg} & 1.00 & 0.95 & 0.95 & 0.90 \T\B\\
+    & \(NaCl\) & \unit{\kg \per \kg} & - & 0.05 & - & 0.05 \T\B\\
+    & \(CO_2\) & \unit{\kg \per \kg} & - & - & 0.05 & 0.05 \T\B\\
+    \hline
+    \multicolumn{2}{|c|}{Partition Model} & - & \ac{WP} \ac{EOS} & \emph{Reaktoro} & \ac{SP2009} & \ac{SP2009} \T\B\\
+    \hline
+    \multicolumn{2}{|c|}{Property Model} & - & \ac{WP} \ac{EOS} & \multicolumn{3}{|c|}{Default - i.e. \emph{CoolProp} \& \emph{ThermoFun}} \T\B\\
+
+     \hline
+\end{tabular}

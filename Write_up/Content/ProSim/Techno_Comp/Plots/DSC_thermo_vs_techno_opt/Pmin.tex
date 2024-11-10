@@ -1,0 +1,282 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{burlywood253194140}{RGB}{253,194,140}
+\definecolor{chocolate24511733}{RGB}{245,117,33}
+\definecolor{darkgray168}{RGB}{168,168,168}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkslategray41}{RGB}{41,41,41}
+\definecolor{dimgray89}{RGB}{89,89,89}
+\definecolor{gray127}{RGB}{127,127,127}
+\definecolor{lightblue182212233}{RGB}{182,212,233}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{lightgray206}{RGB}{206,206,206}
+\definecolor{midnightblue848107}{RGB}{8,48,107}
+\definecolor{orangered222795}{RGB}{222,79,5}
+\definecolor{saddlebrown127394}{RGB}{127,39,4}
+\definecolor{saddlebrown171552}{RGB}{171,55,2}
+\definecolor{sandybrown25315782}{RGB}{253,157,82}
+\definecolor{skyblue131187219}{RGB}{131,187,219}
+\definecolor{steelblue40120184}{RGB}{40,120,184}
+\definecolor{steelblue80155203}{RGB}{80,155,203}
+\definecolor{teal1084158}{RGB}{10,84,158}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.03,0.5)},
+  anchor=west,
+  draw=lightgray204
+},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Condensation Pressure/\unit{\bar}},
+ymin=0.08, ymax=0.6,
+ymode=log,
+ytick style={color=black},
+ytick={0.001,0.01,0.1,0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,1,10},
+yticklabels={
+  \(\displaystyle {0.001}\),
+  \(\displaystyle {0.01}\),
+  \(\displaystyle {0.1}\),
+  \(\displaystyle {0.2}\),
+  \(\displaystyle {0.3}\),
+  \(\displaystyle {0.4}\),
+  \(\displaystyle {0.5}\),
+  \(\displaystyle {0.6}\),
+  \(\displaystyle {0.7}\),
+  \(\displaystyle {0.8}\),
+  \(\displaystyle {0.9}\),
+  \(\displaystyle {1}\),
+  \(\displaystyle {10}\)
+},
+width=10cm, height=6.5cm
+]
+\addplot [semithick, orangered222795]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{Techno-economic Opt.}
+\addplot [semithick, steelblue40120184]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{Thermodynamic Opt.}
+\addplot [semithick, lightgray206]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{423}{\K}}
+\addplot [semithick, burlywood253194140, forget plot]
+table {%
+0 0.174087530100699
+10 0.179924814092318
+20 0.191028520165388
+30 0.175800341628324
+40 0.190242570275734
+50 0.190211210886669
+60 0.213592820065317
+70 0.221635735978842
+80 0.238725306724181
+90 0.26427481641744
+100 0.231780268129945
+};
+\addplot [semithick, lightblue182212233, forget plot]
+table {%
+0 0.100516491966174
+10 0.10085891483133
+20 0.100192045867075
+30 0.100224882024193
+40 0.100235163042185
+50 0.100456267186974
+60 0.100298468067612
+70 0.100019683468695
+80 0.100552445826177
+90 0.100367889705308
+100 0.101703752447466
+};
+\addplot [semithick, darkgray168]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\addplot [semithick, sandybrown25315782, forget plot]
+table {%
+0 0.176247433450165
+10 0.191371717927421
+20 0.192756954730681
+30 0.222926367856714
+40 0.253958216620199
+50 0.191371717927421
+60 0.255801730589167
+70 0.197677501032082
+80 0.266807170011231
+90 0.329412964191945
+100 0.248176784962188
+};
+\addplot [semithick, skyblue131187219, forget plot]
+table {%
+0 0.100427505111133
+10 0.100298519511268
+20 0.100802699353455
+30 0.100741003867798
+40 0.100245627732832
+50 0.100385680920635
+60 0.100073305448595
+70 0.10031374744751
+80 0.10018924342083
+90 0.100163248779866
+100 0.100828199165435
+};
+\addplot [semithick, gray127]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, chocolate24511733, forget plot]
+table {%
+0 0.168345370894104
+10 0.192574965177159
+20 0.235986118151431
+30 0.262367931261817
+40 0.228385938878899
+50 0.260053708598205
+60 0.30033000727183
+70 0.239748996736392
+80 0.285317892252238
+90 0.295601392858194
+100 0.350457434700946
+};
+\addplot [semithick, steelblue80155203, forget plot]
+table {%
+0 0.101777825050233
+10 0.100084989109323
+20 0.100275599880607
+30 0.100594750538591
+40 0.101191622080754
+50 0.100038595400906
+60 0.105528680012676
+70 0.101151881995041
+80 0.100594066365943
+90 0.101345630716496
+100 0.100464855786057
+};
+\addplot [semithick, dimgray89]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, orangered222795, forget plot]
+table {%
+0 0.180056801692935
+10 0.201970379280427
+20 0.277771230742529
+30 0.271324038156164
+40 0.303931042880012
+50 0.274186268854712
+60 0.392991840098521
+70 0.278637252067119
+80 0.304817779923271
+90 0.289948504939809
+100 0.344617793309213
+};
+\addplot [semithick, steelblue40120184, forget plot]
+table {%
+0 0.100075621657955
+10 0.100599011721345
+20 0.100061467714184
+30 0.100367682820982
+40 0.100023572839883
+50 0.100229732036354
+60 0.100792351342826
+70 0.100803498325385
+80 0.100295265209646
+90 0.100193863626635
+100 0.102379512057631
+};
+\addplot [semithick, darkslategray41]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, saddlebrown171552, forget plot]
+table {%
+0 0.184170191219056
+10 0.191292384808462
+20 0.297294679219482
+30 0.345241155932278
+40 0.355474241186701
+50 0.262278682770742
+60 0.270467807360662
+70 0.313902515812438
+80 0.361816384303774
+90 0.294299906151366
+100 0.335883059460169
+};
+\addplot [semithick, teal1084158, forget plot]
+table {%
+0 0.100664112501131
+10 0.100725669665807
+20 0.100490008736702
+30 0.100277275370116
+40 0.10045229035902
+50 0.100108110826363
+60 0.100141637623649
+70 0.100439344052684
+80 0.101215905538596
+90 0.101255431363736
+100 0.100186542305672
+};
+\addplot [semithick, black]
+table {%
+0 0.01
+1 0.01
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\addplot [semithick, saddlebrown127394, forget plot]
+table {%
+0 0.20317544817479
+10 0.207165598480273
+20 0.281188563306618
+30 0.241107217504802
+40 0.26678469179397
+50 0.301814539518751
+60 0.319845281389624
+70 0.314397413671355
+80 0.314187822272418
+90 0.350487430621055
+100 0.38309688458165
+};
+\addplot [semithick, midnightblue848107, forget plot]
+table {%
+0 0.100456903580965
+10 0.100415601521599
+20 0.101440587576695
+30 0.101903842312231
+40 0.100941988080672
+50 0.100022003475026
+60 0.100269533130819
+70 0.100726327650037
+80 0.100655408129229
+90 0.10139462330821
+100 0.101648415540876
+};
+\end{axis}
+
+\end{tikzpicture}

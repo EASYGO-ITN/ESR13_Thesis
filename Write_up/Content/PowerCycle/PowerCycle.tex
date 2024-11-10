@@ -1,0 +1,767 @@
+The following section seeks to outline the governing equations used within \emph{PowerCycle}, which was inspired by Lorenzo Galieti's codebase \emph{wopycle} \cite{Galieti2023}. 
+
+\section{Architecture}
+    At its core \emph{PowerCycle} is comprised of a fluid properties calculation engine and power plant equipment models, see Section~\ref{sec:prosim_fluid_props} and \ref{sec:prosim_components}, which form the building blocks of the power plant. The thermodynamic and techno-economic performance of the power plant can then be calculated for a given set of boundary conditions, and process parameters can be optimised to maximise the thermodynamic or techno-economic performance, see Figure~\ref{fig:powercycle}.
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{16cm}{!}{
+            \input{Content/PowerCycle/Figures/PowerCycle_Schematic}    
+        }
+        \caption{Component diagram of PowerCycle}
+        \label{fig:powercycle}
+    \end{figure}
+
+\section{Fluid Properties}
+    \label{sec:prosim_fluid_props}
+    Underlying to all power plant component calculations are the thermophysical properties of the fluid(s) a given component is handling. However, as previously discussed in \nameref{ch:thermophysmodelling}, different fluids require different modelling approaches. 
+    
+    For example, pure fluids like idealised geofluids (i.e. water) or binary ORC working fluids (i.e. hydrocarbons and refrigerants) are best modelled with dedicated EOS, such as the \ac{WP} \ac{HEOS} for pure water. Such fluids can be modelled using calculation frameworks like \emph{CoolProp}, \emph{REFPROP}, \emph{FluidProp}, etc.  On the other hand, geofluids, which are complex mixtures of water, minerals and \ac{NCG}, require more flexible modelling approaches, such as \emph{GeoProp}.
+    
+    % or mixture specific models like the semi-empirical model for binary mixtures of water and carbon dioxide presented in Section \ref{sec:semiempirical_models}.
+
+    From a modelling perspective, this poses a logistical problem because each calculation engine follows a unique syntax and workflow for obtaining and reporting thermophysical properties, and it is impractical to generate calculation engine specific component models. An alternative approach is the use of an unified fluid property modelling interface for the component models to interact with.
+
+    The following section aims to provide details of the implementation of such a unified fluid property modelling interface and an overview of the calculation engines used in this work.
+
+    \subsection{Architecture}
+        The unified fluid property modelling interface is comprised of three key components: 1) the calculation engines, 2) the engine interfaces and 3) the front-end, which is accessible to the user.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/FluidProperties}
+            \caption{Architecture of the fluid properties module}
+            \label{fig:powercycle_fluidprops}
+        \end{figure}
+
+        The user creates a \emph{Fluid} by specifying the composition and the desired calculation engine to be used for the property calculations. Internally, this then creates a \emph{State}, which represents the thermodynamic state of the \emph{Fluid}. To obtain the properties of a given \emph{State}, the user provides the defining state variable pairs, e.g. pressure and specific enthalpy.
+
+        The \emph{State} then sends a request to the corresponding engine \emph{interface}, which parses the instructions for updating the state to a format accepted by the underlying calculation \emph{engine}. The \emph{engine} then performs the required calculations and the \emph{interface} then aggregates the fluid properties and returns them to the \emph{State} and in turn to the \emph{Fluid}, where they can then be accessed by the user.
+
+        In principle, this plug-in architecture, allows the collection of calculation engines to be extended to any number of models. The only requirement for adding additional \emph{engines}, is the creation of a corresponding \emph{interface} script.
+        
+    \subsection{Calculation Engines}
+        To date, three calculation engines can be used:
+        
+        \begin{description}
+            \item[CoolProp:] For modelling pure fluids, such as pure water geofluids and coolant, pure component hydrocarbons and refrigerants for use as working fluid in binary \ac{ORC}s and air as coolant.
+
+            \begin{notes}{Note}
+                \emph{CoolProp} supports most state variable pairs for updating the fluid state of single component fluids. However, for mixtures only three calculation modes are available: pressure-temperature, pressure-vapour quality and temperature-vapour quality, other calculation modes have to be performed by iteration using the base modes.
+            \end{notes}
+            
+            \item[GeoProp:] For modelling geofluids, in particular mixtures of water and carbon dioxide. In its default configuration the \ac{SP2009} model is used for the partition and the thermophysical properties are determined using \emph{CoolProp} and \emph{ThermoFun}.
+
+            \begin{notes}{Note}
+                Natively, \emph{GeoProp} only supports pressure-temperature calculations, meaning that other calculation modes (e.g. pressure-enthalpy or pressure-entropy) are calculated by iteration.
+            \end{notes}
+
+            \begin{notes}{Note}
+                The \ac{SP2009} model is only valid for pressures between \qty{1}{\bar} and \qty{600}{\bar}, and as such to handle expansions to sub-atmospheric conditions, \emph{CoolProp} is used for pressures below \qty{1}{\bar}, see Figure~\ref{fig:geoprop_calc_regions}.
+
+                \begin{figure}[H]
+                    \centering
+                    \include{Content/PowerCycle/Plots/GeoProp_PhaseEnvelope}
+                    \caption{The calculation regions when using GeoProp. The \emph{Trivial} region covers the temperature and pressure conditions for which the \ac{SP2009} is used, but because the natural state of water is gaseous, the fluid as a whole is considered gaseous.}
+                    \label{fig:geoprop_calc_regions}
+                \end{figure}
+                
+            \end{notes}
+            
+            \item[LookUpTables:] Allow the user to use pre-generated data tables of fluid properties in order to reduce calculation time.
+        \end{description} 
+
+    \subsection{Stream}
+        The material stream is a collection of a mass rate \(\Dot{m}\) and a composition \(\mathbf{z}\), as well as the properties associated with a given state of the fluid. The state of fluid can be defined based on the state variable pairs shown in Table~\ref{table:StateVars}:
+
+        \begin{table}[H]
+            \caption{State variable pairs.}
+            \centering
+            \label{table:StateVars}
+            \input{Content/PowerCycle/DataTables/StateVariablePairs}
+            \\[10pt]
+        \end{table}
+
+\section{Base Components}
+    \label{sec:prosim_components}
+    The base components are the building blocks that make up any power plant, such as turbines, heat exchangers, pumps, compressors, etc. The following section sees to outline the different base components that can be modelled within PowerCycle, and how their performance, exergy loss and cost is calculated.
+
+    The notation convention for the expressions of the exergetic losses follows that presented in \nameref{ch:appendix_c}.
+    
+    \subsection{Turbine}
+        \label{sec:prosim_pwrcyc_turbines}
+        The turbine component can be used to expand a stream from a high to a low pressure, thereby providing the rotational power to drive a generator and generate electrical power, see Figure~\ref{fig:turbine}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/TurbineSchematic}
+            \caption{The process streams entering and exiting a turbine}
+            \label{fig:turbine}
+        \end{figure}
+
+        Considering a stream of mass rate \(\Dot{m}\), pressure \(P_1\), and specific enthalpy \(h_1\), the work done by the fluid on the turbine, \(\Dot{W}_{turb}\), in lowering the stream pressure to, \(P_2\), where \(P_1 > P_2\), can be calculated using Equation~\eqref{eq:turb_work}. 
+
+        \begin{notes}{Note}
+            By convention the work done by the fluid is negative, while work done on the fluid is positive.
+        \end{notes}
+    
+        \begin{align} 
+            \Dot{W}_{turb} = \Dot{m} * (h_2-h_1) \label{eq:turb_work}
+        \end{align}
+
+        The specific enthalpy of the stream at the turbine outlet, \(h_2\), can be determined from the definition of the isentropic efficiency, \(\eta_{turb}^{isen}\), see Equation~\eqref{eq:turb_iseneff}, where \(h_{2, isen}\) corresponds to the outlet specific enthalpy assuming an isentropic expansion (i.e. the specific entropy at the inlet and outlet are equal, \(s_{2}=s_{1}\)). Combining Equations~\ref{eq:turb_work} and \ref{eq:turb_iseneff} yields an expression for the turbine work, Equation~\ref{eq:turb_work2}. The electrical power can then be determined by assuming an efficiency for the generator, \(\eta_{gen}\), see Equation~\ref{eq:turb_elec}. By default the isentropic efficiency of the turbine and the efficiency of the generator are assumed to be \qty{85}{\percent} and \qty{95}{\percent} respectively \cite{DiPippo2016}.
+
+        \begin{align} 
+            \eta_{turb}^{isen} = \frac{h_{2} - h_{1}}{h_{2, isen} - h_{1}} \label{eq:turb_iseneff}
+        \end{align}
+        \begin{align} 
+            \Dot{W}_{turb} = \Dot{m} * \eta_{turb}^{isen} * (h_{2, isen} - h_{1}) \label{eq:turb_work2}
+        \end{align}
+        \begin{align} 
+            \Dot{W}_{turb}^{elec} =\eta_{gen}*\Dot{W}_{turb} \label{eq:turb_elec}
+        \end{align}
+
+        In case of wet expansion, i.e. the expansion crosses the phase envelope, the Baumann rule is used to correct the isentropic efficiency for the vapour \emph{wetness}, Equation~\ref{eq:turb_Baumann}. Where \(\eta_{turb}^{isen, dry}\) is the isentropic efficiency of a dry expansion, and \(x_1\) and \(x_2\) are the vapour quality at the inlet and outlet of the turbine, defined on a mole basis.
+        
+        \begin{align} 
+            \eta_{turb}^{isen} = \eta_{turb}^{isen, dry}*\frac{x_1 - x_2}{2} \label{eq:turb_Baumann}
+        \end{align}
+
+        \begin{notes}{Note}
+            While the definition of the vapour quality on a mass or mole basis is irrelevant when dealing with pure working fluids, for mixtures, such as water and \ac{NCG}, a distinction has to be made. In this work, the mole-based vapour quality is used as it underestimates the isentropic turbine efficiency compared to a mass-based vapour quality, see Figure~\ref{fig:Baumann_comparison}. For outlet mole-based vapour qualities of \qty{0.7}{\mole\per\mole} the difference in isentropic turbine efficiency is at most \qty{10}{\percent}.
+
+        \begin{figure}[H]
+            \centering
+            \resizebox{0.9\linewidth}{!}{\input{Content/PowerCycle/Plots/BaumannRuleComparison}}
+            \caption[Comparing the Baumann-corrected isentropic turbine efficiency as calculated from mole- or mass-based vapour quality for geofluids of different \ce{CO2} content.]{Comparing the Baumann-corrected isentropic turbine efficiency as calculated from mole- or mass-based vapour quality for geofluids of different \ce{CO2} content. The fluid was partitioned by assuming that \ce{CO2} only exists in the vapour phase, i.e. the liquid phase is pure water. The line corresponding to pure water is used as the reference, since for pure fluids mole- and mass-based vapour quality are equal.}
+            \label{fig:Baumann_comparison}
+        \end{figure}
+            
+        \end{notes}
+
+        \begin{notes}{Note}
+            The Baumann rule is a purely empirical correlation, but does not captures the underlying processes, see Section \nameref{sec:prosim_litrev_turbine}. In this respect, it is unclear whether the Baumann rule holds for water-\ac{NCG} mixtures, nevertheless, it is used in this work to capture the anticipated drying effect of \ac{NCG}.
+        \end{notes}
+
+        The exergetic loss, see Appendix~\ref{ch:appendix_c} for derivations, across the turbine is calculated from the difference in exergy between the turbine inlet and outlet and the work done by the fluid on the turbine, see Equation~\ref{eq:turb_exloss}. Similarly, the brute-force and functional efficiencies can be calculated as shown in Equations~\ref{eq:turb_exBF} and \ref{eq:turb_exFUNC}.
+
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \Dot{m}*(e_1 - e_2) - \Dot{E}_W \label{eq:turb_exloss}
+        \end{align}
+        \begin{align}
+            \eta_{bf}^{II}= \frac{\Dot{E}_W + \Dot{m}_2*e_2}{\Dot{m}_1*e_1} \label{eq:turb_exBF}
+        \end{align}
+        \begin{align}
+            \eta_{func}^{II}= \frac{\Dot{E}_W}{\Dot{m}*(e_1 - e_2)} \label{eq:turb_exFUNC}
+        \end{align}
+
+        Depending on the power plant configuration two different cost models are used, one binary \acp{ORC} and another for \acp{DSC}. 
+        
+        For \ac{ORC} turbines, a cost correlation presented by \citeauthor{Astolfi2014B} \cite{Astolfi2014B} is used, Equation~\ref{eq:ORCturb_cost}, which correlates the turbine cost \(C_{turb, ORC}\) to the number of stages \(n_{stages}\), Equation~\ref{eq:turb_nstages} and the size parameter \(SP\), Equation~\ref{eq:turb_SP} of the turbine, which are analogous to the turbine length and diameter respectively. The cost of the accompanying generator, \(C_{gen, ORC}\), was taken from the same work, Equation~\ref{eq:ORCgen_cost}.
+
+        \begin{align}
+            C_{turb, ORC} = 1.23\cdot 10^6 *\left(\frac{n_{stages}}{2}\right)^{0.5} \left(\frac{SP}{0.18}\right)^{1.1} \quad  \textup{\euro}2013\label{eq:ORCturb_cost}
+        \end{align}
+        
+        \begin{align}
+            n_{stages}= \Biggl \lceil \max \left( \frac{\Delta h_{isen}^{tot}}{\Delta h_{stage}^{max}} , \quad \log_{V_{r, stage}^{max}} V_{r, isen}^{tot} \right) \Biggr \rceil \label{eq:turb_nstages}
+        \end{align}
+        
+        \begin{align}
+            SP = \frac{\sqrt{\Dot{V}_{isen}}}{\sqrt[4]{\frac{\Delta h_{isen}^{tot}}{n_{stages}}}} \label{eq:turb_SP}
+        \end{align}
+        
+        \begin{align}
+            C_{gen, ORC} = 0.2\cdot 10^6 *\left(\frac{\Dot{W}_{turb}^{elec}}{5\cdot 10^6}\right)^{0.67}  \quad \textup{\euro}2013 \label{eq:ORCgen_cost}
+        \end{align}
+
+        For \ac{DSC}s, the cost of the turbine and generator, \(C_{turb+gen, DSC}\) is calculated from a correlation based on cost data from \emph{THERMOFLEX v31} \cite{Thermoflex2021} for a steam turbine with wet expansion, see Equation~\ref{eq:DSCturbgen_cost}. 
+
+        \begin{equation}
+            \label{eq:DSCturbgen_cost}
+            \begin{aligned}
+                C_{turb+gen, DSC} = a_0*\exp \left(a_1\ln^2\frac{\Dot{W}_{elec}}{1000} + a_2\ln^2\frac{\Dot{W}_{elec}}{1000} + a_3\right)*f_{mix}*f_{mat} &  \quad \textup{\euro}2021 \\
+                a_0=1000 \quad a_1=-0.0408229 \quad a_2=1.303859 \quad a_3=-0.158304 &
+            \end{aligned}
+        \end{equation}
+
+        \(f_{mix}\) is a correction to account for the difference in volumetric flow rate of water-\ac{NCG} mixtures compared to pure water for the same turbine power. The correction is based on the turbine size parameter \(SP\) (analogous to the turbine width), assuming that the specific enthalpy change and number of stages are constant, as well as near ideal gas behaviour of outlet vapour, Equation~\ref{eq:DSC_mixtureCostCorrection}. 
+        
+        \begin{align}
+            f_{mix} = \left(\frac{SP^{mix}}{SP^{H_2O}} \right) \Rightarrow  \left(\frac{\Dot{V}_{isen}^{H_2O+NCG}}{\Dot{V}_{isen}^{H_2O}} \right) ^{0.55} \Rightarrow \left(\frac{1}{1 - z_{NCG}} \right) ^{0.55}  \label{eq:DSC_mixtureCostCorrection}
+        \end{align}
+        
+        \(f_{mat}\) is a material correction factor to account for more expensive non-corrosive materials and more durable turbine internals (e.g. blades).
+        
+    \subsection{Heat Exchanger}
+        The heat exchanger component allows two streams to exchange heat along a temperature gradient, see Figure~\ref{fig:heat_exchanger}. Besides the cost calculations, no assumptions of the heat exchanger dimensions are made, other than the two streams being contacted indirectly, i.e. separated by an impermeable barrier.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/HXSchematic}            
+            \caption{The process streams entering and exiting a heat exchanger}
+            \label{fig:heat_exchanger}
+        \end{figure}
+
+        Assuming negligible changes in kinetic and potential energy for each stream, the heat exchanger duty can be calculated from Equation~\eqref{eq:HX_energybal}, provided four out of five variables (i.e. \(R\) -the ratio of mass rate \(\frac{\Dot{m}_{cold}}{\Dot{m}_{hot}}\), \(h_{hot,\, in}\), \(h_{hot,\, out}\), \(h_{cold,\, in}\), \(h_{cold,\, out}\)) are known.
+    
+        \begin{align} 
+            \Dot{m}_{1} * (h_{1} - h_{2}) = \Dot{m}_{A} * (h_{B} - h_{A}) \label{eq:HX_energybal}
+        \end{align}
+    
+        It is also possible to determine the heat exchanger duty for cases where only three out of five variables are known by ensuring a pre-defined minimum approach temperature. 
+        
+        The minimum approach temperature is an important design parameter and, less the heat transfer area be infinite, must be strictly larger that zero (i.e. \(T_{hot}(z)>T_{cold}(z)\). The choice of minimum approach temperature difference is ultimately a compromise between cost and performance - a larger minimum approach temperature difference reduces heat transfer area require but increases the exergetic losses in the heat exchanger.
+    
+        % The values in Table~\ref{table:PinchDTs} can be used to calculate a first estimate of the minimum approach temperature difference based on the phases present on the hot and cold side of the heat exchanger. \todo{CITATION NEEDED}
+
+        % \begin{table}[H]
+        %     \caption{Minimum approach temperature difference contribution by phase.}
+        %     \centering 
+        %     \label{table:PinchDTs}
+        %     \input{Content/PowerCycle/DataTables/PinchDTs}
+        %     \\[10pt]
+        % \end{table}
+
+        The exergetic loss across the heat exchanger is calculated from the difference in exergy between the inlet and outlet streams, see Equation~\ref{eq:HX_exloss}. Similarly, the brute-force and functional efficiencies can be calculated as shown in Equations~\ref{eq:HX_exBF}, \ref{eq:HX_exFUNC1}, and \ref{eq:heatX_exFUNC2}.
+
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \Dot{m}_1*(e_1 - e_2) + \Dot{m}_A*(e_A - e_B) \label{eq:HX_exloss}
+        \end{align}
+        \begin{align}
+            \eta_{bf}^{II}= \frac{\Dot{m}_2*e_2 + \Dot{m}_B*e_B}{\Dot{m}_1*e_1 + \Dot{m}_A*e_A} \label{eq:HX_exBF}
+        \end{align}
+        \begin{align}
+            \eta_{func,\,1}^{II}= \frac{\Dot{m}_C*(e_4 - e_3)}{\Dot{m}*(e_1 - e_2)} \label{eq:HX_exFUNC1}
+        \end{align}
+        \begin{align}
+            \eta_{func,\,2}^{II}= \frac{\Dot{m}_C*(e_4 - e_3)}{\Dot{m}*e_1} \label{eq:heatX_exFUNC2}
+        \end{align}
+
+        Depending on the type of heat exchanger different cost correlations are used.
+
+        The cost of recuperators, \(C_{rec}\), is calculated from the \(UA\) of the recuperator,  Equation\ref{eq:HX_cost_rec} \cite{Astolfi2014B}, with a correction factor for the fluid pressure, to account for the increased wall thickness required to contain the fluids, Equation~\ref{eq:HX_cost_rec_Pcorr}. 
+
+        \begin{align}
+            C_{rec}= 2.60\cdot10^5 * \frac{UA}{6.5\cdot10^5}^{0.9}*10^{f_P} \quad  \textup{\euro}2013 \label{eq:HX_cost_rec}
+        \end{align}
+        \begin{align}
+            f_P= a_1 + a_2\cdot \log_{10}\frac{P}{10^5} +a_3\cdot\log_{10}^2\frac{P}{10^5} \label{eq:HX_cost_rec_Pcorr}
+        \end{align}
+
+        \(UA\) is determined by discretising the heat exchanger into \(N+1\) points, yielding \(N\) segments of equal duty \(Q^i\), and the fluid temperature on the hot and cold side were calculated at each point – this allows the log-mean temperature, \(\Delta T_{lm}^i\), for each of the \(N\) intervals to be determined Equation~\ref{eq:HX_logmean}, where \(\Delta T_{in}^i\) and \(\Delta T_{out}^i\) are the differences in temperature between the hot and cold side at the inlet and outlet of interval \(i\) respectively. Subsequently, the \(UA\) is calculated using Equation~\ref{eq:HX_UA}, where \(Q^i\) is the heat transferred in interval \(i\).
+
+        \begin{notes}{Note}
+            Where \(\Delta T_{in}^i=\Delta T_{out}^i\), \(\Delta T_{lm}^i\) is assumed to be \(\Delta T_{in}^i\).
+        \end{notes}
+
+        \begin{align}
+            \Delta T_{lm}^i= \frac{\Delta T_{in}^i - \Delta T_{out}^i}{\log \frac{\Delta T_{in}^i}{\Delta T_{out}^i}} \label{eq:HX_logmean}
+        \end{align}
+        \begin{align}
+            UA = \sum_{i=0}^N UA^i = \sum_{i=0}^N \frac{Q^i}{\Delta T_{lm}^i} \label{eq:HX_UA}
+        \end{align}
+
+        For all other heat exchangers the cost is estimated from the heat transfer area \(A\). The cost of pre-heater, evaporators and superheaters \(C_{Pre-H, eva, SH}\), is evaluated using Equation~\ref{eq:HX_cost_PHE} \cite{Peters2003}. The cost of air-cooled condensers \(C_{cond}\) is calculated from Equation~\ref{eq:HX_cost_cond} \cite{GETEM2016}.
+
+        \begin{align}
+            C_{preh, evap, sh}= 239*A + 1.34\cdot 10^4 \quad  \textup{\unit{\USD}}2002 \label{eq:HX_cost_PHE}
+        \end{align}
+        \begin{align}
+            C_{cond} = 768*A^{0.85} \quad  \textup{\unit{\USD}}2002 \label{eq:HX_cost_cond}
+        \end{align}
+
+        To calculate the heat exchange area \(A\), similarly to above, the heat exchanger was discretized into \(N+1\) points, yielding \(N\) segments of equal duty, and the temperature and vapor quality on the hot and cold side as well as the log-mean temperature difference, Equation~\ref{eq:HX_logmean} were calculated for each point. The vapor qualities, \(x_{in}^i\) and \(x_{out}^i\) at the inlet and outlet of interval \(i\), were used to detect any phase changes as well as determine the dominant phase on the hot and cold side of the heat exchanger, see Equation~\ref{eq:HX_fluid_type}, allowing the appropriate heat transfer coefficient, \(U^i\), to be selected from Table~\ref{table:HX_PHEUvals} and Table~\ref{table:HX_CondUvals}. The heat transfer area is then calculated using Equation~\ref{eq:HX_A}.
+
+        \begin{equation}
+            \label{eq:HX_fluid_type}
+            Fluid\;Type = \left\{
+            \begin{aligned}
+                boiling \quad & \quad x_{out}^i - x_{in}^i > 0\\
+                condensing \quad & \quad x_{out}^i - x_{in}^i < 0\\
+                liquid \quad & \quad x_{in}^i \\
+                vapour \quad & \quad x_{in}^i
+            \end{aligned}
+            \right.
+        \end{equation}
+        
+        \begin{align}
+            A = \sum_{i=0}^N A^i = \sum_{i=0}^N \frac{Q^i}{\Delta T_{lm}^i U^i} \label{eq:HX_A}
+        \end{align}
+
+        \begin{table}[H]
+            \centering
+            \caption[Estimated overall heat transfer coefficients in the \ac{PHE} and recuperator for different fluid combinations.]{Estimated overall heat transfer coefficients \(U\), \unit{\watt\per\square\m\per\K}, in the \ac{PHE} and recuperator for different combinations of fluids and states. The values were derived using values from Tables~\ref{table:FilmHeatTransferCoefficient} and \ref{table:FoulingResistances} and Equation~\ref{eq:litrev_U_overall_general}. \(R_m\) was assumed to be zero; \(A_r\) was assumed to be \num{0.87} for liquid and condensing water as well as LP organic vapour, \num{1} for liquid or boiling organic fluid and \num{3.7} for HP water vapour or HP organic vapour; \(\chi\) was assumed to be \num{1} for all fluids but condensing water, for which a value of \num{4} was used \cite{Astolfi2014C}.}
+            \label{table:HX_PHEUvals}
+            \input{Content/PowerCycle/DataTables/PHE_Uvalues}
+        \end{table}
+
+        \begin{table}[H]
+            \centering
+            \caption[Estimated overall heat transfer coefficients in air-cooled condensers for different fluid combinations.]{Estimated overall heat transfer coefficients \(U\), \unit{\watt\per\square\m\per\K}, in air-cooled condensers for different combinations of fluids and states. The values were derived using values from Tables~\ref{table:FilmHeatTransferCoefficient} and \ref{table:FoulingResistances} and Equation~\ref{eq:litrev_U_overall_general}.  \(R_m\) was assumed to be zero; \(A_r\) was assumed to be \num{0.87} for water and organic fluids and \num{14} for air; \(\chi\) was assumed to be \num{4} for water and organic fluids and \num{1} for air \cite{Astolfi2014C}. }
+            \label{table:HX_CondUvals}
+            \input{Content/PowerCycle/DataTables/Cond_Uvalues}        
+        \end{table}
+    
+    \subsection{Pump \& Compressor}
+        The turbine component can be used to expand a stream from a high to a low pressure, thereby providing the rotational power to drive a generator and generate electrical power, see Figure~\ref{fig:pump_comp}.
+    
+        The pump and compressor component can be used to compress a stream from a low to a high pressure. The performance calculations for pumps and compressors are identical, the only difference being the fluid phase they can handle - pumps are used for liquids, while compressors are used for gases. Two-phase compression is generally avoided as it can be damaging to the pump/compressor internals (e.g. bubbles causing cavitation or liquid droplets colliding with fast moving blades).
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/PumpCompSchematic}
+            \caption{The process streams entering and exiting a pump and compressor}
+            \label{fig:pump_comp}
+        \end{figure}
+    
+        Considering a stream of mass rate \(\Dot{m}\), pressure \(P_1\) and specific enthalpy \(h_1\), the work done by a pump/compressor in raising the pressure to \(P_2\), where \(P_2 > P_1\), can be calculated as follows, see Equation~\eqref{eq:pump_work}. 
+        
+        \begin{notes}{Note}
+            By convention the work done by the fluid is negative, while work done on the fluid is positive.
+        \end{notes}
+
+        \begin{align} 
+            \Dot{W}_{pump, comp} = \Dot{m} * (h_2-h_1) \label{eq:pump_work}
+        \end{align}
+
+        The specific enthalpy at the outlet \(h_2\) can be determined from the definition of the isentropic efficiency \(\eta_{isen}^{pump, comp}\), see Equation~\eqref{eq:pump_isen}, where \(h_{2, isen}\) corresponds to the outlet specific enthalpy assuming an isentropic compression (i.e. specific entropy at the inlet and outlet are equal, \(s_2=s_1\)). Combining Equations~\ref{eq:pump_work} and \ref{eq:pump_isen} yields an expression for the pump/compressor work, Equation~\ref{eq:pump_work2}. The electrical power can then be determined by assuming an efficiency of the motor, \(\eta_{motor}\), see Equation~\ref{eq:pump_elec}. By default the isentropic efficiency of pumps, compressors and fans are assumed to be \qty{75}{\percent}, \qty{70}{\percent} and \qty{60}{\percent} respectively and an efficiency of the motor of \qty{95}{\percent}.
+
+        \begin{align} 
+            \eta_{isen}^{pump, comp} = \frac{h_{2, isen} - h_{1}}{h_{2} - h_{1}} \label{eq:pump_isen}
+        \end{align}
+        \begin{align} 
+            \Dot{W}_{pump, comp} = \Dot{m} * \frac{h_{2, isen} - h_{1}}{\eta_{isen}^{pump, comp}} \label{eq:pump_work2}
+        \end{align}
+        \begin{align} 
+            \Dot{W}_{pump, comp}^{elec} = \frac{\Dot{W}_{pump, comp}}{\eta_{motor}} \label{eq:pump_elec}
+        \end{align}
+
+        The exergetic losses across the pump/compressor is calculated from the difference in exergy between the inlet and outlet streams, see Equation~\ref{eq:pump_exloss}. Similarly, the brute-force and functional efficiencies can be calculated as shown in Equation~\ref{eq:pump_exBF} and \ref{eq:pump_exFUNC}.
+
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \Dot{m}*(e_1 - e_2) + \Dot{E}_W \label{eq:pump_exloss}
+        \end{align}
+        \begin{align}
+            \eta_{bf}^{II}= \frac{\Dot{m}_2*e_2}{\Dot{m}_1*e_1 + \Dot{E}_W} \label{eq:pump_exBF}
+        \end{align}
+        \begin{align}
+            \eta_{func}^{II}= \frac{\Dot{m}*(e_2 - e_1)}{\Dot{E}_W} \label{eq:pump_exFUNC}
+        \end{align}
+
+        The cost of pumps is calculated from the pump electrical power using Equations~\ref{eq:pump_cost} \cite{Astolfi2014B}. The cost of fans is calculated from the fan electrical power using Equation~\ref{eq:fan_cost} \cite{Smith2005}, where the total fan power is between \qty{20}{\kilo\watt} and  \qty{200}{\kilo\watt}, outside these limits the specific cost is kept constant. 
+
+        \begin{align}
+            C_{pump} = 14000* \left(\frac{\Dot{W}}{200000}\right)^{0.67} \textup{\euro}2013  \label{eq:pump_cost}
+        \end{align}
+        \begin{align}
+            C_{fan} = 1.31\cdot10^4 * \left(\frac{\Dot{W}_{elec}}{50000}\right)^{0.76} \quad  \textup{\euro}2005  \label{eq:fan_cost}
+        \end{align}
+
+    \subsection{Multi-Stage Compressor}
+        Compressing gases through large compression ratios can result in excessive heating (i.e. \(\frac{P_{out}}{P_{in}}\propto \frac{T_{out}}{T_{in}}\) from the ideal gas law). Compression work can be reduced by cooling the fluid, thus reducing its compressibility. This can be achieved by dividing the compression processes into multiple compression stages with cooling between each compression stage, see Figure~\ref{fig:multi_comp}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/MultiCompSchematic}                
+            \caption{The process streams entering and exiting a stage of a multi-stage compressor}
+            \label{fig:multi_comp}
+        \end{figure}
+
+        Considering a stream of mass rate \(\Dot{m}\), pressure \(P_1\) and specific enthalpy \(h_1\), the compression is split into \(N\) stages of equal compression ratio. The work done by each compression stage is determined using Equation~\ref{eq:multi_work}, assuming an isentropic efficiency of \qty{70}{\percent}. The inter-stage cooling reduces the fluid temperature to a pre-defined temperature, by default \qty{298}{\K} (\qty{25}{\degreeCelsius}), the heat removed from the fluid is calculated via Equation~\ref{eq:multi_cooling}.
+        
+        The number of stages is determined iteratively to avoid outlet temperatures above \qty{473}{\K} (\qty{200}{\degreeCelsius}).
+        
+        \begin{align} 
+            \Dot{W}_i = \Dot{m} * \frac{h_{i, isen}^{'} - h_{i-1}}{\eta_{isen}^{comp}} \label{eq:multi_work}
+        \end{align}
+        \begin{align} 
+            \Dot{Q}_i = \Dot{m} * (h_i^{'} - h_{i}) \label{eq:multi_cooling}
+        \end{align}
+        \begin{align}
+            h_{i} = \textrm{h}(P_i^{'},\, T_{ambient}) \label{eq:inter_hout}
+        \end{align}
+
+        The exergetic losses across the multi-stage compressor is calculated from the difference in exergy between the inlet and outlet streams, the work done on the fluid and the heat removed from the fluid, see Equation~\ref{eq:multi_exloss}. Similarly, the brute-force and functional efficiencies can be calculated as shown in Equation~\ref{eq:multi_exBF} and \ref{eq:multi_exFUNC}.
+
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \Dot{m} * (e_{in} - e_{out}) + \sum_{i=1}^N \Dot{E}_{W_i} + \sum_{i=1}^{N-1} \left( 1 - \frac{T_0}{T_i} \right)*Q_i\label{eq:multi_exloss}
+        \end{align}
+        \begin{align}
+            \eta_{bf}^{II}= \frac{\Dot{m} * e_{out} + \sum_{i=1}^{N-1} \left( 1 - \frac{T_0}{T_i} \right)*Q_i}{\Dot{m} * e_{in} + \sum_{i=1}^N \Dot{E}_{W_i}} \label{eq:multi_exBF}
+        \end{align}
+        \begin{align}
+            \eta_{func}^{II}= \frac{\Dot{m}*(e_2 - e_1)}{\sum_{i=1}^N \Dot{E}_{W_i}} \label{eq:multi_exFUNC}
+        \end{align}
+
+        The cost of multi-stage compressors is calculated from the component's electrical power using Equations~\ref{eq:multi_cost} \cite{Duc2007}.
+
+        \begin{align}
+            C_{comp}= 6950*\left(\frac{1.34*\Dot{W}_{elec}}{1000}\right)^{0.82} \quad  \textup{\euro}2005 \label{eq:multi_cost}
+        \end{align}
+        
+    \subsection{Mixer and Joint}
+        Mixers and jonts can be used to combine various streams into a single outlet stream, see Figure~\ref{fig:mixer}. These do not have to represent explicit mixing units but can also be points in the system where two or more streams are joined.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/MixerSchematic}            
+            \caption{The process streams entering and exiting a mixer}
+            \label{fig:mixer}
+        \end{figure}
+
+        To calculate the mixer performance, the combined mass and enthalpy rates of the inlet streams must be conserved, see Equations~\eqref{eq:mix_massbal} and \eqref{eq:mix_enthalpbal}. The outlet pressure is assumed to be the minimum pressure of the mixed streams.
+
+        \begin{align} 
+            \Dot{m}_{out} = \sum_{i=1}^{N}\Dot{m}_{i} \label{eq:mix_massbal}
+        \end{align}
+        \begin{align}
+            h_{out} = \frac{\sum_{i=1}^{N}\Dot{m}_{i} * h_{i}}{\sum_{i=1}^{N}\Dot{m}_{i}} \label{eq:mix_enthalpbal}
+        \end{align}    
+
+        The exergetic losses across the mixer are calculated from the difference in exergy between the inlet and outlet streams, see Equation~\ref{eq:mix_exloss}. The brute-force is using Equation~\ref{eq:mix_exBF}.
+        
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \sum_{i=1}^N\Dot{m}_i*e_i - \Dot{m}_{out}*e_{out} \label{eq:mix_exloss}
+        \end{align}
+        \begin{align}
+            \eta_{bf}^{II}= \frac{\Dot{m}_{out}*e_{out}}{\sum_{i=1}^N\Dot{m}_i*e_i} \label{eq:mix_exBF}
+        \end{align}
+
+        As the mixers are mostly used for simply blending streams, their cost is assumed to be negligible when compared to the other power plant components.
+    
+    \subsection{Separator}
+        Separators are used to split two-phase streams into their constituent phase streams. They have one inlet and two outlet streams, see Figure~\ref{fig:separator_schematic}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Figures/SeparatorSchematic}
+            \caption{The process streams entering and exiting a separator}
+            \label{fig:separator_schematic}
+        \end{figure}
+
+        The performance calculations ensure that the inlet stream is equilibrated and that the combined mass and enthalpy flows at the inlet and outlet are equal, see Equation~\ref{eq:sep_massbal} and \ref{eq:sep_enthalpbal}, although this is implicitly achieved as part of the equilibration and partitioning of the fluid. 
+        
+        \begin{align} 
+            \Dot{m}_{in} = \Dot{m}_{vap} + \Dot{m}_{liq} \label{eq:sep_massbal}
+        \end{align}
+        \begin{align}
+            h_{in} = \frac{\Dot{m}_{vap}*h_{vap} + \Dot{m}_{liq}*h_{liq}}{\Dot{m}_{vap} + \Dot{m}_{liq}} \label{eq:sep_enthalpbal}
+        \end{align}
+
+        The exergetic losses across the mixer are calculated from the difference in exergy between the inlet and outlet streams, see Equation~\ref{eq:sep_exloss}. The brute-force is using Equation~\ref{eq:sep_exBF}.
+        
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \Dot{m}_{in}*e_{in} - \Dot{m}_{vap}*e_{vap} + \Dot{m}_{liq}*e_{liq}\label{eq:sep_exloss}
+        \end{align}
+        \begin{align}
+            \eta_{bf}^{II}= \frac{\Dot{m}_{vap}*e_{vap} + \Dot{m}_{liq}*e_{liq}}{\Dot{m}_{in}*e_{in}} \label{eq:sep_exBF}
+        \end{align}
+
+        The cost of the separator is assumed to be negligible compared to the other power plant components.
+
+\section{Economic Model}
+    \label{sec:prosim_Power_Cycle_economic_model}
+    The total plant costs are split into three categories, the primary equipment cost (i.e., the main components of the direct and binary cycle), the secondary equipment (i.e., minor components like mixers and separators as well as piping, wiring, control system), and construction. The primary equipment costs are evaluated from equipment specific cost correlations. The secondary equipment is assumed to be \qty{40}{\percent} of the primary equipment cost, and construction costs are around \qty{70}{\percent} of the total equipment cost\cite{Astolfi2014B}. 
+    
+    The total plant construction cost is calculated using Equation~\ref{eq:total_cost}, where the secondary equipment and construction costs are determined from Equation~\ref{eq:secondary_cost} and Equation~\ref{eq:construction_cost}, with \(X_{sec}=\)\qty{40}{\percent} and \( X_{constr}=\)\qty{70}{\percent}.
+
+    \begin{align}
+        C_{total} = C_{primary} + C_{secondary} + C_{construction} \label{eq:total_cost}
+    \end{align}
+    \begin{align}
+        C_{secondary} = X_{sec}*C_{primary} \label{eq:secondary_cost}
+    \end{align}
+    \begin{align}
+        C_{constr} = X_{constr}*(C_{primary} + C_{secondary}) \label{eq:construction_cost}
+    \end{align}
+
+    The primary equipment cost is calculated as the sum of the primary equipment in the reference year (assumed to be 2023 in this study) and currency (assumed to be USD), see Equation~\ref{eq:primary_cost}. 
+    
+    \begin{align}
+        C_{primary} = \sum_{i=1}^N f_{PPI}*f_{currency}*C_i \label{eq:primary_cost}
+    \end{align}    
+    
+    As the individual cost correlations have been developed at different points in time and in currencies, the calculated cost must be corrected to the reference year and currency. By convention, the currency is converted to the reference currency in the year of publication of the correlation, Equation~\ref{eq:currency_correction} and then corrected for inflation using the ratio of the \ac{PPI} of the corresponding equipment in the reference and publication year, Equation~\ref{eq:PPI_correction}. The USD-EUR exchange rate and PPI values are shown in Figure~\ref{fig:USD_EUR_exchange_rate} and \ref{fig:PPI_correction}.
+
+    \begin{align}
+        f_{currency} = \frac{USD(year_{pub})}{EUR(year_{pub})} \label{eq:currency_correction}
+    \end{align}
+    \begin{align}
+        f_{PPI} = \frac{PPI(year_{ref})}{PPI(year_{pub})} \label{eq:PPI_correction}
+    \end{align}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/PowerCycle/Plots/CurrencyCorrection}
+        \caption{USD-EUR exchanger rate between 2002 and 2023 \cite{Macrotrends2024}}
+        \label{fig:USD_EUR_exchange_rate}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/PowerCycle/Plots/PPICorrection}
+        \caption{PPI for turbines (WPU1197), heat exchangers (WPU1075) and pumps/compressors (PCU33391-33391) between 2002 and 2023 \cite{US_BLS2024}}
+        \label{fig:PPI_correction}
+    \end{figure}
+
+    The \ac{NPV} can then be calculated using Equation~\ref{eq:economics_NPV}, where \(C_{rev_i}\) and \(C_{op_i}\) are the revenue and operating costs, calculated using Equations~\ref{eq:economics_revenue} and \ref{eq:economics_opcosts}, in year \(i\). \(f_{tax}\) is the tax rate, by default set at \qty{20}{\percent}, \(f_{disc\;rate}\) is the discount rate, by default set at \num{0.1}, \(f_{price}\) is the electricity price, by default set at \qty{0.4}{\USD\per\kWh}, and \(f_{inf}\) is the year on year rate of inflation, assumed to be \qty{3}{\percent}. \(C_{op_0}\) is the operating cost in year zero, which assumed to be \qty{5}{\percent} of the total plant cost \(C_{total}\).
+
+    \begin{align}
+        NPV = - C_{total} + \mathlarger{\sum}_{i=1}^N *\frac{(1-f_{tax})*(C_{rev_i} - C_{op_i})}{(1+f_{disc\;rate})^i}\label{eq:economics_NPV}
+    \end{align}
+    \begin{align}
+        C_{rev_i} =  8.76*\Dot W_{elec}\cdot f_{price} \label{eq:economics_revenue}
+    \end{align}
+    \begin{align}
+        C_{op_i} = C_{op_0} *(1+f_{inf})^i \label{eq:economics_opcosts}
+    \end{align}
+
+    Additional economic performance metrics are also calculated. The \ac{LCOE} is obtained by iteratively determining the price of electricity \(f_{price}\) for which the \ac{NPV} becomes zero. Similarly, the \ac{IRR} is found by determining the discount rate \(f_{disc\;rate}\) for which the \ac{NPV} becomes zero.
+
+\section{Optimisation}
+    The system performance can also be optimised. Here, a process metric (\emph{Objective Function}) is maximised/minimised, by adjusting process variables (\emph{Controls}), while ensuring that all process variables, parameters and metrics remain within their allowable range (\emph{Constraints}). In principle, any \emph{Objective Function}, \emph{Control} and \emph{Constraint} can be defined within \emph{PowerCycle}. 
+    
+    The optimisation is performed using \emph{pymoo} \cite{Blank2020}, an open-source framework for performing single and multi objective optimisation, and its \ac{GA}. While Newton and gradient-based optimisation algorithms, generally have a higher rate of convergence, requiring fewer iterations, obtaining derivatives can be computationally expensive, and require the \emph{Objective Function} to be calculable over the entire solution space, which may not be the case. \ac{GA}s on the other hand only require individual evaluations of the \emph{Objective Function}, allowing these to be parallelised, and non-calculable cases do not prevent the algorithm from proceeding.
+
+\section{Validation}
+    The following section provides a description of the validation of the various component models against their respective counterparts in \emph{Aspen Plus v11}. Validations for additional equipment is included in Appendix~\ref{ch:appendix_f}. 
+
+    \subsection{Fluid Properties}
+        \label{sec:PC_props_validation}
+        The thermophysical properties calculations were validated by calculating relevant thermophysical properties (i.e. enthalpy, entropy and density) for a range of temperatures and pressures for several fluids. In \emph{Aspen Plus v11} this was achieved using an inlet stream, initialised to \qty{298}{K} and \qty{101325}{\Pa}, and a heater element to heat the fluid to the desired temperature and pressure, Figure~\ref{fig:Aspen_properties_validation}. \emph{REFPROP} was used as the property model for all fluids. A corresponding calculation was configured in \emph{PowerCycle}, see Listing~\ref{lst:PC_properties_validation}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics{Content/PowerCycle/Figures/AspenPlus_FluidPropertiesValidation.png}
+            \caption{Process diagram of the \emph{Aspen Plus v11} simulation used to calculate the enthalpy, entropy and density of different fluids}
+            \label{fig:Aspen_properties_validation}
+        \end{figure}
+
+        \begin{listing}[H]
+            \caption{Configuration of a fluid properties calculation in \emph{PowerCycle} for water at a given temperature \(T\) and pressure \(P\)}
+            \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/PowerCycle/Code/FluidPropertiesComparison_snippet.py}
+            \label{lst:PC_properties_validation}
+            \vspace{-20pt}
+        \end{listing}
+
+        From Figure~\ref{fig:powercycle_val_water} it can be seen that the thermophysical properties calculated by \emph{Aspen Plus} and \emph{PowerCycle} are in close agreement, without any noticeable differences. Similar validation plots for n-butane and n-pentane, can be found in \nameref{ch:appendix_f}.   
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Plots/WATER}
+            \caption[Comparison of the thermophysical properties of water calculated by \emph{Aspen Plus} and \emph{PowerCycle}.]{Comparison of the thermophysical properties of water calculated by \emph{Aspen Plus} and \emph{PowerCycle}. The enthalpy and entropy are reported relative to \qty{298}{\K} and \qty{101325}{\Pa}}
+            \label{fig:powercycle_val_water}
+        \end{figure}
+
+    \subsection{Turbine}
+        \label{sec:PC_dry_turbine_validation}
+        A stream of saturated steam at a temperature of \qty{473}{\K} (\qty{200}{\degreeCelsius}) was expanded in a turbine to a discharge pressure of \qty{0.1}{\bar}. The expansion process is assumed to be dry (i.e. wetness effects are negligible), with the isentropic efficiency of the turbine being \qty{85}{\percent} and the efficiency of the generator being \qty{95}{\percent} respectively, see Table~\ref{table:turbine_dry_validation_inputs}.
+
+        \begin{table}[H]
+            \caption{The boundary conditions for the turbine performance validation calculations for a dry expansion}
+            \centering 
+            \label{table:turbine_dry_validation_inputs}
+            \input{Content/PowerCycle/DataTables/TurbineValidation/Dry_inputs}        
+        \end{table}
+
+        Models for each scenario were then formulated in \emph{AspenPlus v11} and \emph{PowerCycle}, Figure~\ref{fig:Aspen_turb_dry_validation} and Listing~\ref{lst:PC_turbine_dry_validation} respectively.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics{Content/PowerCycle/Figures/AspenPlus_TurbineDryValidation.png}
+            \caption{Process diagram of the \emph{Aspen Plus v11} simulation used to calculate the performance of a turbine, assuming dry expansion}
+            \label{fig:Aspen_turb_dry_validation}
+        \end{figure}
+
+        \begin{listing}[H]
+            \caption{Configuration of a turbine performance calculation in \emph{PowerCycle} for saturated steam at temperature \(T\) assuming dry expansion}
+            \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/PowerCycle/Code/TurbineDryPerf_snippet.py}
+            \label{lst:PC_turbine_dry_validation}
+            \vspace{-20pt}
+        \end{listing}
+
+        The calculation results are in close agreement, with negligible differences, see Table~\ref{table:turbine_dry_validation_outputs}. A similar validation was also performed for a wet expansion process, however as this is not captured by the native functionality in \emph{Aspen Plus v11}, this has been moved to Appendix~\ref{ch:appendix_f}.
+
+        \begin{table}[H]
+            \caption{The turbine performance calculation results for Aspen Plus v11 and PowerCycle for a dry expansion process}
+            \centering 
+            \label{table:turbine_dry_validation_outputs}
+            \input{Content/PowerCycle/DataTables/TurbineValidation/Dry_outputs}        
+        \end{table}
+
+    \subsection{Heat Exchanger}
+        For validating the heat exchanger calculations, two calculation modes were considered: 1) fixed mass rate ratio of the hot and cold streams, known inlet conditions of the hot stream and known inlet and outlet conditions of the cold stream - here the outlet conditions of hot stream and the minimum temperature approach are to be determined; and 2) known inlet conditions of the hot stream, known inlet and outlet conditions of the cold stream, and fixed minimum temperature approach - here the outlet conditions of the hot stream and the mass rate ratio of the hot and cold stream are to be determined.
+
+        \subsubsection{Fixed Mass Rate Ratio}
+            The hot inlet stream, water, was initialised to a temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}) and vapour quality of \qty{5}{\percent}, the cold inlet stream, n-Butane, was initialised to a temperature of \qty{298}{\K} and is assumed to be super-heated by\qty{10}{\K} at the outlet. The validation was repeated for three different pressures of the cold stream, \qty{20}{\bar}, \qty{32}{\bar}, and \qty{45}{\bar}, Table~\ref{table:HX_validation_inputs}.
+
+            Corresponding models were formulated in \emph{Aspen Plus v11} and \emph{PowerCycle}, see Figure~\ref{fig:Aspen_HX_validation} and Listing~\ref{lst:PC_HX_validation}.
+            
+            \begin{figure}[H]
+                \centering
+                \includegraphics{Content/PowerCycle/Figures/AspenPlus_HXValidation.png}
+                \caption[Process diagram of the \emph{Aspen Plus} simulation used to calculate the performance of a heat exchanger.]{Process diagram of the \emph{Aspen Plus} simulation used to calculate the performance of a heat exchanger for a fixed mass rate ratio, and hot inlet, cold inlet and cold outlet stream conditions}
+                \label{fig:Aspen_HX_validation}
+            \end{figure}
+
+
+            \begin{table}[H]
+                \caption{The boundary conditions for the heat exchanger performance calculation validation for scenario 1}
+                \centering 
+                \label{table:HX_validation_inputs}
+                \input{Content/PowerCycle/DataTables/HX_Validation/FixedMrate_inputs}
+            \end{table}
+        
+            \begin{listing}[H]
+                \caption{Configuration of a heat exchanger performance calculation in \emph{PowerCycle} for a fixed mass rate ratio, and hot inlet, cold inlet and cold outlet stream conditions}
+                \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/PowerCycle/Code/HeatExchangerPerf_snippet.py}
+                \label{lst:PC_HX_validation}
+                \vspace{-20pt}
+            \end{listing}
+    
+            For the cases where the pressure of the cold fluid is \qty{20}{\bar} and \qty{45}{\bar}, \emph{PowerCycle} and \emph{Aspen Plus v11} are in close agreement, Figure~\ref{fig:Aspen_HX_validation_plot}. Minor discrepancies are observed near the bubble and dew-points, because unlike \emph{Aspen Plus v11} \emph{PowerCylce} does not add an additional point at saturation. Nevertheless,  with sufficient discretisation, differences can be minimised.
+
+            For the case where the pressure of the cold fluid is \qty{32}{\bar}, near the critical pressure of n-Butane, some differences are observed, Figure~\ref{fig:Aspen_HX_validation_plot}: 
+            \begin{itemize}
+                \item The phase transition occurs at a higher temperature compared to \emph{Power Cycle}
+                \item There is a discontinuity in the TQ profile (at \qty{45}{\kilo\watt}
+            \end{itemize}
+
+            \begin{figure}[H]
+                \centering
+                \input{Content/PowerCycle/Plots/HXPerf}
+                \caption{Comparison of the temperature duty profiles calculated in \emph{Aspen Plus} and \emph{PowerCycle} for scenario 1.}
+                \label{fig:Aspen_HX_validation_plot}
+            \end{figure}
+
+            The apparent saturation temperature of \qty{425}{\K} (compared to about \qty{415}{\K} calculated by \emph{PowerCycle}) is inconsistent with the validation of the fluid properties performed in Section~\ref{sec:PC_props_validation} (also see Appendix\ref{ch:appendix_f}). Recalculating the saturation temperature of n-Butane at a pressure of \qty{32}{\bar} using a heater element, it can be seen to be consistent with \emph{PowerCycle}, Figure~\ref{fig:Aspen_HX_Tsat}.
+    
+            Moreover, the \emph{Aspen Plus} results are also inconsistent with the boundary conditions imposed, as the cold fluid at the outlet of the heat exchanger is not super-heated by \qty{10}{\K}. That being said, no convergence issues, calculation warnings or errors were raised for this calculation in \emph{Aspen Plus}, and as such the cause of the observed behaviour remains unclear. 
+    
+            \begin{figure}[H]
+                \centering
+                \includegraphics{Content/PowerCycle/Figures/AspenPlus_HX_Tsat.png}
+                \caption{The saturation temperature of n-butane at \qty{32}{\bar} in \emph{Aspen Plus} using a Heater element}
+                \label{fig:Aspen_HX_Tsat}
+            \end{figure}
+    
+            Despite the above, the calculated hot stream outlet temperature and the minimum temperature difference between the hot and cold stream are in good agreement, Table~\ref{table:HX_validation_outputs}.
+            
+            \begin{table}[H]
+                \caption{The heat exchanger performance calculation results for \emph{Aspen Plus v11} and \emph{PowerCycle} for scenario 1}
+                \centering 
+                \label{table:HX_validation_outputs}
+                \input{Content/PowerCycle/DataTables/HX_Validation/FixedMrate_outputs}
+            \end{table}
+    
+        \subsubsection{Fixed Minimum Approach Temperature Difference}
+
+            The hot inlet stream, water, was initialised to a temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}), the cold inlet stream, n-butane, was initialised to a temperature of \qty{298}{\K}, a pressure of \qty{20}{\bar} at the outlet the cold stream is to be super-heated by \qty{10}{\K}, corresponding to an outlet temperature of \qty{397.5}{\K}. Three vapour qualities were considered: \qty{0}{\percent}, \qty{5}{\percent} and \qty{15}{\percent}, see Table~\ref{table:HXPinch_validation_inputs}.
+    
+            \begin{table}[H]
+                \caption{The boundary conditions for the heat exchanger performance calculation validation for scenario 2}
+                \centering 
+                \label{table:HXPinch_validation_inputs}
+                \input{Content/PowerCycle/DataTables/HX_Validation/PinchPoint_inputs}
+            \end{table}
+    
+            Corresponding models were formulated, in \emph{Aspen Plus v11} this was achieved using a \emph{Design Spec} to iterate on the mass rate of the cold stream to achieve the desired minimum approach temperature, in this case \qty{5}{\K}, Figure~\ref{fig:Aspen_HXpinch_validation}. The corresponding \emph{PowerCycle} model can be seen in Listing~\ref{lst:PC_HXpinch_validation}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics{Content/PowerCycle/Figures/AspenPLus_HXpinchValidation.png}
+            \caption{Process flow diagram of the \emph{Aspen Plus v11} simulation used to calculate the performance of a heat exchanger}
+            \label{fig:Aspen_HXpinch_validation}
+        \end{figure}
+
+        The calculated hot stream outlet temperatures and mass rate ratios can be seen to be in close agreement, Table~\ref{table:HXPinch_validation_outputs}. The location of the minimum temperature approach within the heat exchanger (by cumulative heat transferred) correlate well, Figure~\ref{fig:Aspen_HXpinch_validation_plot}, and the observed differences can explained by differences in the discretisation of the heat exchanger when calculating the approach temperature differences.
+
+        \begin{listing}[H]
+            \caption{Configuration of a heat exchanger performance calculation in \emph{PowerCycle} for a fixed mass rate ratio, and hot inlet, cold inlet and cold outlet stream conditions}
+            \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/PowerCycle/Code/HeatExchangerPerf_Pinch_snippet.py}
+            \label{lst:PC_HXpinch_validation}
+            \vspace{-20pt}
+        \end{listing}  
+
+        \begin{table}[H]
+            \caption{The heat exchanger performance calculation results for \emph{Aspen Plus v11} and \emph{PowerCycle} for scenario 2}
+            \centering 
+            \label{table:HXPinch_validation_outputs}
+            \input{Content/PowerCycle/DataTables/HX_Validation/PinchPoints_outputs}
+        \end{table}
+        
+        \begin{figure}[H]
+            \centering
+            \input{Content/PowerCycle/Plots/HXPerf_Pinch}
+            \caption{Comparing the heat exchanger performance calculations between PowerCycle and Aspen Plus v11}
+            \label{fig:Aspen_HXpinch_validation_plot}
+        \end{figure}
+        
+    \subsection{Direct Steam Cycle}
+
+        The geofluid stream, water, was initialised to a temperature of \qty{453}{\K} (\qty{180}{\degreeCelsius}) and a vapour qualitiy of \qty{10}{\percent}, and is assumed to be expanded to \qty{0.1}{\bar} in a dry expansion process. The coolant, water, was initialised to a temperature of \qty{298}{\K} and a pressure of \qty{1.0325}{\bar}. Following expansion and condensation, the condensate is re-pressurised to the inlet pressure and then returned to the reservoir. The inputs are summarised in Table~\ref{table:DSC_validation_inputs}.
+
+        \begin{table}[H]
+            \caption{The boundary conditions for the direct steam cycle performance calculation validation}
+            \centering 
+            \label{table:DSC_validation_inputs}
+            \input{Content/PowerCycle/DataTables/DSCValidation/inputs}
+        \end{table}
+
+        Corresponding models were formulated in \emph{Aspen Plus v11} and \emph{PowerCycle}, Figure~\ref{fig:Aspen_flash_validation} and Listing~\ref{lst:PC_flash_validation}. The performance calculation results were found to be in good agreement, Table~\ref{table:DSC_validation_outputs}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics{Content/PowerCycle/Figures/AspenPLus_FlashValidation.png}
+            \caption{Process diagram of the \emph{Aspen Plus} simulation used to calculate the performance of a direct steam cycle}
+            \label{fig:Aspen_flash_validation}
+        \end{figure}
+
+        \begin{listing}[H]
+            \caption{Configuration of a direct steam cycle performance calculation in \emph{PowerCycle}}
+            \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/PowerCycle/Code/FlashPerf_snippet.py}
+            \label{lst:PC_flash_validation}
+            \vspace{-20pt}
+        \end{listing}
+
+        \begin{table}[H]
+            \caption{The single flash \ac{DSC} performance calculation results for \emph{Aspen Plus v11} and \emph{PowerCycle}}
+            \centering 
+            \label{table:DSC_validation_outputs}
+            \input{Content/PowerCycle/DataTables/DSCValidation/outputs}
+        \end{table}
+
+    \subsection{Binary ORC}
+        The geofluid stream, water, was initialised to a temperature of \qty{473}{\K} (\qty{180}{\degreeCelsius}) and a vapour quality of \qty{0}{\percent}. The working fluid, n-Butane, is to be evaporated at a pressure of \qty{20}{\bar} and condensed at a pressure of \qty{3}{\bar}. The coolant, water, was initialised to a temperature of \qty{298}{\K} and a pressure of \qty{1.0325}{\bar}. The boundary conditions are summarised in Table~\ref{table:ORC_validation_inputs}.
+
+        \begin{table}[H]
+            \caption{The boundary conditions for the direct steam cycle performance calculation validation}
+            \centering 
+            \label{table:ORC_validation_inputs}
+            \input{Content/PowerCycle/DataTables/ORCValidation/inputs}
+        \end{table}
+
+        Corresponding models were formulated in \emph{Aspen Plus v11} and \emph{PowerCycle}, Figure~\ref{fig:Aspen_ORC_validation} and Listing~\ref{lst:PC_ORC_validation}. The performance calculation results were found to be in good agreement, Table~\ref{table:ORC_validation_outputs}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics{Content/PowerCycle/Figures/AspenPLus_ORCValidation.png}
+            \caption{Process diagram of the \emph{Aspen Plus} simulation used to calculate the performance of a binary ORC}
+            \label{fig:Aspen_ORC_validation}
+        \end{figure}
+
+        \begin{table}[H]
+            \caption{The binary \ac{ORC} performance calculation results for \emph{Aspen Plus v11} and \emph{PowerCycle}}
+            \centering 
+            \label{table:ORC_validation_outputs}
+            \input{Content/PowerCycle/DataTables/ORCValidation/outputs}
+        \end{table}
+
+        \begin{listing}[H]
+            \caption{Configuration of a binary ORC performance calculation in \emph{PowerCycle}}
+            \inputminted[bgcolor=bg,linenos, fontsize=\footnotesize]{python}{Content/PowerCycle/Code/ORCPerf_snippet.py}
+            \label{lst:PC_ORC_validation}
+            \vspace{-20pt}
+        \end{listing}
+        

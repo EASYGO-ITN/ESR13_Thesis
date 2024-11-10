@@ -1,0 +1,23 @@
+\begin{tabular}{|c | c | c | c |}
+    \hline
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+       &  & \multicolumn{2}{c|}{\textbf{Techno-economic}} \T\B \\
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+       & \textbf{Thermodynamic} & \textbf{incl. drilling cost} & \textbf{excl. drilling costs} \T\B \\
+    \hline \hline
+    Objective Function & \(W_{elec}^{net}\) & \(\frac{C_{plant} + C_{drilling}}{W_{elec}^{net}}\) & \(\frac{C_{plant}}{W_{elec}^{net}}\) \T\B \\
+    \hline
+    \multicolumn{1}{|l|}{\multirow{7}{*}{Controls}} & \qty{303}{\K}\(\leq T_{cond}\leq\)\qty{400}{\K} & \qty{303}{\K}\(\leq T_{cond}\leq\)\qty{400}{\K} & \qty{303}{\K}\(\leq T_{cond}\leq\)\qty{400}{\K} \T\B \\
+    \multicolumn{1}{|l|}{} & \num{0.2}\(\leq \frac{P_{evap}}{P_{crit}}\leq\)\num{0.8} & \num{0.2}\(\leq \frac{P_{evap}}{P_{crit}}\leq\)\num{0.8} & \num{0.2}\(\leq \frac{P_{evap}}{P_{crit}}\leq\)\num{0.8} \T\B \\
+    \multicolumn{1}{|l|}{} & \qty{3}{\K}\(\leq \Delta T_{sh}\leq\)\qty{15}{\K} & \qty{3}{\K}\(\leq \Delta T_{sh}\leq\)\qty{15}{\K} & \qty{3}{\K}\(\leq \Delta T_{sh}\leq\)\qty{15}{\K} \T\B \\
+    \multicolumn{1}{|l|}{}  &   & \qty{5}{\K}\(\leq \Delta T_{preh}^{min}\leq\)\qty{30}{\K} & \qty{5}{\K}\(\leq \Delta T_{preh}^{min}\leq\)\qty{30}{\K} \T\B \\
+    \multicolumn{1}{|l|}{}  &   & \qty{10}{\K}\(\leq \Delta T_{evap}^{min}\leq\)\qty{30}{\K} & \qty{10}{\K}\(\leq \Delta T_{evap}^{min}\leq\)\qty{30}{\K} \T\B \\
+    \multicolumn{1}{|l|}{} &   & \qty{10}{\K}\(\leq \Delta T_{suph}^{min}\leq\)\qty{30}{\K} & \qty{10}{\K}\(\leq \Delta T_{suph}^{min}\leq\)\qty{30}{\K} \T\B \\
+    \multicolumn{1}{|l|}{} &   & \qty{5}{\K}\(\leq \Delta T_{cond}^{min}\leq\)\qty{30}{\K} & \qty{5}{\K}\(\leq \Delta T_{cond}^{min}\leq\)\qty{30}{\K} \T\B \\
+    \hline
+    \multicolumn{1}{|l|}{\multirow{4}{*}{Constraints}} & \qty{5}{\K}\(\leq \Delta T_{preh}^{min}\leq\)\qty{30}{\K} &   &   \T\B \\
+    \multicolumn{1}{|l|}{}  & \qty{10}{\K}\(\leq \Delta T_{evap}^{min}\leq\)\qty{30}{\K} &  &  \T\B \\
+    \multicolumn{1}{|l|}{} & \qty{10}{\K}\(\leq \Delta T_{suph}^{min}\leq\)\qty{30}{\K} &  &  \T\B \\
+    \multicolumn{1}{|l|}{} & \qty{5}{\K}\(\leq \Delta T_{cond}^{min}\leq\)\qty{30}{\K} &  &  \T\B \\
+    \hline
+\end{tabular}

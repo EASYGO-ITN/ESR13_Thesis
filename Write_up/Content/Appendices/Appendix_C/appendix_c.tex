@@ -1,0 +1,97 @@
+\section{Exergy Analysis}
+    Exergy is a measurement of the maximum work that can be extracted from a substrance relative to its surroundings. This makes it a useful metric for bench-marking the performance of different power plant configurations.
+
+    \subsection{Exergy}
+        For an open system at steady state (i.e. the system boundaries permit mass and energy transfer and the systems thermodynamic properties do not change with time), the exergy can be calculated by considering the First and Second Law of Thermodynamics. The general forms are given by Equations~\eqref{eq:ex_1stLaw_general} and~\eqref{eq:ex_2ndLaw_general} respectively, where
+    
+        \begin{itemize}
+            \item[]
+            \begin{enumerate}
+                \item[\(\Dot{Q} = \)] is the rate of heat transfer into the system 
+                \item[\(\Dot{W} = \)] is the rate of work done by the system
+                \item[\(i = \)] is the index of a system inlet/outlet
+                \item[\(N = \)] is the total number of inlets and outlets to the system
+                \item[\(\Dot{m} = \)] is the mass rate through inlet/outlet \emph{i} into the system
+                \item[\(h_i = \)] is the specific enthalpy of the fluid at inlet/outlet \emph{i}
+                \item[\(v_i = \)] is the fluid velocity at inlet/outlet \emph{i}
+                \item[\(z_i = \)] is the relative elevation of inlet/outlet \emph{i}
+                \item[\(g = \)] is the gravitational acceleration
+                \item[\(\Dot{\theta} = \)] is the rate of production of entropy within the system
+                \item[\(\tau = \)] is time
+                \item[\(s_i = \)] is the specific entropy of the fluid at inlet/outlet \emph{i}
+                \item[\(T = \)] is the absolute temperature
+            \end{enumerate}
+        \end{itemize}
+        
+        \begin{align} 
+            \Dot{Q} - \Dot{W} = - \sum_{i=1}^N \Dot{m}_i*(h_i + \frac{1}{2}v_i^2 + gz_i) \label{eq:ex_1stLaw_general}
+        \end{align}
+        \begin{align}
+            \Dot{\theta} = - \sum_{i=1}^N \Dot{m}_is_i - \int_{\tau_1}^{\tau_2} \frac{1}{T} \frac{dQ}{d\tau} \label{eq:ex_2ndLaw_general}
+        \end{align}
+    
+        For such a system the maximum work can be extracted if the following conditions are met:
+        \begin{enumerate}
+            \item All processes within the system are reversible 
+            \item Streams leaving the system are in thermodynamic equilibrium with the surroundings
+        \end{enumerate}
+    
+        With the above in mind, consider a simplified open system at steady state with one inlet and one outlet. As the system is at steady state, by mass balance the inlet and outlet mass rates must balance (\(\Dot{m}_1=\Dot{m}_2\equiv\Dot{m})\). By condition 2, the outlet stream is in thermodynamic equilibrium with the surroundings, thus no more work can be extracted and it can be considered in its \emph{dead state}, denoted by a 0 subscript. Similarly, as heat is only transferred between the system and the surroundings \(\int_{\tau_1}^{\tau_2} \frac{1}{T} \frac{dQ}{d\tau} = \frac{Q_0}{T_0}\). By condition 1 all processes are fully reversible and so \(\Dot{\theta} = 0\). For simplicity, the kinetic and potential energy are ignored.
+    
+        \begin{align} 
+            \Dot{Q}_0 - \Dot{W} = \Dot{m}*(h_0 - h_1) \label{eq:ex_1stLaw_simple}
+        \end{align}
+        \begin{align}
+            0 = \Dot{m}*(s_0 - s_1) - \frac{Q_0}{T_0} \label{eq:ex_2ndLaw_simple}
+        \end{align}
+    
+        Combining Equations~\eqref{eq:ex_1stLaw_simple} and~\eqref{eq:ex_2ndLaw_simple}, we obtain Equation~\eqref{eq:ex_1st2nd_comb}.
+    
+        \begin{align} 
+            \Dot{W} = \Dot{m}*[(h_1 - h_0) - T_0*(s_1 - s_0)] \label{eq:ex_1st2nd_comb}
+        \end{align}
+    
+        As the outlet stream is in its \emph{dead state}, Equation~\eqref{eq:ex_1st2nd_comb} represents the maximum work that can be extracted from the inlet stream - i.e. the Exergy, \(E\). The specific exergy of a stream can thus be calculated from Equation~\eqref{eq:ex_exergy}
+    
+        \begin{align} 
+            e = (h - h_0) - T_0*(s - s_0)] \label{eq:ex_exergy}
+        \end{align}
+    
+        For completeness, the exergy associated with a heat transfer \(Q\) at a temperature \(T\), can be calculated assuming a reversible Carnot cycle operating between a reservoir of temperature \(T\) and the \emph{dead state} at temperature \(T_0\), see Equation~\eqref{eq:ex_exergyQ}.
+    
+        \begin{align} 
+            E_Q = \left(1- \frac{T_0}{T}\right)*Q \label{eq:ex_exergyQ}
+        \end{align}
+    
+        And somewhat trivially the exergy associated with a work interaction, is the work done itself, see Equation~\eqref{eq:ex_exergyW}.
+    
+        \begin{align} 
+            E_W = W \label{eq:ex_exergyW}
+        \end{align}
+
+    \subsection{Open System Analysis}
+        Considering an open system with multiple inlet and outlet streams at steady state, accounting for the exergy entering and leaving the system it is possible to asses how closely to thermodynamic ideality the system is operating.
+        
+        Equations~\eqref{eq:ex_exergyIN} and ~\eqref{eq:ex_exergyOUT} can be used to determine the total exergy entering , \(\Dot{E}_{in}\), and leaving, \(\Dot{E}_{in}\),  the system. \(\Delta\Dot{E}_{loss}\), the difference between the two terms, see Equation~\eqref{eq:ex_exergyloss}, is the exergy \emph{destroyed} within the system - its value is strictly positive.
+
+        \begin{align} 
+            \Dot{E}_{in} = \Dot{E}_Q + \sum_{i=1}^N \Dot{m}_i*e_i \label{eq:ex_exergyIN}
+        \end{align}
+        \begin{align}
+            \Dot{E}_{out} = \Dot{E}_W + \sum_{j=1}^M \Dot{m}_j*e_j \label{eq:ex_exergyOUT}
+        \end{align}
+        \begin{align}
+            \Delta\Dot{E}_{loss} = \Dot{E}_{in} - \Dot{E}_{out} \label{eq:ex_exergyloss}
+        \end{align}
+
+        Equation~\eqref{eq:ex_exergyloss} allows the destruction of exergetic potential in various plant components to be quantified and can help to identify optimisation opportunities.
+
+        It is also useful to define efficiencies to asses the conservation of exergy within a system. Although there are no standardised definitions, two distinct approaches are generally taken. 
+        
+        The \emph{brute-force} approach compares the total outlet exergy to the total inlet exergy, see Equation~\eqref{eq:ex_eta_BF}.
+
+        \begin{align} 
+            \eta_{bf}^{II}= \frac{\Dot{E}_{out}}{\Dot{E}_{in}} \label{eq:ex_eta_BF}
+        \end{align}
+
+         The \emph{functional} approach compares the exergy of the desired output to the exergy destroyed in the process. However as the definition of \emph{desired} varies across application it is not possible to define a general formula.

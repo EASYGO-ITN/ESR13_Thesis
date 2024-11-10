@@ -1,0 +1,292 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{gray127}{RGB}{127,127,127}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{orchid227119194}{RGB}{227,119,194}
+\definecolor{sienna1408675}{RGB}{140,86,75}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 3, 
+        vertical sep=2.5cm, 
+        horizontal sep=2cm},
+    height=6cm, 
+    width=7cm, 
+]
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\%},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Turbine Stages},
+ymin=0, ymax=6,
+ytick style={color=black},
+ytick distance=1
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 1
+10 1
+20 1
+30 1
+40 1
+50 1
+60 1
+70 1
+80 1
+90 1
+100 1
+};
+\addplot [semithick, darkorange25512714]
+table {%
+0 2
+10 2
+20 2
+30 2
+40 2
+50 2
+60 2
+70 2
+80 2
+90 2
+100 2
+};
+\addplot [semithick, forestgreen4416044]
+table {%
+0 2
+10 2
+20 2
+30 2
+40 2
+50 2
+60 2
+70 2
+80 2
+90 2
+100 2
+};
+\addplot [semithick, crimson2143940]
+table {%
+0 2
+10 2
+20 2
+30 2
+40 2
+50 2
+60 2
+70 2
+80 2
+90 2
+100 2
+};
+\addplot [semithick, mediumpurple148103189]
+table {%
+0 3
+10 3
+20 3
+30 3
+40 3
+50 3
+60 3
+70 3
+80 3
+90 3
+100 3
+};
+\addplot [semithick, sienna1408675]
+table {%
+0 4
+10 4
+20 4
+30 4
+40 4
+50 4
+60 4
+70 4
+80 4
+90 4
+100 4
+};
+\addplot [semithick, orchid227119194]
+table {%
+0 4
+10 4
+20 3
+30 4
+40 4
+50 4
+60 3
+70 3
+80 3
+90 4
+100 3
+};
+\addplot [semithick, gray127]
+table {%
+0 4
+10 5
+20 5
+30 5
+40 5
+50 5
+60 5
+70 5
+80 5
+90 5
+100 5
+};
+
+\nextgroupplot[
+legend cell align={left},
+legend style={
+    fill opacity=0.8,
+    draw opacity=1,
+    text opacity=1,
+    draw=lightgray204,
+    at={(-0.25, -0.35)},
+    anchor= north},
+legend columns=4,
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\%},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Size Parameter},
+ymin=0.0753166527425309, ymax=1.77872564602775,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 0.152744334255495
+10 0.164244733494571
+20 0.174703910521067
+30 0.183858974286969
+40 0.194342573162008
+50 0.203286089715308
+60 0.212111094594654
+70 0.219949515756627
+80 0.228231053192796
+90 0.235909963714923
+100 0.243405532232877
+};
+\addlegendentry{n-Propane}
+\addplot [semithick, darkorange25512714]
+table {%
+0 0.168602376934695
+10 0.180838419231206
+20 0.19361201900078
+30 0.204435649648913
+40 0.213987482259405
+50 0.224362939442097
+60 0.233783338288609
+70 0.242685932894372
+80 0.251970234054973
+90 0.26065817501731
+100 0.268545244413766
+};
+\addlegendentry{CycloPropane}
+\addplot [semithick, forestgreen4416044]
+table {%
+0 0.228487532731693
+10 0.246286999351492
+20 0.260924543073676
+30 0.276002432834379
+40 0.289245253105037
+50 0.301292325298675
+60 0.314096699778801
+70 0.328058140660166
+80 0.337963581929897
+90 0.350734754144035
+100 0.360077049186816
+};
+\addlegendentry{IsoButane}
+\addplot [semithick, crimson2143940]
+table {%
+0 0.243595049431039
+10 0.260730624375473
+20 0.274640377027089
+30 0.293290410183946
+40 0.309231202730229
+50 0.321909955318962
+60 0.334404811761884
+70 0.345917906264345
+80 0.363068978138155
+90 0.371641415995875
+100 0.383086456709609
+};
+\addlegendentry{n-Butane}
+\addplot [semithick, mediumpurple148103189]
+table {%
+0 0.364349048255373
+10 0.401092103734614
+20 0.420141001964235
+30 0.441928025705291
+40 0.463477267769209
+50 0.48023159951414
+60 0.505409752492474
+70 0.519464429613086
+80 0.552029818772609
+90 0.558889076843493
+100 0.581778129602201
+};
+\addlegendentry{Isopentane}
+\addplot [semithick, sienna1408675]
+table {%
+0 0.597529971402767
+10 0.645565930125369
+20 0.669839616966975
+30 0.706288164343626
+40 0.725977775181725
+50 0.783159081722614
+60 0.811726543763642
+70 0.826680655466945
+80 0.85219592707589
+90 0.894221679703736
+100 0.915529490836502
+};
+\addlegendentry{Isohexane}
+\addplot [semithick, orchid227119194]
+table {%
+0 0.451069601428825
+10 0.531996024232716
+20 0.517630241665729
+30 0.591085033946579
+40 0.614787056983751
+50 0.650586309320895
+60 0.611663379088943
+70 0.634324742879696
+80 0.659371524387243
+90 0.756632936136435
+100 0.700125632839871
+};
+\addlegendentry{Cyclopentane}
+\addplot [semithick, gray127]
+table {%
+0 1.08488674200672
+10 1.15456216846186
+20 1.22790212170273
+30 1.28868565868517
+40 1.38394583005574
+50 1.38729858752802
+60 1.44298301659933
+70 1.48565193145746
+80 1.54960022466979
+90 1.64684100518382
+100 1.70129796451478
+};
+\addlegendentry{n-Heptane}
+\end{groupplot}
+
+\end{tikzpicture}

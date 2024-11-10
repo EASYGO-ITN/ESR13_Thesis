@@ -1,0 +1,257 @@
+% The following section aims to provide an overview of the make-up of geothermal geofluids and the various techniques employed for the modelling of thermophysical properties of pure fluids and mixtures.
+
+\section{Geofluids}
+\label{sec:pure_fluids}
+    Geofluids typically have three main constituents: water, minerals and gases\cite{DiPippo2016}. The compositions of minerals depends not only on the chemical composition of the reservoir rock, but also the composition the waters migrating through the rock and the left over waters from the original deposition of the reservoir rock. \ce{Na}, \ce{Ca}, \ce{K}, \ce{Fe}, \ce{Cl}, \ce{SO4} and \ce{HCO3} are common minerals found in geothermal geofluids. For the gases, \ce{CO2}, \ce{CH4} and \ce{H2S} are common constituents. \ce{CO2} is either produced as part of the dissolution of the reservoir rock (e.g. in case of a carbonate reservoir) or, similarly to \ce{H2S}, migrates into the formation from deeper within the Earth (e.g. magmatic origin). \ce{CH4} is typically created deeper within the Earth in hydrocarbon source rock and then migrates into the reservoir. \citeauthor{kottsova_2022} \cite{kottsova_2022} and \citeauthor{REFLECT_2022} \cite{REFLECT_2022} have collated geofluid compositions from a large number of geothermal wells across Europe. 
+    
+\section{Equations of State}
+\label{sec:equations_of_state}
+    In thermodynamics, substances can exist in different \emph{states}, where each \emph{state} is uniquely defined by \emph{state variables}, such as the temperature, pressure, and volume/density of the substance. In this context, an \ac{EOS} is any mathematical expression that correlates the state variables of a substance, allowing the all thermodynamic properties for any given state to be determined. The following sections aim to provide background on the most common \acp{EOS}.
+    
+    \subsection{Ideal Gas Law}
+        The simplest \ac{EOS} is the \emph{Ideal Gas Law}, Equation~\ref{eq:ideal_gas_law}, which links the pressure, molar volume and temperature, and describes the behaviour of a gases, assuming non-interacting, spherical particles of zero volume. 
+        
+        \begin{align}
+            P V_m = R T  \label{eq:ideal_gas_law}
+        \end{align}
+
+    \subsection{Real Gas Law}
+        Over time, as experimental techniques and equipment improved, temperature and pressure dependent deviations from the ideal gas law were observed. To capture these deviations the \ac{Z} was introduced, leading to the \emph{Real Gas Law}, Equation~\ref{eq:real_gas_law}. Standing and Katz provided graphical methods for evaluating \ac{Z} from the reduced temperature and pressure, based on the law of corresponding states.
+    
+        \begin{align}
+            P V_m = Z R T  \label{eq:real_gas_law}
+        \end{align}
+
+    \subsection{Cubic Equations of State}
+        \citeauthor{Waals1873} was the first to present a cubic \ac{EOS} based on the the insight that particles did indeed have an irreducible volume and that there are short-ranged attractive interactions between particles. This is now known as the \ac{VDW} \ac{EOS}, Equation~\ref{eq:van_der_Waals_EOS}. One significant advance of the \ac{VDW} \ac{EOS} is that its domain is not restricted to just gases, but also allows the behaviour of liquids to be approximated - though it is considered non-predictive and typically underestimates liquid densities.
+    
+        \begin{align}
+            P = \frac{R T}{V_m - b} + \frac{a}{V_m^2}  \label{eq:van_der_Waals_EOS}
+        \end{align}
+
+        To improve on the accuracy of liquid phase predictions modifications to the original \ac{VDW} \ac{EOS} were suggested. These modifications have primarily focused on the definition of the attraction term, for example \citeauthor{Redlich1949} modified the attraction term to include a temperature dependence and the irreducible volume, Equation~\ref{eq:RK_EOS}, \citeauthor{Soave1972} further modified the \ac{EOS} proposed by \citeauthor{Redlich1949} by including a temperature dependent \(\alpha\) term, Equation~\ref{eq:SRK_EOS} and \citeauthor{Peng1976} changed the definition of the denominator in the attraction term, Equation~\ref{eq:PR_EOS}. These \ac{EOS} are commonly referred to as the \ac{RK} \ac{EOS}, \ac{SRK} \ac{EOS} and \ac{PR} \ac{EOS}, respectively.
+    
+        \begin{align}
+            P = \frac{R T}{V_m - b} + \frac{a}{\sqrt{T}V_m(V_m-b)}  \label{eq:RK_EOS}
+        \end{align}
+        \begin{align}
+            P = \frac{R T}{V_m - b} + \frac{a\alpha (T)}{V_m(V_m-b)}  \label{eq:SRK_EOS}
+        \end{align}
+        \begin{align}
+            P = \frac{R T}{V_m - b} + \frac{a\alpha (T)}{V_m^2 + 2V_mb-b^2}  \label{eq:PR_EOS}
+        \end{align}
+
+        Cubic \ac{EOS} above can also be used to model mixtures and have been successfully applied in the petroleum sector for many decades. When applied to mixtures, mixing rules are applied to determine the overall values of \(a\), see Equation~\ref{eq:mixing_rule_a}, and \(b\), see Equation~\ref{eq:mixing_rule_b}. Here, \ac{BIC}, \(k_{ij}\), are used to account for differences in the interactions between different species, and are usually obtain by tuning against experimental data of the mixture's phase behaviour.   
+
+        \begin{align}
+            a = \sum_{i=0}^N \sum_{j=0}^N x_i x_j \sqrt{a_i a_j} (1-k_{ij})  \label{eq:mixing_rule_a}
+        \end{align}
+        \begin{align}
+            b = \sum_{i=0}^N x_i b_i  \label{eq:mixing_rule_b}
+        \end{align}
+
+    \subsection{Excess Property Formulations}
+    \label{sec:excess_properties}
+        \citeauthor{Peneloux1989} \cite{Peneloux1989} first investigated the use of \emph{Excess Property} formulations, for example in terms of the Helmholtz free energy, as single mathematical formulation to obtain all thermodynamic properties. Here, the \emph{excess} refers to the difference between the actual thermodynamic property or potential at a given state and that of an ideal gas. The equations below shows the \ac{HEOS} for Nitrogen \cite{Span2000}, where \(\delta=\frac{\rho}{\rho_c}\) and \(\tau =\frac{T_c}{T}\) with \(\rho_c\) and \(T_c\) being the critical density and temperature respectively; and \(a_1\) to \(a_7\),the \(N_k\)s, the \(i_k\)s, the \(j_k\)s, the \(l_k\)s, the \(\phi_k\)s, the \(beta_k\)s and the \(\gamma_k\)s as fluid specific correlation parameters - a total of \emph{\num{154}} parameters in the case of Nitrogen.
+
+        \begin{align}
+            \frac{a (\delta, \tau)}{R T} = \alpha^0 (\delta, \tau) + \alpha^r (\delta, \tau) \label{eq:helmholtz_EOS}
+        \end{align}
+        \begin{align}
+            \alpha^0 (\delta, \tau) = \ln \delta + a_1 \ln \tau + a_2 + a_3 \tau + \frac{a_4}{\tau} + \frac{a_5}{\tau^2} + \frac{a_6}{\tau^3} + a_7 \ln[1-e^{-a_8\tau}]  \label{eq:HEOS_ig_term}
+        \end{align}
+        \begin{align}
+            \alpha^r (\delta, \tau) = \sum_{k=1}^{6} N_k \delta^{i_k} \tau^{j_k} + \sum_{k=7}^{32} N_k \delta^{i_k} \tau^{j_k} e^{(-\delta^{l_k})} + \sum_{k=33}^{36} N_k \delta^{i_k} \tau^{j_k} e^{-\phi_k(\delta-1)^2-\beta_k(\tau-\gamma_k)^2} \label{eq:HEOS_residual}
+        \end{align}
+
+        As a result of their complexity, these \ac{HEOS} are typically only created for fluids where large experimental datasets over a wide range of thermodynamic conditions exist \cite{Lemmon1999}. Given the high-accuracy of \ac{HEOS}, limited only by the experimental uncertainty \cite{Lemmon1999},  they are primarily developed as reference \ac{EOS}s for specific common-use fluids to calculate thermodynamic property charts and look-up tables for scientific and industrial use.
+
+        One such reference \ac{EOS} is the \ac{HEOS} developed by \citeauthor{Wagner2002} for the properties and phase behaviour of water, better known as the IAPWS95 \cite{IAPWS2018} formulation or the \ac{WP} \ac{EOS}. This original model was developed further by \citeauthor{Wagner2000} leading to the IAPWS97 \cite{IAPWS2018} formulation, which primarily improves the speed and is more commonly used in industry than scientific use. Similar reference \ac{EOS} have also been developed for other common geofluid components, such as carbon dioxide \cite{Span1996} (i.e. the \ac{SW} \ac{EOS}), nitrogen \cite{Span2000}, methane \cite{Setzmann1991} and hydrogen sulphide \cite{Lemmon2006}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/TPPM/LiteratureReview/Plots/Water_and_CO2_SaturationPlots}
+            \caption[Saturation curves of water and carbon dioxide]{The saturation curves for water and carbon dioxide in Pressure-Temperature and Pressure-Molar Enthalpy domains. Calculated using the Water and Carbon Dioxide \ac{HEOS} implemented in \emph{CoolProp}.}
+            \label{fig:SaturationCurves}
+        \end{figure}
+
+        \subsubsection{Mixtures}
+        Methodologies for modelling mixtures of reference \ac{EOS} have been developed \cite{Lemmon1999b}, but require an additional set of parameters for each component pair to capture their interactions. The equations below outline the general formulation of the mixture model, with \(N_k\), \(d_k\), \(t_k\) common to all mixtures and \(F_{ij}\), \(\xi_{ij}\), \(\beta_{ij}\), \(\phi_{ij}\) and \(\zeta_{ij}\) specific to each component pair.
+
+        \begin{align}
+            A = A^{id\;mix} + A^{excess} \label{eq:HEOS_mixture}
+        \end{align}
+        \begin{align}
+            A^{id\;mix} = \sum_{i=1}^n x_i \cdot \left[A^0_i(\rho,T) + A^r_i(\delta, \tau) + R T \ln x_i\right] \label{eq:HEOSmixture_id_term}
+        \end{align}
+        \begin{align}
+            A^{excess} = RT \sum_{i=1}^{n-1} \sum_{j=i+1}^n x_i x_j F_{ij} \sum_{k=1}^{10} N_k \delta^{d_k} \tau^{t_k} \label{eq:HEOS_excess}
+        \end{align}
+        \begin{align}
+            \delta = \frac{\rho}{\rho_{red}} \label{eq:reduced_density}
+        \end{align}
+        \begin{align}
+            \tau = \frac{T_{red}}{T} \label{eq:reduced_temperature}
+        \end{align}
+
+        \begin{align}
+            \rho_{red} = \left[\sum_{i=1}^n \frac{x_i}{\rho_c} + \sum_{i=1}^{n-1} \sum_{j=i+1}^n x_i x_j \xi_{ij} \right]^{-1} \label{eq:red_density}
+        \end{align}
+        \begin{align}
+            T_{red} = \sum_{i=1}^{n} x_i T_{c_i} + \sum_{i=1}^{n-1} \sum_{j=i+1}{n} x_i^{\beta_{ij}} x_j^{\phi_{ij}}\zeta_{ij} \label{eq:red_temperature}
+        \end{align}
+
+    As a result of the complexity of the formulation, the convergence can be challenging and may not be guaranteed for all compositions, temperatures and pressure of interest. The convergence was investigated using binary mixtures of water and carbon dioxide over a range of temperatures (\qtyrange{298}{573}{\K} corresponding to \qtyrange{25}{300}{\degreeCelsius}) and pressures (\qtyrange{1}{300}{\bar}) using \emph{CoolProp} \cite{Bell2014}, see Section~\ref{sec:calc_frameworks}. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/LiteratureReview/Plots/CP_H2O_CO2_calcmap}
+        \caption{Convergence maps of the water-carbon dioxide binary \ac{HEOS} mixture implemented in \emph{CoolProp} for a range of compositions.}
+        \label{fig:wat_co2_calcmap}
+    \end{figure}
+
+    From Figure~\ref{fig:wat_co2_calcmap}, for pure water (\(z_{CO_2}=\)\qty{0.00}{\mol\percent}), the \ac{HEOS} formulation does not converge for a broad range of temperatures and pressures, appearing to shadow the saturation line of pure water. Convergence generally improves for quasi pure water (\qty{0.00}{\mol\percent}\(\leq z_{CO_2}<\)\qty{0.05}{\mol\percent}), however the \ac{HEOS} formulation does not converge at elevated (approaching reservoir-like) pressures. The areas of non-convergence appear to be correlated where the fluid is expected to be liquid (i.e. low temperatures and high pressures). 
+
+    \subsection{Incompressible Binary Mixtures}
+    \label{sec:incompressible_fluids}
+        Furthermore, \ac{EOS} have also been developed for some industrially relevant mixtures, like seawater \cite{Sharqawy2010}, lithium bromide solution \cite{Patek2006}, and calcium chloride solution \cite{Preisegger2010} or potassium carbonate solution \cite{Melinder2010}. However, the application range of such binary incompressible fluid \ac{EOS} is limited, Table 1, due to the scope in which these fluids are used /handled in industry (e.g. seawater in desalination plants or lithium bromide in adsorption cooling). Moreover, no interaction models exist to allow mixtures of these binary mixtures (e.g. seawater and lithium bromide) or binary mixtures with other pure components (e.g. seawater and carbon dioxide) to be modelled.
+
+        \begin{table}[H]
+            \caption[The applicability range of various incompressible fluid \ac{EOS}.]{The applicability range of various incompressible fluid \ac{EOS}. \(x_{min}\) and \(x_{max}\) are the lower and upper limit for the amount of the species other than water.}
+            \centering 
+            \label{table:IncompressibleEOS}
+            \input{Content/TPPM/LiteratureReview/DataTables/IncompressibleFluids_ApplicationEnvelope}        
+            \\[10pt]
+        \end{table}
+    
+\subsection{Chemically reactive Systems}
+\label{sec:chemically_active_system}
+    An alternative approach is to treat the geofluid as a chemically reactive system. In such a system, the constituent species can partition into different phases (e.g. gaseous, aqueous – a water-rich liquid phase, solid, etc.), react with each other to form new species or dissociate into other species, Figure~\ref{fig:chemically_reactive_system}. Determining the amounts and composition of all phases at equilibrium, at a given temperature and pressure, is equivalent to assessing the geofluid’s phase behaviour and also allows the thermophysical properties of the individual phases and overall fluid to be obtained.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/LiteratureReview/Figures/ChemicallyReactiveSystemsSchematic}
+        \caption{Schematic of a possible chemical reactive system describing a geofluid}
+        \label{fig:chemically_reactive_system}
+    \end{figure}
+
+    A unit amount of geofluid of arbitrary overall composition can be approximated as a closed thermodynamic system (i.e. no mass transfer into or out of the system). From the Second Law of Thermodynamics, such systems reach equilibrium when the system entropy reaches a global maximum. For systems at constant temperature and pressure, it can be shown that this is consistent with the Gibbs free energy,~\ref{eq:Gibbs_energy} of the system reaching a global minimum, also see \nameref{ch:appendix_a}.
+
+    \begin{align}
+        G = H - TS \label{eq:Gibbs_energy}
+    \end{align}
+
+    Thus, determining the equilibrium state (i.e. finding the phase amounts and compositions) represents a minimisation problem (i.e. \(\min G(P, T, \mathbf{n}) \) ), subject to the constraint that the total mass of each chemical element (i.e. H, O, Na, Cl, etc.) is conserved across all species and phases considered (i.e. \(\sum_{i=0}^N w_{ij} n_i = b_j\), where \(w_{ij} \) is the number of atoms of element \(j\) that make up species \(i\), \(n_i\) is the amount of species \(i\), and \(b_j\) is the total amount of element \(j\) in the system).
+
+    A convenient expression for calculating the Gibbs free energy of the system can be obtained by combining the differential form of the Gibbs free energy (at constant temperature and pressure), Equation~\ref{eq:gibbs_differential}, with the First Law of Thermodynamics (i.e. \(dU= \delta Q + \delta W + \sum _{i=1}^N \mu_i dn_i\)), assuming fully reversible processes (i.e. \(\delta Q = TdS\) ) and mechanical work (i.e. \(\delta W = pdV\)), followed by integration over the molar amounts. This allows the Gibbs free energy of the system to be calculated from the amounts of each species and their respective chemical potential, Equation~\ref{eq:gibbs_energy_from_chemical_potential}. Here, \(G\) is Gibbs free energy, \(P\) is pressure, \(T\) is temperature, \(U\) is internal energy, \(V\) is volume, \(S\) is entropy, \(\mu_i\) is the chemical potential of species \(i\), \(n_i\) is the number of moles of species \(i\) and \(\mathbf{y}\) is the vector of all species’ mole fractions.
+
+    \begin{align}
+        dG \big|_{P,T} = dU + PdV - TdS \label{eq:gibbs_differential}
+    \end{align}
+    \begin{align}
+        G(P, T, \mathbf{n}) = \sum _{i=1}^N n_i \mu_i(P, T, \mathbf{y}) \label{eq:gibbs_energy_from_chemical_potential}
+    \end{align}
+
+    The partial derivatives of the chemical potential are the partial molar enthalpy, Equation~\ref{eq:partial_molar_enthalpy}, the partial molar entropy, Equation~\ref{eq:partial_molar_entropy}, and the partial molar volume, Equation~\ref{eq:partial_molar_volume}, - the thermodynamic properties of interest.
+
+    \begin{align}
+        h_i (P, T, \mathbf{y}) = \frac{ \partial\left( \frac{\mu_i (P, T, \mathbf{y})}{T} \right)}{\partial\left( \frac{1}{T} \right) } \Bigg|_{P, \mathbf{y}} \label{eq:partial_molar_enthalpy}
+    \end{align}
+    \begin{align}
+        s_i (P, T, \mathbf{y}) = - \frac{ \partial\left( \mu_i (P, T, \mathbf{y})\right)}{\partial T} \Bigg|_{P, \mathbf{y}} \label{eq:partial_molar_entropy}
+    \end{align}
+    \begin{align}
+        v_i (P, T, \mathbf{y}) = \frac{ \partial\left( \mu_i (P, T, \mathbf{y})\right)}{\partial P} \Bigg|_{T, \mathbf{y}} = \frac{1}{\rho_i (P, T, \mathbf{y}}) \label{eq:partial_molar_volume}
+    \end{align} 
+
+    \begin{notes}{Note}
+        For convenience the above equations can also be re-written as shown in Equation~\ref{eq:partial_molar_prop}, where \(\Psi_i (P,T, \mathbf{y})\) is a placeholder for a thermodynamic property and the choice of \(x\) and \(f(x)\) depends on the thermodynamic property of interest, see Table~\ref{table:PartialMolarProperties}. 
+        % For instance, when calculating the partial molar enthalpy, \(x=\frac{1}{T}\) and \(f(x)=x\), when calculating the partial molar entropy, \(x=T\) and \(f(x)=-1\), and when calculating the partial molar volume, \(x=P\) and \(f(x)=1\).
+
+        \begin{align}
+            \Psi_i (P, T, \mathbf{y}) = \frac{ \partial \left( f(x)*\mu_i (P, T, \mathbf{y}) \right)} {\partial x } \label{eq:partial_molar_prop}
+        \end{align}
+
+        \begin{table}[H]
+            \caption{The definition of the auxiliary variable and function by partial molar property.}
+            \centering 
+            \label{table:PartialMolarProperties}
+            \input{Content/TPPM/LiteratureReview/DataTables/PartialMolarProperties}        
+            \\[10pt]
+        \end{table}
+    \end{notes}
+
+    The calculation of the chemical potential is broken down into two components; the standard chemical potential of the species at a reference state, and the species’ activity, Equation~\ref{eq:chemical_potential}. The species’ activity is defined as the difference between the actual chemical potential and the standard chemical potential, Equation~\ref{eq:activity_def}.
+    
+    The reference state is chosen by convention: For liquid or gaseous species, the reference composition, \(y^o\), is that of the pure component, whereas for aqueous species (e.g. \(Na^+\)), a 1-molal solution of the solute is chosen, with all other species at infinite dilution. Meanwhile, the reference pressure for liquid and aqueous species is taken as the system pressure (i.e. \(P^o=P\)), whereas for gases, the reference pressure is taken to be \qty{1}{\bar} (i.e. \(P^o=1\) \unit{\bar}).
+
+    \begin{align}
+        \mu_i (P, T, \mathbf{y}) = \mu_i (P^o, T^o, \mathbf{y}^o) + RT \ln a_i (P, T, \mathbf{y}) \label{eq:chemical_potential}
+    \end{align}
+        \begin{align}
+        RT \ln a_i (P, T, \mathbf{y}) \equiv \mu_i (P, T, \mathbf{y}) - \mu_i (P^o, T^o, \mathbf{y}^o) \label{eq:activity_def}
+    \end{align}
+
+    With the above in mind, determining the equilibrium composition and thermophysical properties of a geofluid at a given temperature and pressure requires three inputs: 1) The amounts of all elements across all species, 2) the chemical potential of all species at their respective reference state (also called the standard chemical potential) and 3) the activity of all species.
+    
+    The elemental amounts can be obtained from the geofluid composition, which is specific to each geothermal site as it is dependent on several factors, such as reservoir rock composition, temperature and pressure. Thus, the geofluid composition can only reliably be obtained from geofluid samples.
+
+    \subsubsection{Standard Chemical Potential}
+    The species’ standard chemical potential can be obtained from peer-reviewed open-source databases, such as SUPCRT92 \cite{Johnson1992} or SUPCRTBL \cite{Zimmer2016}. Frameworks, such as ThermoFun \cite{Miron2021} and Reaktoro \cite{Leal2015}, implement several models for computing standard thermodynamic properties from such databases. Alternatively, high-fidelity \ac{EOS} for species, such as water and carbon dioxide, can be used. Computationally cheaper \ac{EOS}, such as \ac{SRK} or \ac{PR}, can be used, provided their input parameters (e.g. critical properties, acentric factor, etc.) have been calibrated to the specific component in question.
+
+    \subsubsection{Activity Models}
+    The species’ activity can be calculated from phase and species-specific activity models. The simplest activity models approximate the fluid as an ideal fluid (i.e. Ideal Gas, Ideal Solution or Ideal Solid). However, this approach limits their application to low concentrations (for Ideal Solutions) or low pressures and high temperatures (for Ideal Gases), where the species exhibit ideal behaviour and where interactions among molecules are negligible. For gaseous species, such as \(CH_4\), \(N2\), \(H2S\), etc., the \ac{SRK} \ac{EOS} or the \ac{PR} \ac{EOS} may also be used to approximate the real gas behaviour and interactions among other gaseous species.
+
+    Various activity models have been proposed for the different types of aqueous species. For example, the Setschenow equation \cite{Setschenow1889} for neutral species, the HKF-Debye-Hückel model \cite{Helgeson1981} for water and ionic species, or the Pitzer model for various aqueous species \cite{Pitzer1973}. Moreover, species-specific activity models have been developed for common mixtures of species. For example, for mixtures of \(H_2O\), \(CO_2\), \(CH_4\) and some mineral species, models by \citeauthor{Duan2003}, \citeauthor{Spycher2003} and \citeauthor{Spycher2009}, amongst others, can be used. The selection of an activity model is ultimately dependent on the species present, their relative amounts as well as the system temperature and pressure.
+
+    \subsubsection{Limitations}
+    \label{sec:chemically_active_system_limitations}
+    In principle, chemically reactive systems allow any number of species and reactions to be modelled. However, the main barrier to this approach, being applied universally to geofluid modelling in a geothermal context, is the availability of appropriate activity models for all species - particularly gaseous water (i.e. steam). While the \ac{WP} \ac{EOS} represents the highest fidelity model for the properties of water and steam \cite{IAPWS2018}, it is computationally expensive and it only works with a single component: water. For this reason, most geochemical modelling codes (e.g., PHREEQC, GEMS, Reaktoro) adopt cubic equations of state for the vapour phase, such as the \ac{PR} \ac{EOS} or the \ac{SRK} \ac{EOS}, to permit other gases such as \(CO_2\), \(H_2S\), \(O_2\), and others to be considered. However, this can result in deviations from the expected phase behaviour when water steam is in higher proportion compared to other gases or simply the only gaseous species.
+
+    For example, for pure water at a pressure of \qty{10}{\bar} the \ac{WP} \ac{EOS} predicts a saturation temperature of around \qty{453}{\K}. To model the same fluid using a chemically reactive system we assume a system consisting of only an aqueous and a gaseous water species (i.e. \(H_2O^{(aq)}\) and \(H_2O^{(g)}\). This system was then simulated in \emph{Reaktoro}, see ~\ref{sec:calc_frameworks}, as part of a \ac{VLE} calculation, for a pressure of \qty{10}{\bar} and a temperature between \qty{445}{\K} and \qty{465}{\K}. The SUPCRTBL database was used for the standard thermodynamic properties and different \ac{EOS} (ideal gas and \ac{SRK}) as activity models for the vapour phase (i.e., \(H_2O^{(g)}\)). The specific volume of the fluid was evaluated for each state and compared against values calculated via the \ac{WP} \ac{EOS} (Figure~\ref{fig:Tsat_at_P}). In the case of \emph{Reaktoro}, the saturation temperature was inferred by the temperature at which the transition from liquid-like to vapour-like densities occurs.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/LiteratureReview/Plots/ChemActive_Tsat_at_P}
+        \caption[The specific volume of water as calculated with \emph{Reaktoro}]{The specific volume of pure water at a pressure of \qty{10}{\bar} over temperatures \num{445} to \qty{465}{\K} calculated with \emph{Reaktoro} using the Ideal Gas and \ac{SRK} \ac{EOS}, compared to the \ac{WP} \ac{EOS}.}
+        \label{fig:Tsat_at_P}
+    \end{figure}
+
+    Depending on the equation of state selected in \emph{Reaktoro}, the specific volume differs from the values predicted by the \ac{WP} \ac{EOS} by \qty{1.3}{\percent} (\ac{SRK}) and \qty{6.5}{\percent} (Ideal Gas) (Figure~\ref{fig:Tsat_at_P}). These differences indicate that the partial derivatives of the chemical potential (in this case with respect to pressure) of gaseous water equation, see Equation~\ref{eq:partial_molar_volume}, are inconsistent with the \ac{WP} \ac{EOS}. Consequently, in direct steam cycle geothermal power plants, the steam turbine would be designed and optimised for different volumetric rates and velocities, resulting in sub-optimal turbine designs.
+
+    Furthermore, the transition from liquid-like to vapour-like specific volume occurs at higher temperatures compared to \ac{WP} \ac{EOS}, indicating that the selected \ac{EOS} (i.e., \ac{SRK} and Ideal Gas) result in the chemical potential of gaseous water to be overestimated. By definition, at saturation, the chemical potential of the same chemical species in different phases is the same (i.e. \(\mu_i^L=\mu_i^G\)).
+    
+    Although the differences in saturation temperature are small in relative terms (less than \qty{0.7}{\percent} in the case of the \ac{SRK} activity model), the absolute differences (\qty{2}{\K} in the case of the \ac{SRK} activity model), when compared to key power plant design parameters, such as the minimum approach temperature difference in the heat exchange equipment (typically between \qty{5}{\K} and \qty{10}{\K}), are significant, representing differences of \qty{20}{\percent} to \qty{40}{\percent}. This can affect the required heat transfer area, which is the primary driver for the cost of heat exchange equipment.
+
+    Repeating the above experiment for different system pressures (Figure~\ref{fig:Tsat_vs_P}), for the \ac{SRK} activity model, the deviations range between \qty{0.28}{\percent} and \qty{0.68}{\percent} in relative terms, and \qty{1.16}{\K} to \qty{3.6}{\K} in absolute terms, while for the Ideal Gas activity model the saturation temperature deviation increases from \qty{0.28}{\percent} (corresponding to \qty{1.06}{\K}) at \qty{1}{\bar} to \qty{3.32}{\percent} (corresponding to \qty{18.4}{\K}) at \qty{64}{bar}. The latter can be explained by the deviation from ideal gas behaviour at elevated pressures. Thus, for pressures exceeding \qty{2.5}{\bar} (corresponding to a saturation temperature of \qty{400}{\K} for pure water), the \ac{SRK} activity model provides more accurate saturation temperature estimates than the Ideal Gas activity model.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/LiteratureReview/Plots/ChemActive_Tsat_vs_P}
+        \caption[The deviation of saturation temperature from the \ac{WP} \ac{EOS}]{The deviation of saturation temperature (from the \ac{WP} \ac{EOS}) when computed as part of a \ac{VLE} calculation in \emph{Reaktoro} assuming either the ideal gas and \ac{SRK} \ac{EOS} for the vapour phase and the SUPCRTLBL thermodynamic database.}
+        \label{fig:Tsat_vs_P}
+    \end{figure}   
+    
+\subsection{Empirical Models}
+\label{sec:partitioning_models}
+
+    Empirical models for specific geofluid mixtures, most commonly for mixtures comprised of water, and carbon dioxide as well as impurities , such as \(CH_4\), \(N_2\) and \(H_2S\) , have been developed. An example of this is a model originally presented by \citeauthor{Spycher2003} \cite{Spycher2003} for the mutual solubilities of carbon dioxide and water at low temperatures (\qty{12}{\degreeCelsius} to \qty{100}{\degreeCelsius}). This model was later extended to higher temperatures (\qty{12}{\degreeCelsius} to \qty{300}{\degreeCelsius}) by \citeauthor{Spycher2009} \cite{Spycher2009}. Corrections for salinity are applied using an approach similar to that of \citeauthor{Duan2003} \cite{Duan2003}.
+
+    While such empirical models can be used to determine equilibrium phases and compositions, they do not provide methods for estimating the thermophysical properties of the fluid. Moreover, these models make simplifying assumptions, particularly regarding the reactivity of the various aqueous species, meaning that advanced phase behaviours, such as scaling/mineralisation, cannot be captured.
+
+% \subsection{Conclusions}
+% \label{sec:tppm_lit_review_conclusions}
+    % \begin{itemize}
+    %     \item EOS approaches can be used but not for all mixtures and all conditions
+    %     \item Fluid specific EOS exist but conditions are limited to non geothermal conditions
+    %     \item chemically reactive systems, provide a holistic approach, however availability of underlying models makes application difficult for two-phase systems
+    %     \item Empirical models exsist but usually just provide information about the partitioning NOT the properties
+    % \end{itemize}
+
+\subsection{Calculation Libraries}
+\label{sec:calc_frameworks}
+    There are a number of calculation libraries that implement \ac{HEOS} for pure fluids and their mixtures, for example \emph{CoolProp} \cite{Bell2014}, \emph{REFPROP} \cite{Lemmon2018} and \emph{FluidProp} \cite{Colonna2019}. Out of the former, only \emph{CoolProp} is fully open-source, while the others are commercial libraries and represent an black box.
+
+    \emph{Reaktoro} \cite{Leal2015} is a unified open-source framework for modelling chemically reactive systems. \emph{Reaktoro} pairs the aforementioned thermodynamic databases, \ac{EOS} and activity models with scalable optimisation algorithms \cite{Leal2017} and on-demand machine learning acceleration strategies \cite{Kyas2022, Leal2020}. \emph{Reaktoro} was used in \citeauthor{Walsh2017} to produce a computer code to compute both thermodynamic and thermophysical properties, such as viscosity and thermal conductivity. The core \emph{Reaktoro} calculation engine is written in C\textsuperscript{++} for performance reasons, with Python API provided for more convenient usage in Jupyter Notebooks and/or with the rich ecosystem of Python libraries.
+
+    \emph{ThermoFun} \cite{Miron2021} is an open-source framework for calculating the thermodynamic properties of species and reactions from thermodynamic databases such as SUPCRT98 or SUPCRTBL. The core \emph{ThermoFun} calculation engine is written in C\textsuperscript{++} for performance reasons, but also offers a Python API for more convenient usage. \emph{ThermoFun} is integrated into \emph{Reaktoro}, where it can be used to provide the standard thermodynamic properties of species.

@@ -1,0 +1,235 @@
+In their 2009 paper, Spycher and Pruess \cite{Spycher2009} provide a model for computing the mutual solubilities of water and carbon dioxide. This model is based on a simplified chemically active system approach, where two reversible reactions are taking place, water migrating to the carbon dioxide-rich phase, and carbon dioxide migrating to the water-rich phase. Salts may be present but are considered nonreactive and are thus confined to the water-rich phase.
+
+\begin{align} 
+    H_2O^{(aq)} \rightleftharpoons H_2O^{(g)}
+\end{align}
+\begin{align} 
+    CO_2^{(g)} \rightleftharpoons CO_2^{(aq)}
+\end{align}
+
+For each reaction an equilibrium constant is defined based on the species activity in the aqueous (water-rich phase) and the fugacity in the gaseous (carbon dioxide-rich phase), see Equations ~\eqref{eq:eqConst_water} and ~\eqref{eq:eqConst_CO2}.
+
+\begin{align} 
+    K_{H_2 O}=f_{H_2 O} / a_{H_2 O} \label{eq:eqConst_water}
+\end{align}
+\begin{align} 
+    K_{CO_2}=f_{CO_2} / a_{CO_2} \label{eq:eqConst_CO2}
+\end{align}
+
+Where \(f_i\) is taken to be the ratio of the component fugacity and the reference fugacity - \(f_i = f_i (P,T,y)/f_i^{o}\) - and the reference fugacity, \(f_i^{o}\), is defined to be 1 bar. In turn, \(f_i\) can be calculated from the component’s fugacity coefficient and mole fraction in the carbon dioxide-rich phase as well as the total pressure, see Equation ~\eqref{eq:fugacity}. Similarly, the component’s activity is calculated from its activity coefficient and water rich phase mole fraction, see Equations ~\eqref{eq:activity_water} and ~\eqref{eq:activity_CO2}. 
+
+\begin{align} 
+    f_i= \Phi_i*y_i*P_{tot} \label{eq:fugacity}
+\end{align}
+\begin{align} 
+   a_{H_2 O}= \gamma_{H_2 O}*x_{H_2 O} \label{eq:activity_water}
+\end{align}
+\begin{align} 
+   a_{CO_2}= \gamma_{CO_2}^{'} * \gamma_{CO_2}*x_{CO_2} \label{eq:activity_CO2}
+\end{align}
+
+Substituting Equations ~\eqref{eq:fugacity}, ~\eqref{eq:activity_water} and ~\eqref{eq:activity_CO2} into the respective expression for the equilibrium constant (i.e. Equations ~\eqref{eq:eqConst_water} and ~\eqref{eq:eqConst_CO2}) and using the fact that that mole fractions ought to sum to one, expressions for the mole fraction of water in the carbon dioxide rich phase and the mole fraction of carbon dioxide in the water rich phase can be obtained, see Equations~\eqref{eq:yH2O} and ~\eqref{eq:xCO2}.
+
+\begin{align} 
+    y_{H_2 O} = A*(1 - x_{CO_2} - x_{salt}) \label{eq:yH2O}
+\end{align}
+\begin{align} 
+    x_{CO_2} = B^{'} * (1 - y_{H_2 O}) \label{eq:xCO2}
+\end{align}
+\begin{align} 
+    A = \frac{K_{H_2 O} * \gamma_{H_2 O}}{\Phi_{H_2 O} * P_{tot}} \label{eq:defA}
+\end{align}
+\begin{align} 
+    B^{'}= \frac{\Phi_{CO_2} * P_{tot}}{55.508*\gamma_{CO_2}^{'}* \gamma_{CO_2} * K_{CO_2}} \label{eq:defBdash}
+\end{align}
+
+Parameters \(x_{salt}\) and \(m_{CO_2}\) can be calculated from \eqref{eq:defx_salt} and \eqref{eq:defmolal_CO2} respectively.
+\begin{align} 
+    x_{salt}= \frac{v*m_{salt}}{55.508 + v*m_{salt}+m_{CO_2}} \label{eq:defx_salt}
+\end{align}
+\begin{align} 
+    m_{CO_2} = \frac{55.508 * x_{CO_2}}{x_{H_2 O}}  \label{eq:defmolal_CO2}
+\end{align}
+
+Equations~\eqref{eq:yH2O} and ~\eqref{eq:xCO2} can either be solved by iteration or by substitution using Equation~\eqref{eq:solution_yH2O} below, followed by substituting the result into Equation~\eqref{eq:xCO2} to obtain \(x_{CO_2}\).
+
+\begin{align} 
+    y_{H_2 O}=\frac{55.508*(1-B^{'})}{(\frac{1}{A} - B^{'} )(v*m_{salt} + 55.508) + v*m_{salt} B^{'}}  \label{eq:solution_yH2O}
+\end{align}
+
+Thus, to calculate the mutual solubilities, a total of six parameters, three for water and three for carbon dioxide must be calculated:
+
+\begin{itemize}
+    \item The equilibrium constant
+    \item The fugacity coefficient
+    \item The activity coefficient
+\end{itemize}
+
+Subsequently, a mole balance can be used to estimate vapour fraction, \(\alpha\), see Equation~\eqref{eq:mole_balance}. Note, \(z_{H_2O}\) is the mole fraction across all phases.
+
+\begin{align} 
+    \alpha = \frac{z_{H_2 O} - x_{H_2 O}}{y_{H_2 O} - x_{H_2 O}}  \label{eq:mole_balance}
+\end{align}
+
+If \(\alpha \leq 0\), the geofluid is entirely liquid, i.e. all carbon dioxide is contained within the water-rich phase, whereas if \(\alpha \geq 1 \), the geofluid is entirely vapour, i.e. all water is contained within the carbon dioxide rich phase. Only when \(0 < \alpha < 1\) can the water and carbon dioxide rich phases coexist.
+
+\begin{notes}{Note}
+    If the pressure is below the saturation pressure of pure water then the geofluid is also assumed to be fully vapour.
+\end{notes}
+
+A Python implementation of this model is available from the following Github repository: \url{https://github.com/EASYGO-ITN/GeoProp}.
+
+\section{The Equilibrium Constant}
+\label{sec:equib_constant}
+
+The equilibrium constant is calculated as per Equation~\eqref{eq:defEquilibConst}.  \(K_i^{o}\) and \(P_i^{ref}\) are calculated from polynomials of the form of \eqref{eq:Polynomial1}, while \(\bar{V_i}\) is calculated using \eqref{eq:Polynomial2}. The coefficients can be found in Tables~\ref{table:EquibDataLow} and ~\ref{table:EquibDataHigh}.
+\begin{align} 
+    K_i(T,P) = K_i^{o}(T)*\exp{\frac{(P-P_i^{ref})\bar V_i}{RT}}   \label{eq:defEquilibConst}
+\end{align}
+\begin{align} 
+    F(T) = a + b(T-273.15) + c(T-273.15)^2 + d(T-273.15)^3 + e(T-273.15)^4   \label{eq:Polynomial1}
+\end{align}
+\begin{align} 
+    \bar{V_i} = a + b(T-373.15)  \label{eq:Polynomial2}
+\end{align}
+
+\input{Content/Appendices/Appendix_B/DataTables/EquilibriumConstant}
+
+\section{The Fugacity Coefficient}
+\label{sec:fug_constant}
+A Soave-Redlich-Kwong stlye cubic equation of state with asymmetric binary interaction coefficients is used to calculate the fugacity of water and carbon dioxide in the carbon dioxide-rich phase, see Equation~\eqref{eq:SRKEOS}
+
+\begin{align} 
+    P = \frac{RT}{V-b_{mix}} - \frac{a_{mix}}{\sqrt{T}*V(V-b_{mix}}  \label{eq:SRKEOS}
+\end{align}
+
+\(a_{mix}\) and \(b_{mix}\) are calculate using the following mixing rules:
+
+\begin{align} 
+    b_{mix} = \sum_{i=1}^N y_i * b_i \label{eq:bmix}
+\end{align}
+\begin{align} 
+    a_{mix} = \sum_{i=1}^N \sum_{j=1}^N y_i y_j * a_{ij} \label{eq:amix}
+\end{align}
+\begin{align} 
+    a_{ij} = \sqrt{a_i a_j} (1 - k_{ij}) \label{eq:aij}
+\end{align}
+\begin{align} 
+    k_{ij} = K_{ij}y_i + K_{ji}y_j) \label{eq:kij}
+\end{align}
+
+Parameters \(a_i\), \(b_i\) and \(K_{ij}\) are calculated from polynomials of the form of Equation~\eqref{eq:Polynomial3}. The coefficients can be found in Tables~\ref{table:SRKDataLow} and ~\ref{table:SRKDataHigh}
+\begin{align} 
+    F(T) = a + bT \label{eq:Polynomial3}
+\end{align}
+
+\input{Content/Appendices/Appendix_B/DataTables/SRK_Parameters}
+
+Determining the fugacity coefficient requires the volume to be determined, which can be achieved by recasting Equation~\eqref{eq:SRKEOS} into its cubic form, ~\eqref{eq:DepressedCubic}, and then applying the Cadorna method (or similar) to obtain the roots.
+
+\begin{align} 
+    V^3 + a_1 V^2 + a_2 V^3 + a_3= 0 \label{eq:DepressedCubic}
+\end{align}
+\begin{align} 
+    a_1 = - \frac{RT}{P}
+\end{align}
+\begin{align} 
+    a_2 = - \left( \frac{RTb_mix}{P} - \frac{a_{mix}}{P\sqrt{T}}+b_{mix}^2 \right)
+\end{align}
+\begin{align} 
+    a_3 = - \frac{a_{mix}b_{mix}}{P\sqrt{T}}
+\end{align}
+
+If a single real root is found then this corresponds to the stable phase, however if three or more roots are found, the smallest root corresponds to the liquid phase and the largest root to the vapour phase. To determine, which is stable the following auxiliary parameters need to be calculated, Equation~\eqref{eq:Auxillary1} and ~\eqref{eq:Auxillary2}. If \(w_2 - w_1 \geq 0\), then largest root is accepted (i.e. stable vapour), otherwise the smallest root is taken (i.e. stable liquid).
+
+\begin{align} 
+    V_{liq} = \min V_1, V_2, V3
+\end{align}
+\begin{align} 
+    V_{vap} = \max V_1, V_2, V3
+\end{align}
+\begin{align} 
+    w_1 = P(V_{gas}-V_{liq})  \label{eq:Auxillary1}
+\end{align}
+\begin{align} 
+    w_2 = RT * \ln \frac{V_{gas}-b_{mix}}{V_{liq}-b_{mix}} + \frac{a_{mix}}{b_{mix}\sqrt{T}} \ln \frac{(V_{gas} + b_{mix})*V_{liq}}{(V_{liq} + b_{mix})*V_{gas}}  \label{eq:Auxillary2}
+\end{align}
+
+With this in place the fugacity coefficient can be calculated using Equation~\eqref{eq:FugacityCoeff}. 
+
+\begin{equation}
+    \label{eq:FugacityCoeff}
+    \begin{split}
+        \ln \Phi_i =& \frac{b_k}{b_{mix}} \left( \frac{PV}{RT} - 1 \right) - \ln \frac{P(V-b_{mix})}{RT} \\
+        & + \frac{a_{mix}}{b_{mix}RT^{1.5}} \ln \frac{V}{V+b_{mix}}\left(
+        \begin{aligned}
+            & \frac{1}{a_{mix}}\sum_{i=1}^N y_i(a_{ik} - a_{ki}) \\
+            & \qquad - \frac{1}{a_{mix}}\sum_{i=1}^N\sum_{j=1}^N y_1^2 y_j (\mathbf{K_{ij}} - \mathbf{K_{ji}})\sqrt{a_i a_j} \\
+            & \qquad \qquad + \frac{1}{a_{mix}} y_k \sum_{i=1}^N y_i(\mathbf{K_{ki}} - \mathbf{K_{ik}})\sqrt{a_i a_k} \\
+            & \qquad \qquad \qquad- \frac{b_k}{b_{mix}}
+        \end{aligned}
+        \right)
+    \end{split}
+\end{equation}
+
+\begin{notes}{Note}
+    There appears to be a misprint in the original paper by Spycher and Pruess, whereby the \(K_{ij}\) highlighted above are instead written as \(k_{ij}\). This has the effect that since \(k_{ij} = k_{ji}\) by definition, most terms cancel out.
+\end{notes}
+
+\section{The Activity Coefficient}
+\label{sec:activ_constant}
+
+The activity coefficients for water and carbon dioxide in the water-rich phase are defined as per Equations~\eqref{eq:GammaH2O} and ~\eqref{eq:GammaCO2}	
+
+\begin{align} 
+    \ln \gamma_{H_2O} = \left( A_M -2A_M * x_{H_2O} \right) * x_{CO_2}^2 \label{eq:GammaH2O}
+\end{align}
+\begin{align} 
+    \ln \gamma_{CO_2} = 2A_M * x_{CO_2} * x_{H_2O}^2  \label{eq:GammaCO2}
+\end{align}
+\begin{equation}
+    \label{eq:activityAM}
+    A_M = \left\{
+    \begin{aligned}
+    0 , & \ T \leq 373.15 K \\
+    a * (T - 373.15) + b * (T373.15)^2 , & \ T > 373.15 K
+    \end{aligned}
+    \right.
+\end{equation}
+
+To account for salinity effects, a correction term for the activity of carbon dioxide in the water-rich phase is provided, see Equation ~\eqref{eq:activityCO2_corr}, where parameters \(\lambda\) and \(\xi\) are calculated using Equation~\eqref{eq:Polynomial4}.
+
+\begin{equation}
+    \label{eq:activityCO2_corr}
+    \gamma_{CO_2}°{'} = \left(1 +\frac{\sum m_{i\neq CO_2}}{55.508} \right) \exp \left(
+    \begin{aligned}
+    &2\gamma (m_{Na^{+}} + m_{K^{+}} + 2m_{Ca^{+2}} + 2m_{Mg^{+2}}) \\
+    &\qquad \quad+ \xi m_{Cl^{-}}(m_{Na^{+}} + m_{K^{+}} + m_{Ca^{+2}} + m_{Mg^{+2}}) \\
+    &\qquad \qquad \quad - 0.07m_{SO_4^{-2}}
+    \end{aligned}
+    \right)
+\end{equation}
+\begin{align} 
+    F(T) = aT +\frac{b}{T} + \frac{c}{T^2} \label{eq:Polynomial4}
+\end{align}
+
+The coefficients for Equations~\eqref{eq:activityAM} and ~\eqref{eq:Polynomial4} can be found in Table~\ref{table:ActDataHigh}
+
+\input{Content/Appendices/Appendix_B/DataTables/ActivityParameters}
+
+\section{Validation}
+\label{sec:appb_validation}
+The above equations were implemented in Python and then validated by digitalising the plots of the equilibrium mole fraction of water/carbon dioxide for different temperatures as calculated by \citeauthor{Spycher2009}. The plots were digitalised using WebPlotDigitizer \cite{Rohatgi2024}. From Figures~\ref{fig:SP2009_validation_yH2O} and \ref{fig:SP2009_validation_xCO2} it can be seen that our implementation of the model presented by \citeauthor{Spycher2009} matches their calculations for a wide range of temperatures and pressures
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/Appendices/Appendix_B/Plots/SP2009validationYH2O}        
+        \caption{Comparison of the equilibrium mole fraction of water in a carbon dioxide-rich phase as calculated by \citeauthor{Spycher2003} and \citeauthor{Spycher2009} against our implementation of their model}
+        \label{fig:SP2009_validation_yH2O}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \input{Content/Appendices/Appendix_B/Plots/SP2009validationXCO2}        
+        \caption{Comparison of the equilibrium mole fraction of carbon dioxide in a water-rich phase as calculated by \citeauthor{Spycher2003} and \citeauthor{Spycher2009} against our implementation of their model}
+        \label{fig:SP2009_validation_xCO2}
+    \end{figure}

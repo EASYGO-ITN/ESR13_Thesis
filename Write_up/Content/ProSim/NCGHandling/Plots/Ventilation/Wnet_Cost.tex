@@ -1,0 +1,100 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 1, 
+        vertical sep=2.5cm, 
+        horizontal sep=2.5cm},
+    height=6cm, 
+    width=7cm, 
+]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.15, -0.35)},
+  anchor=north,
+  draw=lightgray204
+},
+legend columns=-1,
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=15.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power /\unit{\mega\watt}},
+ymin=0, ymax=10,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 7.11824275760516
+1 7.01448533671156
+2 7.09927339965172
+3 7.14641524341508
+5 7.01679759619252
+7 7.11050265098925
+10 7.12134491589304
+15 7.09712060873138
+};
+\addlegendentry{Binary ORC}
+\addplot [semithick, darkorange25512714]
+table {%
+0 6.31326095430661
+1 6.82090237744356
+2 6.6656428680298
+3 6.50748967791259
+5 6.38219673152442
+7 6.46848908756496
+10 6.72346899342379
+15 7.69942700414499
+};
+\addlegendentry{Single Flash DSC}
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=15.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Plant Cost/\unit{\mega\USD\of{2023}}},
+ymin=0, ymax=50,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 17.7893198117598
+1 17.2838207538925
+2 17.5128897395575
+3 17.9947043886249
+5 17.6937890461663
+7 17.7009825019596
+10 18.2315895737394
+15 19.078638972335
+};
+\addplot [semithick, darkorange25512714]
+table {%
+0 15.0391758277982
+1 23.6367237997759
+2 30.2149108213274
+3 32.9425427643126
+5 37.7807278370729
+7 41.2097697128217
+10 25.0252379690916
+15 24.2546556443551
+};
+\end{groupplot}
+
+\end{tikzpicture}

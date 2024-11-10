@@ -1,0 +1,74 @@
+\begin{tikzpicture} [node distance=2cm]
+
+    % the flowchart elements
+    \node (PTin) [io, minimum width=1.5cm, minimum height= 1.2cm] at (0,0) {\(P, T\)};
+    
+    \node (Zspecies) [io, minimum height= 1.2cm, minimum width= 3cm] at ($(PTin) + (-2,-1.5)$) {Species};
+    \node (Zelems) [io, minimum height= 1.2cm, minimum width= 3cm] at ($(PTin)+ (4,-1.5)$) {Elements};
+
+    \node (SP2009) [process, minimum height= 1.2cm, fill=red!30] at ($(PTin) + (0, -3.7)$){Spycher Pruess 2009};
+    \node (User) [process, minimum height= 1.2cm, fill=red!30] at ($(PTin) + (-4,-3.7)$) {User Entered};
+    \node (Reaktoro) [process, minimum height= 1.2cm, fill=red!30] at ($(PTin) + (4,-3.7)$) {Reaktoro};
+
+    \node (Phases) [process, minimum height= 1.2cm, text width = 11cm] at ($(SP2009) + (0,-2.2)$) {Phases \& Phase Compositions};
+    \node (Gaseous) [process, minimum height= 2.4cm] at ($(User) + (0, -4.3)$){Gaseous Phase};
+    \node (Aqueous) [process, minimum height= 2.4cm] at ($(SP2009) + (0,-4.3)$) {Aqueous Phase};
+    \node (Mineral) [process, minimum height= 2.4cm] at ($(Reaktoro) + (0,-4.3)$) {Mineral Phase};
+    \node (Water) [process, minimum height= 0.6cm, text width =1.2cm, minimum width = 1.2cm,] at ($(Aqueous) + (-0.75,-0.75)$) {Water};
+
+    \node (CP) [process, minimum height= 1.2cm, text width = 5cm, fill=green!30] at ($(Aqueous) + (-3,-2.8)$) {CoolProp};
+    \node (TF) [process, minimum height= 1.2cm, text width = 5cm, fill=green!30] at ($(Aqueous) + (3,-2.8)$) {ThermoFun};
+
+    \node (Gprops) [io, minimum height= 1.2cm] at ($(Gaseous) + (0, -5)$){\(n, \mathbf{x}, \rho, h, s\)};
+    \node (Aprops) [io, minimum height= 1.2cm] at ($(Aqueous) + (0,-5)$) {\(n, \mathbf{x}, \rho, h, s\)};
+    \node (Mprops) [io, minimum height= 1.2cm] at ($(Mineral) + (0,-5)$) {\(n, \mathbf{x}, \rho, h, s\)};
+    \node (Tprops) [io, minimum height= 1.2cm] at ($(Aprops) + (0,-2.7)$) {\(n, \mathbf{x}, \rho, h, s\)};
+
+    % the connectors
+    \draw [arrow] (PTin) to [out=180, in = 90] (Zspecies);
+    \draw [arrow] (PTin) to [out=0, in = 90] (Zelems);
+
+    \draw [arrow] (Zspecies) to [out=180, in = 90] (User);
+    \draw [arrow] (Zspecies) to [out=0, in = 90] (SP2009);
+    \draw [arrow] (Zelems) -- (Reaktoro);
+
+    \draw [arrow] (User) to [out=-90, in = 170] (Phases);
+    \draw [arrow] (SP2009) -- (Phases);
+    \draw [arrow] (Reaktoro) to [out=-90, in = 10] (Phases);
+
+    \draw [arrow] (Phases) to [out=190, in = 90] (Gaseous);
+    \draw [arrow] (Phases) -- (Aqueous);
+    \draw [arrow] (Phases) to [out=-10, in = 90] (Mineral);
+
+    \draw [arrow] (Gaseous) to [bend right=20] (Gprops);
+    \draw [arrow] (Water) to [bend right=30] (Aprops) ;
+    \draw [arrow] (Aqueous) to [bend left=30] (Aprops);
+    \draw [arrow] (Mineral) to [bend left=20] (Mprops);
+
+    \draw [arrow] (Gprops) to [out=-90, in = 180] (Tprops) ;
+    \draw [arrow] (Aprops) to (Tprops);
+    \draw [arrow] (Mprops) to [out=-90, in = 0] (Tprops);
+
+    % the spatial separators
+    \draw [dashed] ($(SP2009) + (-6.5, 1.1)$) to ($(SP2009) + (6, 1.1)$);
+    \draw [dashed] ($(SP2009) + (-6.5, -1.1)$) to ($(SP2009) + (6, -1.1)$);
+
+    \draw [dashed] ($(Aqueous) + (-6.5, -1.7)$) to ($(Aqueous) + (6, -1.7)$);
+
+    \draw [dashed] ($(Aprops) + (-6.5, 1.1)$) to ($(Aprops) + (6, 1.1)$);
+
+    % annotations
+    \node [text centered, text width=2cm] at ($(Aprops) + (1.5, -1.2)$) {Aqueous Properties};
+    \node [text centered, text width=2cm] at ($(Gprops) + (1.5, -1.2)$) {Gaseous Properties};
+    \node [text centered, text width=2cm] at ($(Mprops) + (1.5, -1.2)$) {Mineral Properties};
+    \node [text centered] at ($(Tprops) + (0, -1.2)$) {Total Properties};
+
+    
+    \node [text centered, text width=2cm] at ($(PTin) + (-7, -0.75)$) {Inputs};
+    \node [text centered, text width=2cm] at ($(SP2009) + (-7, 0)$) {Partition Model};
+    \node [text centered, text width=2cm] at ($0.5*(Phases)+0.5*(Aqueous) + (-7, 0)$) {Phase Splitting};
+    \node [text centered, text width=2cm] at ($0.5*(CP)+0.5*(TF) + (-7, 0)$) {Property Model};
+    \node [text centered, text width=2cm] at ($0.5*(Aprops)+0.5*(Tprops) + (-7, 0)$) {Outputs};
+    
+    
+\end{tikzpicture}

@@ -1,0 +1,79 @@
+\begin{tikzpicture}
+    \definecolor{lightgray204}{RGB}{204,204,204}
+    \begin{axis}[xlabel = {Temperature/\unit{\K}}, 
+                 xmin=298, xmax=373.15,
+                 ymin=0, ymax=350,
+                 ylabel = {Enthalpy/\unit{\kilo\joule \per \kg}},
+        legend style={
+          fill opacity=0.8,
+          draw opacity=1,
+          text opacity=1,
+          at={(1.03,0.5)},
+          anchor=west,
+          draw=lightgray204
+        },
+                 width=10cm,
+                         height=6.5cm,
+        ytick distance=50]
+        
+        % adding the dummy lines
+        \addplot[color=black, only marks] coordinates {(0,0)};
+        \addlegendentry{Measured}
+        \addplot[color=black] coordinates {(0,0)};
+        \addlegendentry{GeoProp}
+        \addplot[color=black, dashed] coordinates {(0,0)};
+        \addlegendentry{\emph{Aspen Plus v11}}
+
+        %define colors
+        \definecolor{libr}{HTML}{4472C4}
+        \definecolor{nacl}{HTML}{ED7D31}
+        \definecolor{sample27T}{HTML}{70AD47}
+        \definecolor{sample68}{HTML}{FFC000}
+        \definecolor{sample129}{HTML}{5B9BD5}
+
+        % adding the geoprop lines for the legend
+        \addplot[color=libr,] coordinates {(2.980e+02,0.000e+00) (3.160e+02,6.073e+01) (3.340e+02,1.218e+02) (3.520e+02,1.830e+02) (3.700e+02,2.442e+02)};
+        \addlegendentry{LiBr: \qty{0.2}{\kg\per\kg}}
+        
+        \addplot[color=nacl,] coordinates {(2.980e+02,0.000e+00) (3.160e+02,6.697e+01) (3.340e+02,1.343e+02) (3.520e+02,2.018e+02) (3.700e+02,2.695e+02)};
+        \addlegendentry{NaCl: \qty{0.1}{\kg\per\kg}}
+        
+        \addplot[color=sample27T,] coordinates {(2.732e+02,-1.037e+02) (2.782e+02,-8.274e+01) (2.832e+02,-6.182e+01) (2.882e+02,-4.095e+01) (2.932e+02,-2.009e+01) (2.982e+02,7.472e-01) (3.032e+02,2.158e+01) (3.082e+02,4.240e+01) (3.132e+02,6.323e+01) (3.182e+02,8.406e+01) (3.232e+02,1.049e+02) (3.282e+02,1.257e+02) (3.331e+02,1.466e+02)};
+        \addlegendentry{No.27T: \qty{15.3}{\g\per\kg}}
+        
+        \addplot[color=sample68,] coordinates {(2.732e+02,-1.037e+02) (2.782e+02,-8.274e+01) (2.832e+02,-6.182e+01) (2.882e+02,-4.095e+01) (2.932e+02,-2.009e+01) (2.982e+02,7.472e-01) (3.032e+02,2.158e+01) (3.082e+02,4.240e+01) (3.132e+02,6.323e+01) (3.182e+02,8.406e+01) (3.232e+02,1.049e+02) (3.282e+02,1.257e+02) (3.331e+02,1.466e+02)};
+        \addlegendentry{No.68: \qty{1.7}{\g\per\kg}}
+        
+        \addplot[color=sample129,] coordinates {(2.732e+02,-1.037e+02) (2.782e+02,-8.273e+01) (2.832e+02,-6.182e+01) (2.882e+02,-4.094e+01) (2.932e+02,-2.009e+01) (2.982e+02,7.471e-01) (3.032e+02,2.158e+01) (3.082e+02,4.240e+01) (3.132e+02,6.323e+01) (3.182e+02,8.406e+01) (3.232e+02,1.049e+02) (3.282e+02,1.257e+02) (3.331e+02,1.466e+02)};
+        \addlegendentry{No.129: \qty{1.8}{\g\per\kg}}
+
+        \addplot[color=blue,] coordinates {(2.980e+02,0.000e+00) (3.160e+02,7.524e+01) (3.340e+02,1.505e+02) (3.520e+02,2.259e+02) (3.700e+02,3.016e+02)};
+        \addlegendentry{Water}
+        
+        % adding the remaining lines
+        % LIBR:
+        %CoolProp
+        \addplot[color=libr, only marks] coordinates {(2.980e+02,0.000e+00) (3.160e+02,5.861e+01) (3.340e+02,1.177e+02) (3.520e+02,1.772e+02) (3.700e+02,2.370e+02)};
+        % Aspen
+        \addplot[color=libr, dashed] coordinates {(2.981e+02,0.000e+00) (3.031e+02,1.687e+01) (3.081e+02,3.375e+01) (3.131e+02,5.063e+01) (3.181e+02,6.753e+01) (3.231e+02,8.444e+01) (3.281e+02,1.014e+02) (3.331e+02,1.183e+02) (3.381e+02,1.353e+02) (3.431e+02,1.523e+02) (3.481e+02,1.693e+02) (3.531e+02,1.863e+02) (3.581e+02,2.034e+02) (3.631e+02,2.205e+02) (3.731e+02,2.548e+02)};
+
+        % MITSW:
+        %CoolProp
+        \addplot[color=nacl, only marks] coordinates {(2.980e+02,0.000e+00) (3.160e+02,6.688e+01) (3.340e+02,1.340e+02) (3.520e+02,2.013e+02) (3.700e+02,2.687e+02)};
+        % Aspen
+        \addplot[color=nacl, dashed] coordinates {(2.981e+02,0.000e+00) (3.031e+02,1.876e+01) (3.081e+02,3.752e+01) (3.131e+02,5.627e+01) (3.181e+02,7.503e+01) (3.231e+02,9.379e+01) (3.281e+02,1.126e+02) (3.331e+02,1.313e+02) (3.381e+02,1.501e+02) (3.431e+02,1.689e+02) (3.481e+02,1.878e+02) (3.531e+02,2.066e+02) (3.581e+02,2.255e+02) (3.631e+02,2.444e+02) (3.731e+02,2.823e+02)};
+
+        % Sample No. 27T:
+        % RawData
+        \addplot[color=sample27T, only marks] coordinates {(2.732e+02,-1.051e+02) (2.781e+02,-8.381e+01) (2.831e+02,-6.270e+01) (2.931e+02,-2.081e+01) (3.031e+02,2.081e+01) (3.131e+02,6.234e+01) (3.231e+02,1.040e+02) (3.331e+02,1.458e+02)};
+
+        % Sample No. 68:
+        % RawData
+        \addplot[color=sample68, only marks] coordinates {(2.732e+02,-1.051e+02) (2.781e+02,-8.381e+01) (2.831e+02,-6.270e+01) (2.931e+02,-2.081e+01) (3.031e+02,2.081e+01) (3.131e+02,6.234e+01) (3.231e+02,1.040e+02) (3.331e+02,1.458e+02)};
+
+        % Sample No. 129:
+        % RawData
+        \addplot[color=sample129, only marks] coordinates {(2.732e+02,-1.067e+02) (2.781e+02,-8.523e+01) (2.831e+02,-6.373e+01) (2.931e+02,-2.116e+01) (3.031e+02,2.116e+01) (3.131e+02,6.337e+01) (3.231e+02,1.056e+02) (3.331e+02,1.479e+02)};
+
+    \end{axis}
+\end{tikzpicture}

@@ -1,0 +1,118 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.03,0.5)},
+  anchor=west,
+  draw=lightgray204
+},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0.3, xmax=15.7,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Pressure/\unit{\bar}},
+ymin=0.0750202020650154, ymax=104.210825567583,
+ymode=log,
+ytick style={color=black},
+ytick={0.001,0.01,0.1,1,10,100,1000,10000},
+yticklabels={
+  \(\displaystyle {10^{-3}}\),
+  \(\displaystyle {10^{-2}}\),
+  \(\displaystyle {10^{-1}}\),
+  \(\displaystyle {10^{0}}\),
+  \(\displaystyle {10^{1}}\),
+  \(\displaystyle {10^{2}}\),
+  \(\displaystyle {10^{3}}\),
+  \(\displaystyle {10^{4}}\)
+}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+1 15.6630536688748
+2 16.3198841873615
+3 16.9938113190951
+4 17.6848295204466
+5 18.3935694555122
+7 19.8673757145131
+9 21.4215479157084
+11 23.0630210435187
+13 24.799575491809
+15 26.6399783604382
+};
+\addlegendentry{Inlet}
+\addplot [semithick, darkorange25512714]
+table {%
+1 0.104238895885895
+2 0.129350204193398
+3 0.153586153554027
+4 0.197554157002805
+5 0.401219265502528
+7 0.374755751308973
+9 0.398595960189734
+11 0.754542256728902
+13 2.14037349401806
+15 2.24955404852605
+};
+\addlegendentry{DSC Condenser}
+\addplot [semithick, forestgreen4416044]
+table {%
+1 18.9647562724772
+2 20.807798436388
+3 23.7426983284545
+4 23.6448098035008
+5 25.8879768282811
+7 27.4146940753416
+9 29.03949223762
+11 30.3302944350513
+13 32.0634480009951
+15 32.3997293391906
+};
+\addlegendentry{ORC Absorber}
+\addplot [semithick, crimson2143940]
+table {%
+1 28.5029954000339
+2 30.1483693035563
+3 41.433824690827
+4 40.5494551070753
+5 66.8601541710225
+7 66.6499552381017
+9 61.0059236133972
+11 60.5885771390556
+13 59.6087756692846
+15 59.9965953842508
+};
+\addlegendentry{DSC Absorber}
+\addplot [semithick, mediumpurple148103189]
+table {%
+1 75
+2 75
+3 75
+4 75
+5 75
+7 75
+9 75
+11 75
+13 75
+15 75
+};
+\addlegendentry{Outlet}
+\end{axis}
+
+\end{tikzpicture}

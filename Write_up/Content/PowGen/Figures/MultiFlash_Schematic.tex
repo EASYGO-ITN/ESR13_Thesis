@@ -1,0 +1,64 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    
+    \pic (valve) at ($(producer-anchor) + (1, 4)$) {lamination valve};
+    \pic[scale=0.4] (separator) at ($(valve-anchor) + (1.5, 0)$) {gas-liquid separator};
+    \pic (valve_lp) at ($(separator-liquid outlet) + (1.5, -1.2)$) {lamination valve};
+    \pic[scale=0.4] (separator_lp) at ($(valve_lp-anchor) + (1.5, 0)$) {gas-liquid separator};
+
+    \pic (moist1) [scale=0.3, rotate=90] at ($(separator-anchor) + (2, 2)$) {block};
+    \pic (moist2) [scale=0.3, rotate=90] at ($(separator_lp-anchor) + (1, 2.1)$) {block};
+
+    \pic (turbine) at ($(separator-anchor) + (3.6, 2)$) {multi_turbine_gen};
+    \pic[yscale=-1] (condenser) at ($(turbine-anchor) + (4, -1.4)$) {condenser};
+    \pic[scale=0.4] (NCGsep) at ($(condenser-anchor) + (2, -0.5)$) {gas-liquid separator};
+    \pic (treat) [scale=0.25] at ($(NCGsep-gas outlet) + (1.5, 1.5)$) {block};
+    
+    \pic (injector) at ($(producer-anchor) + (5.5,0)$) {injector};
+    \pic (condpump) at ($(injector-anchor) + (3, 0.2)$) {centrifugal pump};
+    \pic[rotate=270] (joint) at ($(injector-anchor) + (0, 1)$) {valve triple=main};
+    
+    
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (valve-inlet);
+    \draw[main stream] (valve-outlet) -- (separator-inlet left);
+    \draw[main stream] (separator-gas outlet) |- (moist1-top);
+    \draw[main stream] (moist1-right) -| (turbine-inlet_hp top);
+    \draw[main stream] (moist1-left) -- ($(moist1-left) + (0,-0.5)$);
+    
+    \draw[main stream] (separator-liquid outlet) |- (valve_lp-inlet);
+    \draw[main stream] (valve_lp-inlet) -- (separator_lp-inlet left);
+    \draw[main stream] (separator_lp-gas outlet) |- (moist2-top);
+    \draw[main stream] (moist2-right) -- (turbine-inlet_lp bottom);
+    \draw[main stream] (moist2-left) -- ($(moist2-left) + (0,-0.5)$);
+
+    \draw[main stream] (turbine-outlet_lp bottom) |- (condenser-pipes inlet);
+
+    \draw[main stream] (condenser-pipes outlet) -- (NCGsep-inlet left);
+    \draw[main stream] (NCGsep-gas outlet) |- (treat-left);
+    \draw[main stream] (treat-right) -- ++ (1.5,0);
+    \draw[main stream] (NCGsep-liquid outlet) |- (condpump-anchor);
+    
+    \draw[main stream] (condpump-top) |- (joint-top);
+    \draw[main stream] (separator_lp-liquid outlet) -- (joint-left);
+    \draw[main stream] (joint-right) -- (injector-top);
+
+    % % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[above, align=center] at (valve-top) {Expansion\\ Valve};
+    \node[right, align=left] at (separator-inlet right) {HP Steam \\ Separator};
+    \node[above, align=center] at (moist1-right) {Moisture\\Removal};
+    \node[right, align=left] at (separator_lp-inlet right) {LP Steam \\ Separator};
+    \node[above] at (turbine-top) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[right, align=center] at (moist2-bottom) {Moisture\\Removal};
+    
+    \node[below] at (condenser-top) {Condenser};
+    \node[right, align=left] at (NCGsep-inlet right) {NCG \\ separator};
+    \node[below, align=center] at (treat-bottom) {NCG\\Treatment};
+    \node[above] at ($(treat-top) + ((1.5, 0)$) {To atmosphere};
+    \node[below] at (condpump-bottom) {Condensate Pump};
+    \node[below] at (injector-bottom) {Injector};
+
+\end{tikzpicture}

@@ -1,0 +1,88 @@
+\begin{tikzpicture} [node distance=1.4cm]
+
+    \definecolor{level1}{RGB}{218,227,243}
+    \definecolor{level2}{RGB}{180,199,231}
+    \definecolor{level3}{RGB}{143,170,227}
+    \definecolor{level4}{RGB}{115,149,211}
+    \definecolor{orchid227119194}{RGB}{227,119,194}
+    \definecolor{sienna1408675}{RGB}{140,86,75}
+    
+    \node (BCs_bkg) [process, minimum height=5.8cm, text width=2.7cm, minimum width=2cm, fill=level2] {};
+    \node (Ts)  [process, yshift=0.7cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Temperature};
+    \node (BCs)  [process, above of=Ts, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, draw=none, fill=none] {\textbf{Boundary Conditions}};
+    \node (Qs)  [process, yshift=-0.7cm, minimum height= 1.2cm, text width=2.3cm, , minimum width=2cm, fill=level1] {Vapour Quality};
+    \node (Cs)  [process, below of=Qs, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {CO\textsubscript{2} Content};
+
+
+    \node (Opt_bkg) [process, right of=BCs_bkg, xshift=10.2cm, yshift=0.1cm, minimum height=14.2cm, minimum width=2cm, text width = 19.3cm, fill=level4] {};
+    \node (Opt) [process, at=(Opt_bkg), yshift=6.1cm, minimum height=1.2cm, minimum width=2cm, text width = 3cm, draw=none, fill=none] {\textbf{Optimisation}};
+    
+    
+    \node (Ctrls_bkg) [process, right of=BCs_bkg, xshift=2.1cm, minimum height=10cm, minimum width=2cm, text width=2.7cm, fill=level2] {};
+    \node (Pmax)  [process, at=(Ctrls_bkg), minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\(P_{max}\)};
+    \node (Tcond)  [process, above of=Pmax, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\(T_{cond}\)};
+    \node (Xflash)  [process, above of=Tcond, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\(X_{flash}\)};
+    \node (Ctrls)  [process, above of=Xflash, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm,  draw=none, fill=none] {\textbf{Controls}};
+    \node (Tmax)  [process, below of=Pmax, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\(T_{max}\)};
+    \node (Tmin)  [process, below of=Tmax, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\(T_{min}\)};
+    \node (Ctrls_plus)  [process, below of=Tmin, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {...};
+
+    \node (PP_bkg) [process, right of=Ctrls_bkg, yshift=-0.2cm, xshift=6.6cm, minimum height=11cm, minimum width=2cm, text width = 12.1cm, fill=level3] {};
+    \node (PP) [process, at=(PP_bkg), yshift=4.65cm, minimum height=1.2cm, minimum width=2cm, text width = 3cm, draw=none, fill=none] {\textbf{Power Plant}};
+
+    \node (Fluids_bkg) [process, right of=Ctrls_bkg, xshift=2.1cm, minimum height=5.8cm, minimum width=2cm, text width=2.7cm,fill=level2] {};
+    \node (Org)  [process, at=(Fluids_bkg), yshift=0.7cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Organic};
+    \node (Fluids)  [process, above of=Org, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm,  draw=none, fill=none] {\textbf{Fluids}};
+    \node (Geo)  [process, at=(Fluids_bkg), yshift=-0.7cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Geofluid};
+    \node (NCG)  [process, below of=Geo, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {NCG};
+
+    \node (Props)  [process, below of=NCG, yshift=-0.4cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Properties};
+
+
+    \node (Comps_bkg) [process, right of=Fluids_bkg, xshift=3.45cm, minimum height=7.2cm, minimum width=2cm, text width=5.4cm, fill=level2] {};
+    \node (HX)  [process, at=(Comps_bkg), xshift=-1.35cm, minimum height= 1.2cm, text width=2.1cm, minimum width=2.5cm, fill=level1] {Heat Exchanger};
+    \node (Turb)  [process, above of=HX, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Turbine};
+    \node (Comps)  [process, above of=Turb, xshift=1.3cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm,  draw=none, fill=none] {\textbf{Components}};
+    \node (Pump)  [process, below of=HX, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Pump};
+    \node (Compr)  [process, below of=Pump, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Compressor};
+    \node (Mix)  [process, right of=HX, xshift=1.3cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Mixer};
+    \node (Sep)  [process, above of=Mix, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Separator};
+    width=2cm] {Mixer};
+    \node (Split)  [process, below of=Mix, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Splitter};
+    \node (Comps_plus)  [process, below of=Split, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {...};
+
+    \node (Perf1)  [process, below of=Compr, yshift=-0.4cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Performance};
+    \node (Cost1)  [process, below of=Comps_plus, yshift=-0.4cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Cost};
+
+
+    \node (Solver)  [process, right of=Comps_plus, xshift=1.55cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\textbf{Cycle Solver}};
+    \node (Cost2)  [process, above of=Solver, yshift=2.8cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Cost};
+    \draw [arrow, ultra thick] ($(Solver) + (-0.5, 0.6)$) -- ($(Cost2) + (-0.5, -0.6)$);
+    \node (Perf2)  [process, below of=Cost2, yshift=-0.2cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Performance};
+    \draw [arrow, ultra thick] ($(Solver) + (0.5, 0.6)$) -- ($(Perf2) + (0.5, -0.6)$);
+
+
+    \node (ObjFunc_bkg) [process, at=(Cost2), xshift=3.5cm, minimum height=5.8cm, minimum width=2cm, text width=2.7cm, fill=level2] {};
+    \node (Perf3)  [process, at=(ObjFunc_bkg), yshift=0.7cm, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Performance};
+    \node (ObjFunc)  [process, above of=Perf3, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm,  draw=none, fill=none] {\textbf{Objective Function}};
+    \node (Cost3)  [process, below of=Perf3, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {Cost};
+    \node (ObjFUnc_plus)  [process, below of=Cost3, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {...};
+
+
+    \node (Cons_bkg) [process, right of=Solver, xshift=2.1cm, yshift=-1.8cm, minimum height=4.4cm, minimum width=2cm, text width=2.7cm, fill=level2] {};
+    \node (Pinch)  [process, at=(Cons_bkg), minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {\(\Delta T_{min}^{HX}\)};
+    \node (Cons)  [process, above of =Pinch, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm,  draw=none, fill=none] {\textbf{Constraints}};
+    \node (Cons_plus)  [process, below of=Pinch, minimum height= 1.2cm, text width=2.3cm, minimum width=2cm, fill=level1] {...};
+
+    \draw [arrow, ultra thick] (BCs_bkg) -- (Opt_bkg);
+    \draw [arrow, ultra thick] (Ctrls_bkg) -- (PP_bkg);
+    \draw [arrow, ultra thick] (Fluids_bkg) -- (Props);
+    \draw [arrow, ultra thick] (Props) -| ++ (1.7, 1.55) |- (Comps_bkg);
+    \draw [arrow, ultra thick] (Comps_bkg) -- (Perf1);
+    \draw [arrow, ultra thick] (Comps_bkg) -- (Cost1);
+    \draw [arrow, ultra thick] (Cost1) -| ($(Solver) + (-0.5, -0.6)$);
+    \draw [arrow, ultra thick] (Perf1) |- ($(Cost1) + (0, -0.8)$) -| ($(Solver) + (0.5, -0.6)$);
+    \draw [arrow, ultra thick] (PP_bkg) -- (ObjFunc_bkg);
+    \draw [arrow, ultra thick] (PP_bkg) -- (Cons_bkg);
+
+\end{tikzpicture}

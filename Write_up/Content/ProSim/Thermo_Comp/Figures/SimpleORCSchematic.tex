@@ -1,0 +1,55 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (injector) at (2,0) {injector};
+    
+    \pic[rotate=180] (preheater) at ($(injector-anchor) + (0.925, 2)$) {heat exchanger biphase};
+    \pic[rotate=180] (evaporator) at ($(preheater-anchor) + (0, 1.5)$) {heat exchanger biphase};
+    \pic[rotate=180] (superheater) at ($(evaporator-anchor) + (0, 1.5)$) {heat exchanger biphase};
+    
+    \pic (turbine) at ($(superheater-anchor) + (5, 0.5)$) {turbine_gen};
+
+    % \pic[yscale=-1, xscale=-1] (condenser) at ($(turbine-anchor) + (-1, -4.5)$) {condenser};
+    \pic (condenser) at ($(turbine-outlet bottom) + (0, -2.2)$) {heat exchanger biphase};
+    
+    \pic (pump) at ($(condenser-shell bottom) + (-3, -1.8)$) {centrifugal pump};
+    
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (superheater-pipes bottom);
+    \draw[main stream] (superheater-pipes top) 
+        -- ($(superheater-pipes top) + (-0.5, 0)$) 
+        |- (evaporator-pipes bottom);
+    \draw[main stream] (evaporator-pipes top) 
+        -- ($(evaporator-pipes top) + (-0.5, 0)$) 
+        |- (preheater-pipes bottom);
+    \draw[main stream] (preheater-pipes top) 
+        -| ($(preheater-pipes top) + (-0.5, -1)$) 
+        -- (injector-top);
+
+    \draw[main stream] (preheater-shell bottom) -- (evaporator-shell top);
+    \draw[main stream] (evaporator-shell bottom) -- (superheater-shell top);
+    \draw[main stream] (superheater-shell bottom) |- (turbine-inlet top);
+
+    \draw[main stream] (turbine-outlet bottom) -- (condenser-shell top);
+    \draw[main stream] (condenser-pipes top) -- ++ (1, 0);
+    \draw[main stream] ($(condenser-pipes bottom) + (1, 0)$) -- (condenser-pipes bottom);
+    
+    \draw[main stream] (condenser-shell bottom) |- (pump-anchor);
+    \draw[main stream] (pump-top) -| (preheater-shell top);
+    
+    % % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[right] at (preheater-shell left) {Pre-Heater};
+    \node[right] at (evaporator-shell left) {Evaporator};
+    \node[right] at (superheater-shell left) {Super-Heater};
+    \node[above] at (turbine-top) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[left, align=left] at (condenser-shell left) {Condenser};
+    \node[above right, align=left] at ($(condenser-pipes top) + (1, 0)$) {Coolant out};
+    \node[below right, align=left] at ($(condenser-pipes bottom) + (1, 0)$) {Coolant in};
+    
+    \node[below, align=center] at (pump-bottom) {Circulation \\ Pump};
+    \node[below] at (injector-bottom) {Injector};
+
+
+\end{tikzpicture}

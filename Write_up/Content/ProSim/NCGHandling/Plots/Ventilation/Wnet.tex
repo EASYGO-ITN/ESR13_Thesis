@@ -1,0 +1,54 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204, at={(0.97, 0.03)}, anchor=south east},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=16,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power /\unit{\mega\watt}},
+ymin=0, ymax=10,
+ytick style={color=black},
+width=10cm, height=6cm
+]
+\addplot [semithick, steelblue31119180]
+table {%
+1 7.01448533671156
+2 7.09927339965173
+3 7.1464152434167
+4 7.07749065024379
+5 7.01679759619276
+7 7.11050265098926
+9 7.11962449744598
+11 7.1600886565322
+13 7.09670547840913
+15 7.09712060873134
+};
+\addlegendentry{Binary ORC}
+\addplot [semithick, darkorange25512714]
+table {%
+1 6.05622907082415
+2 5.82162034028068
+3 5.7796192166751
+4 5.81472582415529
+5 5.91325095696919
+7 6.19689216122147
+9 6.56577446488
+11 7.0369710587965
+13 7.57368260572439
+15 8.0978373660655
+};
+\addlegendentry{Single Flash DSC}
+\end{axis}
+
+\end{tikzpicture}

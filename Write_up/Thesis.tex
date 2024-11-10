@@ -1,0 +1,382 @@
+% A LaTeX template for MSc Thesis submissions to 
+% Politecnico di Milano (PoliMi) - School of Industrial and Information Engineering
+%
+% S. Bonetti, A. Gruttadauria, G. Mescolini, A. Zingaro
+% e-mail: template-tesi-ingind@polimi.it
+%
+% Last Revision: October 2021
+%
+% Copyright 2021 Politecnico di Milano, Italy. NC-BY
+
+\documentclass{Configuration_Files/PoliMi3i_thesis}
+
+%------------------------------------------------------------------------------
+%	REQUIRED PACKAGES AND  CONFIGURATIONS
+%------------------------------------------------------------------------------
+
+% CONFIGURATIONS
+\usepackage{parskip} % For paragraph layout
+\usepackage{setspace} % For using single or double spacing
+\usepackage{emptypage} % To insert empty pages
+\usepackage{multicol} % To write in multiple columns (executive summary)
+\setlength\columnsep{15pt} % Column separation in executive summary
+\setlength\parindent{0pt} % Indentation
+\raggedbottom  
+
+% PACKAGES FOR TITLES
+\usepackage{titlesec}
+% \titlespacing{\section}{left spacing}{before spacing}{after spacing}
+\titlespacing{\section}{0pt}{3.3ex}{2ex}
+\titlespacing{\subsection}{0pt}{3.3ex}{1.65ex}
+\titlespacing{\subsubsection}{0pt}{3.3ex}{1ex}
+\usepackage{color}
+
+% PACKAGES FOR LANGUAGE AND FONT
+\usepackage[english]{babel} % The document is in English  
+\usepackage[utf8]{inputenc} % UTF8 encoding
+\usepackage[T1]{fontenc} % Font encoding
+\usepackage[11pt]{moresize} % Big fonts
+
+% PACKAGES FOR IMAGES
+\usepackage{graphicx}
+\usepackage{transparent} % Enables transparent images
+\usepackage{eso-pic} % For the background picture on the title page
+\usepackage{subfig} % Numbered and caption subfigures using \subfloat.
+\usepackage{tikz} % A package for high-quality hand-made figures.
+\usetikzlibrary{}
+\graphicspath{{./Images/}} % Directory of the images
+\usepackage{caption} % Coloured captions
+\usepackage{xcolor} % Coloured captions
+\usepackage{amsthm,thmtools,xcolor} % Coloured "Theorem"
+\usepackage{float}
+
+% STANDARD MATH PACKAGES
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage[overload]{empheq} % For braced-style systems of equations.
+\usepackage{fix-cm} % To override original LaTeX restrictions on sizes
+
+% PACKAGES FOR TABLES
+\usepackage{tabularx}
+\usepackage{longtable} % Tables that can span several pages
+\usepackage{colortbl}
+\usepackage{multirow}
+
+% PACKAGES FOR ALGORITHMS (PSEUDO-CODE)
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% PACKAGES FOR REFERENCES & BIBLIOGRAPHY
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref} % Adds clickable links at references
+\usepackage{cleveref}
+\usepackage[square, numbers, sort&compress]{natbib} % Square brackets, citing references with numbers, citations sorted by appearance in the text and compressed
+\bibliographystyle{abbrvnat} % You may use a different style adapted to your field
+
+% OTHER PACKAGES
+\usepackage{pdfpages} % To include a pdf file
+\usepackage{afterpage}
+\usepackage{lipsum} % DUMMY PACKAGE
+\usepackage{fancyhdr} % For the headers
+\fancyhf{}
+
+% Input of configuration file. Do not change config.tex file unless you really know what you are doing. 
+\input{Configuration_Files/config}
+
+
+
+
+%----------------------------------------------------------------------------
+%	NEW COMMANDS DEFINED
+%----------------------------------------------------------------------------
+
+% EXAMPLES OF NEW COMMANDS
+\newcommand{\bea}{\begin{eqnarray}} % Shortcut for equation arrays
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
+
+%----------------------------------------------------------------------------
+%	ADD YOUR PACKAGES (be careful of package interaction)
+%----------------------------------------------------------------------------
+% \usepackage{chemplants} % package for drawing process diagrams
+\usepackage{chemplants_my_version}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{backgrounds}
+
+\usepackage{eurosym}
+\usepackage{siunitx} % package for managing units
+\DeclareSIUnit\year{year}
+\DeclareSIUnit\bar{bar}
+\DeclareSIUnit\EUR{\textup{\euro}}
+\DeclareSIUnit\USD{\$}
+\DeclareSIUnit\kWh{kWh}
+\DeclareSIUnit\MWh{MWh}
+\DeclareSIUnit\mass{mass}
+
+\usepackage{pgfplots}  % package for plotting
+\usepgfplotslibrary[groupplots]
+\pgfplotsset{compat=1.18} 
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}  %import todo notes
+\setlength {\marginparwidth}{1.4cm}
+
+\usepackage{acronym} % package for handing abbreviations
+    \acrodef{BIC}{Binary Interaction Coefficients}
+    \acrodef{CFC}{chlorofluorocarbon}
+    \acrodef{DSC}{Direct Steam Cycle}
+    \acrodef{EGS}{Enhanced Geothermal System}
+    \acrodef{EOS}{Equation of State}
+    \acrodef{ESP}{Electrical Submersible Pump}
+    \acrodef{GA}{Genetic Algorithm}
+    \acrodef{GWP}{Global Warming Potential}
+    \acrodef{HCFC}{hydrochlorofluorocarbon}
+    \acrodef{HEOS}{Helmholtz free energy \ac{EOS}}
+    \acrodef{HFC}{hydrofluorocarbon}
+    \acrodef{IRR}{internal rate of return}
+    \acrodef{LCOE}{levelised cost of electricity}
+    \acrodef{LSP}{Line Shaft Pump}
+    \acrodef{NCG}{Non-condensable gases}
+    \acrodef{NETL}{National Energy Technology Laboratory}
+    \acrodef{NPV}{net present value}
+    \acrodef{ODP}{Ozone Depletion Potential}
+    \acrodef{ORC}{Organic Rankine Cycle}
+    \acrodef{PHE}{Primary Heat Exchanger}
+    \acrodef{PPI}{Producer Price Index}
+    \acrodef{PR}{Reng-Robinson}
+    \acrodef{RK}{Redlich-Kwong}
+    \acrodef{SRK}{Soave-Redlich-Kwong}
+    \acrodef{SP2009}{Spycher Pruess 2009}
+    \acrodef{SW}{Span-Wagner}
+    \acrodef{TEMA}{Tubular Exchangers Manufacturers Association}
+    \acrodef{TVD}{True Vertical Depth}
+    \acrodef{VDW}{van der Waals}
+    \acrodef{VLE}{Vapour-Liquid Equilibirum}
+    \acrodef{WHP}{Wellhead Pressure}
+    \acrodef{WP}{Wagner-Pruß}
+    \acrodef{Z}{Compressibility Factor}
+
+
+\usepackage{cancel}  % something to cancel out terms in an equation
+\usepackage{relsize}  % larger math symbols
+
+\usepackage[chapter]{minted}  % package for highlighting code snippets
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+
+\usepackage{svg}
+\usepackage{diagbox}
+
+\usepackage{mhchem}
+
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{notes}[2][]{breakable,sharp corners, skin=enhancedmiddle jigsaw,parbox=false,
+boxrule=0mm,leftrule=2mm,boxsep=0mm,arc=0mm,outer arc=0mm,attach title to upper,
+after title={.\ }, coltitle=black,colback=gray!10,colframe=black, title={#2},
+fonttitle=\bfseries,#1}
+
+%----------------------------------------------------------------------------
+%	ADD YOUR DEFINITIONS AND COMMANDS (be careful of existing commands)
+%----------------------------------------------------------------------------
+\tikzstyle{startstop} = [rectangle, rounded corners, 
+minimum width=3cm, 
+minimum height=1cm,
+text centered, 
+draw=black, 
+fill=red!30]
+
+\tikzstyle{tile} = [rectangle, rounded corners, 
+minimum width=1.2cm, 
+minimum height=1.2cm,
+text centered, 
+draw=black, 
+fill=red!30]
+
+\tikzstyle{io} = [trapezium, 
+trapezium stretches=true, % A later addition
+trapezium left angle=70, 
+trapezium right angle=110, 
+minimum width=3cm, 
+minimum height=1cm, text centered, 
+% text width=2cm, 
+draw=black, fill=blue!30]
+
+\tikzstyle{process} = [rectangle, rounded corners, 
+minimum width=3cm, 
+minimum height=1cm, 
+text centered, 
+text width=3cm, 
+draw=black, 
+fill=orange!30]
+
+\tikzstyle{decision} = [diamond, 
+minimum width=3cm, 
+minimum height=1cm, 
+text centered, 
+draw=black,
+aspect=2,
+fill=green!30]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+%----------------------------------------------------------------------------
+%	BEGIN OF YOUR DOCUMENT
+%----------------------------------------------------------------------------
+
+\begin{document}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[RO,RE]{\thepage} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+%----------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------
+
+\pagestyle{empty} % No page numbers
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the preamble pages
+
+\puttitle{
+	title=Design and Operation of a binary ORC power plant for the exploitation of single and two-phase geothermal resources, % Title of the thesis
+	name=Tristan Leonard Merbecks, % Author Name and Surname
+	course=Scienze e Tecnologie Energetiche e Nucleari (STEN) - Energy and Nuclear Science and Technology, % Study Programme (in Italian)
+	ID= 10834168,  % Student ID number (numero di matricola)
+	advisor={Paola Bombarda, Martin O. Saar, Paolo Silva}, % Supervisor name
+	coadvisor={Dario Alfani, Claudio Pietra, Joseph Bonafin}, % Co-Supervisor name, remove this line if there is none
+	academicyear={2021-24},  % Academic Year
+    phdcycle=XXXVI,
+} % These info will be put into your Title page 
+
+%----------------------------------------------------------------------------
+%	PREAMBLE PAGES: ABSTRACT (inglese e italiano), EXECUTIVE SUMMARY
+%----------------------------------------------------------------------------
+\cleardoublepage
+\begin{center}
+    The doctoral research has been carried out in the context of an agreement on joint doctoral supervision between Politecnico di Milano, Italy, and ETH Zurich, Switzerland.    
+\end{center}
+\cleardoublepage
+
+\startpreamble
+\setcounter{page}{1} % Set page counter to 1
+
+% ABSTRACT IN ENGLISH
+\input{Content/Abstract}
+
+% ACKNOWLEDGEMENTS
+\chapter*{Acknowledgements}
+    \input{Content/Acknowledgements}
+
+\chapter*{Funding}
+    \input{Content/Funding}
+
+\chapter*{Disclaimer}
+    \input{Content/Disclaimer}
+
+\chapter*{Data Availability}
+    \input{Content/DataAvailability}
+
+
+%----------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES/SYMBOLS
+%----------------------------------------------------------------------------
+
+% TABLE OF CONTENTS
+\thispagestyle{empty}
+\tableofcontents % Table of contents 
+\thispagestyle{empty}
+\cleardoublepage
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+% --------------------------------------------------------------------------
+% NUMBERED CHAPTERS % Regular chapters following
+% --------------------------------------------------------------------------
+
+\chapter{Introduction}
+\label{ch:introduction}%
+   \input{Content/Introduction/Introduction}
+
+\chapter{Thermophysical Property Modelling}
+\label{ch:thermophysmodelling}%
+    \input{Content/TPPM/ThermophysicalPropertyModelling}
+
+\chapter{Geothermal Power Generation}
+\label{ch:power_generation}%
+   \input{Content/PowGen/PowGen}
+
+\chapter{Power Plant Modelling}
+\label{ch:PowerCycle}%
+   \input{Content/PowerCycle/PowerCycle}
+
+\chapter{Power Plant Simulations}
+\label{ch:process_simulation}%
+   \input{Content/ProSim/ProcessSimulation} 
+
+\chapter{Conclusions and future developments}
+\label{ch:conclusions}%
+    \input{Content/Conclusions}
+
+%-------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%-------------------------------------------------------------------------
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+\bibliography{Thesis_bibliography} % The references information are stored in the file named "Thesis_bibliography.bib"
+
+\chapter*{Nomenclature}        
+    \input{Content/Symbols}
+    
+% LIST OF FIGURES
+\listoffigures
+
+% LIST OF TABLES
+\listoftables
+
+% LIST OF CODE SNIPPETS
+\listoflistings
+
+\chapter*{List of Publications}        
+    \input{Content/Publications}
+
+%-------------------------------------------------------------------------
+%	APPENDICES
+%-------------------------------------------------------------------------
+
+\cleardoublepage
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+\appendix
+\chapter{Chemical Equilibrium}
+\label{ch:appendix_a}%
+   \input{Content/Appendices/Appendix_A/appendix_a}
+
+\chapter{Spycher-Pruess Partition Model}
+\label{ch:appendix_b}%
+   \input{Content/Appendices/Appendix_B/appendix_b}
+
+\chapter{Exergy Analysis}
+\label{ch:appendix_c}%
+   \input{Content/Appendices/Appendix_C/appendix_c}
+
+\chapter{GeoProp Code Examples}
+\label{ch:appendix_d}%
+   \input{Content/Appendices/Appendix_D/appendix_d}
+
+% \chapter{Appendix E: Coupled Model Validation}
+% \label{ch:appendix_e}%
+%    \input{Content/Appendices/Appendix_E/appendix_e}
+
+\chapter{Power Cycle Validation}
+\label{ch:appendix_f}%
+   \input{Content/Appendices/Appendix_F/appendix_f}
+
+
+\cleardoublepage
+
+\end{document}

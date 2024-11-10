@@ -1,0 +1,123 @@
+% \begin{tikzpicture}
+
+%     \pic (producer) at (0,0) {producer};
+%     \pic (injector) at (4,0) {injector};
+
+%     \pic[rotate=180] (hpevap) at ($(injector-anchor) + (1, 6)$) {heat exchanger biphase};
+%     \pic[rotate=180] (hppreh) at ($(hpevap-anchor) + (0, -1.5)$) {heat exchanger biphase};
+%     \pic (solids) [scale=0.25] at ($(hpevap-pipes bottom) + (-3.5, 0)$) {block};
+
+%     \pic (lpevap) at ($(hpevap-anchor) + (-2.5, -0.5)$) {heat exchanger biphase};
+%     \pic (lppreh) at ($(lpevap-anchor) + (0, -3.5)$) {heat exchanger biphase};
+
+%     \pic[rotate=-90] (split) at ($(hppreh-pipes bottom) + (-1, 0)$) {valve triple=main};
+%     \pic[rotate=90] (mix) at ($(lppreh-pipes bottom) + (1.07, 0)$) {valve triple=main};
+%     \pic[rotate=-90] (split2) at ($(lppreh-shell top) + (0, 0.5)$) {valve triple=main};
+
+%     \pic (turbine) at ($(hpevap-anchor) + (3.5, 0)$) {multi_turbine_gen};
+%     \pic (condenser) at ($(turbine-outlet_lp bottom) + (0, -3.5)$) {heat exchanger biphase};
+%     \pic (lppump) at ($(condenser-anchor) + (-2, -1.3)$) {centrifugal pump};
+%     \pic (hppump) at ($(split2-anchor) + (2.5, 0)$) {centrifugal pump};
+
+%     \draw[main stream] (producer-top) |- (solids-left);
+%     \draw[main stream] (solids-bottom) -- ++ (0, -0.5);
+%     \draw[main stream] (solids-right) -- (hpevap-pipes bottom);
+%     \draw[main stream] (hpevap-pipes top) -- (lpevap-pipes top);
+
+%     \draw[main stream] (lpevap-pipes bottom) -| (split-left);
+%     \draw[main stream] (split-top) |- (hppreh-pipes bottom);
+%     \draw[main stream] (split-right) |- (lppreh-pipes top);
+
+%     \draw[main stream] (lppreh-pipes bottom) -- (mix-top);
+%     \draw[main stream] (hppreh-pipes top) -| (mix-right);
+%     \draw[main stream] (mix-left) -- (injector-top);
+
+%     \draw[main stream] (condenser-shell bottom) |- (lppump-anchor);
+%     \draw[main stream] (lppump-top) -| (lppreh-shell bottom);
+%     \draw[main stream] (lppreh-shell top) -- (split2-right);
+%     \draw[main stream] (split2-top) -- (hppump-anchor);
+%     \draw[main stream] (hppump-top) -- (hppreh-shell top);
+%     \draw[main stream] (hppreh-shell bottom) -- (hpevap-shell top);
+%     \draw[main stream] (split2-left) -- (lpevap-shell bottom);
+
+%     \draw[main stream] (hpevap-shell bottom) |- ++ (0.3, 0.3) -| (turbine-inlet_hp top);
+%     \draw[main stream] (lpevap-shell top) |- ++ (1.2, 1.2) -| (turbine-inlet_lp top);
+%     \draw[main stream] (turbine-outlet_lp bottom) -- (condenser-shell top);
+
+%     \draw[main stream] (condenser-pipes top) -- ++ (1,0);
+%     \draw[main stream] ($(condenser-pipes bottom) + (1, 0)$) -- (condenser-pipes bottom);
+
+%     \node[below] at (producer-bottom) {Producer};
+%     \node[below] at (injector-bottom) {Injector};
+%     \node[above, align=center] at (solids-top) {Solids\\Removal};
+%     \node[right] at (hpevap-shell left) {HP Evap.};
+%     \node[right] at (hppreh-shell left) {HP Pre-H.};
+%     \node[left] at ($(lpevap-shell bottom) + (-0.3, 0)$) {LP Evap.};
+%     \node[left] at ($(lppreh-shell bottom) + (-0.3, 0)$) {LP Pre-H.};
+%     \node[right, align=left] at ($(condenser-pipes bottom) + (1, 0)$) {Coolant in};
+%     \node[right, align=left] at ($(condenser-pipes top) + (1, 0)$) {Coolant out};
+%     \node[below] at ($(hppump-bottom) + (0.3, 0)$) {HP Pump};
+%     \node[below] at (lppump-bottom) {LP Pump};
+
+%     \node[above] at ($(turbine-top)+ (1,0.1)$) {Turbine};
+%     \node[right] at (turbine-right) {Generator};
+% \end{tikzpicture}
+
+\begin{tikzpicture}
+
+    \pic (producer) at (0,0) {producer};
+    \pic (injector) at (4,0) {injector};
+
+    \pic[rotate=180] (hpevap) at ($(injector-anchor) + (1, 6)$) {heat exchanger biphase};
+    \pic[rotate=180] (hppreh) at ($(hpevap-anchor) + (0, -1.5)$) {heat exchanger biphase};
+    \pic (solids) [scale=0.25] at ($(hpevap-pipes bottom) + (-3.5, 0)$) {block};
+
+    \pic (lpevap) at ($(hppreh-anchor) + (-2.5, -0.5)$) {heat exchanger biphase};
+    \pic (lppreh) at ($(lpevap-anchor) + (0, -2)$) {heat exchanger biphase};
+
+    \pic[rotate=-90] (split2) at ($(lppreh-shell top) + (0, 0.5)$) {valve triple=main};
+
+    \pic (turbine) at ($(hpevap-anchor) + (3.5, 0)$) {multi_turbine_gen};
+    \pic (condenser) at ($(turbine-outlet_lp bottom) + (0, -3.5)$) {heat exchanger biphase};
+    \pic (lppump) at ($(condenser-anchor) + (-2, -1.3)$) {centrifugal pump};
+    \pic (hppump) at ($(split2-anchor) + (2.5, 0)$) {centrifugal pump};
+
+    \draw[main stream] (producer-top) |- (solids-left);
+    \draw[main stream] (solids-bottom) -- ++ (0, -0.5);
+    \draw[main stream] (solids-right) -- (hpevap-pipes bottom);
+    \draw[main stream] (hpevap-pipes top) -| ++ (-0.5, -0.5) |- (hppreh-pipes bottom);  
+    \draw[main stream] (hppreh-pipes top) -- (lpevap-pipes top);
+    \draw[main stream] (lpevap-pipes bottom) -| ++ (0.5, -0.5) |- (lppreh-pipes top);
+
+    \draw[main stream] (lppreh-pipes bottom) -| (injector-top);
+
+    \draw[main stream] (condenser-shell bottom) |- (lppump-anchor);
+    \draw[main stream] (lppump-top) -| (lppreh-shell bottom);
+    \draw[main stream] (lppreh-shell top) -- (split2-right);
+    \draw[main stream] (split2-top) -- (hppump-anchor);
+    \draw[main stream] (hppump-top) -- (hppreh-shell top);
+    \draw[main stream] (hppreh-shell bottom) -- (hpevap-shell top);
+    \draw[main stream] (split2-left) -- (lpevap-shell bottom);
+
+    \draw[main stream] (hpevap-shell bottom) |- ++ (0.3, 0.3) -| (turbine-inlet_hp top);
+    \draw[main stream] (lpevap-shell top) |- ++ (3, 2.7) -| (turbine-inlet_lp top);
+    \draw[main stream] (turbine-outlet_lp bottom) -- (condenser-shell top);
+
+    \draw[main stream] (condenser-pipes top) -- ++ (1,0);
+    \draw[main stream] ($(condenser-pipes bottom) + (1, 0)$) -- (condenser-pipes bottom);
+
+    \node[below] at (producer-bottom) {Producer};
+    \node[below] at (injector-bottom) {Injector};
+    \node[above, align=center] at (solids-top) {Solids\\Removal};
+    \node[right] at (hpevap-shell left) {HP Evap.};
+    \node[right] at (hppreh-shell left) {HP Pre-H.};
+    \node[left] at ($(lpevap-shell bottom) + (-0.3, 0)$) {LP Evap.};
+    \node[left] at ($(lppreh-shell bottom) + (-0.3, 0)$) {LP Pre-H.};
+    \node[right, align=left] at ($(condenser-pipes bottom) + (1, 0)$) {Coolant in};
+    \node[right, align=left] at ($(condenser-pipes top) + (1, 0)$) {Coolant out};
+    \node[below] at ($(hppump-bottom) + (0.3, 0)$) {HP Pump};
+    \node[below] at (lppump-bottom) {LP Pump};
+
+    \node[above] at ($(turbine-top)+ (1,0.1)$) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+\end{tikzpicture}

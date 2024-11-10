@@ -1,0 +1,173 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{coral25314160}{RGB}{253,141,60}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkseagreen116196118}{RGB}{116,196,118}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{lightgreen161217155}{RGB}{161,217,155}
+\definecolor{orangered2308513}{RGB}{230,85,13}
+\definecolor{sandybrown253174107}{RGB}{253,174,107}
+\definecolor{seagreen4916384}{RGB}{49,163,84}
+\definecolor{steelblue49130189}{RGB}{49,130,189}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.03,0.5)},
+  anchor=west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Temperature/\unit{\degreeCelsius}},
+xmin=95, xmax=205,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Saturation Pressure/\unit{\bar}},
+ymin=0, ymax=21.6945178,
+ytick style={color=black},
+width=10cm, height=6.5cm
+]
+\addplot [semithick, orangered2308513]
+table {%
+100 -0.5
+110 -0.5
+120 -0.5
+130 -0.5
+140 -0.5
+150 -0.5
+160 -0.5
+170 -0.5
+180 -0.5
+190 -0.5
+200 -0.5
+};
+\addlegendentry{NCG content/\unit{\kg\per\kg}}
+\addplot [semithick, orangered2308513]
+table {%
+100 1.32694489
+110 1.87646689
+120 2.60146395
+130 3.54174579
+140 4.74234333
+150 6.25375799
+160 8.13206051
+170 10.4389907
+180 13.242035
+190 16.6149404
+200 20.637636
+};
+\addlegendentry{\quad0.075}
+\addplot [semithick, coral25314160]
+table {%
+100 1.22225823
+110 1.72805284
+120 2.39508611
+130 3.25969806
+140 4.36302273
+150 5.75093743
+160 7.47423692
+170 9.58862852
+180 12.1547321
+190 15.2383372
+200 18.9103017
+};
+\addlegendentry{\quad0.050}
+\addplot [semithick, sandybrown253174107]
+table {%
+100 1.11771903
+110 1.57991823
+120 2.18919427
+130 2.97856163
+140 3.98522846
+150 5.25065772
+160 6.82055935
+170 8.74487943
+180 11.0777943
+190 13.8776023
+200 17.2069516
+};
+\addlegendentry{\quad0.025}
+\addplot [semithick, steelblue49130189]
+table {%
+100 1.01332883
+110 1.43206525
+120 1.98382281
+130 2.69831838
+140 3.60897491
+150 4.75292844
+160 6.17099981
+170 7.90766027
+180 10.0109236
+190 12.5323195
+200 15.5268135
+};
+\addlegendentry{Pure Water}
+\addplot [semithick, seagreen4916384]
+table {%
+100 -0.5
+110 -0.5
+120 -0.5
+130 -0.5
+140 -0.5
+150 -0.5
+160 -0.5
+170 -0.5
+180 -0.5
+190 -0.5
+200 -0.5
+};
+\addlegendentry{Salinity/\unit{\kg\per\kg}}
+\addplot [semithick, lightgreen161217155]
+table {%
+100 0.953434508
+110 1.34769276
+120 1.86737105
+130 2.54055782
+140 3.39885964
+150 4.47640207
+160 5.8140898
+170 7.45136415
+180 9.43748458
+190 11.8168986
+200 14.6430085
+};
+\addlegendentry{\quad0.1}
+\addplot [semithick, darkseagreen116196118]
+table {%
+100 0.886120221
+110 1.25302271
+120 1.73691634
+130 2.36410994
+140 3.16423413
+150 4.17024883
+160 5.41799728
+170 6.94708898
+180 8.80210229
+190 11.0260644
+200 13.6686461
+};
+\addlegendentry{\quad0.2}
+\addplot [semithick, seagreen4916384]
+table {%
+100 0.817598089
+110 1.15669107
+120 1.60416042
+130 2.18445831
+140 2.92513654
+150 3.85684996
+160 5.01332359
+170 6.42975023
+180 8.14905756
+190 10.2127584
+200 12.663908
+};
+\addlegendentry{\quad0.3}
+\end{axis}
+
+\end{tikzpicture}

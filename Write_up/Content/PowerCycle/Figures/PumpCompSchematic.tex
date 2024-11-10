@@ -1,0 +1,31 @@
+\subfloat[A pump.\label{fig:perf_pump}]{
+    \begin{tikzpicture}
+        \pic (pump) at (0,0) {centrifugal pump};
+    
+        \draw[main stream] ($(pump-anchor) +(-2, 0)$)-- (pump-anchor);
+        \node[above] at ($(pump-anchor)+(-2, 0.1)$) {\(\Dot{m},\, P_1,\,h_1\)};
+
+        \draw[main stream] (pump-top)-- ($(pump-top) +(2, 0)$);
+        \node[below] at ($(pump-top) +(2, -0.1)$) {\(\Dot{m},\, P_2,\,h_2\)};
+        
+        \draw[utility stream] ($(pump-top) +(0, 1.5)$)-- (pump-top);
+        \node[left] at ($(pump-top) +(-0.1, 1.5)$) {\(\Dot{W}\)};
+
+        \node[above] at ($(pump-bottom)+(0, -1)$) {};
+    \end{tikzpicture}
+    }
+\qquad
+\subfloat[A compressor.\label{fig:perf_comp}]{
+    \begin{tikzpicture}
+        \pic (comp) at (1.9,0) {compressor};
+    
+        \draw[main stream] ($(comp-inlet top) + (-2, 1)$) -| (comp-inlet top);
+        \node[above] at ($(comp-inlet top) + (-2, 1.1)$) {\(\Dot{m},\, P_1,\,h_1\)};
+
+        \draw[main stream] (comp-outlet bottom) |- ($(comp-outlet bottom) + (2, -1)$) ;
+        \node[below] at ($(comp-outlet bottom) + (2, -1.1)$) {\(\Dot{m},\, P_2,\,h_2\)};
+        
+        \draw[utility stream] ($(comp-left) + (-1.5, 0)$) -- (comp-left);
+        \node[left] at ($(comp-left) + (-1.6, 0)$) {\(\Dot{W}\)};
+    \end{tikzpicture}
+    }

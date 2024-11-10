@@ -1,0 +1,593 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{burlywood253194140}{RGB}{253,194,140}
+\definecolor{chocolate24511733}{RGB}{245,117,33}
+\definecolor{coral25112593}{RGB}{251,125,93}
+\definecolor{crimson2113132}{RGB}{211,31,32}
+\definecolor{darkgray168}{RGB}{168,168,168}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkgreen06827}{RGB}{0,68,27}
+\definecolor{darkseagreen137206135}{RGB}{137,206,135}
+\definecolor{darkslategray41}{RGB}{41,41,41}
+\definecolor{dimgray89}{RGB}{89,89,89}
+\definecolor{firebrick1681521}{RGB}{168,15,21}
+\definecolor{forestgreen311146}{RGB}{3,111,46}
+\definecolor{gray127}{RGB}{127,127,127}
+\definecolor{lightblue182212233}{RGB}{182,212,233}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{lightgray206}{RGB}{206,206,206}
+\definecolor{lightsalmon252171142}{RGB}{252,171,142}
+\definecolor{maroon103012}{RGB}{103,0,12}
+\definecolor{mediumseagreen83179101}{RGB}{83,179,101}
+\definecolor{midnightblue848107}{RGB}{8,48,107}
+\definecolor{orangered222795}{RGB}{222,79,5}
+\definecolor{saddlebrown127394}{RGB}{127,39,4}
+\definecolor{saddlebrown171552}{RGB}{171,55,2}
+\definecolor{sandybrown25315782}{RGB}{253,157,82}
+\definecolor{seagreen4114674}{RGB}{41,146,74}
+\definecolor{silver184226177}{RGB}{184,226,177}
+\definecolor{skyblue131187219}{RGB}{131,187,219}
+\definecolor{steelblue40120184}{RGB}{40,120,184}
+\definecolor{steelblue80155203}{RGB}{80,155,203}
+\definecolor{teal1084158}{RGB}{10,84,158}
+\definecolor{tomato2437554}{RGB}{243,75,54}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 3, 
+        vertical sep=2.5cm, 
+        horizontal sep=2cm},
+    height=6cm, 
+    width=7cm, 
+]
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={CycloPropane},
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={\(\Delta T_{cond}^{min}\)/\unit{\K}},
+ymin=0, ymax=35,
+ytick style={color=black}
+]
+\addplot [semithick, lightblue182212233]
+table {%
+0 9.73214995135162
+10 11.8229686974185
+20 11.6596856604649
+30 11.8964977803978
+40 13.1716279308338
+50 13.8170510131031
+60 12.0617865354401
+70 12.9846933856641
+80 12.5248059863102
+100 13.6530892607013
+};
+\addplot [semithick, lightblue182212233, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, skyblue131187219]
+table {%
+0 11.4537342599766
+10 11.7666852763461
+20 13.7091829275788
+30 11.644390152563
+40 14.6871797858219
+50 15.944068662841
+60 12.9497419867937
+70 16.2973380694681
+80 17.0402748766832
+100 16.1717215381186
+};
+\addplot [semithick, skyblue131187219, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, steelblue80155203]
+table {%
+0 11.8684723766724
+10 14.2304515816958
+20 13.6228386311076
+30 13.6989036001981
+40 13.6180708267076
+50 13.8654723098641
+60 16.7326145839542
+70 15.2823405386705
+80 15.3410686061692
+100 16.360741810394
+};
+\addplot [semithick, steelblue80155203, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, steelblue40120184]
+table {%
+0 11.8589180705704
+10 14.0108179691414
+20 14.2432752889627
+30 16.8093722282207
+40 16.9255174852107
+50 15.3141052983733
+60 16.6391969577615
+70 16.9589630052909
+80 16.7259535768109
+100 14.1269039513193
+};
+\addplot [semithick, steelblue40120184, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, teal1084158]
+table {%
+0 11.7121936282479
+10 13.3397592970769
+20 13.635347403629
+30 14.8295916666705
+40 14.8347975779398
+50 15.9161467716241
+60 16.9449201081286
+70 16.4655839021104
+80 15.6750201700197
+100 15.7227109766476
+};
+\addplot [semithick, teal1084158, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, midnightblue848107]
+table {%
+0 13.5188956775939
+10 12.9277128536049
+20 14.2846711253687
+30 14.1510021395419
+40 14.1185190555457
+50 16.5026639554829
+60 16.7262778363919
+70 16.7506781153993
+80 15.6807435345629
+100 15.5154538826856
+};
+\addplot [semithick, midnightblue848107, dashed]
+table {%
+0 5
+100 5
+};
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={n-Butane},
+unbounded coords=jump,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={\(\Delta T_{cond}^{min}\)/\unit{\K}},
+ymin=0, ymax=35,
+ytick style={color=black}
+]
+\addplot [semithick, burlywood253194140]
+table {%
+0 nan
+10 nan
+20 nan
+30 nan
+40 nan
+50 nan
+60 nan
+70 nan
+80 nan
+100 nan
+};
+\addplot [semithick, burlywood253194140, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, sandybrown25315782]
+table {%
+0 18.0981636488605
+10 20.9627055474205
+20 27.0517080799088
+30 23.0905012055711
+40 27.033295562842
+50 27.2513842232083
+60 24.8689087387122
+70 24.6175787023852
+80 29.4701087218543
+100 27.1487947014459
+};
+\addplot [semithick, sandybrown25315782, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, chocolate24511733]
+table {%
+0 21.4808770585203
+10 28.6959756977461
+20 28.1654227716748
+30 28.5042916245595
+40 27.2276940918872
+50 27.535142082552
+60 29.5738889368859
+70 27.6123045368537
+80 28.0680456400175
+100 28.1207564432264
+};
+\addplot [semithick, chocolate24511733, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, orangered222795]
+table {%
+0 27.8195935173857
+10 23.3679890023406
+20 26.6405080512831
+30 25.4920286607251
+40 27.0664910242842
+50 28.6597962667437
+60 29.0334057714884
+70 29.3075562738574
+80 27.9322712604084
+100 28.8199057292403
+};
+\addplot [semithick, orangered222795, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, saddlebrown171552]
+table {%
+0 27.2394993819221
+10 27.1625050844774
+20 24.0770004583094
+30 29.1152007519789
+40 29.3460522081381
+50 27.818350710171
+60 28.5136894073362
+70 28.2378015693308
+80 24.9018642008323
+100 27.2772269295907
+};
+\addplot [semithick, saddlebrown171552, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, saddlebrown127394]
+table {%
+0 24.2113445704377
+10 28.4070694627614
+20 29.881827049134
+30 29.1576419805251
+40 29.0976510459889
+50 28.4064703291849
+60 29.3584719438604
+70 28.6835128462743
+80 29.7015809860543
+100 27.3145736346304
+};
+\addplot [semithick, saddlebrown127394, dashed]
+table {%
+0 5
+100 5
+};
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={Isohexane},
+unbounded coords=jump,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={\(\Delta T_{cond}^{min}\)/\unit{\K}},
+ymin=0, ymax=35,
+ytick style={color=black}
+]
+\addplot [semithick, silver184226177]
+table {%
+0 nan
+10 nan
+20 nan
+30 nan
+40 nan
+50 nan
+60 nan
+70 nan
+80 nan
+100 nan
+};
+\addplot [semithick, silver184226177, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, darkseagreen137206135]
+table {%
+0 8.28866905741201
+10 nan
+20 17.6877019067824
+30 29.4970079405452
+40 29.3647758863857
+50 28.9635568623467
+60 28.7864176908094
+70 28.2616059383644
+80 29.7125350927453
+100 16.8699750453482
+};
+\addplot [semithick, darkseagreen137206135, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, mediumseagreen83179101]
+table {%
+0 28.8998957105872
+10 24.4584433145293
+20 29.2697202971734
+30 29.8844849460536
+40 25.8867004797416
+50 29.6158667500487
+60 29.2153413735452
+70 29.9130173141518
+80 29.4099614522497
+100 29.7343666844359
+};
+\addplot [semithick, mediumseagreen83179101, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, seagreen4114674]
+table {%
+0 29.2188966889534
+10 24.8517719454845
+20 28.9557254411424
+30 29.4688732147657
+40 28.3275163920462
+50 29.5874620974594
+60 29.370666206247
+70 28.9899133232548
+80 29.1594362512387
+100 29.4006913104929
+};
+\addplot [semithick, seagreen4114674, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, forestgreen311146]
+table {%
+0 29.6305057158819
+10 29.3500940663868
+20 29.9424565660319
+30 29.9240008042327
+40 29.7692653649261
+50 29.8297151958906
+60 27.7708169732021
+70 28.4530322454333
+80 29.3504626861461
+100 29.4357643384793
+};
+\addplot [semithick, forestgreen311146, dashed]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, darkgreen06827]
+table {%
+0 29.2403251845361
+10 29.3572380251971
+20 29.6084910334159
+30 29.4012796279923
+40 29.1629152990952
+50 29.5061039258931
+60 29.9288679323986
+70 29.919978982827
+80 29.7195478523294
+100 29.2263543596549
+};
+\addplot [semithick, darkgreen06827, dashed]
+table {%
+0 5
+100 5
+};
+
+\nextgroupplot[
+legend cell align={left},
+legend style={
+    fill opacity=0.8,
+    draw opacity=1,
+    text opacity=1,
+    draw=lightgray204,
+    at={(-0.25, -0.35)},
+    anchor= north},
+legend columns=4,
+tick align=outside,
+tick pos=left,
+title={n-Heptane},
+unbounded coords=jump,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={\(\Delta T_{cond}^{min}\)/\unit{\K}},
+ymin=0, ymax=35,
+ytick style={color=black}
+]
+\addplot [semithick, black]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{Techno-economic opt.}
+\addplot [semithick, lightgray206]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{423}{\K}}
+\addplot [semithick, darkgray168]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\addplot [semithick, gray127]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, black, dashed]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{Thermodynamic opt.}
+\addplot [semithick, dimgray89]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, darkslategray41]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, black]
+table {%
+0 -1
+1 -1
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\addplot [semithick, lightsalmon252171142, forget plot]
+table {%
+0 nan
+10 nan
+20 nan
+30 nan
+40 nan
+50 nan
+60 nan
+70 nan
+80 nan
+100 nan
+};
+\addplot [semithick, lightsalmon252171142, dashed, forget plot]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, coral25112593, forget plot]
+table {%
+0 nan
+10 nan
+20 nan
+30 nan
+40 nan
+50 nan
+60 nan
+70 nan
+80 nan
+100 nan
+};
+\addplot [semithick, coral25112593, dashed, forget plot]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, tomato2437554, forget plot]
+table {%
+0 nan
+10 nan
+20 nan
+30 nan
+40 nan
+50 nan
+60 nan
+70 nan
+80 nan
+100 nan
+};
+\addplot [semithick, tomato2437554, dashed, forget plot]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, crimson2113132, forget plot]
+table {%
+0 29.5870667644697
+10 29.6160105771591
+20 25.6662914416278
+30 28.8762620250639
+40 29.6277076851297
+50 28.5143425387321
+60 29.9567222881347
+70 29.5137852177003
+80 28.2792668254258
+100 29.7996500967219
+};
+\addplot [semithick, crimson2113132, dashed, forget plot]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, firebrick1681521, forget plot]
+table {%
+0 29.8664642756134
+10 27.8080096267923
+20 29.9876949091642
+30 28.6764949795691
+40 29.924006431522
+50 29.1775104549817
+60 28.5754606435424
+70 29.9851412708117
+80 29.8240849548432
+100 29.4320521939631
+};
+\addplot [semithick, firebrick1681521, dashed, forget plot]
+table {%
+0 5
+100 5
+};
+\addplot [semithick, maroon103012, forget plot]
+table {%
+0 29.198606720354
+10 29.6382885635713
+20 29.7467379521885
+30 29.7687604826522
+40 29.5945087657457
+50 29.2012174838166
+60 29.64601556388
+70 28.9703532565303
+80 29.8805665263238
+100 29.8562382241727
+};
+\addplot [semithick, maroon103012, dashed, forget plot]
+table {%
+0 5
+100 5
+};
+\end{groupplot}
+
+\end{tikzpicture}

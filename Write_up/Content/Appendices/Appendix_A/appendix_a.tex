@@ -1,0 +1,40 @@
+For a closed system at constant temperature and pressure, equilibrium is established when the Gibbs free energy reaches a global minimum \cite{Gyftopoulos2005}. The Gibbs free energy, \(G\), is defined in Equation~\eqref{eq:gibbs_potential}, where  \(H\) is the enthalpy,  \(S\), is the entropy and  \(T\) is the absolute temperature.
+
+\begin{align} 
+    G = H - TS \label{eq:gibbs_potential}
+\end{align}
+
+Equation~\eqref{eq:dG_def} gives the differential form of Equation~\eqref{eq:gibbs_potential}, where \(U\) is the internal energy, \(P\) is the absolute pressure and \(V\) is the volume. At constant temperature and pressure Equation~\eqref{eq:dG_def} reduces to Equation~\eqref{eq:dG_def_PT}.
+
+\begin{align} 
+    dG = dU + PdV + VdP - TdS - SdT \label{eq:dG_def}
+\end{align}
+\begin{align} 
+    dG|_{P,T} = dU + PdV - TdS \label{eq:dG_def_PT}
+\end{align}
+
+The change in internal energy can be attributed to either a heat or work interaction, see Equation~\eqref{eq:dU_def}, where \(\delta Q\) is heat added to the system and \(\delta W\) is the work done on the system. The work done captures both mechanical (i.e. pressure-volume) and non-mechanical (i.e. electromagnetic) work, see Equation~\eqref{eq:dW_def}, where  \(\delta W_x\) is the non-mechanical work.
+
+\begin{align} 
+    dU = \delta Q + \delta W \label{eq:dU_def}
+\end{align}
+\begin{align} 
+    \delta W = - PdV + \delta W_x \label{eq:dW_def}
+\end{align}
+
+Substituting Equations ~\eqref{eq:dU_def} and \eqref{eq:dW_def} into \eqref{eq:dG_def_PT}, reduces the differential form of the Gibbs free energy, yielding Equation~\eqref{eq:dG_def_PT_reduced}.
+
+\begin{align} 
+    dG|_{P,T} = \delta Q + \delta W_x - TdS \label{eq:dG_def_PT_reduced}
+\end{align}
+
+Since \(Q \leq TdS\), from the second law of thermodynamics; it follows that \(Q - TdS \leq 0\), yielding Equation ~\eqref{eq:dG_def_PT_reduced2}, meaning that in the absence of non-mechanical work (i.e. \(\delta W_x = 0\) the change in Gibbs free energy is strictly negative, see Equation ~\eqref{eq:dG_def_PT_reduced3}. Hence, as the system approaches equilibrium, the Gibbs free energy tends towards a global minimum.
+
+\begin{align} 
+    dG|_{P,T} \leq \delta W_x \label{eq:dG_def_PT_reduced2}
+\end{align}
+\begin{align} 
+    dG|_{P,T} \leq 0 \label{eq:dG_def_PT_reduced3}
+\end{align}
+
+From the second law of thermodynamics, equilibrium is established when the entropy of the system no longer changes (i.e. \(dS = 0\)). The Gibbs free energy also provides a derived equilibrium condition, whereby equilibrium (at constant temperature and pressure for closed systems) is established when the Gibbs Energy no longer changes (i.e. \(dG = 0\)).

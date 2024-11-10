@@ -1,0 +1,65 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (injector) at (2,0) {injector};
+    \pic[rotate=180] (phea) at ($(injector-anchor) + (0.925, 6.5)$) {heat exchanger biphase};
+    \pic (solids) [scale=0.25] at ($(phea-pipes bottom) + (-1.5, 0)$) {block};
+    \pic (turbinea) at ($(phea-anchor) + (4.5, 1)$) {turbine_gen};
+    \pic[rotate=-90] (condensera) at ($(turbinea-outlet bottom) + (-1.05, -1.8)$) {heat exchanger biphase};
+    \pic (pumpa) at ($(condensera-anchor) + (-2, 0)$) {centrifugal pump};
+
+    \pic[rotate=180] (pheb) at ($(phea-anchor) + (0, -4.5)$) {heat exchanger biphase};
+    \pic (turbineb) at ($(pheb-anchor) + (4.5, 1)$) {turbine_gen};
+    \pic (condenserb) at ($(turbineb-outlet bottom) + (0, -0.8)$) {heat exchanger biphase};
+    \pic (pumpb) at ($(condenserb-anchor) + (-1.5, -1)$) {centrifugal pump};
+
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (solids-left);
+    \draw[main stream] (solids-right) -- (phea-pipes bottom);
+    \draw[main stream] (solids-bottom) -- ++ (0, -0.5);
+    
+    \draw[main stream] (phea-pipes top) 
+        -| ($(phea-pipes top) + (-0.5, -1)$) 
+        |- (pheb-pipes bottom);
+    \draw[main stream] (phea-shell bottom) |- ++ (0, 1) -| (turbinea-inlet top);
+    \draw[main stream] (turbinea-outlet bottom) |- (condensera-shell top);
+    \draw[main stream] (condensera-shell bottom) |- (pumpa-anchor);
+    \draw[main stream] (pumpa-top) -| (phea-shell top);
+
+    \draw[main stream] (pheb-shell bottom) |- ++ (0, 1) -| (condensera-pipes bottom);
+    \draw[main stream] (condensera-pipes top) -- (turbineb-inlet top);
+    \draw[main stream] (turbineb-outlet bottom) -- (condenserb-shell top);
+    \draw[main stream] (condenserb-shell bottom) |- (pumpb-anchor);
+    \draw[main stream] (pumpb-top) -| (pheb-shell top);
+    % \draw[main stream] (pheb-shell bottom) -| (phea-shell top);
+    \draw[main stream] (condenserb-pipes top) -- ++ (1,0);
+    \draw[main stream] ($(condenserb-pipes bottom) + (1, 0)$) -- (condenserb-pipes bottom);
+    \draw[main stream] (pheb-pipes top) 
+        -| ($(pheb-pipes top) + (-0.5, -1)$) 
+        -- (injector-top);
+    
+    
+    % % draw labels
+    \node[above, align=center] at (solids-top) {Solids\\Removal};
+    \node[below] at (producer-bottom) {Producer};
+    \node[below] at (injector-bottom) {Injector};
+
+    \node[above] at ($(phea-shell bottom)+ (2,1.2)$) {\textbf{Fluid A}};
+    \node[above] at ($(pheb-shell bottom)+ (2,1.2)$) {\textbf{Fluid B}};
+    
+    \node[right] at (phea-shell left) {PHE};
+    \node[above] at ($(turbinea-top)+ (0.5,0.1)$) {Turbine};
+    \node[right] at (turbinea-right) {Generator};
+    \node[above, align=center] at (condensera-shell left) {Condenser\\Evaporator};
+    \node[below left, align=right] at (pumpa-left) {Pump};
+
+    \node[right] at (pheb-shell left) {PHE};
+    \node[above] at ($(turbineb-top)+ (0.5,0.1)$) {Turbine};
+    \node[right] at (turbineb-right) {Generator};
+    \node[left, align=left] at (condenserb-shell left) {Condenser};
+    \node[below left, align=right] at (pumpb-left) {Pump};
+
+    \node[right, align=left] at ($(condenserb-pipes bottom) + (1, 0)$) {Coolant in};
+    \node[right, align=left] at ($(condenserb-pipes top) + (1, 0)$) {Coolant out};
+    
+\end{tikzpicture}

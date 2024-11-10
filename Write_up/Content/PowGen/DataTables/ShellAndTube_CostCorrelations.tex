@@ -1,0 +1,32 @@
+% \begin{tabular}{|c | c c | c | c | c |}
+%     \hline
+%     \rowcolor{bluepoli!40} % comment this line to remove the color
+%     \textbf{Cost Correlation} & \textbf{Min}/\unit{\square\m} & \textbf{Max}/\unit{\square\m} & \textbf{Currency} & \textbf{Reference} \T\B \\
+%     \hline \hline
+%     \(C = 3.28\cdot10^4 *\left(\frac{A}{80}\right)^{0.68}\) & 80 & 4000 & \$2000 & \cite{Smith2005} \T\B \\ % Heat transfer Area
+%     \(C = 181 * A + 3320\) & - & - & \$2002 & \cite{Peters2003, Adams2021} \textsuperscript{a} \T\B \\ % fixed head
+%     \(C = 239 * A + 13400\) & - & - & \$2002 & \cite{Peters2003, Adams2021} \textsuperscript{b} \T\B \\ % floating head
+%     \(C = 235 * A + 17900\) & - & - & \$2002 &\cite{Loh2002, Adams2021} \textsuperscript{c} \T\B \\ % flaoting/fixed head
+
+%     \hline
+% \end{tabular}
+
+\begin{tabular}{|c | c c | c | c | c |}
+    \hline
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+    \textbf{Cost Correlation} & \textbf{Min}/\unit{\square\m} & \textbf{Max}/\unit{\square\m} & \textbf{Currency} & \textbf{Reference} \T\B \\
+    \hline \hline
+    \(C = 3.28\cdot10^4 *\left(\frac{A}{80}\right)^{0.68}\) & 80 & 4000 & \$2000 & \cite{Smith2005} \T\B \\ % Heat transfer Area
+    \(C = 239 * A + 13400\) & - & - & \$2002 & \cite{Peters2003, Adams2021} \textsuperscript{a} \T\B \\ % floating head
+    \(C = 181 * A + 3320\) & - & - & \$2002 & \cite{Peters2003, Adams2021} \textsuperscript{b} \T\B \\ % fixed head
+    \(C = 235 * A + 17900\) & - & - & \$2002 &\cite{Loh2002, Adams2021} \textsuperscript{c} \T\B \\ % flaoting/fixed head
+    \(\log C = 4.3247 - 0.3030\log A + 0.1634(\log A)^2\) & 10 & 1000 & \$2001 & \cite{Turton2012}\textsuperscript{a} \T\B \\ % heat exchanger
+    \(\log C = 4.8306 -0.8509\log A + 0.3187(\log A)^2\) & 10 & 1000 & \$2001 & \cite{Turton2012}\textsuperscript{b} \T\B \\ % heat exchanger
+    \(\log C = 4.4646 -0.5277\log A + 0.3955(\log A)^2\) & 10 & 100 & \$2001 & \cite{Turton2012} \textsuperscript{d} \T\B \\ % kettle boiler
+    \(C = 1500 * \left(\frac{UA}{4000}\right)^{0.9}*10^{f_P}\) & - & - & \euro2014 & \cite{Astolfi2014B} \textsuperscript{e} \T\B \\ % PHE
+    \(f_P= 0.03881 - 0.11272*\log P + 0.08183* \log^2 P\) &  &  &  &  \T\B \\ 
+    \(C = 260 *\left(\frac{UA}{650}\right)^{0.9}*10^{f_P}\) & - & - & \euro2014 & \cite{Astolfi2014B} \textsuperscript{f} \T\B \\ % RECU
+    \(f_P= -0.00164 - 0.00627*\log P +0.0123* \log^2 P\) &  &  &  &  \T\B \\ 
+
+    \hline
+\end{tabular}

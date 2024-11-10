@@ -1,0 +1,56 @@
+\begin{tikzpicture}
+    \pic (comp1) at (0,0) {compressor};
+    \pic (cooler1) at ($(comp1-anchor) + (1.9, -1)$) {heat exchanger};
+    
+    \draw[main stream] ($(comp1-inlet top) + (-1.1, 1)$) -| (comp1-inlet top);
+    \node[above right] at ($(comp1-inlet top) + (-1.1, 1.1)$) {\(\Dot{m}, P_{0},\,h_{0}\)};
+    
+    \draw[utility stream] ($(comp1-left) + (-0.4, 0)$)-- (comp1-left);
+    \node[left] at ($(comp1-left) + (-0.4, 0)$) {\(\Dot{W}_1\)};
+    
+    \draw[main stream] (comp1-outlet bottom) |- (cooler1-pipes left);
+    \node[below] at ($(comp1-outlet bottom) + (0, -0.9)$) {\(P_{1}^{'},\,h_{1}^{'}\)};
+    
+    \draw[utility stream] (cooler1-shell top)-- ++(0,1);
+    \node[right] at ($(cooler1-shell top) + (0, 1.1)$) {\(\Dot{Q}_1\)};
+
+    \draw[main stream] (cooler1-pipes right) -- ++(1.1, 0);
+    \node[below] at ($(cooler1-pipes right) + (1.1,-0.2)$) {\(P_{1},\,h_{1}\)};
+
+
+
+    \pic (compi) at ($(cooler1-pipes right) + (3.2,1)$) {compressor};
+    \pic (cooleri) at ($(compi-anchor) + (1.9, -1)$) {heat exchanger};
+
+    \draw[main stream, hidden stream] ($(cooler1-pipes right) + (1.3, 0)$) -| ($0.5*(cooler1-pipes right) + 0.5*(compi-inlet top)$) |- ($(compi-inlet top) + (-1.2, 1)$);
+    
+    \draw[main stream] ($(compi-inlet top) + (-1.1, 1)$) -| (compi-inlet top);
+    \node[above right] at ($(compi-inlet top) + (-1.1, 1.1)$) {\(P_{i-1},\,h_{i-1}\)};
+    
+    \draw[utility stream] ($(compi-left) + (-0.4, 0)$)-- (compi-left);
+    \node[left] at ($(compi-left) + (-0.4, 0)$) {\(\Dot{W}_i\)};
+    
+    \draw[main stream] (compi-outlet bottom) |- (cooleri-pipes left);
+    \node[below] at ($(compi-outlet bottom) + (0, -0.9)$) {\(P_{i}^{'},\,h_{i}^{'}\)};
+    
+    \draw[utility stream] (cooleri-shell top)-- ++(0,1);
+    \node[right] at ($(cooleri-shell top) + (0, 1.1)$) {\(\Dot{Q}_i\)};
+
+    \draw[main stream] (cooleri-pipes right) -- ++(1.1, 0);
+    \node[below] at ($(cooleri-pipes right) + (1.1,-0.2)$) {\(P_{i},\,h_{i}\)};
+
+    % \draw[main stream, hidden stream] (5.6 + 6.2,-1.7) -| (5.8 + 6.2,-1) |- (6 + 6.2,0);
+
+    \pic (compN) at ($(cooleri-pipes right) + (3.2,1)$) {compressor};
+
+    \draw[main stream, hidden stream] ($(cooleri-pipes right) + (1.3, 0)$) -| ($0.5*(cooleri-pipes right) + 0.5*(compN-inlet top)$) |- ($(compN-inlet top) + (-1.2, 1)$);
+    
+    \draw[main stream] ($(compN-inlet top) + (-1.1, 1)$) -| (compN-inlet top);
+    \node[above right] at ($(compN-inlet top) + (-1.1, 1.1)$) {\(P_{N-1},\,h_{N-1}\)};
+    
+    \draw[utility stream] ($(compN-left) + (-0.4, 0)$)-- (compN-left);
+    \node[left] at ($(compN-left) + (-0.4, 0)$) {\(\Dot{W}_N\)};
+    
+    \draw[main stream] (compN-outlet bottom) |- ($(compN-anchor) + (1.5, -1)$) ;
+    \node[below] at ($(compN-outlet bottom) + (0, -0.9)$) {\(\Dot{m}, P_{N},\,h_{N}\)};            
+\end{tikzpicture}

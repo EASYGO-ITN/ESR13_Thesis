@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+    \pic (heatX) at (0,0) {tube bundle heat exchanger var};
+
+    \draw[main stream] ($(heatX-head left)+(-2,0)$) -- (heatX-head left);
+    \node[above] at ($(heatX-head left)+(-2,0.1)$) {\(\Dot{m}_1,\, P_1,\,h_1\)};
+    \draw[main stream] (heatX-head right) -- ($(heatX-head right)+(2,0)$);
+    \node[below] at ($(heatX-head right)+(2,-0.1)$) {\(\Dot{m}_2,\, P_2,\,h_2\)};
+
+    \draw[main stream] ($(heatX-shell top right)+(0,2)$) -- (heatX-shell top right);
+    \node[left] at ($(heatX-shell top right)+(-0.1,2)$) {\(\Dot{m}_A,\, P_A,\,h_A\)};
+    \draw[main stream] (heatX-shell bottom left) -- ($(heatX-shell bottom left)+(0,-2)$);
+    \node[right] at ($(heatX-shell bottom left)+(0.1,-2)$) {\(\Dot{m}_B,\, P_B,\,h_B\)};
+    
+\end{tikzpicture}

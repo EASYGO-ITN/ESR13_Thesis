@@ -1,0 +1,531 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{sienna1408675}{RGB}{140,86,75}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 3, 
+        vertical sep=2.5cm, 
+        horizontal sep=2.5cm},
+    height=6cm, 
+    width=6.5cm, 
+    legend cell align={left},
+    legend style={
+        fill opacity=0.8,
+        draw opacity=1,
+        text opacity=1,
+        draw=lightgray204,
+        at={(1.25, 1.3)},
+        anchor= south},
+    legend columns=3
+]
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={n-Butane},
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-7.75, xmax=107.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Cost/\unit{\mega\USD\of{2023}}},
+ymin=0, ymax=29.5589224218663,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-2.5,0) rectangle (axis cs:2.5,2.65951945052489);
+\addlegendimage{ybar,area legend,draw=none,fill=steelblue31119180}
+\addlegendentry{Turbine}
+
+\draw[draw=none,fill=steelblue31119180] (axis cs:7.5,0) rectangle (axis cs:12.5,3.01500280691446);
+\draw[draw=none,fill=steelblue31119180] (axis cs:17.5,0) rectangle (axis cs:22.5,3.27747544003151);
+\draw[draw=none,fill=steelblue31119180] (axis cs:27.5,0) rectangle (axis cs:32.5,3.55499161235223);
+\draw[draw=none,fill=steelblue31119180] (axis cs:37.5,0) rectangle (axis cs:42.5,3.83541273780066);
+\draw[draw=none,fill=steelblue31119180] (axis cs:47.5,0) rectangle (axis cs:52.5,4.06534601772119);
+\draw[draw=none,fill=steelblue31119180] (axis cs:57.5,0) rectangle (axis cs:62.5,4.30395701294958);
+\draw[draw=none,fill=steelblue31119180] (axis cs:67.5,0) rectangle (axis cs:72.5,4.58199215101205);
+\draw[draw=none,fill=steelblue31119180] (axis cs:77.5,0) rectangle (axis cs:82.5,4.77178683101474);
+\draw[draw=none,fill=steelblue31119180] (axis cs:87.5,0) rectangle (axis cs:92.5,4.97987403981134);
+\draw[draw=none,fill=steelblue31119180] (axis cs:97.5,0) rectangle (axis cs:102.5,5.17811572757004);
+\draw[draw=none,fill=darkorange25512714] (axis cs:-2.5,2.65951945052489) rectangle (axis cs:2.5,4.67430819879519);
+\addlegendimage{ybar,area legend,draw=none,fill=darkorange25512714}
+\addlegendentry{Condenser}
+
+\draw[draw=none,fill=darkorange25512714] (axis cs:7.5,3.01500280691446) rectangle (axis cs:12.5,5.46389487812597);
+\draw[draw=none,fill=darkorange25512714] (axis cs:17.5,3.27747544003151) rectangle (axis cs:22.5,5.97698050022185);
+\draw[draw=none,fill=darkorange25512714] (axis cs:27.5,3.55499161235223) rectangle (axis cs:32.5,6.59471877772458);
+\draw[draw=none,fill=darkorange25512714] (axis cs:37.5,3.83541273780066) rectangle (axis cs:42.5,7.25845621309307);
+\draw[draw=none,fill=darkorange25512714] (axis cs:47.5,4.06534601772119) rectangle (axis cs:52.5,7.75920850807441);
+\draw[draw=none,fill=darkorange25512714] (axis cs:57.5,4.30395701294958) rectangle (axis cs:62.5,8.32209235038878);
+\draw[draw=none,fill=darkorange25512714] (axis cs:67.5,4.58199215101205) rectangle (axis cs:72.5,9.07513476235154);
+\draw[draw=none,fill=darkorange25512714] (axis cs:77.5,4.77178683101474) rectangle (axis cs:82.5,9.47627636208836);
+\draw[draw=none,fill=darkorange25512714] (axis cs:87.5,4.97987403981134) rectangle (axis cs:92.5,9.97873244215179);
+\draw[draw=none,fill=darkorange25512714] (axis cs:97.5,5.17811572757004) rectangle (axis cs:102.5,10.4609050686167);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:-2.5,4.67430819879519) rectangle (axis cs:2.5,7.49312605237734);
+\addlegendimage{ybar,area legend,draw=none,fill=forestgreen4416044}
+\addlegendentry{Other Equipment}
+
+\draw[draw=none,fill=forestgreen4416044] (axis cs:7.5,5.46389487812597) rectangle (axis cs:12.5,8.2757368095136);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:17.5,5.97698050022185) rectangle (axis cs:22.5,8.88506300426365);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:27.5,6.59471877772458) rectangle (axis cs:32.5,9.7147783630544);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:37.5,7.25845621309307) rectangle (axis cs:42.5,10.6371707110163);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:47.5,7.75920850807441) rectangle (axis cs:52.5,11.3394847243405);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:57.5,8.32209235038878) rectangle (axis cs:62.5,12.1373660624778);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:67.5,9.07513476235154) rectangle (axis cs:72.5,13.2038912957691);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:77.5,9.47627636208836) rectangle (axis cs:82.5,13.7794062946271);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:87.5,9.97873244215179) rectangle (axis cs:92.5,14.4993759348015);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:97.5,10.4609050686167) rectangle (axis cs:102.5,15.1922251841615);
+\draw[draw=none,fill=crimson2143940] (axis cs:-2.5,7.49312605237734) rectangle (axis cs:2.5,9.8146338321005);
+\addlegendimage{ybar,area legend,draw=none,fill=crimson2143940}
+\addlegendentry{PHE}
+
+\draw[draw=none,fill=crimson2143940] (axis cs:7.5,8.2757368095136) rectangle (axis cs:12.5,9.78291182958974);
+\draw[draw=none,fill=crimson2143940] (axis cs:17.5,8.88506300426365) rectangle (axis cs:22.5,10.1128740859921);
+\draw[draw=none,fill=crimson2143940] (axis cs:27.5,9.71477836305439) rectangle (axis cs:32.5,10.847471753965);
+\draw[draw=none,fill=crimson2143940] (axis cs:37.5,10.6371707110163) rectangle (axis cs:42.5,11.7465681869689);
+\draw[draw=none,fill=crimson2143940] (axis cs:47.5,11.3394847243405) rectangle (axis cs:52.5,12.4455036142189);
+\draw[draw=none,fill=crimson2143940] (axis cs:57.5,12.1373660624778) rectangle (axis cs:62.5,13.2621760541723);
+\draw[draw=none,fill=crimson2143940] (axis cs:67.5,13.2038912957691) rectangle (axis cs:72.5,14.3531476886049);
+\draw[draw=none,fill=crimson2143940] (axis cs:77.5,13.7794062946271) rectangle (axis cs:82.5,14.9580456982765);
+\draw[draw=none,fill=crimson2143940] (axis cs:87.5,14.4993759348015) rectangle (axis cs:92.5,15.7141961208521);
+\draw[draw=none,fill=crimson2143940] (axis cs:97.5,15.1922251841615) rectangle (axis cs:102.5,16.4459079173906);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:-2.5,9.8146338321005) rectangle (axis cs:2.5,9.86586248753754);
+\addlegendimage{ybar,area legend,draw=none,fill=mediumpurple148103189}
+\addlegendentry{Pump}
+
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:7.5,9.78291182958974) rectangle (axis cs:12.5,9.84144675985672);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:17.5,10.1128740859921) rectangle (axis cs:22.5,10.1782887641463);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:27.5,10.847471753965) rectangle (axis cs:32.5,10.9202085486543);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:37.5,11.7465681869689) rectangle (axis cs:42.5,11.8255007427312);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:47.5,12.4455036142189) rectangle (axis cs:52.5,12.5309667569314);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:57.5,13.2621760541723) rectangle (axis cs:62.5,13.3534579923114);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:67.5,14.3531476886049) rectangle (axis cs:72.5,14.4506478669613);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:77.5,14.9580456982765) rectangle (axis cs:82.5,15.0609547638856);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:87.5,15.7141961208521) rectangle (axis cs:92.5,15.822252224274);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:97.5,16.4459079173906) rectangle (axis cs:102.5,16.5596204044069);
+\draw[draw=none,fill=sienna1408675] (axis cs:-2.5,9.86586248753754) rectangle (axis cs:2.5,16.7719662288138);
+\addlegendimage{ybar,area legend,draw=none,fill=sienna1408675}
+\addlegendentry{Construction}
+
+\draw[draw=none,fill=sienna1408675] (axis cs:7.5,9.84144675985672) rectangle (axis cs:12.5,16.7304594917564);
+\draw[draw=none,fill=sienna1408675] (axis cs:17.5,10.1782887641463) rectangle (axis cs:22.5,17.3030908990487);
+\draw[draw=none,fill=sienna1408675] (axis cs:27.5,10.9202085486543) rectangle (axis cs:32.5,18.5643545327124);
+\draw[draw=none,fill=sienna1408675] (axis cs:37.5,11.8255007427312) rectangle (axis cs:42.5,20.1033512626431);
+\draw[draw=none,fill=sienna1408675] (axis cs:47.5,12.5309667569314) rectangle (axis cs:52.5,21.3026434867834);
+\draw[draw=none,fill=sienna1408675] (axis cs:57.5,13.3534579923114) rectangle (axis cs:62.5,22.7008785869294);
+\draw[draw=none,fill=sienna1408675] (axis cs:67.5,14.4506478669613) rectangle (axis cs:72.5,24.5661013738343);
+\draw[draw=none,fill=sienna1408675] (axis cs:77.5,15.0609547638856) rectangle (axis cs:82.5,25.6036230986055);
+\draw[draw=none,fill=sienna1408675] (axis cs:87.5,15.822252224274) rectangle (axis cs:92.5,26.8978287812658);
+\draw[draw=none,fill=sienna1408675] (axis cs:97.5,16.5596204044069) rectangle (axis cs:102.5,28.1513546874918);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={n-Butane},
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-7.75, xmax=107.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Cost Contribution/\unit{\percent}},
+ymin=0, ymax=105,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-2.5,0) rectangle (axis cs:2.5,15.8569330169286);
+\draw[draw=none,fill=steelblue31119180] (axis cs:7.5,0) rectangle (axis cs:12.5,18.021040058105);
+\draw[draw=none,fill=steelblue31119180] (axis cs:17.5,0) rectangle (axis cs:22.5,18.941560552119);
+\draw[draw=none,fill=steelblue31119180] (axis cs:27.5,0) rectangle (axis cs:32.5,19.1495567814542);
+\draw[draw=none,fill=steelblue31119180] (axis cs:37.5,0) rectangle (axis cs:42.5,19.0784744677261);
+\draw[draw=none,fill=steelblue31119180] (axis cs:47.5,0) rectangle (axis cs:52.5,19.0837631031258);
+\draw[draw=none,fill=steelblue31119180] (axis cs:57.5,0) rectangle (axis cs:62.5,18.9594292417726);
+\draw[draw=none,fill=steelblue31119180] (axis cs:67.5,0) rectangle (axis cs:72.5,18.651686245553);
+\draw[draw=none,fill=steelblue31119180] (axis cs:77.5,0) rectangle (axis cs:82.5,18.6371546426749);
+\draw[draw=none,fill=steelblue31119180] (axis cs:87.5,0) rectangle (axis cs:92.5,18.5140372492809);
+\draw[draw=none,fill=steelblue31119180] (axis cs:97.5,0) rectangle (axis cs:102.5,18.3938420905577);
+\draw[draw=none,fill=darkorange25512714] (axis cs:-2.5,15.8569330169286) rectangle (axis cs:2.5,27.8697687261309);
+\draw[draw=none,fill=darkorange25512714] (axis cs:7.5,18.021040058105) rectangle (axis cs:12.5,32.6583670987529);
+\draw[draw=none,fill=darkorange25512714] (axis cs:17.5,18.941560552119) rectangle (axis cs:22.5,34.5428486453276);
+\draw[draw=none,fill=darkorange25512714] (axis cs:27.5,19.1495567814542) rectangle (axis cs:32.5,35.5235554573361);
+\draw[draw=none,fill=darkorange25512714] (axis cs:37.5,19.0784744677261) rectangle (axis cs:42.5,36.1057025680143);
+\draw[draw=none,fill=darkorange25512714] (axis cs:47.5,19.0837631031258) rectangle (axis cs:52.5,36.4236885102471);
+\draw[draw=none,fill=darkorange25512714] (axis cs:57.5,18.9594292417726) rectangle (axis cs:62.5,36.6597808913899);
+\draw[draw=none,fill=darkorange25512714] (axis cs:67.5,18.651686245553) rectangle (axis cs:72.5,36.9416971144539);
+\draw[draw=none,fill=darkorange25512714] (axis cs:77.5,18.6371546426749) rectangle (axis cs:82.5,37.011466406895);
+\draw[draw=none,fill=darkorange25512714] (axis cs:87.5,18.5140372492809) rectangle (axis cs:92.5,37.0986540337484);
+\draw[draw=none,fill=darkorange25512714] (axis cs:97.5,18.3938420905577) rectangle (axis cs:102.5,37.1595086088866);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:-2.5,27.8697687261309) rectangle (axis cs:2.5,44.6764914152065);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:7.5,32.6583670987529) rectangle (axis cs:12.5,49.4650897878286);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:17.5,34.5428486453276) rectangle (axis cs:22.5,51.3495713344032);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:27.5,35.5235554573361) rectangle (axis cs:32.5,52.3302781464118);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:37.5,36.1057025680143) rectangle (axis cs:42.5,52.91242525709);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:47.5,36.4236885102471) rectangle (axis cs:52.5,53.2304111993227);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:57.5,36.6597808913899) rectangle (axis cs:62.5,53.4665035804655);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:67.5,36.9416971144539) rectangle (axis cs:72.5,53.7484198035295);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:77.5,37.011466406895) rectangle (axis cs:82.5,53.8181890959706);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:87.5,37.0986540337484) rectangle (axis cs:92.5,53.905376722824);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:97.5,37.1595086088866) rectangle (axis cs:102.5,53.9662312979622);
+\draw[draw=none,fill=crimson2143940] (axis cs:-2.5,44.6764914152065) rectangle (axis cs:2.5,58.5180872546667);
+\draw[draw=none,fill=crimson2143940] (axis cs:7.5,49.4650897878286) rectangle (axis cs:12.5,58.4736589835447);
+\draw[draw=none,fill=crimson2143940] (axis cs:17.5,51.3495713344032) rectangle (axis cs:22.5,58.4454774293999);
+\draw[draw=none,fill=crimson2143940] (axis cs:27.5,52.3302781464118) rectangle (axis cs:32.5,58.4317205042093);
+\draw[draw=none,fill=crimson2143940] (axis cs:37.5,52.91242525709) rectangle (axis cs:42.5,58.4308955929994);
+\draw[draw=none,fill=crimson2143940] (axis cs:47.5,53.2304111993227) rectangle (axis cs:52.5,58.4223437900577);
+\draw[draw=none,fill=crimson2143940] (axis cs:57.5,53.4665035804655) rectangle (axis cs:62.5,58.4214218995398);
+\draw[draw=none,fill=crimson2143940] (axis cs:67.5,53.7484198035295) rectangle (axis cs:72.5,58.4266403129505);
+\draw[draw=none,fill=crimson2143940] (axis cs:77.5,53.8181890959706) rectangle (axis cs:82.5,58.4215977585268);
+\draw[draw=none,fill=crimson2143940] (axis cs:87.5,53.905376722824) rectangle (axis cs:92.5,58.4218014347573);
+\draw[draw=none,fill=crimson2143940] (axis cs:97.5,53.9662312979622) rectangle (axis cs:102.5,58.419596854065);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:-2.5,58.5180872546667) rectangle (axis cs:2.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:7.5,58.4736589835447) rectangle (axis cs:12.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:17.5,58.4454774293999) rectangle (axis cs:22.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:27.5,58.4317205042093) rectangle (axis cs:32.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:37.5,58.4308955929994) rectangle (axis cs:42.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:47.5,58.4223437900577) rectangle (axis cs:52.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:57.5,58.4214218995398) rectangle (axis cs:62.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:67.5,58.4266403129505) rectangle (axis cs:72.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:77.5,58.4215977585268) rectangle (axis cs:82.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:87.5,58.4218014347573) rectangle (axis cs:92.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:97.5,58.419596854065) rectangle (axis cs:102.5,58.8235294117647);
+\draw[draw=none,fill=sienna1408675] (axis cs:-2.5,58.8235294117647) rectangle (axis cs:2.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:7.5,58.8235294117647) rectangle (axis cs:12.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:17.5,58.8235294117647) rectangle (axis cs:22.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:27.5,58.8235294117647) rectangle (axis cs:32.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:37.5,58.8235294117647) rectangle (axis cs:42.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:47.5,58.8235294117647) rectangle (axis cs:52.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:57.5,58.8235294117647) rectangle (axis cs:62.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:67.5,58.8235294117647) rectangle (axis cs:72.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:77.5,58.8235294117647) rectangle (axis cs:82.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:87.5,58.8235294117647) rectangle (axis cs:92.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:97.5,58.8235294117647) rectangle (axis cs:102.5,100);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={Isopentane},
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-7.75, xmax=107.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Cost/\unit{\mega\USD\of{2023}}},
+ymin=0, ymax=39.269481671335,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-2.5,0) rectangle (axis cs:2.5,4.49474889687541);
+\draw[draw=none,fill=steelblue31119180] (axis cs:7.5,0) rectangle (axis cs:12.5,5.46268458860476);
+\draw[draw=none,fill=steelblue31119180] (axis cs:17.5,0) rectangle (axis cs:22.5,5.98723358975187);
+\draw[draw=none,fill=steelblue31119180] (axis cs:27.5,0) rectangle (axis cs:32.5,6.41118402857234);
+\draw[draw=none,fill=steelblue31119180] (axis cs:37.5,0) rectangle (axis cs:42.5,6.96606763782058);
+\draw[draw=none,fill=steelblue31119180] (axis cs:47.5,0) rectangle (axis cs:52.5,7.24363062640908);
+\draw[draw=none,fill=steelblue31119180] (axis cs:57.5,0) rectangle (axis cs:62.5,7.64450732924325);
+\draw[draw=none,fill=steelblue31119180] (axis cs:67.5,0) rectangle (axis cs:72.5,8.20766015167422);
+\draw[draw=none,fill=steelblue31119180] (axis cs:77.5,0) rectangle (axis cs:82.5,8.66786005274831);
+\draw[draw=none,fill=steelblue31119180] (axis cs:87.5,0) rectangle (axis cs:92.5,8.94859294170044);
+\draw[draw=none,fill=steelblue31119180] (axis cs:97.5,0) rectangle (axis cs:102.5,9.20652789100374);
+\draw[draw=none,fill=darkorange25512714] (axis cs:-2.5,4.49474889687541) rectangle (axis cs:2.5,6.14762977029696);
+\draw[draw=none,fill=darkorange25512714] (axis cs:7.5,5.46268458860476) rectangle (axis cs:12.5,7.76348671488115);
+\draw[draw=none,fill=darkorange25512714] (axis cs:17.5,5.98723358975187) rectangle (axis cs:22.5,8.57954306884231);
+\draw[draw=none,fill=darkorange25512714] (axis cs:27.5,6.41118402857234) rectangle (axis cs:32.5,9.276567952931);
+\draw[draw=none,fill=darkorange25512714] (axis cs:37.5,6.96606763782058) rectangle (axis cs:42.5,10.2380062008377);
+\draw[draw=none,fill=darkorange25512714] (axis cs:47.5,7.24363062640908) rectangle (axis cs:52.5,10.6289095804113);
+\draw[draw=none,fill=darkorange25512714] (axis cs:57.5,7.64450732924325) rectangle (axis cs:62.5,11.2804843983867);
+\draw[draw=none,fill=darkorange25512714] (axis cs:67.5,8.20766015167422) rectangle (axis cs:72.5,12.3482659392782);
+\draw[draw=none,fill=darkorange25512714] (axis cs:77.5,8.66786005274831) rectangle (axis cs:82.5,13.2380066371278);
+\draw[draw=none,fill=darkorange25512714] (axis cs:87.5,8.94859294170044) rectangle (axis cs:92.5,13.6919814731399);
+\draw[draw=none,fill=darkorange25512714] (axis cs:97.5,9.20652789100374) rectangle (axis cs:102.5,14.0547831541201);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:-2.5,6.14762977029696) rectangle (axis cs:2.5,9.1548588813908);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:7.5,7.76348671488115) rectangle (axis cs:12.5,11.9107782694176);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:17.5,8.57954306884231) rectangle (axis cs:22.5,12.7220578798687);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:27.5,9.276567952931) rectangle (axis cs:32.5,13.5890012012028);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:37.5,10.2380062008377) rectangle (axis cs:42.5,14.913411840314);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:47.5,10.6289095804113) rectangle (axis cs:52.5,15.4566970493614);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:57.5,11.2804843983867) rectangle (axis cs:62.5,16.3815219003274);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:67.5,12.3482659392782) rectangle (axis cs:72.5,17.8894497284331);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:77.5,13.2380066371278) rectangle (axis cs:82.5,19.1502762122668);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:87.5,13.6919814731399) rectangle (axis cs:92.5,19.8066395283862);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:97.5,14.0547831541201) rectangle (axis cs:102.5,20.3404144740617);
+\draw[draw=none,fill=crimson2143940] (axis cs:-2.5,9.1548588813908) rectangle (axis cs:2.5,10.4842713836099);
+\draw[draw=none,fill=crimson2143940] (axis cs:7.5,11.9107782694176) rectangle (axis cs:12.5,14.4649347562583);
+\draw[draw=none,fill=crimson2143940] (axis cs:17.5,12.7220578798687) rectangle (axis cs:22.5,14.4423921187584);
+\draw[draw=none,fill=crimson2143940] (axis cs:27.5,13.5890012012028) rectangle (axis cs:32.5,15.0309255841661);
+\draw[draw=none,fill=crimson2143940] (axis cs:37.5,14.913411840314) rectangle (axis cs:42.5,16.2957480038415);
+\draw[draw=none,fill=crimson2143940] (axis cs:47.5,15.4566970493614) rectangle (axis cs:52.5,16.8236907652353);
+\draw[draw=none,fill=crimson2143940] (axis cs:57.5,16.3815219003274) rectangle (axis cs:62.5,17.7751534282932);
+\draw[draw=none,fill=crimson2143940] (axis cs:67.5,17.8894497284331) rectangle (axis cs:72.5,19.3104319621835);
+\draw[draw=none,fill=crimson2143940] (axis cs:77.5,19.1502762122668) rectangle (axis cs:82.5,20.6038729893585);
+\draw[draw=none,fill=crimson2143940] (axis cs:87.5,19.8066395283862) rectangle (axis cs:92.5,21.3072948549053);
+\draw[draw=none,fill=crimson2143940] (axis cs:97.5,20.3404144740617) rectangle (axis cs:102.5,21.9015792566627);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:-2.5,10.4842713836099) rectangle (axis cs:2.5,10.5253018888285);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:7.5,14.4649347562583) rectangle (axis cs:12.5,14.5155204408775);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:17.5,14.4423921187584) rectangle (axis cs:22.5,14.4988018385925);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:27.5,15.0309255841661) rectangle (axis cs:32.5,15.0935163689514);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:37.5,16.2957480038415) rectangle (axis cs:42.5,16.3639197381671);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:47.5,16.8236907652353) rectangle (axis cs:52.5,16.8972561413251);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:57.5,17.7751534282932) rectangle (axis cs:62.5,17.8536312567925);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:67.5,19.3104319621835) rectangle (axis cs:72.5,19.3941432620423);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:77.5,20.6038729893585) rectangle (axis cs:82.5,20.6929435129867);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:87.5,21.3072948549053) rectangle (axis cs:92.5,21.4013031933621);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:97.5,21.9015792566627) rectangle (axis cs:102.5,21.9997096197955);
+\draw[draw=none,fill=sienna1408675] (axis cs:-2.5,10.5253018888285) rectangle (axis cs:2.5,17.8930132110084);
+\draw[draw=none,fill=sienna1408675] (axis cs:7.5,14.5155204408775) rectangle (axis cs:12.5,24.6763847494917);
+\draw[draw=none,fill=sienna1408675] (axis cs:17.5,14.4988018385925) rectangle (axis cs:22.5,24.6479631256073);
+\draw[draw=none,fill=sienna1408675] (axis cs:27.5,15.0935163689514) rectangle (axis cs:32.5,25.6589778272175);
+\draw[draw=none,fill=sienna1408675] (axis cs:37.5,16.3639197381671) rectangle (axis cs:42.5,27.8186635548841);
+\draw[draw=none,fill=sienna1408675] (axis cs:47.5,16.8972561413251) rectangle (axis cs:52.5,28.7253354402526);
+\draw[draw=none,fill=sienna1408675] (axis cs:57.5,17.8536312567925) rectangle (axis cs:62.5,30.3511731365472);
+\draw[draw=none,fill=sienna1408675] (axis cs:67.5,19.3941432620423) rectangle (axis cs:72.5,32.9700435454719);
+\draw[draw=none,fill=sienna1408675] (axis cs:77.5,20.6929435129867) rectangle (axis cs:82.5,35.1780039720774);
+\draw[draw=none,fill=sienna1408675] (axis cs:87.5,21.4013031933621) rectangle (axis cs:92.5,36.3822154287156);
+\draw[draw=none,fill=sienna1408675] (axis cs:97.5,21.9997096197955) rectangle (axis cs:102.5,37.3995063536524);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={Isopentane},
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-7.75, xmax=107.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Cost Contribution/\unit{\percent}},
+ymin=0, ymax=105,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-2.5,0) rectangle (axis cs:2.5,25.1201340091231);
+\draw[draw=none,fill=steelblue31119180] (axis cs:7.5,0) rectangle (axis cs:12.5,22.1372970313947);
+\draw[draw=none,fill=steelblue31119180] (axis cs:17.5,0) rectangle (axis cs:22.5,24.2909872886478);
+\draw[draw=none,fill=steelblue31119180] (axis cs:27.5,0) rectangle (axis cs:32.5,24.9861240449405);
+\draw[draw=none,fill=steelblue31119180] (axis cs:37.5,0) rectangle (axis cs:42.5,25.040985970002);
+\draw[draw=none,fill=steelblue31119180] (axis cs:47.5,0) rectangle (axis cs:52.5,25.2168704573547);
+\draw[draw=none,fill=steelblue31119180] (axis cs:57.5,0) rectangle (axis cs:62.5,25.1868594826675);
+\draw[draw=none,fill=steelblue31119180] (axis cs:67.5,0) rectangle (axis cs:72.5,24.8942957577667);
+\draw[draw=none,fill=steelblue31119180] (axis cs:77.5,0) rectangle (axis cs:82.5,24.6399996419025);
+\draw[draw=none,fill=steelblue31119180] (axis cs:87.5,0) rectangle (axis cs:92.5,24.596063863218);
+\draw[draw=none,fill=steelblue31119180] (axis cs:97.5,0) rectangle (axis cs:102.5,24.6167096537215);
+\draw[draw=none,fill=darkorange25512714] (axis cs:-2.5,25.1201340091231) rectangle (axis cs:2.5,34.3577110115513);
+\draw[draw=none,fill=darkorange25512714] (axis cs:7.5,22.1372970313947) rectangle (axis cs:12.5,31.461199821992);
+\draw[draw=none,fill=darkorange25512714] (axis cs:17.5,24.2909872886478) rectangle (axis cs:22.5,34.8083248304151);
+\draw[draw=none,fill=darkorange25512714] (axis cs:27.5,24.9861240449405) rectangle (axis cs:32.5,36.1533028143116);
+\draw[draw=none,fill=darkorange25512714] (axis cs:37.5,25.040985970002) rectangle (axis cs:42.5,36.8026529406739);
+\draw[draw=none,fill=darkorange25512714] (axis cs:47.5,25.2168704573547) rectangle (axis cs:52.5,37.0018640949172);
+\draw[draw=none,fill=darkorange25512714] (axis cs:57.5,25.1868594826675) rectangle (axis cs:62.5,37.1665515123148);
+\draw[draw=none,fill=darkorange25512714] (axis cs:67.5,24.8942957577667) rectangle (axis cs:72.5,37.4529864428224);
+\draw[draw=none,fill=darkorange25512714] (axis cs:77.5,24.6399996419025) rectangle (axis cs:82.5,37.6314888349988);
+\draw[draw=none,fill=darkorange25512714] (axis cs:87.5,24.596063863218) rectangle (axis cs:92.5,37.6337210689295);
+\draw[draw=none,fill=darkorange25512714] (axis cs:97.5,24.6167096537215) rectangle (axis cs:102.5,37.5801301258286);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:-2.5,34.3577110115513) rectangle (axis cs:2.5,51.1644337006269);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:7.5,31.461199821992) rectangle (axis cs:12.5,48.2679225110676);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:17.5,34.8083248304151) rectangle (axis cs:22.5,51.6150475194907);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:27.5,36.1533028143116) rectangle (axis cs:32.5,52.9600255033872);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:37.5,36.8026529406739) rectangle (axis cs:42.5,53.6093756297495);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:47.5,37.0018640949172) rectangle (axis cs:52.5,53.8085867839928);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:57.5,37.1665515123148) rectangle (axis cs:62.5,53.9732742013904);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:67.5,37.4529864428224) rectangle (axis cs:72.5,54.259709131898);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:77.5,37.6314888349988) rectangle (axis cs:82.5,54.4382115240745);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:87.5,37.6337210689295) rectangle (axis cs:92.5,54.4404437580051);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:97.5,37.5801301258286) rectangle (axis cs:102.5,54.3868528149043);
+\draw[draw=none,fill=crimson2143940] (axis cs:-2.5,51.1644337006269) rectangle (axis cs:2.5,58.5942192070791);
+\draw[draw=none,fill=crimson2143940] (axis cs:7.5,48.2679225110676) rectangle (axis cs:12.5,58.6185330756616);
+\draw[draw=none,fill=crimson2143940] (axis cs:17.5,51.6150475194907) rectangle (axis cs:22.5,58.5946678237032);
+\draw[draw=none,fill=crimson2143940] (axis cs:27.5,52.9600255033872) rectangle (axis cs:32.5,58.5795961373888);
+\draw[draw=none,fill=crimson2143940] (axis cs:37.5,53.6093756297495) rectangle (axis cs:42.5,58.5784718654484);
+\draw[draw=none,fill=crimson2143940] (axis cs:47.5,53.8085867839928) rectangle (axis cs:52.5,58.5674301357694);
+\draw[draw=none,fill=crimson2143940] (axis cs:57.5,53.9732742013904) rectangle (axis cs:62.5,58.5649633650877);
+\draw[draw=none,fill=crimson2143940] (axis cs:67.5,54.259709131898) rectangle (axis cs:72.5,58.5696283219972);
+\draw[draw=none,fill=crimson2143940] (axis cs:77.5,54.4382115240745) rectangle (axis cs:82.5,58.5703299303531);
+\draw[draw=none,fill=crimson2143940] (axis cs:87.5,54.4404437580051) rectangle (axis cs:92.5,58.565138499202);
+\draw[draw=none,fill=crimson2143940] (axis cs:97.5,54.3868528149043) rectangle (axis cs:102.5,58.5611452984426);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:-2.5,58.5942192070791) rectangle (axis cs:2.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:7.5,58.6185330756616) rectangle (axis cs:12.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:17.5,58.5946678237032) rectangle (axis cs:22.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:27.5,58.5795961373888) rectangle (axis cs:32.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:37.5,58.5784718654484) rectangle (axis cs:42.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:47.5,58.5674301357694) rectangle (axis cs:52.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:57.5,58.5649633650877) rectangle (axis cs:62.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:67.5,58.5696283219972) rectangle (axis cs:72.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:77.5,58.5703299303531) rectangle (axis cs:82.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:87.5,58.565138499202) rectangle (axis cs:92.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:97.5,58.5611452984426) rectangle (axis cs:102.5,58.8235294117647);
+\draw[draw=none,fill=sienna1408675] (axis cs:-2.5,58.8235294117647) rectangle (axis cs:2.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:7.5,58.8235294117647) rectangle (axis cs:12.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:17.5,58.8235294117647) rectangle (axis cs:22.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:27.5,58.8235294117647) rectangle (axis cs:32.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:37.5,58.8235294117647) rectangle (axis cs:42.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:47.5,58.8235294117647) rectangle (axis cs:52.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:57.5,58.8235294117647) rectangle (axis cs:62.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:67.5,58.8235294117647) rectangle (axis cs:72.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:77.5,58.8235294117647) rectangle (axis cs:82.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:87.5,58.8235294117647) rectangle (axis cs:92.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:97.5,58.8235294117647) rectangle (axis cs:102.5,100);
+
+\nextgroupplot[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+tick align=outside,
+tick pos=left,
+title={Isohexane},
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-7.75, xmax=107.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Cost/\unit{\mega\USD\of{2023}}},
+ymin=0, ymax=60.5004837008267,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-2.5,0) rectangle (axis cs:2.5,7.15155050602772);
+\draw[draw=none,fill=steelblue31119180] (axis cs:7.5,0) rectangle (axis cs:12.5,9.86967199566713);
+\draw[draw=none,fill=steelblue31119180] (axis cs:17.5,0) rectangle (axis cs:22.5,11.1556305093196);
+\draw[draw=none,fill=steelblue31119180] (axis cs:27.5,0) rectangle (axis cs:32.5,12.3321154407641);
+\draw[draw=none,fill=steelblue31119180] (axis cs:37.5,0) rectangle (axis cs:42.5,12.7608475097478);
+\draw[draw=none,fill=steelblue31119180] (axis cs:47.5,0) rectangle (axis cs:52.5,13.5686563311235);
+\draw[draw=none,fill=steelblue31119180] (axis cs:57.5,0) rectangle (axis cs:62.5,14.4306791632978);
+\draw[draw=none,fill=steelblue31119180] (axis cs:67.5,0) rectangle (axis cs:72.5,15.2540957207177);
+\draw[draw=none,fill=steelblue31119180] (axis cs:77.5,0) rectangle (axis cs:82.5,15.9841584478723);
+\draw[draw=none,fill=steelblue31119180] (axis cs:87.5,0) rectangle (axis cs:92.5,16.3665821021076);
+\draw[draw=none,fill=steelblue31119180] (axis cs:97.5,0) rectangle (axis cs:102.5,17.0941949215831);
+\draw[draw=none,fill=darkorange25512714] (axis cs:-2.5,7.15155050602772) rectangle (axis cs:2.5,8.67242817711355);
+\draw[draw=none,fill=darkorange25512714] (axis cs:7.5,9.86967199566713) rectangle (axis cs:12.5,11.8607909099107);
+\draw[draw=none,fill=darkorange25512714] (axis cs:17.5,11.1556305093196) rectangle (axis cs:22.5,13.5563513236088);
+\draw[draw=none,fill=darkorange25512714] (axis cs:27.5,12.3321154407641) rectangle (axis cs:32.5,15.1656631123154);
+\draw[draw=none,fill=darkorange25512714] (axis cs:37.5,12.7608475097478) rectangle (axis cs:42.5,15.6735166290884);
+\draw[draw=none,fill=darkorange25512714] (axis cs:47.5,13.5686563311235) rectangle (axis cs:52.5,16.7783893033033);
+\draw[draw=none,fill=darkorange25512714] (axis cs:57.5,14.4306791632978) rectangle (axis cs:62.5,17.9379178999364);
+\draw[draw=none,fill=darkorange25512714] (axis cs:67.5,15.2540957207177) rectangle (axis cs:72.5,19.1104675320495);
+\draw[draw=none,fill=darkorange25512714] (axis cs:77.5,15.9841584478723) rectangle (axis cs:82.5,20.1352138680436);
+\draw[draw=none,fill=darkorange25512714] (axis cs:87.5,16.3665821021076) rectangle (axis cs:92.5,20.6378575149024);
+\draw[draw=none,fill=darkorange25512714] (axis cs:97.5,17.0941949215831) rectangle (axis cs:102.5,21.6676925410847);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:-2.5,8.67242817711355) rectangle (axis cs:2.5,12.5014341734938);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:7.5,11.8607909099107) rectangle (axis cs:12.5,18.002067151578);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:17.5,13.5563513236088) rectangle (axis cs:22.5,20.096668859096);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:27.5,15.1656631123154) rectangle (axis cs:32.5,22.1514709177703);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:37.5,15.6735166290884) rectangle (axis cs:42.5,22.8110942535488);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:47.5,16.7783893033033) rectangle (axis cs:52.5,24.3686593324868);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:57.5,17.9379178999364) rectangle (axis cs:62.5,26.0241217879962);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:67.5,19.1104675320495) rectangle (axis cs:72.5,27.6671188106726);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:77.5,20.1352138680436) rectangle (axis cs:82.5,29.0983451815446);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:87.5,20.6378575149024) rectangle (axis cs:92.5,29.9002354661735);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:97.5,21.6676925410847) rectangle (axis cs:102.5,31.351643513606);
+\draw[draw=none,fill=crimson2143940] (axis cs:-2.5,12.5014341734938) rectangle (axis cs:2.5,13.3831542948257);
+\draw[draw=none,fill=crimson2143940] (axis cs:7.5,18.002067151578) rectangle (axis cs:12.5,21.4527901440326);
+\draw[draw=none,fill=crimson2143940] (axis cs:17.5,20.096668859096) rectangle (axis cs:22.5,22.8437547015775);
+\draw[draw=none,fill=crimson2143940] (axis cs:27.5,22.1514709177703) rectangle (axis cs:32.5,24.3968789025157);
+\draw[draw=none,fill=crimson2143940] (axis cs:37.5,22.8110942535488) rectangle (axis cs:42.5,24.9237048971786);
+\draw[draw=none,fill=crimson2143940] (axis cs:47.5,24.3686593324868) rectangle (axis cs:52.5,26.5030515716007);
+\draw[draw=none,fill=crimson2143940] (axis cs:57.5,26.0241217879962) rectangle (axis cs:62.5,28.2350177282901);
+\draw[draw=none,fill=crimson2143940] (axis cs:67.5,27.6671188106726) rectangle (axis cs:72.5,29.8774343986399);
+\draw[draw=none,fill=crimson2143940] (axis cs:77.5,29.0983451815446) rectangle (axis cs:82.5,31.2972339413371);
+\draw[draw=none,fill=crimson2143940] (axis cs:87.5,29.9002354661735) rectangle (axis cs:92.5,32.3387976180117);
+\draw[draw=none,fill=crimson2143940] (axis cs:97.5,31.351643513606) rectangle (axis cs:102.5,33.811447660223);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:-2.5,13.3831542948257) rectangle (axis cs:2.5,13.4015209873309);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:7.5,21.4527901440326) rectangle (axis cs:12.5,21.4944668458356);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:17.5,22.8437547015775) rectangle (axis cs:22.5,22.8911113742052);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:27.5,24.3968789025157) rectangle (axis cs:32.5,24.4503273190923);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:37.5,24.9237048971786) rectangle (axis cs:42.5,24.9815216856115);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:47.5,26.5030515716007) rectangle (axis cs:52.5,26.5659451021424);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:57.5,28.2350177282901) rectangle (axis cs:62.5,28.3017136082093);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:67.5,29.8774343986399) rectangle (axis cs:72.5,29.9482794751808);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:77.5,31.2972339413371) rectangle (axis cs:82.5,31.3709595972532);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:87.5,32.3387976180117) rectangle (axis cs:92.5,32.418322829449);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:97.5,33.811447660223) rectangle (axis cs:102.5,33.8938284038245);
+\draw[draw=none,fill=sienna1408675] (axis cs:-2.5,13.4015209873309) rectangle (axis cs:2.5,22.7825856784625);
+\draw[draw=none,fill=sienna1408675] (axis cs:7.5,21.4944668458356) rectangle (axis cs:12.5,36.5405936379206);
+\draw[draw=none,fill=sienna1408675] (axis cs:17.5,22.8911113742052) rectangle (axis cs:22.5,38.9148893361489);
+\draw[draw=none,fill=sienna1408675] (axis cs:27.5,24.4503273190923) rectangle (axis cs:32.5,41.5655564424569);
+\draw[draw=none,fill=sienna1408675] (axis cs:37.5,24.9815216856115) rectangle (axis cs:42.5,42.4685868655396);
+\draw[draw=none,fill=sienna1408675] (axis cs:47.5,26.5659451021424) rectangle (axis cs:52.5,45.1621066736421);
+\draw[draw=none,fill=sienna1408675] (axis cs:57.5,28.3017136082093) rectangle (axis cs:62.5,48.1129131339559);
+\draw[draw=none,fill=sienna1408675] (axis cs:67.5,29.9482794751808) rectangle (axis cs:72.5,50.9120751078074);
+\draw[draw=none,fill=sienna1408675] (axis cs:77.5,31.3709595972532) rectangle (axis cs:82.5,53.3306313153304);
+\draw[draw=none,fill=sienna1408675] (axis cs:87.5,32.418322829449) rectangle (axis cs:92.5,55.1111488100633);
+\draw[draw=none,fill=sienna1408675] (axis cs:97.5,33.8938284038245) rectangle (axis cs:102.5,57.6195082865017);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={Isohexane},
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-7.75, xmax=107.75,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Cost Contribution/\unit{\percent}},
+ymin=0, ymax=105,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-2.5,0) rectangle (axis cs:2.5,31.3904251561246);
+\draw[draw=none,fill=steelblue31119180] (axis cs:7.5,0) rectangle (axis cs:12.5,27.0101577808652);
+\draw[draw=none,fill=steelblue31119180] (axis cs:17.5,0) rectangle (axis cs:22.5,28.6667409303329);
+\draw[draw=none,fill=steelblue31119180] (axis cs:27.5,0) rectangle (axis cs:32.5,29.6690733777055);
+\draw[draw=none,fill=steelblue31119180] (axis cs:37.5,0) rectangle (axis cs:42.5,30.047732810489);
+\draw[draw=none,fill=steelblue31119180] (axis cs:47.5,0) rectangle (axis cs:52.5,30.0443387842281);
+\draw[draw=none,fill=steelblue31119180] (axis cs:57.5,0) rectangle (axis cs:62.5,29.9933598348533);
+\draw[draw=none,fill=steelblue31119180] (axis cs:67.5,0) rectangle (axis cs:72.5,29.9616460111219);
+\draw[draw=none,fill=steelblue31119180] (axis cs:77.5,0) rectangle (axis cs:82.5,29.9718155469829);
+\draw[draw=none,fill=steelblue31119180] (axis cs:87.5,0) rectangle (axis cs:92.5,29.6974068867878);
+\draw[draw=none,fill=steelblue31119180] (axis cs:97.5,0) rectangle (axis cs:102.5,29.6673738286442);
+\draw[draw=none,fill=darkorange25512714] (axis cs:-2.5,31.3904251561246) rectangle (axis cs:2.5,38.0660399987523);
+\draw[draw=none,fill=darkorange25512714] (axis cs:7.5,27.0101577808652) rectangle (axis cs:12.5,32.4592178973304);
+\draw[draw=none,fill=darkorange25512714] (axis cs:17.5,28.6667409303329) rectangle (axis cs:22.5,34.835898430825);
+\draw[draw=none,fill=darkorange25512714] (axis cs:27.5,29.6690733777055) rectangle (axis cs:32.5,36.4861303692894);
+\draw[draw=none,fill=darkorange25512714] (axis cs:37.5,30.047732810489) rectangle (axis cs:42.5,36.906141187868);
+\draw[draw=none,fill=darkorange25512714] (axis cs:47.5,30.0443387842281) rectangle (axis cs:52.5,37.1514761801305);
+\draw[draw=none,fill=darkorange25512714] (axis cs:57.5,29.9933598348533) rectangle (axis cs:62.5,37.2829594624496);
+\draw[draw=none,fill=darkorange25512714] (axis cs:67.5,29.9616460111219) rectangle (axis cs:72.5,37.5362180613984);
+\draw[draw=none,fill=darkorange25512714] (axis cs:77.5,29.9718155469829) rectangle (axis cs:82.5,37.7554388002446);
+\draw[draw=none,fill=darkorange25512714] (axis cs:87.5,29.6974068867878) rectangle (axis cs:92.5,37.4476997132274);
+\draw[draw=none,fill=darkorange25512714] (axis cs:97.5,29.6673738286442) rectangle (axis cs:102.5,37.6047855760004);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:-2.5,38.0660399987523) rectangle (axis cs:2.5,54.8727626878279);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:7.5,32.4592178973304) rectangle (axis cs:12.5,49.2659405864061);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:17.5,34.835898430825) rectangle (axis cs:22.5,51.6426211199006);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:27.5,36.4861303692894) rectangle (axis cs:32.5,53.292853058365);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:37.5,36.906141187868) rectangle (axis cs:42.5,53.7128638769436);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:47.5,37.1514761801305) rectangle (axis cs:52.5,53.9581988692061);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:57.5,37.2829594624496) rectangle (axis cs:62.5,54.0896821515253);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:67.5,37.5362180613984) rectangle (axis cs:72.5,54.342940750474);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:77.5,37.7554388002446) rectangle (axis cs:82.5,54.5621614893202);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:87.5,37.4476997132274) rectangle (axis cs:92.5,54.254422402303);
+\draw[draw=none,fill=forestgreen4416044] (axis cs:97.5,37.6047855760004) rectangle (axis cs:102.5,54.411508265076);
+\draw[draw=none,fill=crimson2143940] (axis cs:-2.5,54.8727626878279) rectangle (axis cs:2.5,58.7429121685581);
+\draw[draw=none,fill=crimson2143940] (axis cs:7.5,49.2659405864061) rectangle (axis cs:12.5,58.7094735148737);
+\draw[draw=none,fill=crimson2143940] (axis cs:17.5,51.6426211199007) rectangle (axis cs:22.5,58.7018364725437);
+\draw[draw=none,fill=crimson2143940] (axis cs:27.5,53.292853058365) rectangle (axis cs:32.5,58.6949411739275);
+\draw[draw=none,fill=crimson2143940] (axis cs:37.5,53.7128638769436) rectangle (axis cs:42.5,58.6873892839664);
+\draw[draw=none,fill=crimson2143940] (axis cs:47.5,53.9581988692061) rectangle (axis cs:52.5,58.6842676829082);
+\draw[draw=none,fill=crimson2143940] (axis cs:57.5,54.0896821515253) rectangle (axis cs:62.5,58.6849057542581);
+\draw[draw=none,fill=crimson2143940] (axis cs:67.5,54.342940750474) rectangle (axis cs:72.5,58.6843775968154);
+\draw[draw=none,fill=crimson2143940] (axis cs:77.5,54.5621614893202) rectangle (axis cs:82.5,58.6852868031591);
+\draw[draw=none,fill=crimson2143940] (axis cs:87.5,54.254422402303) rectangle (axis cs:92.5,58.6792297316557);
+\draw[draw=none,fill=crimson2143940] (axis cs:97.5,54.411508265076) rectangle (axis cs:102.5,58.6805557105802);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:-2.5,58.7429121685581) rectangle (axis cs:2.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:7.5,58.7094735148737) rectangle (axis cs:12.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:17.5,58.7018364725437) rectangle (axis cs:22.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:27.5,58.6949411739275) rectangle (axis cs:32.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:37.5,58.6873892839664) rectangle (axis cs:42.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:47.5,58.6842676829082) rectangle (axis cs:52.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:57.5,58.6849057542581) rectangle (axis cs:62.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:67.5,58.6843775968154) rectangle (axis cs:72.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:77.5,58.6852868031591) rectangle (axis cs:82.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:87.5,58.6792297316557) rectangle (axis cs:92.5,58.8235294117647);
+\draw[draw=none,fill=mediumpurple148103189] (axis cs:97.5,58.6805557105802) rectangle (axis cs:102.5,58.8235294117647);
+\draw[draw=none,fill=sienna1408675] (axis cs:-2.5,58.8235294117647) rectangle (axis cs:2.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:7.5,58.8235294117647) rectangle (axis cs:12.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:17.5,58.8235294117647) rectangle (axis cs:22.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:27.5,58.8235294117647) rectangle (axis cs:32.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:37.5,58.8235294117647) rectangle (axis cs:42.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:47.5,58.8235294117647) rectangle (axis cs:52.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:57.5,58.8235294117647) rectangle (axis cs:62.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:67.5,58.8235294117647) rectangle (axis cs:72.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:77.5,58.8235294117647) rectangle (axis cs:82.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:87.5,58.8235294117647) rectangle (axis cs:92.5,100);
+\draw[draw=none,fill=sienna1408675] (axis cs:97.5,58.8235294117647) rectangle (axis cs:102.5,100);
+\end{groupplot}
+
+\end{tikzpicture}

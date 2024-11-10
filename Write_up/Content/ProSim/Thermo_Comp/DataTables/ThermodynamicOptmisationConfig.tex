@@ -1,0 +1,17 @@
+\begin{tabular}{|c | c c |}
+    \hline
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+      & \textbf{Single Flash DSC} & \textbf{Binary ORC} \T\B \\
+    \hline \hline
+    Objective Function & \(W_{net,\;elec}\) & \(W_{net,\;elec}\) \T\B \\
+    \hline
+    \multicolumn{1}{|l|}{\multirow{4}{*}{Constraints}} & \multirow{4}{*}{\(\Delta T_{cond}^{min}\geq5\)\unit{\K}} & \(\Delta T_{cond}^{min}\geq5\)\unit{\K} \T\B \\
+    \multicolumn{1}{|l|}{} &  & \(\Delta T_{preh}^{min}\geq5\)\unit{\K} \T\B \\
+    \multicolumn{1}{|l|}{} &  & \(\Delta T_{evap}^{min}\geq10\)\unit{\K} \T\B \\
+    \multicolumn{1}{|l|}{} &  & \(\Delta T_{sh}^{min}\geq10\)\unit{\K} \T\B \\
+    \hline
+    \multicolumn{1}{|l|}{\multirow{3}{*}{Controls}} & \qty{0.1}{\bar}\(\leq P_{cond}\leq\)\qty{5.0}{\bar} & \qty{303}{\K}\(\leq T_{cond}\leq\)\qty{400}{\K} \T\B \\
+    \multicolumn{1}{|l|}{} & \num{0.3}\(\leq \frac{P_{flash]}}{P_{in}}\leq\)\num{1.0} & \num{0.2}\(\leq \frac{P_{evap}}{P_{crit}}\leq\)\num{0.8} \T\B \\
+    \multicolumn{1}{|l|}{} &  & \qty{3}{\K}\(\leq \Delta T_{sh}\leq\)\qty{15}{\K} \T\B \\
+    \hline
+\end{tabular}

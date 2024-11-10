@@ -1,0 +1,48 @@
+
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (valve) at ($(producer-anchor) + (1, 3)$) {lamination valve};
+    \pic[scale=0.4] (separator) at ($(valve-anchor) + (1.5, 0)$) {gas-liquid separator};
+    \pic (turbine) at ($(separator-anchor) + (1.5, 2)$) {turbine_gen};
+    \pic[yscale=-1] (condenser) at ($(turbine-anchor) + (2.3, -1.5)$) {condenser};
+    \pic[scale=0.4] (NCGsep) at ($(condenser-anchor) + (2, -0.5)$) {gas-liquid separator};
+    \pic (compr) at ($(NCGsep-gas outlet) + (4.3, 0.5)$) {compressor};
+    
+    \pic (brinepump) at ($(separator-liquid outlet) + (8, -2)$) {centrifugal pump};
+    \pic (condpump) at ($(NCGsep-liquid outlet) + (1, -0.5)$) {centrifugal pump};
+    \pic[rotate=-90] (joint) at ($(brinepump-top) + (0, 1)$) {valve triple=main};
+    
+    \pic (injector) at ($(producer-anchor) + (13,0)$) {injector};
+    \pic (reinj) at ($(injector-anchor) + (0, 1.8)$) {block};
+    
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (valve-inlet);
+    \draw[main stream] (valve-outlet) -- (separator-inlet left);
+    \draw[main stream] (separator-gas outlet) |- (turbine-inlet top);
+    \draw[main stream] (turbine-outlet bottom) |- (condenser-pipes inlet);
+    \draw[main stream] (condenser-pipes outlet) -- (NCGsep-inlet left);
+    \draw[main stream] (NCGsep-gas outlet) |- (compr-inlet top);
+    \draw[main stream] (compr-outlet bottom) -- (reinj-top);
+    \draw[main stream] (NCGsep-liquid outlet) |- (condpump-anchor);
+    
+    \draw[main stream] (condpump-top) -| (joint-left);
+    \draw[main stream] (separator-liquid outlet) |- (brinepump-anchor);
+    \draw[main stream] (brinepump-top) |- (joint-right);
+    \draw[main stream] (joint-top) -- (reinj-left);
+    \draw[main stream] (reinj-bottom) -- (injector-top);
+
+    % % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[above, align=center] at (valve-top) {Expansion\\ Valve};
+    \node[right, align=left] at (separator-inlet right) {Steam \\ Separator};
+    \node[above] at (turbine-top) {Turbine};
+    \node[below] at (condenser-top) {Condenser};
+    \node[above right, align=left] at (NCGsep-inlet right) {NCG \\ separator};
+    \node[align=center] at (reinj-anchor) {Reinjection\\Handling};
+    \node[below left] at (condpump-bottom) {Condensate Pump};
+    \node[below left] at (brinepump-bottom) {Brine Pump};
+    \node[above right, align=left] at (compr-outlet top) {NCG\\Compressor};
+    \node[below] at (injector-bottom) {Injector};
+
+\end{tikzpicture}

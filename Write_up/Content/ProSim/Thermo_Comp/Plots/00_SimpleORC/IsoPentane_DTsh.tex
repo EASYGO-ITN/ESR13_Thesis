@@ -1,0 +1,126 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkgreen06827}{RGB}{0,68,27}
+\definecolor{darkseagreen137206135}{RGB}{137,206,135}
+\definecolor{forestgreen311146}{RGB}{3,111,46}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumseagreen83179101}{RGB}{83,179,101}
+\definecolor{seagreen4114674}{RGB}{41,146,74}
+\definecolor{silver184226177}{RGB}{184,226,177}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.03,0.5)},
+  anchor=west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Inlet Steam Quality/\unit{\percent}},
+xmin=-5, xmax=105,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Superheating/\unit{\K}},
+ymin=2.43870301023865, ymax=14.8933713563067,
+ytick style={color=black}, width=10cm, height=6.5cm
+]
+\addplot [semithick, silver184226177]
+table {%
+0 3.03255147384084
+10 3.30008978454856
+20 3.4708428981811
+30 3.32575233238725
+40 3.10338376923193
+50 3.50759502715692
+60 3.0858798447436
+70 3.76970816830135
+80 3.05640285627334
+90 4.21667348346841
+100 3.35566580170291
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{423}{\K}}
+\addplot [semithick, darkseagreen137206135]
+table {%
+0 3.11734252530709
+10 3.05439804289551
+20 5.17619667388823
+30 3.04981613014303
+40 3.05387122875572
+50 3.39655258134286
+60 3.13744033465753
+70 3.16319260346307
+80 3.18401552029815
+90 3.32570058690663
+100 3.50036948389373
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{448}{\K}}
+\addplot [semithick, mediumseagreen83179101]
+table {%
+0 3.28202033542709
+10 3.35986186350556
+20 10.0308147906924
+30 13.7258408326094
+40 10.5333740006919
+50 10.465465686841
+60 9.98510286237484
+70 12.6137382183028
+80 9.51181483403747
+90 13.7352799620461
+100 13.5705129611316
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{473}{\K}}
+\addplot [semithick, seagreen4114674]
+table {%
+0 3.00482429869629
+10 9.12192663039394
+20 11.5382971035417
+30 10.1111467694489
+40 10.5881205202329
+50 11.4970285234567
+60 14.327250067849
+70 11.5010405812411
+80 11.1444765355993
+90 9.87747454019262
+100 14.0435730718135
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{498}{\K}}
+\addplot [semithick, forestgreen311146]
+table {%
+0 4.47504019769343
+10 12.3127888278809
+20 14.1340712878746
+30 9.43780506863891
+40 12.0511428206272
+50 11.449497109823
+60 12.9394000405649
+70 13.0441963617383
+80 13.8923361401487
+90 9.60298617596192
+100 11.3751985814677
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{523}{\K}}
+\addplot [semithick, darkgreen06827]
+table {%
+0 11.9483894622484
+10 9.15267658268192
+20 10.271384814248
+30 10.5515280488742
+40 11.4594987849496
+50 12.1124348915914
+60 13.2976874929625
+70 10.0401149870127
+80 11.9887420780896
+90 9.60298617596192
+100 13.5705129611316
+};
+\addlegendentry{\(T_{geo}^{in}=\)\qty{548}{\K}}
+\end{axis}
+
+\end{tikzpicture}

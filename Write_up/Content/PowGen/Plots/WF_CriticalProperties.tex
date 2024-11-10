@@ -1,0 +1,195 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  at={(1.03,0.5)},
+  anchor=west,
+},
+xmin=200, xmax=832.307,
+xlabel={Critical temperature/\unit{\K}},
+ymin=0, ymax=100,
+ylabel={Critical pressure/\unit{\bar}},
+width=13cm, height=7cm,
+% ymode=log
+]
+\path [draw=red, fill=red, opacity=0.3]
+(axis cs:373.15,1000)
+--(axis cs:373.15,0)
+--(axis cs:573.15,0)
+--(axis cs:573.15,1000)
+--(axis cs:573.15,1000)
+--(axis cs:373.15,1000)
+--cycle;
+
+\addplot [semithick, steelblue31119180, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+419.29 40.051
+562.02 48.94
+553.6 40.824
+398.3 55.797
+511.72 45.712
+305.322 48.722
+617.12 36.224
+282.35 50.418
+468.92 73.0468615963585
+407.817 36.29
+418.09 40.098
+497.7 30.4
+460.35 33.78
+190.564 45.992
+433.74 31.96
+364.211 45.55
+402.38 56.26
+591.75 41.26
+435.75 42.255
+616.89 35.346
+425.125 37.96
+617.7 21.03
+658.1 18.17
+540.13 27.36
+507.82 30.4411532835969
+594.55 22.81
+568.74 24.8359119967769
+469.7 33.6751899473634
+369.89 42.512
+638.8 19.904
+630.259 37.375
+616.168 35.315
+428.61 40.273
+};
+\addlegendentry{Hydrocarbons}
+\addplot [semithick, darkorange25512714, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+471.06 43.94
+487.21 33.922
+418.83 32.57
+353.1 31.2903696827871
+293.03 30.48
+385.12 41.361
+456.831 36.72
+439.6 36.236377763648
+367.85 33.822
+382.52 36.3493685102173
+423.27 35.3061967044966
+395.425 36.24295
+376.93 35.1786712617843
+339.173 36.177
+301.88 38.79
+374.21 40.5928
+396.44 39.5256607171867
+227.51 37.5
+477.5 42.12
+410.26 40.55
+345.857 37.61
+386.411 45.2
+375.25 50.1
+451.48 51.812
+345.02 26.4
+369.295 49.9
+374.9 29.2524223394477
+299.293 48.32
+412.44 34.2
+398.07 32
+447.57 39.4074048875043
+427.01 36.51
+351.255 57.82
+460 32.6620706788325
+416.3 66.7168697714184
+345.27 37.348
+359.345 46.317
+317.28 58.97
+344.494 49.012
+343.765 37.049
+388.38 27.775
+450.7 28.49
+};
+\addlegendentry{Refrigerants}
+\addplot [semithick, forestgreen4416044, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+586.5 13.4721535609046
+618.3 10.7768778025659
+645.78 9.61
+599.4 11.4402429635701
+628 9.53950310236878
+653.2 8.28558722066077
+564.09 14.1004475581655
+518.75 19.39
+};
+\addlegendentry{Siloxanes}
+\addplot [semithick, crimson2143940, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+508.1 47
+561.6 52.2758510308235
+466.7 36.4901689652854
+557 49.088
+400.378 53.368
+514.71 62.68
+468.92 73.0468615963585
+512.5 82.1585
+799 13.41
+772 13.69
+782 12.46
+755 13.5
+775 12.39
+};
+\addlegendentry{Organics}
+\addplot [semithick, mediumpurple148103189, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+405.4 113.33
+304.1282 73.773
+132.86 34.94
+430.64 78.8658760034641
+318.7232 37.54983
+647.096 220.64
+};
+\addlegendentry{Inorganics}
+\addplot [semithick, black, mark=diamond*, mark size=4, mark options={solid}, only marks]
+table {%
+304.1282 73.773
+553.6 40.824
+398.3 55.797
+511.72 45.712
+647.096 220.64
+425.125 37.96
+469.7 33.6751899473634
+369.89 42.512
+386.411 45.2
+374.9 29.2524223394477
+};
+\addlegendentry{Notables}
+
+\addplot+[mark=none] coordinates {(309.1282,77.46165)} coordinate (CO2);
+\addplot+[mark=none] coordinates {(558.6,42.8652)} coordinate (CycloHex);
+\addplot+[mark=none] coordinates {(403.3,58.58685)} coordinate (CycloProp);
+\addplot+[mark=none] coordinates {(516.72,47.9976)} coordinate (CycloPent);
+% \addplot+[mark=none] coordinates {(652.096,231.672)} coordinate (Water);
+\addplot+[mark=none] coordinates {(430.125,39.858)} coordinate (Butane);
+\addplot+[mark=none] coordinates {(474.7,35.35894)} coordinate (Pentane);
+\addplot+[mark=none] coordinates {(364.89,44.6376)} coordinate (Propane);
+\addplot+[mark=none] coordinates {(391.411,47.46)} coordinate (R152a);
+\addplot+[mark=none] coordinates {(369.9,30.7150434)} coordinate (R227ea);
+
+\end{axis}
+
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base west, text=black,rotate=0.0] at (CO2) {Carbon Dioxide};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=north west, text=black,rotate=0.0] at (CycloHex) {CycloHexane};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base west, text=black,rotate=0.0] at (CycloProp) {CycloPropane};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base west, text=black,rotate=0.0] at (CycloPent) {Cyclopentane};
+% \node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base west, text=black,rotate=0.0] at (Water) {Water};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base west, text=black,rotate=0.0] at (Butane) {n-Butane};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=north west, text=black,rotate=0.0] at (Pentane) {n-Pentane};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base east, text=black,rotate=0.0] at (Propane) {n-Propane};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base west, text=black,rotate=0.0] at (R152a) {R152a};
+\node[scale=0.7,fill=lightgray204, draw=black, line width=0.4pt, inner sep=3pt, rounded corners, anchor=base east, text=black,rotate=0.0] at (R227ea) {R227ea};
+
+\end{tikzpicture}

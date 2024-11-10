@@ -1,0 +1,85 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic[scale=0.4] (separator) at ($(producer-anchor) + (1.5, 5)$) {gas-liquid separator};
+    \pic[rotate=180] (BPHE) at ($(separator-liquid outlet) + (0.65, -1)$) {heat exchanger biphase};
+
+    \pic[rotate=-90] (evap) at ($(separator-gas outlet) + (1.8, 1)$) {heat exchanger biphase};
+
+    \pic[scale=0.4] (vsep) at ($(evap-pipes top) + (2.3, -1)$) {gas-liquid separator};
+    
+    \pic[rotate=180] (vpreh) at ($(vsep-gas outlet) + (1.7, 0)$) {heat exchanger biphase};
+    \pic (cpreh) at ($(vsep-liquid outlet) + (-1, -1)$) {heat exchanger biphase};
+
+
+    \pic[rotate=-90] (joint1) at ($(evap-anchor) + (-1.15, 0)$) {valve triple=main};
+    \pic (joint2) at ($(cpreh-shell bottom) + (0, -0.5)$) {valve triple=main};
+    \pic (joint3) at ($(joint2-anchor) + (2.7, 0)$) {valve triple=main};
+    \pic[rotate=180] (joint4) at ($(evap-shell top) + (1.05, 0)$) {valve triple=main};
+
+    
+    \pic (injector) at ($(producer-anchor) + (5.5, 0)$) {injector};
+    \pic[xscale=0.75] (reinj) at ($(injector-anchor) + (0, 1.5)$) {block};
+
+    % \pic (solids) [scale=0.25] at ($(PHE-pipes bottom) + (-1.5, 0)$) {block};
+    \pic (turbine) at ($(BPHE-anchor) + (8, 0.7)$) {turbine_gen};
+    \pic (condenser) at ($(turbine-outlet bottom) + (0, -1)$) {heat exchanger biphase};
+    \pic (pump) at ($(condenser-anchor) + (-1.5, -1)$) {centrifugal pump};
+    
+    % % draw connectors
+    % geofluid loop
+    \draw[main stream] (producer-top) |- (separator-inlet left);
+    \draw[main stream] (separator-liquid outlet) |- (BPHE-pipes bottom);
+    \draw[main stream] (BPHE-pipes top) -| ++(-0.2, -1) |- (reinj-left);
+    
+    \draw[main stream] (separator-gas outlet) |- ($0.5*(separator-gas outlet) + 0.5*(evap-pipes bottom)$) -| (evap-pipes bottom);
+    \draw[main stream] (evap-pipes top) |- (vsep-inlet left);
+
+    \draw[main stream] (vsep-gas outlet) |- (vpreh-pipes bottom);
+    \draw[main stream] (vpreh-pipes top) -| ++(-0.2,-2) |- (reinj-right);
+
+    \draw[main stream] (vsep-liquid outlet) |- (cpreh-pipes top);
+    \draw[main stream] (cpreh-pipes bottom) -| (reinj-top);
+    \draw[main stream] (reinj-bottom) -- (injector-top);
+
+    % working fluid loop
+    \draw[main stream] (cpreh-shell top) -- (joint4-top);
+    \draw[main stream] (joint4-right) -- (evap-shell top);
+    \draw[main stream] (vpreh-shell bottom) |- (joint4-left);
+
+    \draw[main stream] (evap-shell bottom) -- (joint1-top);
+    \draw[main stream] (BPHE-shell bottom) -- (joint1-right);
+
+    \draw[main stream] (joint1-left) |- ++(2,1) -| (turbine-inlet top);
+    \draw[main stream] (turbine-outlet bottom) -- (condenser-shell top);
+    \draw[main stream] (condenser-shell bottom) |- (pump-anchor);
+    \draw[main stream] (pump-top) |- (joint3-right);
+    \draw[main stream] (joint3-left) -- (joint2-right);
+    \draw[main stream] (joint3-top) -- (vpreh-shell top);
+    \draw[main stream] (joint2-top) -- (cpreh-shell bottom);
+    \draw[main stream] (joint2-left) -| (BPHE-shell top);
+    %coolant
+    \draw[main stream] (condenser-pipes top) -- ++ (1,0);
+    \draw[main stream] ($(condenser-pipes bottom) + (1, 0)$) -- (condenser-pipes bottom);
+    
+    
+    % % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[above] at ($(turbine-top)+ (0.5,0.1)$) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[below right, align=right] at (condenser-shell bottom) {Condenser};
+    \node[below, align=center] at (pump-bottom) {Circulation \\ Pump};
+    \node[below] at (injector-bottom) {Injector};
+    \node[align=center] at (reinj-anchor) {Reinjection\\Handling};
+    \node[right, align=left] at ($(condenser-pipes bottom) + (1, 0)$) {Coolant in};
+    \node[right, align=left] at ($(condenser-pipes top) + (1, 0)$) {Coolant out};
+
+    \node[above left, align=right] at (separator-gas outlet) {Steam \\ Separator};
+
+    \node[left] at (BPHE-shell right) {BPHE};
+    \node[above] at (evap-shell left) {S. Evap};
+    \node[above left] at (cpreh-shell left) {C. PreH};
+    \node[above right] at (vpreh-shell left) {S. PreH};
+    
+\end{tikzpicture}
+

@@ -1,0 +1,12 @@
+\begin{tabular}{|c | c c | c | c |}
+    \hline
+    \rowcolor{bluepoli!40} % comment this line to remove the color
+    \textbf{Cost Correlation} & \textbf{Min}/\unit{\kilo\watt} & \textbf{Max}/\unit{\kilo\watt} & \textbf{Currency} & \textbf{Reference} \T\B \\
+    \hline \hline
+    \(C_{pump} = 1.051\cdot10^4 *\left(\frac{\Dot{W}}{4} \right)^{0.55}\) & 4 & 700 & \$2000 &\cite{Smith2005} \T\B \\
+    \(C_{pump} = 1185 * S_{mat}*(1.34*\Dot{W})^{0.767}\) &  &  & \$2002 &\cite{GETEM2016} \T\B \\ % S_mat=2.35
+    \(\log C_{pump} = 3.3892 + 0.0536\log \Dot{W}_s +0.1538(\log \Dot{W}_s)^2\) & 1 & 300 & \$2001 &\cite{Turton2012} \T\B \\
+    % \(C_{pump} = \log \Dot{W} - 0.03195*\Dot{W}^2 + 467.4* \Dot{W} + 2.048*10^4\) &  &  & ?? & Moein \T\B \\
+    \(C_{pump} = 1.4\cdot10^4*\left(\frac{\Dot{W}_{elec}}{200} \right)^{0.67}\) & - & - & \euro2014&\cite{Astolfi2014B} \T\B \\
+    \hline
+\end{tabular}

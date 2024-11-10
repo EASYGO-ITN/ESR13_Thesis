@@ -1,0 +1,110 @@
+The aforementioned frameworks/models fall into two categories: partition models for determining the number, amounts and composition of equilibrium phases; and property models for estimating the thermophysical properties of fluids of known composition. GeoProp was developed in recognition of these synergies and allows different partitioning and property frameworks/models to be coupled with another (Figure~\ref{fig:geoprop_v1}), all while maintaining the flexibility of customising the underlying calculation engines, \cite{Merbecks2024}.
+
+\subsection{Structure}
+\label{sec:geopropv1_structure}
+
+    The main underlying data structure, a \emph{Fluid}, is a container for the compositional data of the geofluid. The individual species are stored in \emph{Phases}, both in their native phase (i.e. aqueous, gaseous or mineral) and in a total phase, capturing all species. The \emph{Fluid} can be passed from one calculation engine (e.g. partition model or property model) to another, with the required input data and parameters being automatically passed to the underlying models. The user defines the initial species and their total amounts. The phase compositions are populated after performing a partitioning calculation, while the thermophysical properties are updated following the property calculation.
+
+    The \emph{Partition} module equilibrates an input \emph{Fluid} and partitions the \emph{Fluid} into the equilibrium phases. This determines the number, amounts and composition of the equilibrium phases at the given temperature and pressure. To date, two partition models are available: a) \emph{Reaktoro} and b) \emph{\ac{SP2009}} (details of adaptation of the original model by \citeauthor{Spycher2009} can be found in \nameref{ch:appendix_b}). However, the open architecture of GeoProp allows other partition models to be included. Additionally, the user retains the ability to fully customise the underlying equilibrium and partitioning calculations, such as selecting non-default activity models in \emph{Reaktoro}.
+
+    The \emph{Property} module evaluates the properties of a given \emph{Fluid} at the specified pressure and temperature. This module currently uses two calculation engines: a) \emph{CoolProp} and b) \emph{ThermoFun}.
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{.75\linewidth}{!}{\input{Content/TPPM/GeoProp/Figures/GeoProp_v1}}
+        \caption{Flow diagram of GeoProp for partitioning geofluids and calculating their thermophysical properties}
+        \label{fig:geoprop_v1}
+    \end{figure}
+
+    \subsubsection{Property Estimation}
+        The properties of gaseous phase species are evaluated in \emph{CoolProp} using a mixture of pure components and the default \ac{BIC} data, which effectively takes the role of the activity model correcting the partial molar properties from ideal to real conditions. In case of non-convergence, an ideal mixture is assumed (i.e. mixture effects are negligible), allowing the pure component properties to be calculated and then aggregated to the phase properties.
+
+        \emph{ThermoFun} is used to calculate the properties of all aqueous species besides water, which is calculated using \emph{CoolProp}’s implementation of the \ac{WP} \ac{EOS}. Aqueous species are assumed to be dilute and hence mixture effects are insignificant (i.e. unit activity for all aqueous species). As such, the species chemical potential, \(\mu_i^{(aq)} (P,T, \mathbf{y})\), approaches that at the reference conditions, \(\mu_i^{(aq)} (P,T, \mathbf{y}^o)\), since the activity contribution approaches zero (i.e. \(RT\ln a_i (P, T, \mathbf{y})\rightarrow 0\) as \(a_i\approx1\)). In turn this allows the pure component properties, \(\Psi_i^{(aq)}(P, T, \mathbf{y}^o)\), to be used, see Equation~\ref{eq:props_aqueous_i}, where \(\Psi_i^{(aq)}\) is a placeholder for properties such as the specific enthalpy, entropy or density of component \(i\), and \(x\) as well as \(f(x)\) are the supplementary variable and function to calculate the property, see Equation~\ref{eq:partial_molar_prop} and Table~\ref{table:PartialMolarProperties} in  Section~\ref{sec:chemically_active_system}. To obtain the aqueous phase properties, the species properties, \(\Psi_i^{(aq)}\), are aggregated using Equation~\ref{eq:props_aqueous}.
+
+        \begin{align}
+            \Psi_i^{(aq)} (P, T, \mathbf{y}) \approx \frac{1}{M_{r_i}} \frac{\partial \mu_i (P, T, \mathbf{y}^o)*f(x)}{\partial x} \label{eq:props_aqueous_i}
+        \end{align}
+        \begin{align}
+            \Psi^{(aq)} (P, T, \mathbf{y}) = \frac{\sum_{i=0}^N m_i^{(aq)} \Psi_i^{(aq)} (P, T, \mathbf{y})}{\sum_{i=0}^N m_i^{(aq)}} \label{eq:props_aqueous}
+        \end{align}
+    
+    Mineral phase properties are computed with \emph{ThermoFun}, assuming that each mineral constitutes a separate pure phase. Thus, unit activities are assumed, allowing the pure component properties, \(\Psi_i^{(s)} (P, T, \mathbf{y}^o)\), to be used, Equation~\ref{eq:props_solid_i}, which are then aggregated to the overall mineral phase properties, Equation~\ref{eq:props_solid}.
+
+    \begin{align}
+        \Psi_i^{(s)} (P, T, \mathbf{y}) \approx \frac{1}{M_{r_i}} \frac{\partial \mu_i (P, T, \mathbf{y}^o)*f(x)}{\partial x} \label{eq:props_solid_i}
+    \end{align}
+    \begin{align}
+        \Psi^{(s)} (P, T, \mathbf{y}) = \frac{\sum_{i=0}^N m_i^{(s)} \Psi_i^{(s)} (P, T, \mathbf{y})}{\sum_{i=0}^N m_i^{(i)}} \label{eq:props_solid}
+    \end{align}
+
+    The properties of all phases are aggregated to the overall fluid properties employing a mass-fraction-based mixing rule, Equation~\ref{eq:geo_props_total}. 
+    
+    \begin{align}
+        \Psi^{(t)} (P, T, \mathbf{y}) = \frac{\sum_{j=0}^K m^j \Psi^j (P, T, \mathbf{z})}{\sum_{j=0}^K m^j} \label{eq:geo_props_total}
+    \end{align}
+
+\subsection{Validation}
+\label{sec:tppm_geoprop_validation}
+    We use geofluid samples, collected from geothermal fields near Makhachkala, Dagestan in Russia, by \citeauthor{Abdulagatov2016} as the primary validation dataset. This dataset includes the fluid density, speed of sound and specific enthalpy (inferred from density and speed of sound measurements) for various temperatures. The composition of the fluid samples is summarised in Table~\ref{table:SampleComposition}. The salinity of these fluids ranges between about \qty{1.7}{\g \per \L} to \qty{15}{\g \per \L}. For reference, seawater has a salinity of \qty{35}{\g\per\kg} \cite{Millero2008}.
+
+    \begin{table}[H]
+        \caption{The composition of the geothermal fluid samples near Makhachkala \cite{Abdulagatov2016} in \unit{\milli \g \per \L}. Species exclusively below the detection threshold of \qty{0.1}{\milli \g \per \L} have been omitted.}
+        \centering
+        \input{Content/TPPM/GeoProp/DataTables/SampleComposition}
+        \label{table:SampleComposition}
+        \\[10pt]
+    \end{table}
+
+    We also consider several “synthetic” datasets. For example, seawater is a good analogue for simple geothermal brines as it is primarily comprised of water and NaCl. Although lithium bromide is not typically present in large quantities in geothermal fluids, it is also considered to test the applicability of GeoProp to unconventional brines. The thermophysical properties of these fluids were obtained from the MITSW and LiBr incompressible binary mixture \ac{EOS}, implemented in \emph{CoolProp}. Moreover, with these \ac{EOS}, it is possible to explore a wider range of salinities and temperatures.
+    
+    A final benchmark is performed against the ELECNRTL electrolyte model in \emph{ASPEN Plus v11}, a common process simulation. 
+    
+    The fluids were recreated in GeoProp and \emph{Aspen Plus v11}, and then equilibrated over a range of temperatures, determining their thermophysical properties (Figure~\ref{fig:geoprop_density_validation}, Figure~\ref{fig:geoprop_enthalpy_validation} and Figure~\ref{fig:geoprop_entropy_validation}). We find that GeoProp reproduces the “measured” densities of all fluids at all temperatures to within \qty{3}{\percent}, narrowly outperforming the ELECNRTL model in \emph{Aspen Plus v11}. For the specific enthalpy, both GeoProp and \emph{Aspen Plus v11} reproduced the measurements to within \qty{1}{\percent}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/GeoProp/Plots/GeoProp_Validation_Density}        
+        \caption{The density of various brines as a function of temperature at \qty{1}{\bar} pressure. Solid circles represent “measured” data and lines represent property models}
+        \label{fig:geoprop_density_validation}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/GeoProp/Plots/GeoProp_Validation_Enthalpy}      
+        \caption[The specific enthalpy of various brines as a function of temperature at \qty{1}{\bar} pressure.]{The specific enthalpy of various brines as a function of temperature at \qty{1}{\bar} pressure. The reference temperature is \qty{298}{\K} or \qty{25}{\degreeCelsius}. Solid circles represent “measured” data and lines represent property models.}
+        \label{fig:geoprop_enthalpy_validation}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/GeoProp/Plots/GeoProp_Validation_Entropy}
+        \caption[The specific entropy of various brines as a function of temperature at \qty{1}{\bar} pressure.]{The specific entropy of various brines as a function of temperature at \qty{1}{\bar} pressure. The reference temperature is \qty{298}{\K} or \qty{25}{\degreeCelsius}. Solid circles represent “measured” data and lines represent property models.}
+        \label{fig:geoprop_entropy_validation}
+    \end{figure}
+
+\subsection{Examples}
+\label{sec:tppm_geoprop_examples}
+    For code examples on using \emph{GeoProp}, please refer to \nameref{ch:appendix_d} or the \emph{GeoProp} Github repository \url{https://github.com/EASYGO-ITN/GeoProp}.
+
+\subsection{GeoProp v2}
+\label{sec:tppm_geoprop_v2}
+    Given the open-source architecture of GeoProp, it is in principle possible to extend the functionality of GeoProp v1 to include further partition and property models. However, the first implementation of the properties back-end is somewhat static, making it difficult for users to extend the functionality to other property estimation engines.
+
+    Moreover, the initial approach divides the models into two classes without recognising that in fact they are all \emph{models} and the only difference between them are their capabilities. For example, in GeoProp v1, \emph{CoolProp} is treated purely as a property model, when in reality it also has some partitioning-like capabilities. A summary of the \emph{models} currently used and their capabilities can be found in Table~\ref{table:ModelCapabiities}.
+
+    With the above in mind, a revised plug-in based architecture is proposed. This streamlines the process of adding \emph{models} to GeoProp by simply requiring an \emph{interface} or \emph{driver} script, without having to adjust the overall GeoProp architecture. Besides the default configuration, this enables the user to define custom thermophysical property models by specifying arbitrary combinations of the \emph{models}. While the general workflow is unchanged, the new architecture can be seen in Figure~\ref{fig:geoprop_v2}.
+
+    \begin{table}[H]
+        \caption{\emph{Model} capabilities.}
+        \centering 
+        \label{table:ModelCapabiities}
+        \input{Content/TPPM/GeoProp/DataTables/GeoProp_v2_ModelCapabilities}        
+        \\[10pt]
+    \end{table}
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{.75\linewidth}{!}{\input{Content/TPPM/GeoProp/Figures/GeoProp_v2}}
+        \caption{Flow diagram of GeoProp v2 for partitioning geofluids and calculating their thermophysical properties}
+        \label{fig:geoprop_v2}
+    \end{figure}

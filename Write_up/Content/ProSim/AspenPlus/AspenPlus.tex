@@ -1,0 +1,267 @@
+\subsection{Objectives}
+
+    Refine the application range of \ac{DSC}s with flash and binary \ac{ORC} geothermal power plants for two-phase sources, which are currently predominantly exploited via \ac{DSC}s.
+
+\subsection{Geothermal Sources}
+
+    Primarily two-phase geothermal sources were considered, with wellhead temperatures ranging between \qty{100}{\degreeCelsius} and \qty{200}{\degreeCelsius} and vapour quality ranging between \qty{0}{\percent} to \qty{50}{\percent}. In the context of this study the vapour quality is exclusively defined as the ratio of the mass of water in the vapour phase to the total mass of water, Equation~\ref{eq:aspen_vap_quality}. The brine salinity, defined in terms of \ce{NaCl} and relative to the total mass of water, Equation~\ref{eq:aspen_salinity}, ranges between \qty{0.0}{\kg\per\kg} to \qty{0.3}{\kg\per\kg}. The \ac{NCG} content, defined in terms of \ce{CO2} and relative to the total mass of water, Equation~\ref{eq:aspen_ncg_content}, ranges between \qty{0.00}{\kg\per\kg} to \qty{0.03}{\kg\per\kg}. Heat losses between the wellhead and the plant inlet were assumed to be insignificant and therefore neglected.
+
+    \begin{align}
+        x = \frac{\Dot{m}_{H_2O}^V}{\Dot{m}_{H_2O}^V+\Dot{m}_{H_2O}^L} \label{eq:aspen_vap_quality}
+    \end{align}
+    \begin{align}
+        s_{NaCl} = \frac{\Dot{m}_{NaCl}}{\Dot{m}_{H_2O}^V+\Dot{m}_{H_2O}^L} \label{eq:aspen_salinity}
+    \end{align}
+    \begin{align}
+        s_{NCG} = \frac{\Dot{m}_{NCG}}{\Dot{m}_{H_2O}^V+\Dot{m}_{H_2O}^L} \label{eq:aspen_ncg_content}
+    \end{align}
+
+    While a unit geofluid mass rate could be considered for the power plant simulations, this has the undesirable effect of artificially reducing the power plants’ performance as the effective inlet heat rate is lower due to the lower specific heat capacities of salinity and \ac{NCG} compared to water. Instead, the combined mass rate of liquid water and steam is assumed to be \qty{1}{\kg\per\s} (i.e. \(\Dot{m}_{H_2O}^V+\Dot{m}_{H_2O}^L=1\)\unit{\kg\per\s}) for the followinf calculations, to which the mass rates of salinity and \ac{NCG} are added, see Equation~\ref{eq:aspen_mgeo}.
+
+    \begin{align}
+        \Dot{m} = \Dot{m}_{H_2O}^V+\Dot{m}_{H_2O}^L+ \Dot{m}_{NaCl} + \Dot{m}_{NCG} \label{eq:aspen_mgeo}
+    \end{align}
+
+\subsection{Power Plant Configurations}
+
+    Two power plant configurations are considered, 1) a direct single flash steam cycle and 2) a binary \ac{ORC}. In a \ac{DSC} only the vapour portion of the geofluid is utilised and subsequently expanded in a turbine, see Figure~\ref{fig:aspen_DSC}. On the other hand, in a binary \ac{ORC} the geofluid merely serves as a heat source to vaporise a secondary fluid, which is then expanded in a turbine similarly to the \ac{DSC}, see Figure~\ref{fig:aspen_binarORC}. This allows exploiting the heat contained within both the vapour as well as the liquid phase. 
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{0.95\linewidth}{!}{\input{Content/ProSim/AspenPlus/Figures/DSC_Schematic}}
+        \caption{\ac{DSC} geothermal power plant.}
+        \label{fig:aspen_DSC}
+    \end{figure}
+
+    Both power plants are subject to the same boundary conditions:
+    \begin{itemize}
+        \item Geofluid composition, inlet temperature, pressure and steam quality
+        \item Heat is rejected into the surrounding environment at a temperature of \qty{25}{\degreeCelsius}
+        \item Geofluid enters and exits the power plant at the same pressure – this is to penalise for \ac{NCG} handling to ensure that it is not released into the atmosphere but instead re-injected into the formation.
+        \item Geofluid re-injection temperature is not constraint, as scaling is assumed to be negligible. 
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/AspenPlus/Figures/ORC_Schematic}}
+        \caption{Binary \ac{ORC} geothermal power plant.}
+        \label{fig:aspen_binarORC}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/AspenPlus/Plots/TQDiagram}}
+        \caption{Temperature Heat Transferred diagram for the Binary \ac{ORC} geothermal power plant shown in Figure~\ref{fig:aspen_binarORC}. For an inlet temperature of \qty{165}{\degreeCelsius} and a vapour quality of \qty{25}{\percent}.}
+        \label{fig:aspen_binarORC}
+    \end{figure}  
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \subfloat[\ac{DSC} geothermal power plant.\label{fig:aspen_DSC}]{
+    %         % \includesvg[width=0.45\columnwidth]{Content/ProSim/AspenPlus/Figures/DirectSteamCycle.svg}
+    %         \include{Content/ProSim/AspenPlus/Figures/DSC_Schematic}
+    %     }
+    %     \quad
+    %     \subfloat[Binary \ac{ORC} geothermal power plant.\label{fig:aspen_binarORC}]{
+    %         \includesvg[width=0.45\columnwidth]{Content/ProSim/AspenPlus/Figures/BinaryORC.svg}
+    %     }
+    % \end{figure}
+    
+    The specific net power output from the power plant, defined in Equation~\ref{eq:aspen_specific_power}, will be used to judge which performs better for a set of boundary condition. This definition was chosen with the simulations of real geofluids, containing \ac{NCG} and salinity, in mind because the presence of impurities diminishes the heat flow into the power plant. As such, the mass rate of the main heat-carrying constituent of the real geofluid (i.e. water) was chosen as a reference. 
+
+    \begin{align}
+        \Dot{w}_{net} = \frac{\Dot{W}_{turb}-\Dot{W}_{pump} + \Dot{W}_{repr}}{\Dot{m}_{H_2O}^V+\Dot{m}_{H_2O}^L}\label{eq:aspen_specific_power}
+    \end{align}
+
+\subsection{Model Description}
+    For the \ac{DSC}:
+    \begin{itemize}
+        \item The net power is optimised by adjusting the flash temperature/pressure, increasing the vapour mass rate while sacrificing specific enthalpy drop across the turbine; the pressure of the liquid fraction is consequently also decreased by the flash process.
+        \item The stream exiting the turbine is then cooled to \qty{30}{\degreeCelsius}, partially condensing the stream, before separating it into a liquid stream and a \ac{NCG} stream. All outlet streams, i.e. the liquid stream from the flash chamber, the condensate stream and the \ac{NCG} stream, must then be re-pressurised to the inlet pressure so that they can be re-injected into the reservoir.
+        \item Given the bell-shaped vapour dome of water in the T-s (temperature-specific entropy) diagram, the turbine efficiency is corrected for liquid drop out using the empirical Baumann Rule, Equation~\ref{eq:aspen_baumann_rule}, where \(\eta_{turb}^{wet}\) is the turbine wet efficiency, \(\eta_{turb}^{dry}\) is the turbine dry efficiency, assumed to be \qty{85}{\percent} \cite{DiPippo2016}, and \(x_{in}\) and \(x_{out}\) are the mole-based vapour fraction at the turbine inlet and outlet respectively.
+
+        \begin{align}
+            \eta_{turb}^{wet} = \eta_{turb}^{dry}*\left(\frac{x_{i}+x_{out}}{2}\right) \label{eq:aspen_baumann_rule}
+        \end{align}
+    \end{itemize}
+    
+    For the binary \ac{ORC}:
+    \begin{itemize}
+        \item The incoming geofluid is split into a liquid and vapour stream with each stream being used to pre-heat and evaporate the cycle working fluid. The vapour stream is further split into a vapour and condensate following the vapour powered evaporator.
+        \item The net power is optimised by adjusting evaporation and condensation temperature/pressure and the working fluid mass flow rates, while ensuring that the minimum approach temperatures do not fall below \qty{5}{\degreeCelsius} in liquid dominated and \qty{10}{\degreeCelsius} in vapour dominated heat exchangers. Moreover, the vapour quality at the vapour evaporator outlet should be above \qty{75}{\percent} to avoid excessive conditions of simultaneous condensation on the hot-side and evaporation on the cold-side, which may be difficult to find a suitable heat exchanger design for\footnote{Private communication: This constraint may be unnecessary, as there is at least one example of a binary \ac{ORC} geothermal power plant, where condensing steam is used to evaporate the working fluid. In any case, a heat transfer fluid could be used to facilitate the heat transfer, to first condense the steam, heating the heat transfer fluid, and then evaporate the working fluid, cooling the heat transfer fluid. The main disadvantage of this approach is the pumping cost of the heat transfer fluid and the cost of an additional heat exchanger.}.
+        \item Iso-butane, n-butane, iso-pentane, n-pentane and cyclopentane were considered as \ac{ORC} working fluids.
+    \end{itemize}
+
+    The simulations were run in \emph{Aspen Plus V11}.
+
+\subsection{Case 1: Pure Water}
+    To establish a base case, the two power plants were simulated in \emph{Aspen Plus V11} for a geofluid modelled as pure water for inlet temperatures and steam quality ranging between \qty{100}{\degreeCelsius} to \qty{200}{\degreeCelsius} and \qty{0}{\percent} to \qty{50}{\percent} respectively. The results are shown in Figure~\ref{fig:prosim_aspen_pureWAT_map}. Figures~\ref{fig:prosim_aspen_pureWAT_Tslice} and \ref{fig:prosim_aspen_pureWAT_Qslice} are constant vapour quality and constant temperature slices of Figure~\ref{fig:prosim_aspen_pureWAT_map} showing all working fluids considered. The key observations are:
+    \begin{itemize}
+        \item The investigated \ac{ORC} configurations thermodynamically outperform the \ac{DSC}s at any temperature for saturated liquid sources. For inlet temperatures above \qty{150}{\degreeCelsius}, the \ac{ORC} configurations begin to outperform the \ac{DSC}s at increasingly higher steam quality.
+        \item All \ac{ORC} working fluids perform similarly poorly at lower temperatures (up to \qty{150}{\degreeCelsius}), which can likely be attributed to the critical temperatures of the selected working fluids being too high. Isobutane and n-butane appear to be the most favourable working fluids for the conditions studied.
+        \item Cross-over of isobutane and n-butane in Figure~\ref{fig:prosim_aspen_pureWAT_Tslice} can be attributed to the vapour heated branch becoming vapour fraction constraint (i.e. the vapour quality in the vapour evaporator outlet reaches the limit of \qty{75}{\percent}), limiting the amount of working fluid that can be evaporated.
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/PureWaterMap.svg}
+        \input{Content/ProSim/AspenPlus/Plots/PureWater_map}
+        \caption[Maximum specific net power from a geofluid of pure water.]{Maximum specific net power from a geofluid of pure water as a function of inlet temperature and steam quality. The grey line indicates the performance boundary between binary \ac{ORC} and \ac{DSC}s.}
+        \label{fig:prosim_aspen_pureWAT_map}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/TemperatureSlices.svg}
+        \input{Content/ProSim/AspenPlus/Plots/PureWater_Tslice}
+        \caption[Specific net power from a geofluid of pure water by working fluid as a function of temperature.]{Specific net power from a geofluid of pure water as a function of inlet temperature and a steam quality of \qty{25}{\percent} for a \ac{DSC} and binary \ac{ORC} plant using various working fluids.}
+        \label{fig:prosim_aspen_pureWAT_Tslice}
+    \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/VapQualitySlices.svg}
+        \input{Content/ProSim/AspenPlus/Plots/PureWater_Qslice}
+        \caption[Specific net power from a geofluid of pure water by working fluid as a function of steam quality.]{Specific net power from a geofluid of pure water as a function of steam quality and an inlet temperature of \qty{165}{\degreeCelsius} for a \ac{DSC} and binary \ac{ORC} plant using various working fluids. }
+        \label{fig:prosim_aspen_pureWAT_Qslice}
+    \end{figure}
+
+\subsection{Role of Salinity and NCG}  % the acronym version is purposefully not use to preserve the heading style
+    In reality geofluids are not only comprised of pure water, but may also carry dissolved minerals and \ac{NCG}. The presence of such impurities alters the geofluid’s phase behaviour and thermophysical properties compared to pure water, the magnitude of deviations being strongly related to the effective salinity, Equation~\ref{eq:aspen_salinity_eff}, and effective \ac{NCG} content, Equation~\ref{eq:aspen_ncg_content_eff}, and has implications for the performance of direct steam and binary \ac{ORC} power plants.
+
+    \begin{align}
+        s_{NaCl}^{eff} = \frac{\Dot{m}_{NaCl}}{\Dot{m}_{H_2O}^L} \label{eq:aspen_salinity_eff}
+    \end{align}
+    \begin{align}
+        s_{NCG}^{eff} = \frac{\Dot{m}_{NCG}}{\Dot{m}_{H_2O}^V} \label{eq:aspen_ncg_content_eff}
+    \end{align}
+
+    Perhaps most consequential is their effect on the geofluid saturation pressure. Considering a geofluid comprised of \ce{H2O(aq)}, \ce{Na^+(aq)}, \ce{Cl^-(aq)} and \ce{H2O(g)}, the presence of the \ce{Na^+(aq)}, \ce{Cl^-(aq)} causes a reduction in chemical potential of the \ce{H2O(aq)}, meaning that mixture prefers to be in the liquid state and thus the saturation pressure is reduced, see Figure~\ref{fig:prosim_aspen_Psat}. Similarly, for a geofluid comprised of \ce{H2O(aq)}, \ce{H2O(g)} and \ce{CO2(g)}, the fluid prefers to be in the gaseous state and hence the saturation pressure increases.
+
+    The change in saturation pressure is particularly important for \ac{DSC}s, as, for example in the case of high salinity, impedes the ability to optimise flash temperature/pressure and reduces net power. Specifically, a geofluid with an effective salinity of \qty{0.3}{\kg\per\kg} of \ce{NaCl}, the saturation pressure is reduced from \qty{10}{\bar} to \qty{8}{\bar}.
+    
+    Salinity and \ac{NCG} also affect the geofluid’s thermophysical properties, such as the specific enthalpy or specific heat capacity. Changes can primarily be attributed to both salts and \ac{NCG} having far lower heat capacity than pure water and to a smaller extent to the reduction in species chemical potential, although this is more significant for higher concentrations of salts and \ac{NCG}. That being said, the heat flow is relatively unchanged compared to pure water, see Figure~\ref{fig:prosim_aspen_Heatflow}. This suggests that, assuming the total mass rate scales with the mass rate of impurities, the performance of the binary \ac{ORC} is only weakly affected.
+
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/DeltaPsat.svg}
+        \input{Content/ProSim/AspenPlus/Plots/DeltaPsat}
+        \caption{Geofluid saturation pressure as a function of temperature for a range of effective salinity and \ac{NCG} content.}
+        \label{fig:prosim_aspen_Psat}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/DeltaHeat.svg}
+        \input{Content/ProSim/AspenPlus/Plots/DealtaQ}
+        \caption[Deviation of liquid and vapour heat flow from pure water/steam for a range of effective salinity and \ac{NCG} content.]{Deviation of liquid and vapour heat flow from pure water/steam for a range of effective salinity and \ac{NCG} content, at a steam quality of \qty{10}{\percent}, as a function of temperature. The reference conditions are \qty{25}{\degreeCelsius} and \qty{1}{\bar}.}
+        \label{fig:prosim_aspen_Heatflow}
+    \end{figure}
+
+\subsection{ELECNRTL vs. SP2009}
+    Within \emph{Aspen Plus v11}, the ELECNRTL model has so far been used to capture the phase behaviour of water, sodium chloride and carbon dioxide mixtures. Given the particular focus of this work on the thermophysical properties and phase behaviour of the geofluid, it was important to compare the ELECNRTL model against other available models, such as \ac{SP2009}.
+
+    To compare the mutual solubilities of water and carbon dioxide from the ELECNRTL model, a simple process was modelled in \emph{Aspen Plus v11}. Two streams of pure water and carbon dioxide are mixed, then taken to the desired temperature and pressure in the Heater element. Finally the mixture is partitioned into a vapour and liquid phase in the Separator, see Figure~\ref{fig:SP2009vsAspen_process_diagram}. 
+
+    The methodology above relies on a two-phase mixture to exist at the desired temperature and pressure, such that both the liquid and vapour phase are considered saturated. For conditions, where only a single phase exists, water or carbon dioxide, would need to be added until mixture becomes saturated, however, this procedure is difficult to implement in \emph{Aspen Plus v11}. In this respect, the ratio of water to carbon dioxide at the inlet was set to 1 to 10 on a mole basis as this was found to yield a two-phase mixture over a wide range of conditions.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics{Content/TPPM/CaseStudies/Figures/Aspen11vsSP2009_process_diagram.png}
+        \caption{Process flow diagram of the \emph{Aspen Plus v11} simulation used to calculate the mutual solubilities of water and carbon dioxide}
+        \label{fig:SP2009vsAspen_process_diagram}
+    \end{figure}
+
+    Comparing the equilibrium mole fraction of water in the vapour/carbon dioxide-rich phase, see Figures~\ref{fig:SP2009vsAspen_yH2O}, it can be seen that the ELECNRTL model generally provides higher estimates than the \ac{SP2009} model. The deviations from \ac{SP2009}'s estimates increase with decreasing temperature; from a ratio of \num{1.31} at \qty{250}{\degreeCelsius} and \qty{600}{\bar} to \num{2.20} at \qty{60}{\degreeCelsius} and \qty{600}{\bar}.
+    
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/AspenPlus/Plots/ELECNRTLvsSP2009/SP2009vsAspen_yH2O_log}         
+        \caption[Comparison of the equilibrium mole fraction of water in a carbon dioxide-rich phase predictions.]{The equilibrium mole fraction of water in a carbon dioxide-rich phase as a function of temperature and pressure, as calculated using the ELECNRTL model in \emph{Aspen Plus v11} and the \ac{SP2009} model}
+        \label{fig:SP2009vsAspen_yH2O}
+    \end{figure}
+
+    The observed deviations at temperatures below \qty{60}{\degreeCelsius} can in part be explained by phase change of the carbon dioxide-rich phase from vapour to liquid, visible as the discontinuities of the lines corresponding to temperatures of \qty{31}{\degreeCelsius} and \qty{20}{\degreeCelsius}. This phase change does not appear to be captured within the ELECNRTL model in \emph{Aspen Plus v11}. 
+    
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/AspenPlus/Plots/ELECNRTLvsSP2009/SP2009vsAspen_yH2O_log_ratio}         
+    %     \caption{The ratio of equilibrium mole fractions of water in a carbon dioxide-rich phase, as a function of temperature and pressure, as calculated using the ELECNRTL model in \emph{Aspen Plus v11} and the \ac{SP2009} model}
+    %     \label{fig:SP2009vsAspen_yH2O_ratio}
+    % \end{figure}
+
+    As for the equilibrium mole fraction of carbon dioxide in a water-rich phase, while the ELECNRTL and \ac{SP2009} models show good agreement at low temperatures, they deviate considerably at higher temperatures, see Figures~\ref{fig:SP2009vsAspen_xCO2_part2} and \ref{fig:SP2009vsAspen_xCO2_part1}. As described above, the low-temperature and high-pressure behaviour of the ELECNRTL model can likely be attributed to the phase change from vapour to liquid carbon dioxide not being captured.
+    
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/AspenPlus/Plots/ELECNRTLvsSP2009/SP2009vsAspen_xCO2_log_part2}
+        \caption[Comparison of the equilibrium mole fraction of carbon dioxide in a water-rich phase predictions. Part 1.]{The equilibrium mole fraction of carbon dioxide in a water-rich phase as a function of temperature and pressure, as calculated using the ELECNRTL model in \emph{Aspen Plus v11} and the \ac{SP2009} model}
+        \label{fig:SP2009vsAspen_xCO2_part2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/AspenPlus/Plots/ELECNRTLvsSP2009/SP2009vsAspen_xCO2_log_part1}
+        \caption[Comparison of the equilibrium mole fraction of carbon dioxide in a water-rich phase predictions. Part 2.]{The equilibrium mole fraction of carbon dioxide in a water-rich phase as a function of temperature and pressure, as calculated using the ELECNRTL model in \emph{Aspen Plus v11} and the \ac{SP2009} model}
+        \label{fig:SP2009vsAspen_xCO2_part1}
+    \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/AspenPlus/Plots/ELECNRTLvsSP2009/SP2009vsAspen_xCO2_log_ratio}         
+    %     \caption{The ratio of equilibrium mole fractions of carbon dioxide in a water-rich phase, as a function of temperature and pressure, as calculated using the ELECNRTL model in \emph{Aspen Plus v11} and the \ac{SP2009} model}
+    %     \label{fig:SP2009vsAspen_xCO2_ratio}
+    % \end{figure}
+
+    Another factor to consider when comparing these results is nature of the phases considered by each model: \emph{Aspen Plus v11} differentiates between a vapour, liquid and solid phase, whereas \ac{SP2009} considers a water-rich and a carbon dioxide-rich phase. For the vast majority of conditions these definitions are congruent, however below the critical temperature of carbon dioxide (about \qty{31}{\degreeCelsius}) carbon dioxide can exist in its liquid state, provided pressures are sufficiently high. For our investigation it is unclear, whether the ELECNRTL model makes this distinction, nevertheless, \emph{Aspen Plus v11} still reports carbon dioxide in the vapour phase at these conditions, see Figure~\ref{fig:SP2009vsAspen_supcritCO2}.
+
+    \begin{figure}[H]
+        \centering
+        \frame{\includegraphics[scale=0.9]{Content/TPPM/CaseStudies/Figures/Aspen11vsSP2009_SupcritCO2.png}}
+        \caption{Reported stream composition with the ELECNRTL model in \emph{Aspen Plus v11} for supercritical conditions}
+        \label{fig:SP2009vsAspen_supcritCO2}
+    \end{figure}
+
+    In summary, at low pressures (less than \qty{100}{\bar}) mutual solubilities predicted by ELECNRTL and \ac{SP2009} compare well, though for the vapour phase deviations increase with increasing temperature, while for the liquid phase deviations increase with decreasing temperature. In this respect, the ELECNRTL model can be used to model the inlet two-phase geofluid and partition it into a vapour and liquid phase. However, given the large deviations at low temperatures for the liquid phase, care should be taken when investigating re-injection scenarios involving the re-dissolution of carbon dioxide in brine similar to the \emph{CarbFix} process. 
+
+\subsection{Case 2: Salinity and NCG} % the acronym version is purposefully not use to preserve the heading style
+    To investigate the effect of impurities, the two power plants were simulated in \emph{Aspen Plus V11} for an inlet temperature of \qty{150}{\degreeCelsius} and steam quality of \qty{10}{\percent} for geofluids with salinity between \qty{0.0}{\kg\per\kg} to \qty{0.2}{\kg\per\kg} of \ce{NaCl} and \ac{NCG} content ranging between \qty{0.00}{\kg\per\kg} to \qty{0.03}{\kg\per\kg} of \ce{CO2} respectively, see Figures~\ref{fig:prosim_aspen_NCGSal_map} and \ref{fig:prosim_aspen_NCGSlice}. The key observations were:
+    \begin{itemize}
+        \item Salinity does not significantly affect the performance of \ac{DSC}s or \ac{ORC}s.
+        \item \ac{NCG} content primarily impacts the performance of \ac{DSC}s due to the additional compression requirements to reinject the \ac{NCG}.
+        \item \ac{ORC}s begin to thermodynamically outperform \ac{DSC}s at about \qty{0.025}{\kg\per\kg} of \ce{CO2} for any salinity studied.
+    \end{itemize}
+	
+    \ac{NCG} content primarily impacts the performance of \ac{DSC}s due to the additional compression requirements to reinject the \ac{NCG}.
+	
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/NCGSalMap.svg}
+        \resizebox{!}{8cm}{\input{Content/ProSim/AspenPlus/Plots/PureWater_Sal_NCG_map}}
+        \caption[Maximum specific net power from a \ac{DSC} or a binary \ac{ORC} as a function of salinity and \ac{NCG} content.]{Maximum specific net power from a \ac{DSC} or a binary \ac{ORC} as a function of salinity and \ac{NCG} content. Inlet temperature is \qty{150}{\degreeCelsius} and a steam quality of \qty{10}{\percent}}
+        \label{fig:prosim_aspen_NCGSal_map}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        % \includesvg[width=0.9\columnwidth]{Content/ProSim/AspenPlus/Figures/NCGSlice.svg}
+        \input{Content/ProSim/AspenPlus/Plots/PureWater_SalSlice}
+        \caption[Specific net power as a function of \ac{NCG} content.]{Specific net power as a function of \ac{NCG} content. Inlet temperature is \qty{150}{\degreeCelsius} and steam quality is \qty{10}{\percent}}
+        \label{fig:prosim_aspen_NCGSlice}
+    \end{figure}
+
+\subsection{Observations}
+    Simulations of geothermal power plants showed that \ac{ORC}s can thermodynamically outperform \ac{DSC}s for inlet steam quality as high as \qty{30}{\percent}, provided an appropriate working fluid has been selected - iso-butane and n-butane were found to be thermodynamically promising working fluids. The presence of impurities in the geofluid such as salts and \ac{NCG} does not significantly affect the heat flow entering the power plant, and in turn the turbine power. That being said, \ac{NCG} compression for re-injection reduced the net power of \ac{DSC}s significantly, rendering binary \ac{ORC}s thermodynamically favourable for \ac{NCG} content as low as \qty{0.025}{\kg\per\kg} of \ce{CO2}.
+
+    From a practical perspective, \emph{Aspen Plus v11} represents a black box to the user, meaning that any troubleshooting of potential issues (e.g. model assumptions/implementation, calculation convergence, solver order or crashes) is limited to outputs provided by the tool (e.g. error, warning and debug messages) or the user guides. 
+
+    Formulating stable optimisable power plant models for a wide range of inlet conditions without expert knowledge in this black-box environment proved to be a challenging task, resulting in a number of unresolved issues to be encountered:
+    \begin{itemize}
+        \item Achieving consistent initialisation of individual cases between a standalone and sensitivity calculation
+        \item Unoptimised solver order leading to unnecessary iterations and runtime
+        \item Difficulty in tracing severity of warnings and errors in sensitivty calculations, undermining reliability of results
+        \item Small model modifications (e.g. enabling/disabling the recuperator, or super-critical vs. sub-critical \ac{ORC}) require separate model templates
+        \item Connectivity to non-standard third party applications/models
+        \item Reproducible and non-reproducible (random) system crashes
+    \end{itemize}
+
+\clearpage

@@ -1,0 +1,62 @@
+\begin{tikzpicture} [node distance=2cm]
+
+    % the flowchart elements
+    \node (PTin) [io, minimum width=1.5cm, minimum height= 1.2cm] at (0,0) {\(P, T\)};
+    \node (Z) [io, minimum height= 1.2cm, minimum width= 3cm] at ($(PTin) + (0,-1.5)$) {Total Composition};
+
+    \node (PartitionModel) [process, minimum height= 1.2cm, fill=red!30] at ($(Z) + (0, -2.2)$){Partition Model};
+
+    \node (Phases) [process, minimum height= 1.2cm, text width = 11cm] at ($(PartitionModel) + (0,-2.2)$) {Phases \& Phase Compositions};
+    \node (Gaseous) [process, minimum height= 1.2cm] at ($(Phases) + (-4, -1.5)$){Gaseous Phase};
+    \node (Aqueous) [process, minimum height= 1.2cm] at ($(Phases) + (0,-1.5)$) {Aqueous Phase};
+    \node (Mineral) [process, minimum height= 1.2cm] at ($(Phases) + (4,-1.5)$) {Mineral Phase};
+
+    \node (PropertyModelG) [process, minimum height= 1.2cm, fill=green!30] at ($(Gaseous) + (0, -2.2)$){Gaseous Property Model};
+    \node (PropertyModelA) [process, minimum height= 1.2cm, fill=green!30] at ($(Aqueous) + (0,-2.2)$) {Aqueous Property Model};
+    \node (PropertyModelM) [process, minimum height= 1.2cm, fill=green!30] at ($(Mineral) + (0,-2.2)$) {Mineral Property Model};
+
+    \node (Gprops) [io, minimum height= 1.2cm] at ($(PropertyModelG) + (0, -2.2)$){\(n, \mathbf{x}, \rho, h, s\)};
+    \node (Aprops) [io, minimum height= 1.2cm] at ($(PropertyModelA) + (0,-2.2)$) {\(n, \mathbf{x}, \rho, h, s\)};
+    \node (Mprops) [io, minimum height= 1.2cm] at ($(PropertyModelM) + (0,-2.2)$) {\(n, \mathbf{x}, \rho, h, s\)};
+    \node (Tprops) [io, minimum height= 1.2cm] at ($(Aprops) + (0,-2.7)$) {\(n, \mathbf{x}, \rho, h, s\)};
+
+    % the connectors
+    \draw [arrow] (PTin) to [out=-90, in = 90] (Z);
+    \draw [arrow] (Z) to [out=-90, in = 90] (PartitionModel);
+
+    \draw [arrow] (PartitionModel) -- (Phases);
+
+    \draw [arrow] (Phases) to [out=190, in = 90] (Gaseous);
+    \draw [arrow] (Phases) -- (Aqueous);
+    \draw [arrow] (Phases) to [out=-10, in = 90] (Mineral);
+    \draw [arrow] (Gaseous) -- (PropertyModelG);
+    \draw [arrow] (Aqueous) -- (PropertyModelA);
+    \draw [arrow] (Mineral) -- (PropertyModelM);
+
+    \draw [arrow] (PropertyModelG) -- (Gprops);
+    \draw [arrow] (PropertyModelA) -- (Aprops);
+    \draw [arrow] (PropertyModelM) -- (Mprops);
+
+    \draw [arrow] (Gprops) to [out=-90, in = 180] (Tprops) ;
+    \draw [arrow] (Aprops) to (Tprops);
+    \draw [arrow] (Mprops) to [out=-90, in = 0] (Tprops);
+
+    % the spatial separators
+    \draw [dashed] ($(Z) + (-6.5, -1.1)$) to ($(Z) + (6, -1.1)$);
+    \draw [dashed] ($(PartitionModel) + (-6.5, -1.1)$) to ($(PartitionModel) + (6, -1.1)$);
+    \draw [dashed] ($(Aqueous) + (-6.5, -1.1)$) to ($(Aqueous) + (6, -1.1)$);
+    \draw [dashed] ($(Aprops) + (-6.5, 1.1)$) to ($(Aprops) + (6, 1.1)$);
+
+    % annotations
+    \node [text centered, text width=2cm] at ($(Aprops) + (1.5, -1.2)$) {Aqueous Properties};
+    \node [text centered, text width=2cm] at ($(Gprops) + (1.5, -1.2)$) {Gaseous Properties};
+    \node [text centered, text width=2cm] at ($(Mprops) + (1.5, -1.2)$) {Mineral Properties};
+    \node [text centered] at ($(Tprops) + (0, -1.2)$) {Total Properties};
+
+    \node [text centered, text width=2cm] at ($(PTin) + (-7, -0.75)$) {Inputs};
+    \node [text centered, text width=2cm] at ($(SP2009) + (-7, 0)$) {Partition Model};
+    \node [text centered, text width=2cm] at ($0.5*(Phases)+0.5*(Aqueous) + (-7, 0)$) {Phase Splitting};
+    \node [text centered, text width=2cm] at ($(PropertyModelA) + (-7, 0)$) {Property Models};
+    \node [text centered, text width=2cm] at ($0.5*(Aprops)+0.5*(Tprops) + (-7, 0)$) {Outputs};
+    
+\end{tikzpicture}

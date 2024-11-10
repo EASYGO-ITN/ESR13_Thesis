@@ -1,0 +1,58 @@
+\begin{tikzpicture} [node distance=1.5cm]
+
+    \definecolor{blue_level1}{RGB}{218,227,243}
+    \definecolor{blue_level2}{RGB}{143,170,227}
+    \definecolor{green_level2}{RGB}{169,209,142}
+    \definecolor{green_level1}{RGB}{226,240,217}
+    \definecolor{gold_level1}{RGB}{255,242,205}
+    \definecolor{gold_level2}{RGB}{255,217,102}
+    \definecolor{red_level1}{RGB}{251,229,214}
+    \definecolor{red_level2}{RGB}{244,177,131}
+
+    \node (CP) [process, text width=1.8cm, minimum width=2cm, minimum height=1.2cm, fill=blue_level2] {CoolProp};
+    \node (CP_inter) [process, right of=CP, xshift=2cm, text width=1.8cm, minimum width=2cm, minimum height=1.2cm, , fill=blue_level1] {Interface};
+
+    \node (GP) [process, below of=CP, text width=1.8cm, minimum width=2cm, minimum height=1.2cm, fill=red_level2] {GeoProp};
+    \node (GP_inter) [process, right of=GP, xshift=2cm, text width=1.8cm, minimum width=2cm, minimum height=1.2cm, fill=red_level1] {Interface};
+
+    \node (other) [process, below of=GP, text width=1.8cm, minimum width=2cm, minimum height=1.2cm, fill=gold_level2] {...};
+    \node (other_inter) [process, right of=other, xshift=2cm, text width=1.8cm, minimum width=2cm, minimum height=1.2cm, fill=gold_level1] {Interface};
+
+    \node (fluid) [process, right of=GP_inter, yshift=0.2cm, xshift=3.7cm, text width=1.8cm, minimum width=4.5cm, minimum height=5.5cm, fill=green_level2] {};
+    \node (fluid_label) [process, at=(fluid), xshift=-0.6cm, yshift=2.35cm, text width=1.8cm, draw=none, fill=none] {Fluid};
+    \node (state) [process, right of=GP_inter, xshift=1.8cm, text width=1.4cm, minimum width=1.6cm, minimum height=4.2cm, fill=green_level1] {State};
+    
+    \node (update) [process, right of=state, xshift=1.8cm, text width=2.4cm, minimum width=2cm, minimum height=1.2cm, fill=green_level1] {Update( State Var1, State Var2)};
+    \node (comp) [process, above of=update,yshift=0.2cm, text width=2.4cm, minimum width=2.2cm, minimum height=1.2cm, fill=green_level1] {Composition, Engine};
+    \node (props) [process, below of=update,yshift=-0.2cm, text width=2.4cm, minimum width=2.2cm, minimum height=1.2cm, fill=green_level1] {Properties};
+
+    \node [above of=CP, yshift=-0.5cm] {Engines};
+    \node [above of=CP_inter, yshift=-0.5cm] {Interfaces};
+
+
+    \draw [arrow, thick] (CP) to [out=10, in=170] (CP_inter);
+    \draw [arrow, thick] (CP_inter) to [out=190, in=-10] (CP);
+    \draw [arrow, thick] (CP_inter) to [out=10, in=170] ($(CP_inter)+(2.5,0.2)$);
+    \draw [arrow, thick] ($(CP_inter)+(2.5,-0.2)$) to [out=190, in=-10] (CP_inter);
+    
+    
+    \draw [arrow, thick] (GP) to [out=10, in=170] (GP_inter);
+    \draw [arrow, thick] (GP_inter) to [out=190, in=-10] (GP);
+    \draw [arrow, thick] (GP_inter) to [out=10, in=170] ($(GP_inter)+(2.5,0.2)$);
+    \draw [arrow, thick] ($(GP_inter)+(2.5,-0.2)$) to [out=190, in=-10] (GP_inter);
+    
+    \draw [arrow, thick] (other) to [out=10, in=170] (other_inter);
+    \draw [arrow, thick] (other_inter) to [out=190, in=-10] (other);
+    \draw [arrow, thick] (other_inter) to [out=10, in=170] ($(other_inter)+(2.5,0.2)$);
+    \draw [arrow, thick] ($(other_inter)+(2.5,-0.2)$) to [out=190, in=-10] (other_inter);  
+
+    \draw [arrow, thick] (comp) to ($(comp)+(-2.5,0)$);
+    \draw [arrow, thick] (update) to [out=180, in=90] ($0.5*(update)+0.5*(props)+(-2.45,0)$) to [out=-90, in=180] (props);
+
+    \begin{scope}[on background layer]
+        \draw [dashed] ($(fluid)+(1, 3.5)$) -- ($(fluid)+(1, -3.5)$);
+        \node at ($(fluid)+(1, 3.5)$) [anchor=north west] {User};
+        \node at ($(fluid)+(1, 3.5)$) [anchor=north east] {Backend};
+    \end{scope}
+
+\end{tikzpicture}

@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (injector) at (2,0) {injector};
+    \pic[rotate=180] (evap) at ($(injector-anchor) + (0.925, 4)$) {heat exchanger biphase};
+    \pic[rotate=180] (preh) at ($(evap-anchor) + (0, -1.5)$) {heat exchanger biphase};
+    \pic (solids) [scale=0.25] at ($(evap-pipes bottom) + (-1.5, 0)$) {block};
+    \pic (turbine) at ($(evap-anchor) + (4.5, 0)$) {turbine_gen};
+    \pic (condenser) at ($(turbine-outlet bottom) + (0, -1.6)$) {heat exchanger biphase};
+    \pic (pump) at ($(condenser-anchor) + (-1.5, -1)$) {centrifugal pump};
+    
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (solids-left);
+    \draw[main stream] (solids-right) -- (evap-pipes bottom);
+    \draw[main stream] (solids-bottom) -- ++ (0, -0.5);
+    \draw[main stream] (evap-pipes top) 
+        -| ($(evap-pipes top) + (-0.5, -1)$) 
+        -- (preh-pipes bottom);
+    \draw[main stream] (preh-pipes top) 
+        -| ($(preh-pipes top) + (-0.5, -1)$) 
+        -- (injector-top);
+    \draw[main stream] (evap-shell bottom) |- ++ (0, 0.2) -| (turbine-inlet top);
+    \draw[main stream] (turbine-outlet bottom) -- (condenser-shell top);
+    \draw[main stream] (condenser-shell bottom) |- (pump-anchor);
+    \draw[main stream] (pump-top) -| (preh-shell top);
+    \draw[main stream] (preh-shell bottom) -| (evap-shell top);
+    \draw[main stream] (condenser-pipes top) -- ++ (1,0);
+    \draw[main stream] ($(condenser-pipes bottom) + (1, 0)$) -- (condenser-pipes bottom);
+    
+    
+    % % draw labels
+    \node[above, align=center] at (solids-top) {Solids\\Removal};
+    \node[below] at (producer-bottom) {Producer};
+    \node[right] at (evap-shell left) {Evaporator};
+    \node[right] at (preh-shell left) {Pre-Heater};
+    \node[above] at ($(turbine-top)+ (0.5,0.1)$) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[left, align=left] at (condenser-shell left) {Condenser};
+    \node[below, align=center] at (pump-bottom) {Circulation \\ Pump};
+    \node[below] at (injector-bottom) {Injector};
+    \node[right, align=left] at ($(condenser-pipes bottom) + (1, 0)$) {Coolant in};
+    \node[right, align=left] at ($(condenser-pipes top) + (1, 0)$) {Coolant out};
+    
+\end{tikzpicture}

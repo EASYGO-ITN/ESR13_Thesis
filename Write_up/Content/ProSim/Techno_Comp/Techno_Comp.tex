@@ -1,0 +1,223 @@
+The following section aims to investigate the performance of techno-economically optimised single flash \ac{DSC} and binary \ac{ORC} geothermal power plants for two-phase geothermal heat sources.
+
+\subsection{Plant Configurations}
+    The power plant configurations used for the techno-economic optimisation are the same as those used for the thermodynamic optimisation, see Section~\ref{sec:prosim_plant_configurations}.
+
+\subsection{Boundary Conditions}
+    The boundary conditions used for the techno-economic optimisation are the same as those used for the thermodynamic optimisation, see Section~\ref{sec:prosim_thermo_BCs}.
+
+\subsection{Optimisation Configuration}
+    The performance of the power plants is optimised based on the specific plant cost, by adjusting the process variables. For the \ac{DSC} plant, the flash pressure and the condensation pressure, as well as the minimum temperature in the condenser are adjusted; for the binary \ac{ORC} plant, the evaporation pressure, the degree of super-heating and the condensation temperature, as well as the minimum approach temperature differences in the pre-heater, evaporator, super-heater and condenser are adjusted,  Table~\ref{table:prosim_pure_water_techno_opt_params}, .
+
+    \begin{table}[H]
+        \centering
+        \caption{The optimisation parameters used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+        \label{table:prosim_pure_water_techno_opt_params}
+        \input{Content/ProSim/Techno_Comp/DataTables/TechnoEconomicOptimisation}        
+    \end{table}
+
+\subsection{Performance Analysis: DSC}
+
+    The techno-economic optimisation of the \ac{DSC} geothermal power plant reduces the specific plant costs by between \qty{7}{\percent} and \qty{10}{\percent},  Figure~\ref{fig:prosim_purewater_DeltaSpecCost_DSC_thermo_vs_techno}, at the expense of between \qty{10}{\percent} to \qty{35}{\percent} of net plant power, Figure~\ref{fig:prosim_purewater_DeltaWnet_DSC_thermo_vs_techno}.
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/Techno_Comp/Plots/DSC_thermo_vs_techno_opt/DeltaSpecCost}}
+        \caption[The specific plant cost of the techno-economically optimised single flash \ac{DSC}.]{Left: the specific plant cost of the techno-economically optimised single flash \ac{DSC}. Right: the change in specific plant cost compared to the thermodynamically optimised single flash \ac{DSC}.}
+        \label{fig:prosim_purewater_DeltaSpecCost_DSC_thermo_vs_techno}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/Techno_Comp/Plots/DSC_thermo_vs_techno_opt/DeltaWnet}}
+        \caption[The net electrical power of the techno-economically optimised single flash \ac{DSC}.]{Left: the net electrical power of the techno-economically optimised single flash \ac{DSC}. Right: the change in net electrical power compared to the thermodynamically optimised single flash \ac{DSC}.}
+        \label{fig:prosim_purewater_DeltaWnet_DSC_thermo_vs_techno}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/DSC_thermo_vs_techno_opt/Cost_breakdown}
+        \caption[The absolute cost of plant components for a techno-economically optimised and thermodynamically optimised single flash \ac{DSC} geothermal power plant.]{The absolute cost of plant components for techno-economically optimised (left) and thermodynamically optimised single flash \ac{DSC} geothermal power plant. The geofluid inlet temperature is \qty{523}{\K} (\qty{225}{\degreeCelsius}).}
+        \label{fig:prosim_purewater_DSC_techno_opt_CostBreakdown}
+    \end{figure}
+
+    The reduction in specific cost is primarily driven by the decrease in the cost of the condenser. Compared to the thermodynamically optimised single flash \ac{DSC}, the specific cost of the condenser (relative to the net electrical power) is between \qty{40}{\percent} to \qty{60}{\percent} lower for the techno-economically optimised power plant. This is achieved by raising the minimum approach temperature difference in the condenser and the condensation pressure/temperature, Figure~\ref{fig:prosim_purewater_DSC_techno_opt_DTpinch_Pmin}, as well as reducing the degree of flashing, compared to the thermodynamically optimised case, Figure~\ref{fig:prosim_purewater_DSC_techno_opt_Xflash}.
+
+    Raising the minimum approach temperature difference, has the effect of providing a greater driving force for the heat transfer in the condenser, thus allowing the heat transfer area to be reduced. This in turn requires the condensation temperature to be raised to allow for the greater temperature difference, but decreases the turbine power. Reducing the degree of flashing maintains a higher turbine inlet pressure, thus providing a greater driving force for the expansion, and by virtue of reducing the vapour mass rate also reduces the duty, and thus the size of the condenser. 
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/Techno_Comp/Plots/DSC_thermo_vs_techno_opt/Pmin_and_DTpinchCond}}
+        \caption[The minimum approach temperature in the condenser and condensation pressure for a techno-economically and a thermodynamically optimised single flash \ac{DSC} geothermal power plant.]{The minimum approach temperature in the condenser \(T_{cond}^{min}\) (left) and the condensation pressure (right) for a techno-economically and a thermodynamically optimised single flash \ac{DSC} geothermal power plant.}
+        \label{fig:prosim_purewater_DSC_techno_opt_DTpinch_Pmin}
+    \end{figure}
+    
+    % Replaced by a more compact version
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/ORCvsDSC/Plots/DSC_thermo_vs_techno_opt/DTpinchCond}
+    %     \caption{The minimum approach temperature in the condenser \(T_{cond}^{min}\) for a techno-economically and a thermodynamically optimised single flash \ac{DSC} geothermal power plant.}
+    %     \label{fig:prosim_purewater_DSC_techno_opt_DTpinch}
+    % \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/ORCvsDSC/Plots/DSC_thermo_vs_techno_opt/Pmin}
+    %     \caption{The condensation pressure for a techno-economically and a thermodynamically optimised single flash \ac{DSC} geothermal power plant.}
+    %     \label{fig:prosim_purewater_DSC_techno_opt_Pmin}
+    % \end{figure}
+    
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/Techno_Comp/Plots/DSC_thermo_vs_techno_opt/Xflash}}
+        \caption{The degree of flashing \(X_{flash}\) a techno-economically (left) and a thermodynamically (right) optimised single flash \ac{DSC} geothermal power plant.}
+        \label{fig:prosim_purewater_DSC_techno_opt_Xflash}
+    \end{figure}
+
+\subsection{Performance Analysis: ORC}
+    The techno-economic optimisation of the binary \ac{ORC} geothermal power plant reduces the specific plant cost by between about \qty{20}{\percent} to \qty{30}{\percent}, Figure~\ref{fig:prosim_purewater_Wnet_ORC_thermo_vs_techno}, at the expense of \qty{40}{\percent} to \qty{65}{\percent} of net electrical power, Figure~\ref{fig:prosim_purewater_SpecCost_ORC_thermo_vs_techno}. 
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/DSpecCost}}
+        \caption[The minimum specific cost of the techno-economically optimised  binary \ac{ORC}.]{Left: the minimum specific cost of the techno-economically optimised  binary \ac{ORC}. Right: the difference to the minimum specific cost obtained for the thermodynamically optimised binary \ac{ORC}.}
+        \label{fig:prosim_purewater_Wnet_ORC_thermo_vs_techno}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \resizebox{\linewidth}{!}{\input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/DWnet}}
+        \caption[The maximum net electrical power of the techno-economically optimised  binary \ac{ORC}.]{Left: the maximum net electrical power of the techno-economically optimised  binary \ac{ORC}. Right: the difference to the maximum net electrical power obtained for the thermodynamically optimised binary \ac{ORC}.}
+        \label{fig:prosim_purewater_SpecCost_ORC_thermo_vs_techno}
+    \end{figure}
+
+    The reduction in specific plant cost is primarily driven by the miniaturisation of the turbine and the condenser, Figure~\ref{fig:prosim_purewater_ORC_techno_Costbreakdown}. The cost of the condenser is reduced irrespective of working fluid, while the cost of the turbine is only reduced for heavier more complex working fluids like Isopentane or n-Heptane.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/CostBreakdown_some_fluids}
+        \caption[The absolute cost of plant components for techno-economically optimised and thermodynamically optimised binary \ac{ORC} geothermal power plants by working fluid.]{The absolute cost of plant components for techno-economically optimised (left) and thermodynamically optimised binary \ac{ORC} geothermal power plants operating for different working fluids. The geofluid inlet temperature is \qty{523}{\K} (\qty{225}{\degreeCelsius}).}
+        \label{fig:prosim_purewater_ORC_techno_Costbreakdown}
+    \end{figure}
+
+    Compared to the thermodynamically optimised binary \ac{ORC}, the specific cost of the turbine (relative to the net electrical plant power) is between \qtyrange{25}{55}{\percent} lower for the techno-economically optimised power plant. This can be attributed to significantly smaller turbines, both in terms of number of stages, Figure~\ref{fig:prosim_purewater_ORC_techno_opt_stages}, and the size parameter, Figure~\ref{fig:prosim_purewater_ORC_techno_opt_sp}. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/Stages}
+        \caption[The number of turbine stages of the techno-economically optimised binary \ac{ORC} geothermal power plant.]{Left: the number of turbine stages of the techno-economically optimised binary \ac{ORC}. Right: the change in the number of turbine stages compared to the thermodynamically optimised binary \ac{ORC}.}
+        \label{fig:prosim_purewater_ORC_techno_opt_stages}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/SP}
+        \caption[The turbine size parameter of the techno-economically optimised binary \ac{ORC}.]{Left: the turbine size parameter of the techno-economically optimised binary \ac{ORC}. Right: the change in the turbine size parameter compared to the thermodynamically optimised binary \ac{ORC}.}
+        \label{fig:prosim_purewater_ORC_techno_opt_sp}
+    \end{figure}
+
+    The number of turbine stages are reduced by opting for lower evaporation pressures, thereby decreasing the expansion ratio and in turn the volume ratio across the turbine, Figure~\ref{fig:prosim_purewater_techno_op_Pmax}. For most working fluids, except n-Heptane, this allows the expansion to be performed with just a single stage, Figure~\ref{fig:prosim_purewater_ORC_techno_opt_stages}. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/OP_Pmax}
+        \caption{The techno-economically and thermodynamically optimised reduced pressure for some working fluids.}
+        \label{fig:prosim_purewater_techno_op_Pmax}
+    \end{figure}
+
+    The size parameter \(SP\), Equation~\ref{eq:turb_SP}, is reduced by raising the turbine exhaust pressure (i.e. the condensation pressure) thereby reducing the volumetric rate. In practice this is achieved by raising the minimum cycle temperature (i.e. the condensation temperature), Figure~\ref{fig:prosim_purewater_techno_op_Tmin}.
+
+    \begin{align}
+        SP = \frac{\sqrt{\Dot{V}_{isen}}}{\sqrt[4]{\frac{\Delta h_{isen}^{tot}}{n_{stages}}}} \tag{\ref{eq:turb_SP}}
+    \end{align}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/OP_Tmin}
+        \caption{The techno-economically and thermodynamically optimised minimum cycle temperature for some working fluids.}
+        \label{fig:prosim_purewater_techno_op_Tmin}
+    \end{figure}
+
+    Similarly to the single flash \ac{DSC}, the condenser cost is minimised by increasing the minimum approach temperature difference, Figure~\ref{fig:prosim_purewater_techno_op_DTpinchCond}, thus providing a larger driving force to the heat transfer, reducing the required heat transfer area.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/OP_DTcond}
+        \caption{The techno-economically and thermodynamically optimised condenser minimum approach temperature difference for some working fluids.}
+        \label{fig:prosim_purewater_techno_op_DTpinchCond}
+    \end{figure}
+
+    Increasing the minimum approach temperature difference in the pre-heater, Figure~\ref{fig:prosim_purewater_techno_op_DTpinchPreH}, not only increases the driving force for heat transfer in the \ac{PHE}, reducing the heat transfer area required, but also reduces the duty of the condenser by decreasing the working fluid mass rate. However this comes at the expense of the net electrical power generated by the power plant.   
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/ORC_thermo_vs_techno/OP_DTpreh}
+        \caption{The techno-economically and thermodynamically optimised pre-heater minimum approach temperature difference for some working fluids.}
+        \label{fig:prosim_purewater_techno_op_DTpinchPreH}
+    \end{figure}
+
+    Given that the pinch-point occurs within the pre-heater for most conditions investigated, the minimum approach temperature differences in the evaporator and the super-heater have no effect on the objective function.
+
+    \begin{notes}{Note:}
+        As discussed in Section~\ref{sec:ORC_thermo_opt}, the \emph{noisiness} of the optimised variables can be attributed to the \emph{shape} of the objective function. For example, the objective function for the techno-economic optimisation is discontinuous (e.g. the cost of the turbine), whereas the objective function for the thermodynamic optimisation is continuous. As such, changes in the optimisation variables does not necessarily translate into a change of the objective function.
+    \end{notes}
+
+\subsection{Direct Comparison}
+    Similarly to Section~\ref{sec:thermo_opt_direc_comp}, a direct comparison between the single flash \ac{DSC} and the binary \ac{ORC}, requires the selection of a suitable metric to select the optimum binary ORC plant configuration. Based on the specific plant cost, it can be seen that binary \ac{ORC} can compete up to geofluid inlet vapour qualities of \qtyrange{60}{80}{\percent}, Figure~\ref{fig:prosim_purewater_SpecCost_DSC_vs_ORC_techno}, although the net electrical power is significantly below that of the single flash \ac{DSC}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/DSC_vs_ORC_techno/SpecCost_best_Wnet}
+        \caption[The specific plant cost and the corresponding net electrical power of the single flash \ac{DSC} and the binary \ac{ORC}.]{The specific plant cost (left) and the corresponding net electrical power (right) of the single flash \ac{DSC} and the binary \ac{ORC}. For the binary \ac{ORC}, the specific cost is the minimum across all working fluids considered.}
+        \label{fig:prosim_purewater_SpecCost_DSC_vs_ORC_techno}
+    \end{figure}
+
+    From a geofluid inlet conditions perspective, three feasibility regions can be identified:
+    \begin{description}
+       \item[Region 1] Left of the blue line (representing parity in net power), where the binary \ac{ORC} produces more net electrical power and at a lower specific plant cost compared to the single flash \ac{DSC}. 
+       \item[Region 2] Between the blue line and the yellow line (representing parity of specific plant cost), where the binary \ac{ORC} produces less net electrical power than the single flash \ac{DSC}, albeit at a lower specific cost.
+       \item[Region 3] Right of the yellow line, where the single flash \ac{DSC} produces more net electrical power and a lower specific plant cost than the binary \ac{ORC}.
+    \end{description}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/DSC_vs_ORC_techno/Breakeven_SpecCost}
+        \caption[The geofluid inlet conditions for which the binary ORC and single flash \ac{DSC} geothermal power plants deliver equal net electrical power and have equal specific plant costs.]{The geofluid inlet conditions for which the binary ORC and single flash \ac{DSC} geothermal power plants deliver equal net electrical power and have equal specific plant costs. For the binary ORC, the specific plant cost is the minimum across all working fluids considered.}
+        \label{fig:prosim_purewater_Breakeven_DSC_vs_ORC_SpecCost_techno}
+    \end{figure}
+
+    Alternatively, based on the net electrical power, it can be seen that the binary \ac{ORC} can compete up to geofluid inlet vapour qualities of \qtyrange{10}{30}{\percent}, Figure~\ref{fig:prosim_purewater_Wnet_DSC_vs_ORC_techno} and at similar specific plant costs to the single flash \ac{DSC}. 
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/DSC_vs_ORC_techno/Wnet_best_SpecCost}
+        \caption[The net electrical plant power and the corresponding specific plant cost of the single flash \ac{DSC} and the binary \ac{ORC}.]{The net electrical plant power (left) and the corresponding specific plant cost (right) of the single flash \ac{DSC} and the binary \ac{ORC}. For the binary \ac{ORC}, the net power is the maximum across all working fluids considered.}
+        \label{fig:prosim_purewater_Wnet_DSC_vs_ORC_techno}
+    \end{figure}
+
+    From a geofluid inlet conditions perspective, four feasibility regions can be identified:
+    \begin{description}
+       \item[Region 1] Left of the blue line (representing parity in net power) and left of the yellow line (representing parity in specific plant cost), where the binary \ac{ORC} produces more net electrical power and at a lower specific plant cost compared to the single flash \ac{DSC}.
+       \item[Region 2a] Right of the blue line and left of the yellow line, where the binary \ac{ORC} produces less net electrical power than the single flash \ac{DSC}, albeit at a lower specific cost.
+      \item[Region 2b] Left of the blue line and right of the yellow line, where the binary \ac{ORC} produces more net electrical power than the single flash \ac{DSC}, but at a higher specific cost.
+       \item[Region 3] Right of the yellow line, where the single flash \ac{DSC} produces more net electrical power and at a lower specific plant cost than the binary \ac{ORC}.
+    \end{description}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Techno_Comp/Plots/DSC_vs_ORC_techno/Breakeven_Wnet}
+        \caption[The geofluid inlet conditions for which the binary ORC and single flash DSC geothermal power plants deliver equal net electrical power and have equal specific plant costs.]{The geofluid inlet conditions for which the binary ORC and single flash DSC geothermal power plants deliver equal net electrical power and have equal specific plant costs. For the binary ORC, the net electrical power is the maximum across all working fluids considered.}
+        \label{fig:prosim_purewater_Breakeven_DSC_vs_ORC_Wnet_techno}
+    \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/ORCvsDSC/Plots/DSC_vs_ORC_techno/BreakevenMap}
+    %     \caption{The geofluid inlet conditions for which the binary \ac{ORC} outperforms the single flash \ac{DSC}.}
+    %     \label{fig:prosim_purewater_Breakeven_DSC_vs_ORC_techno}
+    % \end{figure}            
+
+\subsection{Conclusions}
+    For the single flash \ac{DSC}, specific cost reductions of about \qtyrange{6}{10}{\percent}, at the expense of around \qtyrange{10}{20}{\percent} of net electrical power were observed. The cost reductions are almost entirely a result of a reduction in condenser size, by raising the minimum approach temperature difference and condensation temperature. For the binary \ac{ORC}, larger cost reductions of about \qtyrange{20}{30}{\percent} were observed, at the expense of up to \qty{65}{\percent} net electrical power. For all fluids the condenser costs are reduced by raising the minimum approach temperature difference and condensation temperature, for the heavier working fluids simultaneously reducing the number of turbine stages from a maximum of 5 to a minimum of 1. Nevertheless, n-Butane achieves the lowest specific net electrical power across a broad range of geofluid inlet conditions.
+    
+    From a specific cost perspective, techno-economically optimised binary ORCs can compete with single flash DSCs to geofluid inlet vapour qualities as high as \qty{80}{\percent}, but produce significantly less power. Here, the envelope for competitive specific power and net electrical power reduces from a geofluid inlet vapour quality of \qty{20}{\percent} at a geofluid inlet temperature \qty{423}{\K} to \qty{0}{\percent} at \qty{548}{\K}.
+
+\clearpage

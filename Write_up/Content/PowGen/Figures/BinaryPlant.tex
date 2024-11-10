@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (injector) at (2,0) {injector};
+    \pic[rotate=180] (PHE) at ($(injector-anchor) + (0.925, 2.5)$) {heat exchanger biphase};
+    \pic (solids) [scale=0.25] at ($(PHE-pipes bottom) + (-1.5, 0)$) {block};
+    \pic (turbine) at ($(PHE-anchor) + (3.5, 0.7)$) {turbine_gen};
+    \pic (condenser) at ($(turbine-outlet bottom) + (0, -1)$) {heat exchanger biphase};
+    \pic (pump) at ($(condenser-anchor) + (-1.5, -1)$) {centrifugal pump};
+    
+    % % draw connectors
+    \draw[main stream] (producer-top) |- (solids-left);
+    \draw[main stream] (solids-right) -- (PHE-pipes bottom);
+    \draw[main stream] (solids-bottom) -- ++ (0, -0.5);
+    \draw[main stream] (PHE-pipes top) 
+        -| ($(PHE-pipes top) + (-0.5, -1)$) 
+        -- (injector-top);
+    \draw[main stream] (PHE-shell bottom) |- ++ (0, 0.8) -| (turbine-inlet top);
+    \draw[main stream] (turbine-outlet bottom) -- (condenser-shell top);
+    \draw[main stream] (condenser-shell bottom) |- (pump-anchor);
+    \draw[main stream] (pump-top) -| (PHE-shell top);
+    \draw[main stream] (condenser-pipes top) -- ++ (1,0);
+    \draw[main stream] ($(condenser-pipes bottom) + (1, 0)$) -- (condenser-pipes bottom);
+    
+    
+    % % draw labels
+    \node[above, align=center] at (solids-top) {Solids\\Removal};
+    \node[below] at (producer-bottom) {Producer};
+    \node[right] at (PHE-shell left) {PHE};
+    \node[above] at ($(turbine-top)+ (0.5,0.1)$) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[left, align=left] at (condenser-shell left) {Condenser};
+    \node[below, align=center] at (pump-bottom) {Circulation \\ Pump};
+    \node[below] at (injector-bottom) {Injector};
+    \node[right, align=left] at ($(condenser-pipes bottom) + (1, 0)$) {Coolant in};
+    \node[right, align=left] at ($(condenser-pipes top) + (1, 0)$) {Coolant out};
+    
+\end{tikzpicture}

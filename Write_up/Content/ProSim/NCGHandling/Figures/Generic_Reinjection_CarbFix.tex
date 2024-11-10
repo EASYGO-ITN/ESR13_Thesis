@@ -1,0 +1,77 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (injector) at (14,0) {injector};
+    \pic[scale=0.6, yscale=2] (pplant) at ($(producer-top) + (1.5, 3)$) {block};
+
+    \pic (Bpump) at ($(pplant-bottom right) + (1, -2.2)$) {centrifugal pump};
+
+    \pic[scale=0.4] (NCGsep) at ($(pplant-top right) + (2.5, 0)$) {gas-liquid separator};
+    
+    \pic (Cpump) at ($(NCGsep-liquid outlet) + (1.2, -0.5)$) {centrifugal pump};
+    \pic (NCGcomp_lp) at ($(NCGsep-gas outlet) + (1, 1.5)$) {compressor};
+
+    \pic[yscale=0.5] (absorb) at ($(NCGsep-inlet right) + (3.75, 0)$) {column=packed};
+    \pic (NCGcomp_hp) at ($(NCGcomp_lp-anchor) + (4, 0)$) {compressor};
+    \pic[rotate=90] (Ljoint) at ($(Cpump-top) + (1.55, 0)$) {valve triple=main};
+
+    
+    \pic[rotate=90] (NCGcond) at ($(NCGcomp_hp-outlet bottom) + (1.75, 0)$) {heat exchanger biphase};
+    \pic (NCGpump) at ($(NCGcond-shell bottom) + (1.5, 0)$) {centrifugal pump};
+
+    \pic (Bpump_hp) at ($(absorb-bottom) + (2, -1)$) {centrifugal pump};
+
+    % \pic[rotate=90] (Ljoint) at ($(injector-top) + (-0.2, 0.7)$) {valve triple=main};
+
+    % draw connectors
+    \draw[main stream] (producer-top) |- (pplant-left);
+    \draw[main stream] (pplant-top right) -- (NCGsep-inlet left);
+
+    \draw[main stream] (pplant-bottom right) -| ($0.75*(pplant-bottom right) + 0.25*(Bpump-anchor)$) |- (Bpump-anchor);
+
+    \draw[main stream] (Cpump-top) -- (Ljoint-top);
+    \draw[main stream] (Bpump-top) -| (Ljoint-left);
+    \draw[main stream] (Ljoint-right) |- (absorb-top left);
+    
+    
+    \draw[main stream] (NCGsep-liquid outlet) |- (Cpump-anchor);
+    \draw[main stream] (NCGsep-gas outlet) |- (NCGcomp_lp-inlet top);
+    
+    \draw[main stream] (NCGcomp_lp-outlet bottom) -- ++(1.75,0) |- (absorb-bottom left);
+
+    \draw[main stream] (absorb-top) |- (NCGcomp_hp-inlet top);
+    \draw[main stream] (absorb-bottom) |- (Bpump_hp-anchor);
+    \draw[main stream] (NCGcomp_hp-outlet bottom) -- (NCGcond-shell top);
+
+    \draw[main stream] (NCGcond-shell bottom) -- (NCGpump-anchor);
+    \draw[main stream] (NCGpump-top) -| ++(1.5, -3) -| ($(injector-top) + (0.2, 0)$);
+    \draw[main stream] (Bpump_hp-top) -| ($(injector-top) + (-0.2, 0)$);
+
+    \draw[main stream] ($(NCGcond-pipes bottom) + (0,1)$) -- (NCGcond-pipes bottom);
+    \draw[main stream] (NCGcond-pipes top) -- ($(NCGcond-pipes top) + (0,1.75)$);
+
+
+    % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[below] at (injector-bottom) {Injector};
+    \node[align=center] at (pplant-anchor) {Power\\Plant};
+
+    \node[below] at (Bpump-bottom) {Brine Pump};
+    \node[below, align=center] at (Cpump-bottom) {Condensate or\\Brine Pump};
+
+    \node[right] at (NCGsep-inlet right) {NCG Sep.};
+    \node[above] at (NCGcomp_lp-inlet top) {LP NCG Compr.};
+    \node[below] at (NCGcond-shell left) {NCG Liquefier};
+    \node[above] at (NCGpump-top) {NCG pump};
+
+    \node[right] at (absorb-right) {\ce{CO2} Absorber};
+    \node[below] at (Bpump_hp-bottom) {HP Brine Pump};
+    \node[above] at (NCGcomp_hp-inlet top) {HP NCG Compr.};
+
+    \node[below right, align=left, font=\footnotesize] at ($(pplant-top right) - (0, 0.1)$) {From DSC\textsuperscript{2}};
+    \node[above right, align=left, font=\footnotesize] at ($(pplant-top right) + (0, 0.1)$) {From ORC\textsuperscript{1}};
+    \node[below left, align=left, font=\footnotesize] at ($(pplant-bottom right) - (-0.2, 0.75)$) {DSC only\textsuperscript{3}};
+
+    \node[above right] at ($(NCGcond-pipes bottom) + (0,1)$) {Coolant In};
+    \node[above] at ($(NCGcond-pipes top) + (0,1.75)$) {Coolant Out};
+\end{tikzpicture}

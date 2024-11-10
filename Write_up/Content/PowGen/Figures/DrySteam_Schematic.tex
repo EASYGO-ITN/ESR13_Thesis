@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+    % draw equipment
+    \pic (producer) at (0,0) {producer};
+    \pic (solids) [scale=0.25] at ($(producer-anchor) + (1.5, 2)$) {block};
+    \pic (moist) [scale=0.3, rotate=90] at ($(solids-anchor) + (2, 0)$) {block};
+    \pic (turbine) at ($(moist-anchor) + (2, 0)$) {turbine_gen};
+    \pic (condenser) at ($(turbine-anchor) + (3, -1.25)$) {condenser};
+    \pic[scale=0.4] (NCGsep) at ($(condenser-anchor) + (2.5, +0.5)$) {gas-liquid separator};
+    \pic (injector) at ($(NCGsep-anchor) + (0, -1.25)$) {injector};
+    \pic (treat) [scale=0.25] at ($(NCGsep-gas outlet) + (1.5, 2)$) {block};
+
+    % draw connectors
+    \draw[main stream] (producer-top) |- (solids-left);
+    \draw[main stream] (solids-right) -- (moist-top);
+    \draw[main stream] (solids-bottom) -- ++ (0,-0.5);
+    \draw[main stream] (moist-right) -| (turbine-inlet top);
+    \draw[main stream] (moist-left) -- ++ (0, -0.5);
+    \draw[main stream] (turbine-outlet bottom) |- (condenser-pipes inlet);
+    \draw[main stream] (condenser-pipes outlet) -- (NCGsep-inlet left);
+    \draw[main stream] (NCGsep-liquid outlet) -- (injector-top);
+    \draw[main stream] (NCGsep-gas outlet) |- (treat-left);
+    \draw[main stream] (treat-right) -- ++ (1.5,0);
+
+    % draw labels
+    \node[below] at (producer-bottom) {Producer};
+    \node[above, align=center] at (solids-top) {Solids\\Removal};
+    \node[above, align=center] at (moist-right) {Moisture\\Removal};
+    \node[above] at (turbine-top) {Turbine};
+    \node[right] at (turbine-right) {Generator};
+    \node[below] at (condenser-bottom) {Condenser};
+    \node[right] at (NCGsep-inlet right) {NCG separator};
+    \node[below] at (injector-bottom) {Injector};
+    \node[below, align=center] at (treat-bottom) {NCG\\Treatment};
+    \node[above] at ($(treat-top) + ((1.5, 0)$) {To atmosphere};
+
+\end{tikzpicture}

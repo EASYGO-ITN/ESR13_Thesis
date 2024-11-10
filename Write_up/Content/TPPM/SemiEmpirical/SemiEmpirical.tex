@@ -1,0 +1,178 @@
+\todo{perhaps this could be framed as future work with potential}
+
+In specific cases it is also possible to tightly couple different models to extend their respective capabilities or to improve speed of calculations. For example, mixtures of water and carbon dioxide can be modelled using their respective high-fidelity pure fluid formulation; however, convergence is not guaranteed for all conditions, particularly for quasi-pure water, see Section~\ref{sec:excess_properties}. On the other hand, the \acf{SP2009} model can be used to partition mixtures of water and carbon dioxide, providing stable convergence for a broad range of compositions, temperatures and pressure.
+
+The following section aims to investigate the coupling of the \acf{SP2009} model with the \acf{WP} \ac{EOS} for water and the \acf{SW} \ac{EOS} for pure carbon dioxide.
+
+\subsection{Formulation}
+\label{sec_semiempirical_formulation}
+    Assuming a system comprised of two phases, one water-rich phase, hereinafter \emph{wp}, and one carbon dioxide-rich, hereinafter \emph{cp}, where the only reactions taking place are the migrations of water and carbon dioxide molecules from one phase to another, see Reaction~\ref{eq:reaction_1} and ~\ref{eq:reaction_2}.
+
+    \begin{align}
+        H_2O^{(wp)} \rightleftharpoons H_2O^{(cp)} \label{eq:reaction_1}
+    \end{align}
+    \begin{align}
+        CO_2^{(cp)} \rightleftharpoons CO_2^{(wp)} \label{eq:reaction_2}
+    \end{align}
+
+    At equilibrium the chemical potential of a species \(i\) is equal across all phases, see Equation~\ref{eq:chempot_at_equib}, where the chemical potential of species \(i\) at a given temperature, pressure and composition can be calculated from its chemical potential at some reference conditions and the activity of species \(i\), as previously shown in Equations~\ref{eq:chemical_potential} and ~\ref{eq:activity_def}. By convention, the reference conditions depend on the phase that the species occupies. 
+
+    \begin{align}
+        \mu_i^{(x)}= \mu_i^{(y)}= \mu_i^{(z)}= ... \label{eq:chempot_at_equib}
+    \end{align}
+    \begin{align}
+        \ln a_i^{j}(P, T, \mathbf{z}_j)= \frac{\mu_i^{j} (P, T, \mathbf{z}_j) - \mu_i^{j} (P^o, T^o, \mathbf{z}_j^o)}{RT} \tag{\ref{eq:activity_def}}
+    \end{align}
+    \begin{align}
+        \mu_i^{j} (P, T, \mathbf{z}_j) = \mu_i^{j} (P^o, T^o, \mathbf{z}_j^o) +RT*\ln a_i (P, T, \mathbf{z}_j) \tag{\ref{eq:chemical_potential}}
+    \end{align}
+
+    It is then possible to calculate the thermodynamic properties of species \(i\) for the partial derivaties of chemical potential. The property \(\Psi\), a placeholder for the molar enthalpy, molar entropy or molar volume, can be calculated via Equation~\ref{eq:props_from_mu}. The choice of \(x\) and \(f(x)\) depends on the property to be calculated: for the partial molar enthalpy \(x=1/T\) and \(f(x)=x\), for the partial molar entropy \(x=T\) and \(f(x)=-1\), and for the partial molar volume \(x=P\) and \(f(x)=1\), with the unused properties being constant.
+
+    \begin{align}
+        \Psi_i^{j} (P, T, \mathbf{z}_j) = \frac{\partial \left( \mu_i^{j} (P, T, \mathbf{z}_j)*f(x) \right)}{\partial x} \label{eq:props_from_mu}
+    \end{align}
+
+    Substituting Equation~\ref{eq:chemical_potential} into Equation~\ref{eq:props_from_mu}, yields Equation~\ref{eq:props_from_mu_expandend}, which simplifies to Equation~\ref{eq:props_from_mu_expandend_simp} by recognising that \(\Psi_i^{j} (P^o, T^o, \mathbf{z}_j^o)=\frac{\partial \left( \mu_i (P^o, T^o, \mathbf{z}_j^o)*f(x) \right)}{\partial x}\).
+
+    \begin{align}
+        \Psi_i^{j} (P, T, \mathbf{z}_j) = \frac{\partial \left( \mu_i^{j} (P^o, T^o, \mathbf{z}_j^o)*f(x) \right)}{\partial x} + \frac{\partial \left(RT * f(x)* \ln a_i^{j} (P, T, \mathbf{z}_j) \right)}{\partial x} \label{eq:props_from_mu_expandend}
+    \end{align}
+    \begin{align}
+        \Psi_i^{j} (P, T, \mathbf{z}_j) = \Psi_i^{j} (P^o, T^o, \mathbf{z}_j^o) + \frac{\partial \left(RT * f(x)* \ln a_i^{j} (P, T, \mathbf{y}_j) \right)}{\partial x} \label{eq:props_from_mu_expandend_simp}
+    \end{align}
+
+    Equation~\ref{eq:props_from_mu_expandend_simp} provides the basis for coupling the \ac{WP} and \ac{SW} \ac{EOS} with the \ac{SP2009} model. The \ac{WP} and \ac{SW} \ac{EOS} can be used to evaluate the properties of water and carbon dioxide at their respective reference conditions, i.e. \(\Psi_i^{j} (P^o, T^o, \mathbf{z}_j^o)\). Meanwhile, the \ac{SP2009} model is used to 1) partition the fluid into water-rich and carbon dioxide-rich phase and 2) to provide the species activity (i.e. \(\ln a_i^{j} (P, T, \mathbf{z}_j)\), which accounts for the deviation from the reference conditions and composition.
+
+\subsection{Change of Reference Conditions}
+\label{sec:change_ref_cond}
+
+    However, Equation~\ref{eq:props_from_mu_expandend_simp} gives undue importance to the the activity model as it not only corrects for the presence of other species but also the temperature and pressure being different to the reference conditions. For example, considering the boundary case where the fluid is pure (either water or carbon dioxide) then it would be best to simply use the corresponding \ac{HEOS} to calculate the fluid's properties. However, with the current formulation it would be the activity model's responsibility to correct the properties at the reference conditions to the temperature and pressure of interest, which can introduce inconsistencies in the pure component properties, as the activity model does not have the same level of accuracy as the \ac{HEOS}. This has previously been illustrated in Section~\ref{sec:chemically_active_system_limitations}.
+
+    An alternative approach is to change the reference conditions to be the current temperature and pressure and composition corresponding to a pure substance, i.e. \(P, T, \mathbf{z}_j^o\), by adding and subtracting \(\mu_i (P, T, \mathbf{z}_j^o)\) to Equation~\ref{eq:chemical_potential}, yielding Equation~\ref{eq:chem_pot_change_ref}. The definition of the species activity allows this expression to be simplified to Equation~\ref{eq:chem_pot_change_ref_simp}, where \(i\) is the species index, and \(j\) is the phase index
+
+    \begin{align}
+        \mu_i^{j} (P, T, \mathbf{z}_j) = \mu_i^{j} (P^o, T^o, \mathbf{z}_j^o) +RT*\ln a_i^{j} (P, T, \mathbf{z}_j) + \mu_i^{j} (P, T, \mathbf{z}_j^o) - \mu_i^{j} (P, T, \mathbf{z}_j^o) \label{eq:chem_pot_change_ref}
+    \end{align}
+    \begin{align}
+        \mu_i^{j} (P, T, \mathbf{z}_j) = \mu_i^{j} (P, T, \mathbf{z}_j^o) + RT*\ln a_i^{j} (P, T, \mathbf{z}_j) -RT*\ln a_i^{j} (P, T, \mathbf{z}_j^o)
+    \end{align}
+    \begin{align}
+        \mu_i^{j} (P, T, \mathbf{z}_j) = \mu_i^{j} (P, T, \mathbf{z}_j^o) + RT*\ln \frac{a_i^{j} (P, T, \mathbf{z}_j)}{a_i^{j} (P, T, \mathbf{z}_j^0)} \label{eq:chem_pot_change_ref_simp}
+    \end{align}
+
+    From Equation~\ref{eq:chem_pot_change_ref_simp}, the thermodynamic properties can then be obtained as outlined above, yielding Equation~\ref{eq:props_chempot_changed_ref}, where \(A_i^{j} (P, T, \mathbf{z}_j) = \frac{a_i^{j} (P, T, \mathbf{z}_j)}{a_i^{j} (P, T, \mathbf{z}_j^o)}\)
+
+    \begin{align}
+        \Psi_i^{j} (P, T, \mathbf{z}_j) = \Psi_i^{j} (P, T, \mathbf{z}_{j}^o) + \frac{\partial \left(RT * f(x)* \ln A_i^{j} (P, T, \mathbf{z}_j) \right)}{\partial x} \label{eq:props_chempot_changed_ref}
+    \end{align}
+
+    This formulation allows the properties to be evaluated at the temperature and pressure of interest directly from the corresponding \ac{HEOS} and the activity model only corrects for the difference in composition. The additional benefit being that if the fluid is pure, the properties are entirely consistent with those predicted by the \ac{HEOS} as \(A_i^{j} (P, T, \mathbf{z}_j) = 1\) and hence the activity contribution is zero.
+
+    The properties of species \(i\) in phase \(j\) can then be aggregated by phase or by all phases to obtain the phase or total properties, Equations~\ref{eq:props_phase} and \ref{eq:props_total}.
+
+    \begin{align}
+        \Psi_i^j (P, T, \mathbf{z}_j) = \Psi_i^j (P, T, \mathbf{z}_j^o) + \frac{\partial \left(RT * f(x)* \ln A_i^j (P, T, \mathbf{z}_j) \right)}{\partial x} \label{eq:props_comp_phase}
+    \end{align}
+    \begin{align}
+        \Psi^j (P, T, \mathbf{z}_j) = \sum_{i=0}^N n_i^j\Psi_i^j (P, T, \mathbf{z}_j) \label{eq:props_phase}
+    \end{align}
+    \begin{align}
+        \Psi (P, T, \mathbf{z}) = \sum_{i=0}^N n^j\Psi^j (P, T, \mathbf{z}_j) \label{eq:props_total}
+    \end{align}
+
+\subsection{Extrapolation}
+\label{sec:extrapolation}
+    \todo{After speaking with Allan, this section needs some more work... essentially the extrapolation should be treated as tuning to reduce the differences to the CoolProp model}
+    One drawback of the above formulation is that the models used to obtain \(\Psi_i^j (P, T, \mathbf{z}_j)\) are not necessarily continuous over the fully temperature and pressure domain of interest. For example, considering pure water, if the temperature is below the saturation temperature at a given pressure (but above the melting point), water can only exist in its liquid state - a vapour or solid state is not feasible. However, the presence of impurities changes the saturation point. Specifically, for a mixture of water and carbon dioxide, some water may exist in its vapour state despite the temperature being below the saturation temperature of pure water. This poses an obstacle, because the \ac{WP} \ac{EOS} is designed to model physical states of pure water, but such equilibrium states are non-physical for pure water. 
+
+    \todo{insert the chemical potential diagram}
+
+    As an alternative, the desired properties of water vapour could be obtained by extrapolating from the saturation point. The following methods were considered, also see Table~\ref{table:SemiEmpirical_ExtrapolationFuncs}:
+
+    \begin{itemize}
+        \item \emph{Gibbs Energy}: the Gibbs energy is linearly extrapolated from the saturation point, with the remaining properties being determined from the partial derivatives. This has the unfortunate consequence that the molar enthalpy and entropy are constant with temperature.
+        \item \emph{Enthalpy \& Entropy}: both the molar enthalpy and molar entropy are linearly extrapolated from the saturation point, with the Gibbs energy being back-calculated from the resulting values of the molar enthalpy and entropy; the volume is not computed.
+        \item \emph{Density}: the ideal gas law is used to compute the density of the water vapour at the current temperature. In turn, the temperature and density are then used to compute the properties from the \ac{WP} \ac{EOS}.
+        \item \emph{Power Law}: it is assumed that \(v \propto T^a\), with the value of \(a\)  being back-calculated from the saturation point.
+    \end{itemize}
+
+    \begin{table}[H]
+        \caption{The extrapolation schemes investigated for obtaining water vapour properties for sub-saturation conditions}
+        \centering 
+        \label{table:SemiEmpirical_ExtrapolationFuncs}
+        \input{Content/TPPM/SemiEmpirical/DataTables/SemiEmpirical_Extrapolation}        
+        \\[10pt]
+    \end{table}
+
+    While the selection of extrapolation method is arbitrary, provided it allows existing property data to be reproduced, care was taken to ensure that the selected methods display smoothly around the saturation point, and that when extrapolating backwards (i.e. to conditions where \(T>T_{sat}\) and water vapour can exist) the extrapolated properties are close to those predicted by the \ac{WP} \ac{EOS}, see Figures~\ref{fig:SemiEmpirical_extrapolation1} and \ref{fig:SemiEmpirical_extrapolation2}. Based on these criteria the \emph{Enthalpy \& Entropy} method was selected for the molar enthalpy and molar entropy, and the \emph{Power Law} method was chosen for the molar volume.
+
+    \begin{notes}{Note:}
+        While it was attempted to also extrapolate the derivatives of the species activity from the saturation point, it was ultimately decided to simply use the derivatives evaluated at the saturation point to ensure model stability.
+    \end{notes}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/SemiEmpirical/Plots/ExtrapolationFuncs_part1}
+        \caption{The molar Gibbs energy, molar enthalpy and molar entropy of water vapour at sub-saturation conditions, as extrapolated by the various methods considered, see Table~\ref{table:SemiEmpirical_ExtrapolationFuncs}}
+        \label{fig:SemiEmpirical_extrapolation1}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/SemiEmpirical/Plots/ExtrapolationFuncs_part2}
+        \caption{The molar volume of water vapour at sub-saturation conditions, as extrapolated by the various methods considered, see Table~\ref{table:SemiEmpirical_ExtrapolationFuncs}}
+        \label{fig:SemiEmpirical_extrapolation2}
+    \end{figure}
+
+
+\subsection{Algorithm}
+\label{sec:algorithm}
+    Similarly to \emph{GeoProp}, the fluid is first equilibrated to determine the composition of the water and carbon dioxide-rich phases. Using these compositions, the composition contribution to the component properties are then evaluated (i.e. the partial derivatives of the component activity, \(A_i\)). For the carbon dioxide-rich phase the properties of pure carbon dioxide are then determined from the \ac{SW} \ac{HEOS}, while the properties of pure water are determined from the \ac{WP} \ac{HEOS} or extrapolated from the saturated properties if the temperature is below the saturation temperature of pure water. For the water-rich phase, the properties of pure water are obtained from the \ac{WP} \ac{HEOS}, while the properties of aqueous carbon dioxide is calculated using \emph{ThermoFun} using the "CO2@" component in the \emph{slop98-inorganic} database \cite{Johnson1992}. The overall fluid properties are then obtained by aggregating the component and phase properties, see Figure~\ref{fig:coupled_model}.
+
+    \todo{maybe I should just write a wee routine to calculate the CO2@ properties directly instead of using ThermoFUN- for speed}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/SemiEmpirical/Figures/WP_SW_SP2009_coupling}
+        \caption{Calculation steps for equilibrating a mixture of water and carbon dioxide and determining the thermophysical properties}
+        \label{fig:coupled_model}
+    \end{figure}
+
+\subsection{Validation}
+\label{sec:SemiEmpirical_validation}
+    The proposed model was validated against the \ac{HEOS} mixture model for water and carbon dioxide implemented in \emph{CoolProp}. An extract of the validation plots is shown in Figures~\ref{fig:SemiEmpirical_properties_maintext} and \ref{fig:SemiEmpirical_ratios_maintext} for a 50:50 mixture of carbon dioxide and water, further validation plots are provided in \nameref{ch:appendix_e}.
+
+    For temperatures up to \qty{466}{\K} (\qty{193}{\degreeCelsius}) the differences between the coupled model and the \ac{HEOS} mixture are below \qty{10}{\percent}, see Figure~\ref{fig:SemiEmpirical_ratios_maintext}, particularly for the density and molar volume, as well as the vapour quality. Comparing the relative differences in molar enthalpy and molar enthalpy is difficult at low temperatures, as the values are small in magnitude and transition from positive to negative, which can lead to \emph{infinite} relative differences. In absolute terms, the differences are small, see Figure~\ref{fig:SemiEmpirical_properties_maintext}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/SemiEmpirical/Plots/SemiEmpirical_properties}
+        \caption{The molar density/volume/enthalpy/entropy/vapour quality for a carbon dioxide mole fraction of \num{0.5} as a function of temperature and pressure, calculated using the \ac{HEOS} mixture in \emph{CoolProp} and the coupled model}
+        \label{fig:SemiEmpirical_properties_maintext}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/TPPM/SemiEmpirical/Plots/SemiEmpirical_ratios}
+        \caption{The ratio of molar density/volume/enthalpy/entropy/vapour quality, as a function of temperature and pressure for a mole fraction of carbon dioxide of \num{0.5}, as calculated using the \ac{HEOS} mixture in \emph{CoolProp} and the coupled model}
+        \label{fig:SemiEmpirical_ratios_maintext}
+    \end{figure}
+
+\subsection{Performance}
+\label{sec:SemiEmpirical_performance}
+    The performance of the coupled model, the \ac{HEOS} mixture as well as the pure component \ac{HEOS} was compared for randomised values of pressure, temperature and composition. The temperatures were obtained by linear sampling of temperatures between \qty{298}{\K} and \qty{573}{\K}.The pressures were obtained by linear sampling \(\log P\) for pressures between \qty{1}{\bar} to \qty{100}{\bar}. The compositions were obtained by linear sampling the standard deviation for values between \num{-3.5} and \num{+3.5} of the Normal distribution, to ensure more representative sampling of the tails (i.e. quasi pure compositions). The results are provided in Table~\ref{table:SemiEmpirical_Performance}
+
+    \begin{table}[H]
+        \caption{The computational performance over 10000 randomised calculations}
+        \centering 
+        \label{table:SemiEmpirical_Performance}
+        \input{Content/TPPM/SemiEmpirical/DataTables/SemiEmpirical_Performance}    
+        \\[10pt]
+    \end{table}
+
+
+
+\subsection{Conclusions}
+\label{sec:tppm_semi_conclusions}
+    The approach of tightly coupling the \ac{WP} \ac{EOS} and \ac{SW} \ac{EOS} with the \ac{SP2009} model has yielded a useful model for evaluating the properties of water and carbon dioxide for a wide range of temperatures, pressures and compositions. The calculated properties are similar to the values obtained from a \ac{HEOS} mixture of water and carbon dioxide in \emph{CoolProp}, while being computationally cheaper, speed-ups of \num{17} times have been observed, and stable, converging for all conditions tested. The performance could be further improved by implementing the model in C++ to streamline the evaluations and reduce computational overheads. Moreover, extending the \ac{SP2009} to sub-atmospheric conditions (i.e. below pressures of \qty{1}{bar} and temperatures below \qty{298}{\K}) would allow this model to be used geothermal power plant simulations, particularly direct steam cycles. 

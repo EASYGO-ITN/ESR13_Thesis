@@ -1,0 +1,56 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={NCG content/\unit{\kg\per\kg}},
+xmin=-0.0015, xmax=0.0315,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific net power/\unit{\kilo\watt\s\per\kg}},
+ymin=75, ymax=150,
+ytick style={color=black},
+width=10cm, height=6cm
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 132.711179
+0.003 128.465446
+0.006 124.193662
+0.009 119.90836
+0.012 115.609411
+0.015 111.185462
+0.018 106.859127
+0.021 102.518494
+0.024 98.167011
+0.027 93.8024848
+0.03 89.4235443
+};
+\addlegendentry{DSC}
+\addplot [semithick, darkorange25512714]
+table {%
+0 112.510505
+0.003 112.930169
+0.006 113.355197
+0.009 113.780212
+0.012 114.205472
+0.015 114.631033
+0.018 115.056365
+0.021 115.483483
+0.024 115.91014
+0.027 116.33709
+0.03 116.764336
+};
+\addlegendentry{ORC}
+\end{axis}
+
+\end{tikzpicture}

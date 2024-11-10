@@ -1,0 +1,39 @@
+\begin{tikzpicture} [node distance=1.5cm]
+    \node (start) [startstop] {Start};
+    \node (input) [io, right of=start, xshift=2cm] {\(P, T, \mathbf{z}\)};
+    \node (SP2009) [process, right of=input, text width=4.5cm, xshift=3cm] {\(\mathbf{x}, \mathbf{y}=SP2009(P,T,\mathbf{z})\)};
+    \node (cp_derivs) [process, below of=SP2009, xshift=-2.5cm, yshift=-0.2cm, text width=3.5cm] {\(\frac{\partial RT*f(x)*A_i(P,T,\mathbf{y})}{\partial x}\)};
+    \node (wp_derivs) [process, right of=cp_derivs, xshift=3cm, yshift=-0.2cm, text width=3.5cm] {\(\frac{\partial RT*f(x)*A_i(P,T,\mathbf{x})}{\partial x}\)};
+    \node (cp_CO2) [process, below of=cp_derivs, text width=3.5cm] {\(\Psi_{CO_2}^{cp}=SW(P,T)\)};
+    \node (Tsat) [decision, left of=cp_CO2, xshift=-3.7cm] {\(T<T_{sat}^{wat}\)};        
+
+    \node (extrap) [process, below of=Tsat, text width=4cm, xshift=2.5cm] {\(\Psi_{H_2O}^{cp}=Extrap(P,T)\)};
+    \node (cp_H2O) [process, below of=Tsat, text width=3.5cm, yshift=-1.5cm] {\(\Psi_{H_2O}^{cp}=WP(P,T)\)};
+    \node (cp_props) [process, right of=cp_H2O, xshift=3.5cm] {\(\Psi^{cp}(P,T, \mathbf{y})\)};
+
+    \node (wp_CO2) [process, below of=wp_derivs, text width=3.5cm] {\(\Psi_{CO_2}^{wp}=SW(P,T)\)};
+    \node (wp_H2O) [process, below of=wp_CO2, text width=3.5cm] {\(\Psi_{H_2O}^{wp}=WP(P,T)\)};
+    \node (wp_props) [process, below of=wp_H2O, text width=3.5cm] {\(\Psi^{wp}(P,T, \mathbf{x})\)};
+    
+    \node (out1) [io, below of=wp_props] {\(\Psi(P,T\mathbf{z})\)};
+    \node (stop) [startstop, right of=out1, xshift=2cm] {Stop};
+    
+    % \node (stop) [startstop, below of=out1] {Stop};
+    
+    \draw [arrow] (start) -- (input);
+    \draw [arrow] (input) -- (SP2009);
+    \draw [arrow] (SP2009) |- ($0.5*(SP2009)+0.5*(cp_derivs)$) -| (cp_derivs);
+    \draw [arrow] (cp_derivs) -- (cp_CO2);
+    \draw [arrow] (cp_CO2) -- (Tsat);
+    \draw [arrow] (Tsat) -- node[anchor=west] {yes} (extrap);
+    \draw [arrow] (Tsat) -- node[anchor=east] {no} (cp_H2O);
+    \draw [arrow] (cp_H2O) -- (cp_props);
+    \draw [arrow] (extrap) -| (cp_props);
+    \draw [arrow] (cp_props) -| ($0.5*(cp_props)+0.5*(wp_derivs)$) |- (wp_derivs);
+    \draw [arrow] (wp_derivs) -- (wp_CO2);
+    \draw [arrow] (wp_CO2) -- (wp_H2O);
+    \draw [arrow] (wp_H2O) -- (wp_props);
+    \draw [arrow] (wp_props) -- (out1);
+    \draw [arrow] (out1) -- (stop);
+
+\end{tikzpicture}

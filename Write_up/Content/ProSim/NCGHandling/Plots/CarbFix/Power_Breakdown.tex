@@ -1,0 +1,176 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 1, 
+        vertical sep=2.5cm, 
+        horizontal sep=2.5cm},
+    height=6cm, 
+    width=7cm, 
+]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.15, -0.35)},
+  anchor=north,
+  draw=lightgray204
+},
+legend columns=-1,
+tick align=outside,
+tick pos=left,
+title={Binary ORC},
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=16,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power /\unit{\mega\watt}},
+ymin=-10, ymax=10,
+ytick style={color=black}
+]
+\addplot [semithick, black, dotted, forget plot]
+table {%
+0 0
+15 0
+};
+\addplot [semithick, steelblue31119180]
+table {%
+1 6.55200334498105
+2 6.50812419725244
+3 6.39763831526581
+4 6.21299092215118
+5 6.05826468321621
+7 5.91255366974207
+9 5.70894434355113
+11 5.60671136475166
+13 5.40654697899401
+15 5.34428762053166
+};
+\addlegendentry{Net}
+\addplot [semithick, darkorange25512714]
+table {%
+1 7.85432725154102
+2 8.00500804569348
+3 7.91223705819149
+4 8.04238721645978
+5 7.8894549145806
+7 8.09835695706549
+9 8.09635540041787
+11 8.04889502457086
+13 8.05984776488976
+15 8.1414255293163
+};
+\addlegendentry{Cycle}
+\addplot [semithick, forestgreen4416044]
+table {%
+1 -1.30232390655997
+2 -1.49688384844104
+3 -1.51459874292568
+4 -1.8293962943086
+5 -1.83119023136439
+7 -2.18580328732343
+9 -2.38741105686673
+11 -2.4421836598192
+13 -2.65330078589574
+15 -2.79713790878464
+};
+\addlegendentry{Parasitic}
+\addplot [semithick, crimson2143940]
+table {%
+1 -0.452675699806433
+2 -0.598108832668341
+3 -0.731869905246981
+4 -0.859300582941079
+5 -0.975500254981138
+7 -1.19496020678393
+9 -1.38441331724789
+11 -1.55537503744862
+13 -1.66558905405316
+15 -1.79796936691804
+};
+\addlegendentry{NCG Handling}
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={Single flash DSC},
+x grid style={darkgray176},
+xlabel={Geofluid \ce{CO2} content/\unit{\mol\percent}},
+xmin=0, xmax=16,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power /\unit{\mega\watt}},
+ymin=-10, ymax=10,
+ytick style={color=black}
+]
+\addplot [semithick, black, dotted]
+table {%
+0 0
+15 0
+};
+\addplot [semithick, steelblue31119180]
+table {%
+1 5.81905454069752
+2 4.84989335812679
+3 4.13759896033259
+4 3.34100131059608
+5 2.85814529901997
+7 2.01430665244833
+9 1.08352234962453
+11 0.18770214558003
+13 -0.435529018692934
+15 -0.8908585630639
+};
+\addplot [semithick, darkorange25512714]
+table {%
+1 7.56031039820296
+2 7.63417114196802
+3 7.7104419153436
+4 7.63263914908461
+5 6.91243261831585
+7 7.56867972397266
+9 8.1285651425146
+11 7.65984963500571
+13 6.1644306944235
+15 6.59779628351349
+};
+\addplot [semithick, forestgreen4416044]
+table {%
+1 -1.74125585750544
+2 -2.78427778384122
+3 -3.57284295501101
+4 -4.29163783848853
+5 -4.05428731929588
+7 -5.55437307152433
+9 -7.04504279289007
+11 -7.47214748942568
+13 -6.59995971311643
+15 -7.48865484657739
+};
+\addplot [semithick, crimson2143940]
+table {%
+1 -1.41851381024397
+2 -2.50026418409771
+3 -3.35456042880522
+4 -4.09514691625261
+5 -3.92999019169099
+7 -5.42538140373434
+9 -6.92211401296325
+11 -7.38232392759166
+13 -6.53804579166102
+15 -7.42630541192469
+};
+\end{groupplot}
+
+\end{tikzpicture}

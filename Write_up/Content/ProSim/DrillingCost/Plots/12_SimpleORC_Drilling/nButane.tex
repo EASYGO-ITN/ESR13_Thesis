@@ -1,0 +1,170 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[
+    group style={
+        group size=2 by 1, 
+        vertical sep=2.5cm, 
+        horizontal sep=2.5cm},
+    height=6cm, 
+    width=7cm, 
+]
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(1.15, -0.35)},
+  anchor=north,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Drilling Cost/\unit{\mega\USD\of{2023}}},
+xmin=0, xmax=60,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific plant cost/\unit{\USD\of{2023}\kilo\watt}},
+ymin=0, ymax=4000,
+ytick style={color=black},
+ytick distance=1000
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 2601.17267795214
+1 2601.17267795214
+2 2601.17267795214
+4 2601.17267795214
+8 2601.17267795214
+12 2601.17267795214
+16 2601.17267795214
+20 2601.17267795214
+25 2601.17267795214
+30 2601.17267795214
+35 2601.17267795214
+40 2601.17267795214
+50 2601.17267795214
+60 2601.17267795214
+};
+\addlegendentry{Thermodynamic Opt.}
+\addplot [semithick, darkorange25512714]
+table {%
+0 1893.73345388824
+1 1893.73345388824
+2 1893.73345388824
+4 1893.73345388824
+8 1893.73345388824
+12 1893.73345388824
+16 1893.73345388824
+20 1893.73345388824
+25 1893.73345388824
+30 1893.73345388824
+35 1893.73345388824
+40 1893.73345388824
+50 1893.73345388824
+60 1893.73345388824
+};
+\addlegendentry{Techno-economic Opt. (excluding drilling costs)}
+\addplot [semithick, forestgreen4416044]
+table {%
+0 1929.71485831579
+1 1940.69729140754
+2 1920.60711514522
+4 2160.78497049723
+8 2206.90107421575
+12 2340.41495437103
+16 2369.93511566778
+20 2417.35914659394
+25 2434.77748293875
+30 2477.23818703967
+35 2528.39069241134
+40 2468.04581179375
+50 2545.83303619237
+60 2540.61724380931
+};
+\addlegendentry{Techno-economic Opt. (including drilling costs)}
+
+\nextgroupplot[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Drilling Cost/\unit{\mega\USD\of{2023}}},
+xmin=0, xmax=63,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Net electrical power/\unit{\mega\watt}},
+ymin=0, ymax=10,
+ytick style={color=black},
+ytick distance=2
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 6.52143371948183
+1 6.52143371948183
+2 6.52143371948183
+4 6.52143371948183
+8 6.52143371948183
+12 6.52143371948183
+16 6.52143371948183
+20 6.52143371948183
+25 6.52143371948183
+30 6.52143371948183
+35 6.52143371948183
+40 6.52143371948183
+50 6.52143371948183
+60 6.52143371948183
+};
+\addplot [semithick, darkorange25512714]
+table {%
+0 3.35312380103824
+1 3.35312380103824
+2 3.35312380103824
+4 3.35312380103824
+8 3.35312380103824
+12 3.35312380103824
+16 3.35312380103824
+20 3.35312380103824
+25 3.35312380103824
+30 3.35312380103824
+35 3.35312380103824
+40 3.35312380103824
+50 3.35312380103824
+60 3.35312380103824
+};
+\addplot [semithick, forestgreen4416044]
+table {%
+0 3.41586816872176
+1 3.45484599362514
+2 3.59827794491314
+4 5.44747672618843
+8 5.71741855543081
+12 6.13905459187174
+16 6.22879829708411
+20 6.33475894364317
+25 6.35406610908275
+30 6.39668208743175
+35 6.4680377937982
+40 6.40986537612564
+50 6.50452302914855
+60 6.47623187635999
+};
+\end{groupplot}
+
+\end{tikzpicture}

@@ -1,0 +1,410 @@
+The following section aims to investigate the performance of thermodynamically optimised single flash \ac{DSC} and binary \ac{ORC} geothermal power plants for two-phase geothermal heat sources.
+
+\subsection{Plant Configurations}
+    \label{sec:prosim_plant_configurations}
+
+    \subsubsection{Single Flash DSC}
+        \label{sec:thermo_opt_DSC_config}
+        The hot geofluid is expanded via an expansion valve and then passed through a separator to split the liquid brine and vapor phases, Figure~\ref{fig:prosim_purewater_DSC}, into two streams. The vapour is then expanded in a turbine connected to an electrical generator, producing electricity, before being condensed. The brine and condensate streams are re-pressurised, by means of pumps, and re-injected. The model parameters used are summarised in Table~\ref{table:prosim_pure_water_DSC_inputs}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Figures/SingleFlashDSCSchematic}
+            \caption{Single flash \ac{DSC} geothermal power plant.}
+            \label{fig:prosim_purewater_DSC}
+        \end{figure}
+
+        \begin{table}[H]
+            \centering
+            \caption{The model parameters used for the single flash \ac{DSC} component models.}
+            \label{table:prosim_pure_water_DSC_inputs}
+            \input{Content/ProSim/Thermo_Comp/DataTables/DSC_ModelParameters}        
+        \end{table}
+    
+    \subsubsection{Binary ORC}
+        The hot geofluid heats and evaporates a secondary high-pressure low-boiling point fluid, Figure~\ref{fig:prosim_purewater_ORC}. The resulting high-pressure vapor is expanded in a turbine which drives an alternator, generating electricity. The expanded vapor is then condensed, re-pressurised and returned to the pre-heater. The cold geofluid is re-pressurized and re-injected. The model parameters used are summarised in Table~\ref{table:prosim_pure_water_ORC_inputs}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Figures/SimpleORCSchematic}
+            \caption{Binary \ac{ORC} geothermal power plant.}
+            \label{fig:prosim_purewater_ORC}
+        \end{figure}
+
+        \begin{table}[H]
+            \centering
+            \caption{The model parameters used for the binary \ac{ORC} component models.}
+            \label{table:prosim_pure_water_ORC_inputs}
+            \input{Content/ProSim/Thermo_Comp/DataTables/ORC_ModelParameters}        
+        \end{table}
+
+        n-Propane, Cyclepropane, Isobutane, n-Butane, Isopentane, Isohexane, Cyclopentane and n-Heptane were chosen as candidate cycle working fluids based on their critical temperatures covering the full range of geothermal source temperatures to be considered. Vendor safety sheets \cite{Airgas2024} suggest that all fluids are dangerous, with hazards including flammability, explosiveness, toxicity to aquatic life, and may cause irritation on contact or inhalation. 
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Plots/WorkingFluids}
+            \caption{The critical temperature and pressure of the \ac{ORC} working fluids considered.}
+            \label{fig:prosim_purewater_wfs}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Plots/WorkingFluid_TS_envelopes}
+            \caption{The phase envelopes in the temperature-entropy domain of the \ac{ORC} working fluids considered.}
+            \label{fig:prosim_purewater_wfs_envelopes}
+        \end{figure}
+
+\subsection{Boundary Conditions}
+    The geofluid is assumed to be pure water, arriving at the wellhead at a temperature between \qty{423}{\K} and \qty{548}{\K} (\qty{150}{\degreeCelsius} and \qty{275}{\degreeCelsius} respectively) and a steam quality between \qty{0}{\percent} (saturated liquid) and \qty{100}{\percent} (saturated vapour). The geofluid inlet pressure is back-calculated from the inlet temperature and steam quality. The mass rate of geofluid is fixed at \qty{50}{\kg\per\s}.
+
+    \begin{table}[H]
+        \centering
+        \caption{The boundary conditions used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+        \label{table:prosim_pure_water_boundary}
+        \input{Content/ProSim/Thermo_Comp/DataTables/BCs_thermo}        
+    \end{table}
+
+\subsection{Optimisation Configuration}
+    \label{sec:prosim_thermo_BCs}
+    The performance of the power plants is optimised based on the net electrical power generated, while ensuring that the approach temperatures in the heat exchangers (i.e. condenser, pre-heater, evaporator and super-heater) do not exceed the defined minimum values, Table~\ref{table:prosim_pure_water_thermo_opt_params}, by adjusting the process variables. For the \ac{DSC} plant, the flash pressure and the condensation pressure adjusted; for the binary \ac{ORC} plant, the evaporation pressure, the degree of super-heating and the condensation temperature are adjusted.
+
+    \begin{table}[H]
+        \centering
+        \caption{The optimisation parameters used for the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.}
+        \label{table:prosim_pure_water_thermo_opt_params}
+        \input{Content/ProSim/Thermo_Comp/DataTables/ThermodynamicOptmisationConfig}        
+    \end{table}
+        
+        
+\subsection{Performance Analysis: DSC}
+    \label{sec:thermo_opt_DSCresults}
+
+    The net power produced by the \ac{DSC} geothermal power plant increases with both steam quality, due to the higher steam mass rate, and temperature, due to the higher heat content of the vapour, Figure~\ref{fig:prosim_purewater_DSC_Wnet}. The gains in net power with temperature appear to be diminishing, which can be attributed to the shape of the phase envelope in the pressure-enthalpy domain, Figure~\ref{fig:prosim_purewater_DSC_flash_region}, where with increasing temperature (or pressure) the gradient of the dew-point line becomes vertical for temperatures higher than around \qty{500}{\K}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/06_SingleFlash/Wnet}
+        \caption{The net electrical power of the single flash \ac{DSC} geothermal power plant as a function of inlet steam quality at different inlet temperatures.}
+        \label{fig:prosim_purewater_DSC_Wnet}
+    \end{figure}
+
+    The sensitivity study indicates that, the lower condensation pressures are favoured, Figure~\ref{fig:prosim_purewater_DSC_OPs}. In fact, for all inlet conditions considered, the optimised condensation pressure is equal to the minimum condensation pressure of \qty{0.1}{\bar}. This indicates that even lower condensation pressures would be favoured, the lower limit being the saturation pressure at the ambient temperature plus the required minimum approach temperature in the condenser.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/06_SingleFlash/OperatingPoints}
+        \caption[The geofluid inlet pressure and optimised flash and condensation pressures for the single flash \ac{DSC} geothermal power plant.]{The geofluid inlet pressure and optimised flash and condensation pressures for the single flash \ac{DSC} geothermal power plant as a function of inlet steam quality at different inlet temperatures.}
+        \label{fig:prosim_purewater_DSC_OPs}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/06_SingleFlash/FlashingRegion}
+        \caption{The degree of flashing \(X_{flash}\) for a single flash \ac{DSC} geothermal power plant as a function of geofluid inlet temperature ans vapour quality.}
+        \label{fig:prosim_purewater_DSC_flash_region}
+    \end{figure}
+
+    The optimum degree of flashing \(X_{flash}\) (i.e. \(X_{flash}=1- \frac{P_{flash}}{P_{in}}\)) decreases with increasing geofluid inlet steam quality, Figure~\ref{fig:prosim_purewater_DSC_flash_region}, which can be attributed to the lines of equal vapour quality in the pressure-enthalpy domain becoming more vertical, Figure~\ref{fig:prosim_purewater_DSC_flashing_degree}, and as such flashing liberates less additional vapour. For instance, flashing a geofluid arriving at \qty{423}{\K} and an inlet vapour quality of \qty{15}{\percent} by \qty{50}{\percent} (i.e. \(P_{flash}=0.5*P_{in}\)), raises the vapour quality to \qty{19}{\percent}. Considering a geofluid at the same temperature and an inlet vapour quality of \qty{70}{\percent}, the same flash only raises the vapour quality to \qty{72}{\percent}.
+            
+    Similarly, the optimum degree of flashing increases with geofluid temperature, as the lines of equal vapour quality are more curved, Figure~\ref{fig:prosim_purewater_DSC_flashing_degree}, and thus larger amounts of vapour can be liberated for the same degree of flashing. For instance, flashing a geofluid arriving at \qty{548}{\K} and an inlet vapour quality of \qty{15}{\percent} by \qty{50}{\percent} (i.e. \(P_{flash}=0.5*P_{in}\)), raises the vapour quality to \qty{25}{\percent}. Considering a geofluid at \qty{423}{\K}, the same flash only raises the vapour quality to \qty{19}{\percent}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/06_SingleFlash/FlashingDegree}
+        \caption{The inlet geofluid vapour quality and the resultant vapour quality following a \qty{50}{\percent} flash.}
+        \label{fig:prosim_purewater_DSC_flashing_degree}
+    \end{figure}
+
+   With regards to the cost, four main cost components can be identified for the single flash \ac{DSC}; the turbine, the condenser, secondary equipment and construction, Figure~\ref{fig:prosim_purewater_DSC_CostBreakdown}. By definition, see Section~\ref{sec:prosim_Power_Cycle_economic_model}, the combined construction and secondary equipment cost amount to about \qty{45}{\percent} of total plant cost, with the remainder being roughly evenly split between the turbine and the condenser. The increasing cost share of the condenser relative to the turbine with geofluid inlet vapour quality, Figure~\ref{fig:prosim_purewater_DSC_CostBreakdown}, can be attributed to the scaling of the respective cost correlations, and can more generally be observed with increasing power plant capacity. Re-pressurisation is not a significant cost component, owing to the low power requirements, as the geofluid is virtually in-compressible. The specific costs calculated in this study, Figure~\ref{fig:prosim_purewater_DSC_costs}, are about \qty{50}{\percent} lower than cost estimates from \emph{GEOPHIRES-X} \cite{Beckers2023}, see Section~\ref{sec:prosim_litrev_plant_cost}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/06_SingleFlash/CostBreakdown}
+        \caption[The absolute cost (left) and relative cost (right) of plant components of a single flash \ac{DSC} geothermal power plant.]{The absolute cost (left) and relative cost (right) of plant components of a single flash \ac{DSC} geothermal power plant for a geofluid inlet temperature of \qty{523}{\K} (\qty{225}{\degreeCelsius}) as a function of inlet steam quality.}
+        \label{fig:prosim_purewater_DSC_CostBreakdown}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/06_SingleFlash/SpecCost_LCOE}
+        \caption[The specific plant cost (left) and the LCOE (right) of the single flash \ac{DSC} geothermal power plant.]{The specific plant cost (left) and the LCOE (right) of a single flash \ac{DSC} geothermal power plant as a function of inlet steam quality at different inlet temperatures.}
+        \label{fig:prosim_purewater_DSC_costs}
+    \end{figure}
+
+\subsection{Performance Analysis: Binary ORC}
+    \label{sec:ORC_thermo_opt}
+
+    The net power of binary \ac{ORC} geothermal power plants increases with geofluid inlet temperature and steam quality, Figure~\ref{fig:prosim_purewater_isopentane_by_temp}, due to the higher heat flow entering the power plant. Similarly to the performance of the \ac{DSC} plant, with increasing geofluid inlet temperature, the increases in net power diminish, as a result of the dew-line undergoing an inflection in the temperature-enthalpy domain at temperatures above \qty{473}{\K} (\qty{200}{\degreeCelsius}). Consequently, the heat flow entering the power plant is almost constant with temperature as \(\frac{\partial H}{\partial T}\) is close to zero. 
+    
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/NetPow_IsoPentane}
+        \caption[The net electrical power for a binary \ac{ORC} using IsoPentane as the working fluid.]{The net electrical power for a binary \ac{ORC} using IsoPentane as the working fluid as a function of inlet steam quality at different inlet temperatures.}
+        \label{fig:prosim_purewater_isopentane_by_temp}
+    \end{figure}
+
+    As can be seen in Figure~\ref{fig:prosim_purewater_isopentane_by_temp}, the dependency of the net power on the geofluid inlet steam quality follows two distinct slopes, which can be attributed to a shift in the location of the pinch-point from the outlet of the pre-heater (on the working fluid side) to its inlet, Figure~\ref{fig:prosim_purewater_isopentane_TQ_by_Q}. 
+    
+    Considering a binary \ac{ORC} using Isopentane as the working fluid, for saturated liquid geofluids (i.e. \(x_{geo}^{in}=\)\qty{0}{\percent}) the pinch-point is located at the pre-heater outlet (on the working fluid side). The cycle parameters (i.e. \(P_{max}\) and \(\Delta T_{sh}\)) are chosen such that the cycle net power is optimised. For two-phase geofluids with small inlet steam qualities, the additional heat content of the steam, allows the pinch-point to occur at a higher temperature (and in turn maximum cycle pressure \(P_{max}\)). Once the maximum cycle pressure is reached, for any higher geofluid inlet qualities, the pinch-point is then pushed inside the pre-heater, and the cycle power can now only be maximised by raising the degree of super-heating \(\Delta T_{sh}\). For high enough steam qualities (in this case about \qty{20}{\percent}), the pinch-point is located at the pre-heater inlet (on the working fluid side. Up until this point, the increase in cycle power is driven by 1) the increase in heat flow entering the plant, thus increasing the working fluid mass rate and 2) increasingly favourable operating parameters for the \ac{ORC}. 
+    
+    At even higher geofluid inlet steam qualities, the cycle operating parameters remain unchanged, either because they have reached their upper bound or because the optimum parameters with respect to the source temperature have been determined. As such, the subsequent increase in net power with geofluid inlet steam quality are now simply a result of the increased heat flow.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC_higher_def/Isopentane_TQs_by_Q}
+        \caption[TQ diagrams for a binary \ac{ORC} using Isopentane as the working fluid by steam quality.]{Temperature-Heat transferred diagrams for a binary \ac{ORC} using Isopentane as the working fluid for different geofluid steam qualities.}
+        \label{fig:prosim_purewater_isopentane_TQ_by_Q}
+    \end{figure}        
+
+    At even higher geofluid inlet steam qualities, the cycle operating parameters remain unchanged, either because they have reached their upper bound or because the optimum parameters with respect to the source temperature have been determined. As such, the subsequent increase in net power with geofluid inlet steam quality are now simply a result of the increased heat flow.
+
+    A similar behaviour can also be observed with respect to the geofluid inlet temperature, where for higher geofluid inlet temperatures, the pinch-point shifts towards the pre-heater inlet (on the working fluid side), Figure~\ref{fig:prosim_purewater_isopentane_TQ_by_T}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC_higher_def/Isopentane_TQs_by_T}
+        \caption[TQ diagrams for a binary \ac{ORC} using Isopentane as the working fluid by inlet temperature.]{Temperature-Heat transferred diagrams for a binary \ac{ORC} using Isopentane as the working fluid for different geofluid inlet temperatures.}
+        \label{fig:prosim_purewater_isopentane_TQ_by_T}
+    \end{figure}
+
+    Regarding the optimisation of process variables, the following trends can be identified:
+
+    \begin{itemize}
+        \item The reduced pressure \(P_r\) increases with both geofluid inlet temperature and pressure as a result of the pinch-point shifting towards the pre-heater inlet, Figure~\ref{fig:prosim_purewater_isopentane_Pr}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/Isopentane_Pr}
+            \caption[The optimised reduced pressure \(P_r\) for a binary \ac{ORC} using Isopentane as the working fluid.]{The optimised reduced pressure \(P_r\) for a binary \ac{ORC} using Isopentane as the working fluid as a function of inlet steam quality at different inlet temperatures.}
+            \label{fig:prosim_purewater_isopentane_Pr}
+        \end{figure}
+        
+        \item The minimum temperature \(T_{min}\) is virtually independent of the geofluid inlet temperature and steam quality, Figure~\ref{fig:prosim_purewater_isopentane_TminTmax}, and assumes values close to the specified lower bound value of \qty{303}{\K} (\qty{30}{\degreeCelsius}). As such, the condensation pressure for each working fluid is essentially fixed for all geofluid inlet conditions and may therefore be omitted as an optimisation variable. Instead, the minimum cycle temperature \(T_{min}\), could be estimated based on the ambient temperature \(T_{amb}\) and the minimum approach temperature in the condenser \(\Delta T_{cond}^{min}\).
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/IsoPentane_TminTmax}
+            \caption[The minimum cycle temperature \(T_{min}\) and the maximum cycle temperatures \(T_{max}\) for a binary \ac{ORC} using Isopentane as the working fluid.]{The minimum cycle temperature \(T_{min}\) and the maximum cycle temperatures \(T_{max}\) for a binary \ac{ORC} using Isopentane as the working fluid as a function of inlet steam quality at different inlet temperatures.}
+            \label{fig:prosim_purewater_isopentane_TminTmax}
+        \end{figure}
+
+        \item The degree of super-heating \(\Delta T_{sh}\) generally only begins to increase once the maximum cycle temperature can no longer be increased by raising the reduced pressure \(P_r\), Figure~\ref{fig:prosim_purewater_isopentane_DTsh}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/IsoPentane_DTsh}
+            \caption[The degrees of super-heating \(\Delta T_{sh}\) for a binary \ac{ORC} using Isopentane.]{The degrees of super-heating \(\Delta T_{sh}\) for a binary \ac{ORC} using Isopentane as the working fluid as a function of inlet steam quality at different inlet temperatures.}
+            \label{fig:prosim_purewater_isopentane_DTsh}
+        \end{figure}
+
+    \end{itemize}
+
+    The \emph{noisiness} of the optimisation variables (e.g. the degrees of super-heating) with respect to the geofluid inlet conditions, can be attributed to degeneracy of the optimisation problem. As such there may be multiple (or even infinite) combinations of the optimisation variables that yield the same value (or similar values) of the objective function. 
+    
+    For example, considering a binary \ac{ORC} using IsoPentane as the working fluid, operating on a geofluid inlet temperature of \qty{473}{\K} (\qty{200}{\degreeCelsius}) and steam quality of \qty{20}{\percent}, the normalised objective function (i.e. \(\frac{W_{net,\;elec}}{W_{net,\;elec}^{max}}\)) was calculated for the full range of optimisation variables (i.e. \(P_r\) and \(DT_{sh}\)). For simplicity, the minimum cycle temperature \(T_{min}\) was fixed at \qty{308}{\K} (\qty{35}{\degreeCelsius}), Figure~\ref{fig:prosim_purewater_isopentane_objFunc_shape}.
+
+    As can be seen from Figure~\ref{fig:prosim_purewater_isopentane_objFunc_shape}, there are many combinations of the reduced pressure \(P_r\) and the degrees of super-heating \(\Delta T_{sh}\) that yield a normalised objective function value of \num{0.99}. Nevertheless, the optimisation has converged satisfactorily (i.e. the average value of the objective function across all \emph{species} is within \qty{1}{\percent} of the best \emph{species} encountered, Figure~\ref{fig:prosim_purewater_isopentane_objFunc_Convergence}. In principle the \emph{noisiness} could be reduced by lowering the convergence tolerance for the optimisation (set at \qty{1}{\percent} for this study), however this comes at the expense of increased model runtime, however even with the default tolerance, the optimisation comes within \qty{0.1}{\percent} of the global optimum value of the objective function as determined via the brute-force approach.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/ObjFuncShape}
+        \caption[The normalised objective function space for a binary \ac{ORC} using IsoPentane as the working fluid.]{The normalised objective function space (i.e. \(\frac{W_{net,\;elec}}{W_{net,\;elec}^{max}}\)) for a binary \ac{ORC} using IsoPentane as the working fluid, operating on a geofluid temperature of \qty{473}{\K} (\qty{200}{\degreeCelsius}) and steam quality of \qty{20}{\percent}. The minimum cycle temperature \(T_{min}\) is fixed at \qty{308}{\K} (\qty{35}{\degreeCelsius}). The black star indicates the global optimum point; the black circle indicates the optimum operating conditions found in \emph{PowerCycle}.}
+        \label{fig:prosim_purewater_isopentane_objFunc_shape}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/ObjFuncConvergence}
+        \caption[The normalised objective function convergence for a binary \ac{ORC} using IsoPentane as the working fluid.]{The normalised objective function (i.e. \(\frac{W_{net,\;elec}}{W_{net,\;elec}^{max}}\)) as a function of the optimiser iterations for a binary \ac{ORC} using IsoPentane as the working fluid, operating on a geofluid temperature of \qty{473}{\K} (\qty{200}{\degreeCelsius}) and steam quality of \qty{20}{\percent}. The minimum cycle temperature \(T_{min}\) is fixed at \qty{308}{\K} (\qty{35}{\degreeCelsius}). The black star indicates the global optimum point; the black circle indicates the optimum operating conditions found in \emph{PowerCycle}.}
+        \label{fig:prosim_purewater_isopentane_objFunc_Convergence}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/NetPow}
+        \caption[The net electrical power by working fluid.]{The net electrical power as a function of inlet steam quality at different inlet temperatures for a range of working fluids. The best performing working fluid is indicated by the dotted black line}
+        \label{fig:prosim_purewater_wfs_by_temp}
+    \end{figure}
+
+    Comparing the performance of the different working fluids considered, Figure~\ref{fig:prosim_purewater_wfs_by_temp}, several working fluids can be seen to dominate at different geofluid inlet conditions. Overall, CycloPentane appears to be the best performing working fluid, yielding the highest net power for virtually all geofluid inlet steam qualities and temperatures greater than or equal to \qty{448}{\K}. n-Butane and Isopentane can be seen to perform well at lower temperatures and low steam qualities.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/Eta1stLaw}
+        \caption[The 1\textsuperscript{st} law cycle, thermal recovery and plant efficiency of the binary ORC plant.]{The maximum 1\textsuperscript{st} law plant efficiency (bottom left) and corresponding cycle (top left) and thermal recovery (top right) efficiencies of the binary ORC plant across all working fluids as a function of inlet steam quality at different inlet temperatures for a range of working fluids.}
+        \label{fig:prosim_purewater_eta1st_by_temp}
+    \end{figure}
+
+    The 1\textsuperscript{st} law plant efficiency for two-phase heat sources is higher than that of single-phase sources, Figure~\ref{fig:prosim_purewater_eta1st_by_temp}. The cycle efficiency increases with geofluid inlet vapour quality (up to a threshold) because the pinch point in the \ac{PHE} is shifted towards to the working fluid inlet, allowing for higher cycle temperatures. For the same reason the thermal recovery efficiency increases with geofluid inlet vapour quality, reaching values as high as \qty{97}{\percent}, irrespective of geofluid inlet temperature, for saturated vapour sources. Consequently, the plant efficiency approaches the cycle efficiency. Two-phase sources can reach plant efficiencies almost twice as high as single-phase liquid heat sources, though the effect diminished with source temperature. These trends are in keeping with what was previously identified from a theoretical perspective in section~\ref{sec:prosim_litrev_orc_efficiency}. 
+
+    The maximum net power and the corresponding specific plant cost across all working fluids for the different geofluid inlet conditions is shown in Figure~\ref{fig:prosim_purewater_Wnet_bestWf_SpecCost}. The specific cost is compared against estimates from \emph{GEOPHIRES-X} \cite{Beckers2023}, though while the specific costs are of similar magnitude, overall agreement is poor. This could be the result of a number of factors, such as the \emph{GEOPHIRES-X} cost model being intended for at most saturated geofluids and geofluid temperatures below \qty{473}{\K}, as well as in this case the binary \ac{ORC} being optimised solely on net power.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC_final/Wnet_best_SpecCost}
+        \caption[The net electrical power and the corresponding specific plant cost for the best performing working fluid.]{The net electrical power (left) and the corresponding specific plant cost (right) for the best performing working fluid.}
+        \label{fig:prosim_purewater_Wnet_bestWf_SpecCost}
+    \end{figure}
+
+    The above being said, the thermodynamically best performing working fluids can be see to be less favourable from a specific cost perspective. Particularly CycloPentane achieves specific costs about \qty{1000}{\USD\of{2023}\per\kilo\watt} higher than the minimum specific cost observed across all working fluids considered, Figure~\ref{fig:prosim_purewater_specCost_by_wf}. Although this gap closes at higher temperatures, and for some geofluid inlet vapour qualities at inlet temperatures exceeding \qty{523}{\K}, CycloPentane actually achieves the lowest specific cost across all working fluids. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/specCost}
+        \caption[The specific plant cost as a function of inlet steam quality at different inlet temperatures for a range of working fluids.]{The specific plant cost as a function of inlet steam quality at different inlet temperatures for a range of working fluids. The best performing working fluid is indicated by the dotted black line}
+        \label{fig:prosim_purewater_specCost_by_wf}
+    \end{figure}
+
+    CycloPropane produces the lowest specific cost for geofluid inlet temperatures of \qty{423}{\K} and n-Butane produces the lowest cost for virtually all other inlet conditions investigated, see Figure~\ref{fig:prosim_purewater_specCost_by_wf}. The minimum specific cost and the corresponding net electrical power across all working fluids for the different geofluid inlet conditions is shown in Figure~\ref{fig:prosim_purewater_specCost_bestWf}. For saturated geofluids, better agreement between the specific cost calculated in PowerCycle and \emph{GEOPHIRES-X} can be observed.
+
+    \begin{notes}{Note}
+        The \emph{oscillations} in the net power between geofluid inlet vapour qualities of \qtyrange{60}{100}{\percent}, Figure~\ref{fig:prosim_purewater_specCost_bestWf}, are a result of the working fluid with the lowest specific cost switching from n-Butane to CycloPentane (and vice versa), Figure~\ref{fig:prosim_purewater_specCost_by_wf}
+    \end{notes}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC_final/SpecCost_best_Wnet}
+        \caption{The specific plant cost (left) and the corresponding net power (right) for the best performing working fluid.}
+        \label{fig:prosim_purewater_specCost_bestWf}
+    \end{figure}
+
+    Besides the construction and secondary equipment costs, the main cost components of the binary \ac{ORC} geothermal power plant are the turbine, condenser and \ac{PHE}. Construction and secondary plant equipment, by definition (Section~\ref{sec:prosim_Power_Cycle_economic_model}), make up \qty{41.2}{\percent} and \qty{16.8}{\percent} of the total plant cost respectively. Depending on the working fluid, the turbine represents between \qty{11.5}{\percent} and \qty{37.7}{\percent}, the condenser accounts for between \qty{4.1}{\percent} and \qty{25.2}{\percent}, with the remainder (between \qty{0.6}{\percent} to \qty{6.7}{\percent}) being attributable to the \ac{PHE}, Figure~\ref{fig:prosim_purewater_ORC_Costbreakdown}. The cost of the circulation pump is negligible.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/CostBreakdown_someFluids}
+        \caption[The absolute cost and relative cost of plant components of a binary \ac{ORC} geothermal power plant by working fluids.]{The absolute cost (left) and relative cost (right) of plant components of binary \ac{ORC} geothermal power plants operating on different working fluids for a geofluid inlet temperature of \qty{523}{\K} (\qty{225}{\degreeCelsius}) as a function of inlet steam quality.}
+        \label{fig:prosim_purewater_ORC_Costbreakdown}
+    \end{figure}
+
+    The cost contribution of the turbine is primarily dependent on the working fluid with lighter less complex working fluids like Propane yielding cheaper turbines than more complex working fluids such as n-Heptane, see Figure~\ref{fig:prosim_purewater_spec_turb_cost}. This can be attributed to the latter requiring a larger number of stages and having a higher size parameter \(SP\), Figure~\ref{fig:prosim_purewater_turb_stages_SP}.
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/SpecTurbineCost}
+        \caption{The turbine cost fluid normalised by the plant power by working for a geofluid inlet temperature of \qty{548}{\K} as a function of inlet vapour quality.}
+        \label{fig:prosim_purewater_spec_turb_cost}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/TurbineStages_SP}
+        \caption{The turbine stages and size parameter \(SP\) by working fluid for a geofluid inlet temperature of \qty{548}{\K} as a function of inlet vapour quality.}
+        \label{fig:prosim_purewater_turb_stages_SP}
+    \end{figure}
+
+    \begin{notes}{Note}
+        The \emph{oscillations} in the specific turbine cost and the number of stages that can be observed for Cyclopentane, Figures~\ref{fig:prosim_purewater_spec_turb_cost} and \ref{fig:prosim_purewater_turb_stages_SP} are a result of how the number of stages are calculated from the overall change in specific enthalpy and volume across the turbine, Equation~\ref{eq:turb_nstages}, see Section~\ref{sec:prosim_pwrcyc_turbines}. In this particular case, the minimum number of stages is numerically close to \num{3.0}, meaning that if the value is found to be less than \num{3.0} it is rounded up to \num{3} stages, but if it is just above \num{3.0} it is rounded up to \num{4} stages.
+
+        \begin{align}
+            n_{stages}= \Biggl \lceil \max \left( \frac{\Delta h_{isen}^{tot}}{\Delta h_{stage}^{max}} , \quad \log_{V_{r, stage}^{max}} V_{r, isen}^{tot} \right) \Biggr \rceil \tag{\ref{eq:turb_nstages}}
+        \end{align}
+
+        
+    \end{notes}
+
+    Similarly to the turbine, the specific cost of the condenser is dependent on the working fluid, with lighter less complex working fluids like Propane requiring more expensive condensers (per unit net plant power) than heavier more complex fluids like n-Heptane, Figure~\ref{fig:prosim_purewater_spec_cond_cost}. This can be primarily attributed to the differences in net plant power, as the absolute condenser costs only demonstrate slight variability with working fluid. The general reduction in specific condenser cost with geofluid inlet vapour quality is a result of the increased cooling duty, and in turn heat transfer area, leading to lower specific equipment costs. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/00_SimpleORC/SpecCondCost}
+        \caption{The condenser cost fluid normalised by the plant power by working for a geofluid inlet temperature of \qty{548}{\K} as a function of inlet vapour quality.}
+        \label{fig:prosim_purewater_spec_cond_cost}
+    \end{figure}
+
+\subsection{Direct Comparison}
+    \label{sec:thermo_opt_direc_comp}
+    To draw a direct comparison between the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants, a suitable metric must first be chosen to select the optimum binary \ac{ORC} configuration amongst the configurations considered (in this case the different working fluids investigated). 
+    
+    For instance, if net electrical power is considered the most important, then the for each geofluid inlet condition studied, the binary \ac{ORC} configuration(s) yielding the maximum net electrical power should be selected, Figure~\ref{fig:prosim_purewater_Wnet_DSC_vs_ORC}. For further comparison of plant metrics, such as the specific plant cost, the values corresponding to the selected binary \ac{ORC} configuration(s) should be considered. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/Wnet_best_SpecCost}
+        \caption[The net electrical power and the corresponding specific cost of the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.]{The net electrical power (left) and the corresponding specific cost (right) of the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants. For the binary \ac{ORC},  the net electrical power is the maximum across all working fluids.}
+        \label{fig:prosim_purewater_Wnet_DSC_vs_ORC}
+    \end{figure}
+
+    From a second law efficiency perspective, the break-even in brute-force efficiencies closely matches the break-even in net electrical power at geofluid inlet vapour qualities between around \qty{55}{\percent} and \qty{85}{\percent}. By contrast, for the functional efficiency the break-even is less dependent on the geofluid inlet vapour quality and occurs at around \qty{45}{\percent}, see Figure~\ref{fig:prosim_purewater_EFF_II_DSC_vs_ORC}. Combined, the two technologies generate electricity at second law efficiencies in excess of \qty{50}{\percent} for temperatures above \qty{200}{\K} irrespective of the geofluid inlet vapour quality.   
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/EFF_II}
+        \caption[The brute-force and functional second law efficiency of the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants.]{The brute-force (left) and functional (right) second law efficiency of the single flash \ac{DSC} and the binary \ac{ORC} geothermal power plants. For the binary \ac{ORC},  the maximum efficiency across all working fluids is shown.}
+        \label{fig:prosim_purewater_EFF_II_DSC_vs_ORC}
+    \end{figure}
+
+    Plotting the geofluid inlet conditions for which the single flash \ac{DSC} and binary \ac{ORC} reach parity, then allows feasibility regions to be identified, Figure~\ref{fig:prosim_purewater_Breakeven_NetPow}. Three regions can be identified:
+
+    \begin{description}
+       \item[Region 1] Left of the yellow line (representing parity in specific plant cost), where the binary \ac{ORC} produces more net electrical power and at a lower specific plant cost compared to the single flash \ac{DSC}. 
+       \item[Region 2] Between the blue line (representing parity of net electrical power) and yellow line, where the binary \ac{ORC} produces more net electrical power than the single flash \ac{DSC}, albeit at a higher specific cost.
+       \item[Region 3] Right of the blue line, where the single flash \ac{DSC} produces more net electrical power and at a lower specific plant cost than the binary \ac{ORC}.
+    \end{description}
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/Breakeven_NetPow}
+        \caption[The geofluid inlet conditions for which the binary \ac{ORC} and single flash \ac{DSC} geothermal power plants deliver equal net electrical power and have equal specific plant cost.]{The geofluid inlet conditions for which the binary \ac{ORC} and single flash \ac{DSC} geothermal power plants deliver equal net electrical power and have equal specific plant cost. For the binary \ac{ORC},  the net electrical power is the maximum across all working fluids.}
+        \label{fig:prosim_purewater_Breakeven_NetPow}
+    \end{figure}
+
+    \begin{notes}{Note}
+        The \emph{kink} in \emph{Net Power Parity} line in Figure~\ref{fig:prosim_purewater_Breakeven_NetPow} can be attributed a change in working fluid. While the upper part of the line follows the net power parity inlet conditions of Cyclopentane, at the lowest temperature considered (\qty{423}{\K}) Cyclopentane is not a viable working fluid, as such the next best viable working fluid, Isohexane, is selected, see Figure~\ref{fig:prosim_purewater_Breakeven_NetPow_by_WF}.
+
+        \begin{figure}[H]
+            \centering
+            \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/Breakeven_Fluid_Wnet}
+            \caption{The geofluid inlet conditions for which the binary \ac{ORC} and single flash \ac{DSC} geothermal power plants deliver equal net electrical power by working fluid.}
+            \label{fig:prosim_purewater_Breakeven_NetPow_by_WF}
+        \end{figure}
+        
+    \end{notes}
+
+    % Safe this for later
+    % This can be attributed to the binary \ac{ORC} being capable of utilising the entire heat content of the geofluid, while \ac{DSC} is only able to utilise the vapour portion. For instance, for a geofluid arriving at \qty{473}{\K} and a vapour quality of \qty{20}{\percent}, the vapour carries only about \qty{45}{\percent} of the total enthalpy entering the plant.
+
+    Similarly, if the specific cost is considered the most important metric, then the for each geofluid inlet condition studied, the binary \ac{ORC} configuration(s) yielding the minimum specific plant cost should be selected, Figure~\ref{fig:prosim_purewater_SpecCost_DSC_vs_ORC}. The same three region are observed, however their spread is reduced, and Region 1 extends to higher geofluid inlet vapour qualities for all temperatures (about \qty{20}{\percent}). 
+
+    % However, from a cost perspective, the \ac{DSC} geothermal power plants are favourable for geofluid inlet vapour qualities higher than \qty{10}{\percent}, Figures~\ref{fig:prosim_purewater_SpecCost_DSC_vs_ORC} and \ref{fig:prosim_purewater_Breakeven_DSC_vs_ORC}. While the steam turbine costs are comparable to many of the heavier \ac{ORC} working fluids, for the working fluid with the lowest specific plant cost, it is the difference in condenser costs and the lack of a \ac{PHE} unit that makes the \ac{DSC} economically favourable. 
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/SpecCost_best_Wnet}
+        \caption[The specific plant cost and the corresponding net electrical power of the single flash \ac{DSC} and the binary \ac{ORC}.]{The specific plant cost (left) and the corresponding net electrical power (right) of the single flash \ac{DSC} and the binary \ac{ORC}. For the binary \ac{ORC}, the specific plant cost is the minimum across all working fluids considered.}
+        \label{fig:prosim_purewater_SpecCost_DSC_vs_ORC}
+    \end{figure}  
+
+    \begin{figure}[H]
+        \centering
+        \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/Breakeven_SpecCost}
+        \caption[The geofluid inlet conditions for which binary \ac{ORC} and single flash \ac{DSC} geothermal power plants deliver equal net electrical power and have equal specific plant costs.]{The geofluid inlet conditions for which binary \ac{ORC} and single flash \ac{DSC} geothermal power plants deliver equal net electrical power and have equal specific plant costs. For the binary \ac{ORC}, the specific plant cost is the minimum across all working fluids considered.}
+        \label{fig:prosim_purewater_Breakeven_SpecCost}
+    \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/Thermo_Comp/Plots/DSC_vs_ORC/Breakeven_Fluid_SpecCost}
+    %     \caption{To be removed. The geofluid inlet conditions for which the binary \ac{ORC} and single flash \ac{DSC} geothermal power plants have equal specific plant costs by working fluid.}
+    % \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/ORCvsDSC/Plots/DSC_vs_ORC/LCOE}
+    %     \caption{The LCOE of the single flash \ac{DSC} and the binary \ac{ORC} (using best performing working fluid) geothermal power plants as a function of inlet steam quality at different inlet temperatures.}
+    %     \label{fig:prosim_purewater_LCOE_DSC_vs_ORC}
+    % \end{figure}
+
+    % \begin{figure}[H]
+    %     \centering
+    %     \input{Content/ProSim/ORCvsDSC/Plots/DSC_vs_ORC/Breakeven}
+    %     \caption{The geofluid inlet conditions for which the binary \ac{ORC} and single flash \ac{DSC} geothermal power plants deliver equal net electrical power or have equal specific plant costs. Left of the lines the binary \ac{ORC} outperforms the single flash \ac{DSC} plant. Solid lines indicate binary \ac{ORC}s with maximum net electrical power. Dashed lines indicate binary \ac{ORC}s with minimum specific cost.}
+    %     \label{fig:prosim_purewater_Breakeven_DSC_vs_ORC}
+    % \end{figure}
+
+\subsection{Conclusions}
+    Binary \ac{ORC}s can thermodynamically outperform \ac{DSC} geothermal power plants for a wide range of geofluid inlet conditions. However from a cost perspective, the application envelope of such thermodynamically optimised binary \ac{ORC}s is limited to low geofluid inlet vapour qualities.
+
+    With the turbine and condenser being the main cost components, their size optimisation represents the largest potential for cost reductions. For instance, the size and cost of the condenser could be reduced by enforcing a larger approach temperature, at the expense of turbine power, or the use of a recuperator to improve the overall heat transfer coefficient for the cooling of the super-heating turbine outlet vapour (i.e. vapour-liquid contacting in the recuperator versus vapour-vapour contacting in the condenser).
+
+\clearpage
