@@ -1,0 +1,42 @@
+group style={group size=2 by 3}, width=7cm, height=6.5cm, vertical sep=1.75cm, horizontal sep=1.75cm
+
+
+[
+    group style={
+        group size=2 by 3,
+        vertical sep=2cm,
+        horizontal sep=2cm
+        },
+    width=7cm,
+    height=6.5cm,
+    legend style={
+        at={(1.55,0.5)},
+        anchor=west
+        },
+    legend cell align={left},
+    unbounded coords=jump,
+    xlabel={Pressure/\unit{\bar}},
+    xmin=0, xmax=100,
+    ylabel={Entropy/\unit{\joule\per\mole\K}},
+    ymin=-10.8675789105177, ymax=150
+    ]
+
+   [
+    group style={
+        group size=2 by 3,
+        vertical sep=2cm,
+        horizontal sep=2cm
+        },
+    width=7cm,
+    height=6.5cm,
+    legend style={
+        at={(1.55,0.5)},
+        anchor=west
+        },
+    legend cell align={left},
+    unbounded coords=jump,
+    xlabel={Pressure/\unit{\bar}},
+    xmin=0, xmax=100,
+    ylabel={Quality/\unit{\mole\per\mole}},
+    % ymin=10, ymax=100000,
+    ]

@@ -1,0 +1,126 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{sienna1408675}{RGB}{140,86,75}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=lightgray204
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xlabel={Steam Quality/\unit{\percent}},
+xmin=-2.5, xmax=52.5,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Specific net power/\unit{\kilo\watt\s\per\kg}},
+ymin=31.727869605, ymax=307.091452495,
+ytick style={color=black}
+]
+\addplot [semithick, steelblue31119180]
+table {%
+0 44.2443961
+5 61.1068329
+10 80.102991
+15 101.262474
+20 124.495623
+25 149.777019
+30 176.744952
+35 206.202446
+40 235.659939
+45 265.117433
+50 294.574926
+};
+\addlegendentry{DSC}
+\addplot [semithick, darkorange25512714]
+table {%
+0 67.9126881
+5 76.244438295
+10 84.57618849
+15 92.907938685
+20 101.23968888
+25 109.571439075
+30 117.90318927
+35 126.234939465
+40 134.56668966
+45 142.898439855
+50 151.23019005
+};
+\addlegendentry{iso-Butane}
+\addplot [semithick, forestgreen4416044]
+table {%
+0 61.6912993
+5 65.538576835
+10 69.38585437
+15 73.233131905
+20 77.08040944
+25 80.927686975
+30 84.77496451
+35 88.622242045
+40 92.46951958
+45 96.316797115
+50 100.16407465
+};
+\addlegendentry{n-Butane}
+\addplot [semithick, crimson2143940]
+table {%
+0 59.1833916
+5 61.92750467
+10 64.67161774
+15 67.41573081
+20 70.15984388
+25 72.90395695
+30 75.64807002
+35 78.39218309
+40 81.13629616
+45 83.88040923
+50 86.6245223
+};
+\addlegendentry{iso-Pentane}
+\addplot [semithick, mediumpurple148103189]
+table {%
+0 58.7602131
+5 61.409644145
+10 64.05907519
+15 66.708506235
+20 69.35793728
+25 72.007368325
+30 74.65679937
+35 77.306230415
+40 79.95566146
+45 82.605092505
+50 85.25452355
+};
+\addlegendentry{n-Pentane}
+\addplot [semithick, sienna1408675]
+table {%
+0 56.0217031
+5 58.385122445
+10 60.74854179
+15 63.111961135
+20 65.47538048
+25 67.838799825
+30 70.20221917
+35 72.565638515
+40 74.92905786
+45 77.292477205
+50 79.65589655
+};
+\addlegendentry{cyclo-Pentane}
+\end{axis}
+
+\end{tikzpicture}

@@ -1,0 +1,342 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{mediumpurple148103189}{RGB}{148,103,189}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.03)},
+  anchor=south west,
+  draw=lightgray204
+},
+log basis y={10},
+minor ytick={2,3,4,5,6,7,8,9,20,30,40,50,60,70,80,90,200,300,400,500,600,700,800,900,2000,3000,4000,5000,6000,7000,8000,9000},
+minor yticklabels={
+  \(\displaystyle {2\times10^{0}}\),
+  \(\displaystyle {3\times10^{0}}\),
+  \(\displaystyle {4\times10^{0}}\),
+  ,
+  \(\displaystyle {6\times10^{0}}\),
+  ,
+  ,
+  ,
+  \(\displaystyle {2\times10^{1}}\),
+  \(\displaystyle {3\times10^{1}}\),
+  \(\displaystyle {4\times10^{1}}\),
+  ,
+  \(\displaystyle {6\times10^{1}}\),
+  ,
+  ,
+  ,
+  \(\displaystyle {2\times10^{2}}\),
+  \(\displaystyle {3\times10^{2}}\),
+  \(\displaystyle {4\times10^{2}}\),
+  ,
+  \(\displaystyle {6\times10^{2}}\),
+  ,
+  ,
+  ,
+  \(\displaystyle {2\times10^{3}}\),
+  \(\displaystyle {3\times10^{3}}\),
+  \(\displaystyle {4\times10^{3}}\),
+  ,
+  \(\displaystyle {6\times10^{3}}\),
+  ,
+  ,
+  
+},
+tick align=outside,
+tick pos=left,
+x grid style={darkgray176},
+xmin=99.553, xmax=832.307,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=10, ymax=100,
+ymode=log,
+ytick style={color=black},
+ytick={1,10,100,1000},
+yticklabels={
+  \(\displaystyle {10^{0}}\),
+  \(\displaystyle {10^{1}}\),
+  \(\displaystyle {10^{2}}\),
+  \(\displaystyle {10^{3}}\)
+}
+]
+\path [draw=red, fill=red, opacity=0.3]
+(axis cs:373.15,1000)
+--(axis cs:373.15,1)
+--(axis cs:573.15,1)
+--(axis cs:573.15,1000)
+--(axis cs:573.15,1000)
+--(axis cs:373.15,1000)
+--cycle;
+
+\addplot [semithick, steelblue31119180, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+419.29 40.051
+562.02 48.94
+553.6 40.824
+398.3 55.797
+511.72 45.712
+305.322 48.722
+617.12 36.224
+282.35 50.418
+468.92 73.0468615963585
+407.817 36.29
+418.09 40.098
+497.7 30.4
+460.35 33.78
+190.564 45.992
+433.74 31.96
+364.211 45.55
+402.38 56.26
+591.75 41.26
+435.75 42.255
+616.89 35.346
+425.125 37.96
+617.7 21.03
+658.1 18.17
+540.13 27.36
+507.82 30.4411532835969
+594.55 22.81
+568.74 24.8359119967769
+469.7 33.6751899473634
+369.89 42.512
+638.8 19.904
+630.259 37.375
+616.168 35.315
+428.61 40.273
+};
+\addlegendentry{Hydrocarbons}
+\addplot [semithick, darkorange25512714, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+471.06 43.94
+487.21 33.922
+418.83 32.57
+353.1 31.2903696827871
+293.03 30.48
+385.12 41.361
+456.831 36.72
+439.6 36.236377763648
+367.85 33.822
+382.52 36.3493685102173
+423.27 35.3061967044966
+395.425 36.24295
+376.93 35.1786712617843
+339.173 36.177
+301.88 38.79
+374.21 40.5928
+396.44 39.5256607171867
+227.51 37.5
+477.5 42.12
+410.26 40.55
+345.857 37.61
+386.411 45.2
+375.25 50.1
+451.48 51.812
+345.02 26.4
+369.295 49.9
+374.9 29.2524223394477
+299.293 48.32
+412.44 34.2
+398.07 32
+447.57 39.4074048875043
+427.01 36.51
+351.255 57.82
+460 32.6620706788325
+416.3 66.7168697714184
+345.27 37.348
+359.345 46.317
+317.28 58.97
+344.494 49.012
+343.765 37.049
+388.38 27.775
+450.7 28.49
+};
+\addlegendentry{Refrigerants}
+\addplot [semithick, forestgreen4416044, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+586.5 13.4721535609046
+618.3 10.7768778025659
+645.78 9.61
+599.4 11.4402429635701
+628 9.53950310236878
+653.2 8.28558722066077
+564.09 14.1004475581655
+518.75 19.39
+};
+\addlegendentry{Silicones}
+\addplot [semithick, crimson2143940, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+508.1 47
+561.6 52.2758510308235
+466.7 36.4901689652854
+557 49.088
+400.378 53.368
+514.71 62.68
+468.92 73.0468615963585
+512.5 82.1585
+799 13.41
+772 13.69
+782 12.46
+755 13.5
+775 12.39
+};
+\addlegendentry{Organics}
+\addplot [semithick, mediumpurple148103189, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+405.4 113.33
+304.1282 73.773
+132.86 34.94
+430.64 78.8658760034641
+318.7232 37.54983
+647.096 220.64
+};
+\addlegendentry{Inorganics}
+\addplot [semithick, black, mark=asterisk, mark size=5, mark options={solid}, only marks]
+table {%
+304.1282 73.773
+369.89 42.512
+407.817 36.29
+425.125 37.96
+460.35 33.78
+469.7 33.6751899473634
+405.4 113.33
+351.255 57.82
+374.21 40.5928
+427.01 36.51
+};
+\addlegendentry{Notables}
+\draw[->,draw=gray] (axis cs:309.1282,81.1503) -- (axis cs:304.1282,73.773);
+\draw (axis cs:309.1282,81.1503) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{CarbonDioxide};
+\draw[->,draw=gray] (axis cs:364.89,46.7632) -- (axis cs:369.89,42.512);
+\draw (axis cs:364.89,46.7632) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base east,
+  text=black,
+  rotate=0.0
+]{n-Propane};
+\draw[->,draw=gray] (axis cs:412.817,39.919) -- (axis cs:407.817,36.29);
+\draw (axis cs:412.817,39.919) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{Isobutane};
+\draw[->,draw=gray] (axis cs:430.125,41.756) -- (axis cs:425.125,37.96);
+\draw (axis cs:430.125,41.756) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{n-Butane};
+\draw[->,draw=gray] (axis cs:465.35,37.158) -- (axis cs:460.35,33.78);
+\draw (axis cs:465.35,37.158) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{Isopentane};
+\draw[->,draw=gray] (axis cs:474.7,37.0427089420997) -- (axis cs:469.7,33.6751899473634);
+\draw (axis cs:474.7,37.0427089420997) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{n-Pentane};
+\draw[->,draw=gray] (axis cs:410.4,124.663) -- (axis cs:405.4,113.33);
+\draw (axis cs:410.4,124.663) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{Ammonia};
+\draw[->,draw=gray] (axis cs:356.255,63.602) -- (axis cs:351.255,57.82);
+\draw (axis cs:356.255,63.602) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{R32};
+\draw[->,draw=gray] (axis cs:379.21,44.65208) -- (axis cs:374.21,40.5928);
+\draw (axis cs:379.21,44.65208) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{R134a};
+\draw[->,draw=gray] (axis cs:432.01,40.161) -- (axis cs:427.01,36.51);
+\draw (axis cs:432.01,40.161) node[
+  scale=0.5,
+  fill=lightgray204,
+  draw=black,
+  line width=0.4pt,
+  inner sep=3pt,
+  rounded corners,
+  anchor=base west,
+  text=black,
+  rotate=0.0
+]{R245fa};
+\end{axis}
+
+\end{tikzpicture}
